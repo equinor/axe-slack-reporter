@@ -18,7 +18,7 @@ try {
     const fileName = core_1.getInput('fileName');
     console.log('fileName: ', fileName);
     //fsAsync.readFile(fileName).then(content => console.log(JSON.stringify(content)))
-    console.log('File content:', JSON.stringify(fs_1.default.readFileSync(fileName)));
+    console.log('File content:', JSON.parse(fs_1.default.readFileSync(fileName, { encoding: 'utf8' })));
     core_1.setOutput('status', '0');
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github_1.context.payload, undefined, 2);
