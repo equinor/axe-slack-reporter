@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "GH Action for reporting findings from axe-core to Slack using incoming web hook",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "ncc build index.js --license licenses.txt",
     "test": "echo \"Error: no test specified\" && exit 1"
