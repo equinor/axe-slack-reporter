@@ -1,5 +1,5 @@
-import { createRequire as __WEBPACK_EXTERNAL_createRequire } from "module";
-/******/ var __webpack_modules__ = ({
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
 
 /***/ 351:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
@@ -3566,7 +3566,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var deprecation = __nccwpck_require__(481);
+var deprecation = __nccwpck_require__(932);
 var once = _interopDefault(__nccwpck_require__(223));
 
 const logOnceCode = once(deprecation => console.warn(deprecation));
@@ -4000,7 +4000,7 @@ function removeHook(state, name, method) {
 
 /***/ }),
 
-/***/ 481:
+/***/ 932:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -6138,7 +6138,7 @@ module.exports = eval("require")("encoding");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("assert");
+module.exports = require("assert");
 
 /***/ }),
 
@@ -6146,7 +6146,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("assert");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("events");
+module.exports = require("events");
 
 /***/ }),
 
@@ -6154,7 +6154,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("events");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("fs");
+module.exports = require("fs");
 
 /***/ }),
 
@@ -6162,7 +6162,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("fs");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("http");
+module.exports = require("http");
 
 /***/ }),
 
@@ -6170,7 +6170,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("http");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("https");
+module.exports = require("https");
 
 /***/ }),
 
@@ -6178,7 +6178,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("https");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("net");
+module.exports = require("net");
 
 /***/ }),
 
@@ -6186,7 +6186,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("net");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("os");
+module.exports = require("os");
 
 /***/ }),
 
@@ -6194,7 +6194,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("os");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("path");
+module.exports = require("path");
 
 /***/ }),
 
@@ -6202,7 +6202,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("path");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("stream");
+module.exports = require("stream");
 
 /***/ }),
 
@@ -6210,7 +6210,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("stream");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("tls");
+module.exports = require("tls");
 
 /***/ }),
 
@@ -6218,7 +6218,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("tls");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("url");
+module.exports = require("url");
 
 /***/ }),
 
@@ -6226,7 +6226,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("url");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("util");
+module.exports = require("util");
 
 /***/ }),
 
@@ -6234,67 +6234,72 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("util");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("zlib");
+module.exports = require("zlib");
 
 /***/ })
 
-/******/ });
+/******/ 	});
 /************************************************************************/
-/******/ // The module cache
-/******/ var __webpack_module_cache__ = {};
-/******/ 
-/******/ // The require function
-/******/ function __nccwpck_require__(moduleId) {
-/******/ 	// Check if module is in cache
-/******/ 	var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 	if (cachedModule !== undefined) {
-/******/ 		return cachedModule.exports;
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __nccwpck_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		var threw = true;
+/******/ 		try {
+/******/ 			__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nccwpck_require__);
+/******/ 			threw = false;
+/******/ 		} finally {
+/******/ 			if(threw) delete __webpack_module_cache__[moduleId];
+/******/ 		}
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
 /******/ 	}
-/******/ 	// Create a new module (and put it into the cache)
-/******/ 	var module = __webpack_module_cache__[moduleId] = {
-/******/ 		// no module.id needed
-/******/ 		// no module.loaded needed
-/******/ 		exports: {}
-/******/ 	};
-/******/ 
-/******/ 	// Execute the module function
-/******/ 	var threw = true;
-/******/ 	try {
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nccwpck_require__);
-/******/ 		threw = false;
-/******/ 	} finally {
-/******/ 		if(threw) delete __webpack_module_cache__[moduleId];
-/******/ 	}
-/******/ 
-/******/ 	// Return the exports of the module
-/******/ 	return module.exports;
-/******/ }
-/******/ 
+/******/ 	
 /************************************************************************/
-/******/ /* webpack/runtime/compat */
-/******/ 
-/******/ if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = new URL('.', import.meta.url).pathname.slice(import.meta.url.match(/^file:\/\/\/\w:/) ? 1 : 0, -1) + "/";
-/******/ 
+/******/ 	/* webpack/runtime/compat */
+/******/ 	
+/******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
+/******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(186);
-/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(438);
+var exports = __webpack_exports__;
 
-
-
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const core_1 = __nccwpck_require__(186);
+const github_1 = __nccwpck_require__(438);
 try {
-  console.log(`Hello world`)
-  const fileName = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('fileName')
-  console.log('fileName: ', fileName)
-  ;(0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)('status', '0')
-  // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`)
-} catch (error) {
-  (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)(error.message)
+    console.log(`Hello world`);
+    const fileName = core_1.getInput('fileName');
+    console.log('fileName: ', fileName);
+    core_1.setOutput('status', '0');
+    // Get the JSON webhook payload for the event that triggered the workflow
+    const payload = JSON.stringify(github_1.context.payload, undefined, 2);
+    console.log(`The event payload: ${payload}`);
 }
+catch (error) {
+    core_1.setFailed(error.message);
+}
+
 })();
 
+module.exports = __webpack_exports__;
+/******/ })()
+;
