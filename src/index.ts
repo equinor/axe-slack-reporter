@@ -1,13 +1,16 @@
 import { setOutput, setFailed, getInput } from '@actions/core'
 import { context } from '@actions/github'
 import fs, { promises as fsAsync } from 'fs'
+import { parse } from './axe-result-parser'
 
 try {
   console.log(`Hello world`)
   const fileName = getInput('fileName')
   console.log('fileName: ', fileName)
   //fsAsync.readFile(fileName).then(content => console.log(JSON.stringify(content)))
-  console.log('File content:', JSON.parse(fs.readFileSync(fileName, { encoding: 'utf8' })))
+  const fileContent = JSON.parse(fs.readFileSync(fileName, { encoding: 'utf8' }))
+  const parsedResult = parse(fileContent)
+  console.log('parsed result: ', JSON.stringify(parsedResult))
   setOutput('status', '0')
   // Get the JSON webhook payload for the event that triggered the workflow
   const payload = JSON.stringify(context.payload, undefined, 2)
