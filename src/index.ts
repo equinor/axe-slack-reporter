@@ -7,7 +7,7 @@ try {
   const fileName = getInput('fileName')
   console.log('fileName: ', fileName)
   //fsAsync.readFile(fileName).then(content => console.log(JSON.stringify(content)))
-  console.log('File content:', fs.readFileSync(fileName))
+  console.log('File content:', JSON.stringify(fs.readFileSync(fileName)))
   setOutput('status', '0')
   // Get the JSON webhook payload for the event that triggered the workflow
   const payload = JSON.stringify(context.payload, undefined, 2)
