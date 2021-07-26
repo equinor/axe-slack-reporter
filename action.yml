@@ -9,4 +9,4 @@ outputs:
     description: '0 if OK, non-zero if error'
 runs:
   using: 'node12'
-  main: 'dist/index.js'
+  main: 'dist/index.js --experimental-modules'
