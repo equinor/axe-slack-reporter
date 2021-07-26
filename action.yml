@@ -1,7 +1,7 @@
 name: 'Axe Slack Reporter'
 description: 'Report axe-core findings to Slack'
 inputs:
-  result:  # Result from axe
+  fileName:  # Result from axe
     description: 'json-result from axe-core'
     required: true
 outputs:
