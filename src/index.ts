@@ -15,8 +15,8 @@ try {
   console.log('parsed result: ', JSON.stringify(result))
   setOutput('status', '0')
   // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`)
+  // const payload = JSON.stringify(context.payload, undefined, 2)
+  // console.log(`The event payload: ${payload}`)
 } catch (error) {
   setFailed(error.message)
 }
