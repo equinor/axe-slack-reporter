@@ -38,6 +38,7 @@
   "dependencies": {
     "@actions/core": "^1.4.0",
     "@actions/github": "^5.0.0",
-    "@slack/webhook": "^6.0.0"
+    "@slack/webhook": "^6.0.0",
+    "fp-ts": "^2.11.0"
   }
 }
