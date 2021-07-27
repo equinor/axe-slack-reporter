@@ -1,1 +1,2 @@
-export * from './fp-helpers'
+export * from './fp-funcs'
+export * from './array-funcs'

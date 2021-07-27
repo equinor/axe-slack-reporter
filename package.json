@@ -8,8 +8,8 @@
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint --fix src/**/*.ts",
     "bundle": "ncc build",
-    "test": "ts-node ./**/*.test.ts",
-    "test:dev": "ts-node ./**/*.test.ts | tap-spec-emoji"
+    "test": "tape -r ts-node/register/transpile-only ./src/*.test.ts ./src/**/*.test.ts",
+    "test:dev": "tape -r ts-node/register/transpile-only ./src/*.test.ts ./src/**/*.test.ts | tap-spec-emoji"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,6 @@
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-github": "^4.1.5",
-    "eslint-plugin-prettier": "^3.4.0",
     "tap-spec-emoji": "^6.1.2",
     "tape": "^5.2.2",
     "ts-node": "^10.1.0",

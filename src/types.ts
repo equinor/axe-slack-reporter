@@ -1,7 +1,11 @@
-interface Input {
+export interface Input {
   violations: any[]
 }
 
-interface AttributeInfo {
+export interface AttributeInfo {
   count: number
+}
+
+export interface Result {
+  numberOfViolations: number
 }

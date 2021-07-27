@@ -1,7 +1,7 @@
 import { setOutput, setFailed, getInput } from '@actions/core'
 import { context } from '@actions/github'
 import fs, { promises as fsAsync } from 'fs'
-import { parse } from './axe-result-parser'
+import { firstOrDefault } from './common'
 import { AxeResult, ViolationsEntity } from './generated-interfaces'
 
 try {

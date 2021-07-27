@@ -1,17 +1,11 @@
-import { compose } from "./common"
+import { AxeResult } from './generated-interfaces'
+import { Result } from './types'
+import { compose, firstOrDefault } from './common'
 
-const fieldsToExtract = ["incomplete", "violations"]
-const emptyResult : Input = { violations: [] }
+const emptyResult = {} as AxeResult
 
-const computeAttributes = (fieldValues: any[]): AttributeInfo => ({
-  count: fieldValues?.length || 0,
-})
-const getFirstEntry = (json: unknown[]) => (json && json[0]) || emptyResult
-const extractFields = (fields: string[]) => (json: Record<string, unknown>) =>
-  fields.reduce(
-    (result: Record<string, unknown>, field: string) => ({ ...result, [field]: computeAttributes(json[field] as unknown[]) }),
-    {}
-  )
+const parseJson = (json: unknown): AxeResult[] => <AxeResult[]>json
+const countViolations = (result: AxeResult): Result => ({ numberOfViolations: result?.violations?.length ?? 0 })
 
-export const parse = (jsonResult: unknown[]) =>
-  compose(extractFields(fieldsToExtract), getFirstEntry)(jsonResult)
+export type ParseType = (json: unknown) => Result
+export const parse: ParseType = compose(countViolations, firstOrDefault(emptyResult), parseJson)
