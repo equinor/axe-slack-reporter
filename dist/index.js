@@ -1,62 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 391:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.parse = void 0;
-const common_1 = __nccwpck_require__(911);
-const fieldsToExtract = ["incomplete", "violations"];
-const emptyResult = { violations: [] };
-const computeAttributes = (fieldValues) => ({
-    count: (fieldValues === null || fieldValues === void 0 ? void 0 : fieldValues.length) || 0,
-});
-const getFirstEntry = (json) => (json && json[0]) || emptyResult;
-const extractFields = (fields) => (json) => fields.reduce((result, field) => ({ ...result, [field]: computeAttributes(json[field]) }), {});
-const parse = (jsonResult) => common_1.compose(extractFields(fieldsToExtract), getFirstEntry)(jsonResult);
-exports.parse = parse;
-
-
-/***/ }),
-
-/***/ 90:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.compose = void 0;
-const reducer = (f, g) => (...args) => f(g(...args));
-const compose = (...fns) => fns.reduce(reducer);
-exports.compose = compose;
-
-
-/***/ }),
-
-/***/ 911:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-__exportStar(__nccwpck_require__(90), exports);
-
-
-/***/ }),
-
 /***/ 822:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -69,15 +13,18 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(186);
 const github_1 = __nccwpck_require__(438);
 const fs_1 = __importDefault(__nccwpck_require__(747));
-const axe_result_parser_1 = __nccwpck_require__(391);
 try {
     console.log(`Hello world`);
-    const fileName = core_1.getInput('fileName');
+    const fileName = core_1.getInput('fileName') || 'example-files/dagbladet.json';
     console.log('fileName: ', fileName);
     //fsAsync.readFile(fileName).then(content => console.log(JSON.stringify(content)))
     const fileContent = JSON.parse(fs_1.default.readFileSync(fileName, { encoding: 'utf8' }));
-    const parsedResult = axe_result_parser_1.parse(fileContent);
-    console.log('parsed result: ', JSON.stringify(parsedResult));
+    const typedContent = fileContent;
+    // TODO: Parse typed content
+    // Also TODO: Possible to use Option datatype instead of null?
+    // const parsedResult = parse(fileContent)
+    console.log('output', typedContent[0].violations[0].nodes);
+    //console.log('parsed result: ', JSON.stringify(typedContent))
     core_1.setOutput('status', '0');
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github_1.context.payload, undefined, 2);
