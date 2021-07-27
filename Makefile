@@ -8,6 +8,9 @@ lint:
 build:
 	npm run build && npm run bundle
 
+test:
+	npm run test:dev
+
 help: Makefile
 	@echo ''
 	@echo 'Usage:'
@@ -17,4 +20,4 @@ help: Makefile
 	@sed -n 's/^##//p' $<
 	@echo ''
 
-.PHONY: help lint build
+.PHONY: help lint build test
