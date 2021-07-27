@@ -1,6 +1,6 @@
 import test from 'tape'
 import { parse } from './axe-result-parser'
-import json from '../example-files/result.json'
+import json from '../example-files/dagbladet.json'
 
 test('Empty json does not crash', (t) => {
   t.assert(parse(undefined))
@@ -18,7 +18,16 @@ test('Valid json does not crash', (t) => {
   t.end()
 })
 
-// test('3 violations are found in json', (t) => {
-//   t.plan(1)
-//   t.equal(parse(json).violations.count, 3)
-// })
+test('Testing output', (t) => {
+  t.plan(2)
+  const res = parse(json)
+  t.test('3 incomplete tests are found in json', (subTest) => {
+    subTest.equals(res.numberOfIncomplete, 3)
+    subTest.end()
+  })
+  t.test('4 violations are found in json', (subTest) => {
+    subTest.equal(res.numberOfViolations, 4)
+    subTest.end()
+  })
+  t.end()
+})
