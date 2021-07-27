@@ -1,4 +1,4 @@
-export interface Result {
+export type Result = {
   numberOfViolations: number
   numberOfIncomplete: number
 }
