@@ -11,6 +11,9 @@ build:
 test:
 	npm run test:dev
 
+watch:
+	npm run watch
+
 help: Makefile
 	@echo ''
 	@echo 'Usage:'
@@ -20,4 +23,4 @@ help: Makefile
 	@sed -n 's/^##//p' $<
 	@echo ''
 
-.PHONY: help lint build test
+.PHONY: help lint build test watch
