@@ -11,20 +11,20 @@ type PrepareMessageType = (axeResult: Result) => string
 const prepareMessage: PrepareMessageType = (axeResult) =>
   fromTemplate(axeResult.numberOfViolations, axeResult.numberOfIncomplete)
 
-// type SendMessageToSlackType = (url: string, axeResult: Result) => number // TODO: Replace with proper success type
-// const sendMessageToSlack: SendMessageToSlackType = (url, axeResult) => flow(
-//   connectToSlack(url)
-//   prepareMessage(axeResult),
-//   sendMessageToSlack
-// )
+type SendMessageToSlackType = (url: string, axeResult: Result) => number // TODO: Replace with proper success type
+const sendMessageToSlack: SendMessageToSlackType = (url, axeResult) => flow(
+  connectToSlack(url)
+  prepareMessage(axeResult),
+  sendMessageToSlack
+)
 
-// type SendType = (maybeUrl: (string | undefined), axeResult: Result) => number
-// export const send: SendType = (maybeUrl, axeResult) =>
-//   pipe(
-//     fromNullable(maybeUrl),
-//     match(
-//       () => 1,
-//       (url: string) => sendMessageToSlack(url, axeResult),
-//     ),
-//   )
+type SendType = (maybeUrl: (string | undefined), axeResult: Result) => number
+export const send: SendType = (maybeUrl, axeResult) =>
+  pipe(
+    fromNullable(maybeUrl),
+    match(
+      () => 1,
+      (url: string) => sendMessageToSlack(url, axeResult),
+    ),
+  )
 // const webhook = new IncomingWebhook(url)

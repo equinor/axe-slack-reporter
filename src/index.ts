@@ -3,6 +3,11 @@ import { context } from '@actions/github'
 import fs, { promises as fsAsync } from 'fs'
 import { parse } from './axe-result-parser'
 import { AxeResult, ViolationsEntity } from './generated-interfaces'
+import { none, some, match, fromNullable, Option } from 'fp-ts/lib/Option'
+import { IO } from 'fp-ts/lib/IO'
+
+const getWebhookURL = (key: string): IO<Option<string>> => () =>
+  fromNullable(process.env.SLACK_WEBHOOK_URL)
 
 try {
   console.log(`Hello world`)
