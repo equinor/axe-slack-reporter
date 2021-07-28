@@ -128,7 +128,8 @@ try {
     // TODO: convert to task-based approach with error handling
     const getFileContent = (fileName) => JSON.parse(fs_1.default.readFileSync(fileName, { encoding: 'utf8' }));
     // So the magic!
-    function_1.flow(getFileName, getFileContent, axe_result_parser_1.parse, slack_1.send(getWebhookURL()()), T.map(E.fold(core_1.setFailed, setSuccess)));
+    const doDaThing = function_1.flow(getFileName, getFileContent, axe_result_parser_1.parse, slack_1.send(getWebhookURL()()), T.map(E.fold(core_1.setFailed, setSuccess)))();
+    doDaThing();
     // Get the JSON webhook payload for the event that triggered the workflow
     // const payload = JSON.stringify(context.payload, undefined, 2)
     // console.log(`The event payload: ${payload}`)

@@ -24,7 +24,8 @@ try {
   const getFileContent = (fileName: string) => JSON.parse(fs.readFileSync(fileName, { encoding: 'utf8' }))
 
   // So the magic!
-  flow(getFileName, getFileContent, parse, send(getWebhookURL()()), T.map(E.fold(setFailed, setSuccess)))
+  const doDaThing = flow(getFileName, getFileContent, parse, send(getWebhookURL()()), T.map(E.fold(setFailed, setSuccess)))()
+  doDaThing()
 
   // Get the JSON webhook payload for the event that triggered the workflow
   // const payload = JSON.stringify(context.payload, undefined, 2)
