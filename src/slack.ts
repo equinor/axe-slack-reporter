@@ -1,8 +1,7 @@
-import { none, some, match, fromNullable, Option } from 'fp-ts/lib/Option'
-import * as T from 'fp-ts/lib/Task'
+import * as O from 'fp-ts/lib/Option'
 import * as E from 'fp-ts/lib/Either'
-import { pipe, flow, identity } from 'fp-ts/lib/function'
 import * as TE from 'fp-ts/lib/TaskEither'
+import { pipe } from 'fp-ts/lib/function'
 import { IncomingWebhook, IncomingWebhookResult } from '@slack/webhook'
 import { Result } from './types'
 
@@ -25,21 +24,10 @@ const prepareAndSendMessage: PrepareAndSendType = (axeResult) => (url) =>
     TE.map((result) => result.text),
   )
 
-type SendType = (url: Option<string>, axeResult: Result) => TE.TaskEither<Error, string>
+type SendType = (url: O.Option<string>, axeResult: Result) => TE.TaskEither<Error, string>
 export const send: SendType = (url, axeResult) =>
   pipe(
     url,
     TE.fromOption(() => new Error('Unable to get hold of a URL')),
     TE.chain(prepareAndSendMessage(axeResult)),
-    //T.map(E.fold(console.error, console.log)),
   )
-
-// const webhook = new IncomingWebhook(url)
-/*
-1. Get data to be sent
-2. Put data into template for body payload
-3. Connect to webhook using URL
-4. Send to webhook
-5. Handle errors
-6. Give feedback
-*/
