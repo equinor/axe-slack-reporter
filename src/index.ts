@@ -38,7 +38,7 @@ try {
     T.map(E.fold(setFailed, setSuccess)),
   )()
 
-  doDaThing()
+  doDaThing() // Should be awaited, but not allowed at top level
 } catch (error) {
   setFailed(error.message)
 }

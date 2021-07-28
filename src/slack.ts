@@ -10,8 +10,8 @@ const fromTemplate: FromTemplateType = (numberOfViolations, numberOfIncomplete) 
   `Number of violations: ${numberOfViolations}\nNumber of incomplete: ${numberOfIncomplete}`
 
 type PrepareMessageType = (axeResult: Result) => string
-const prepareMessage: PrepareMessageType = (axeResult) =>
-  fromTemplate(axeResult.numberOfViolations, axeResult.numberOfIncomplete)
+const prepareMessage: PrepareMessageType = ({ numberOfViolations, numberOfIncomplete }) =>
+  fromTemplate(numberOfViolations, numberOfIncomplete)
 
 type PostToSlackType = (webhook: IncomingWebhook) => (message: string) => TE.TaskEither<Error, IncomingWebhookResult>
 const postToSlack: PostToSlackType = (webhook) => (message) => TE.tryCatch(() => webhook.send(message), E.toError)
