@@ -1,22 +1,19 @@
 import test from 'tape'
 import { send } from './slack'
+import * as O from 'fp-ts/Option'
+import { Result } from './types'
 
-test('Accepts undefined input', (t) => {
-  t.assert(send(undefined))
+const urlOk = O.some('http://example.com')
+const urlFail = O.none
+
+const exampleResult = {} as Result
+
+test('Valid url gives success code', (t) => {
+  t.equals(send(urlOk, exampleResult), 0)
   t.end()
 })
 
-test('Accepts null input', (t) => {
-  t.assert(send(null))
-  t.end()
-})
-
-test('Gives error code in response if not proper string', (t) => {
-  t.equals(send(undefined), 1)
-  t.end()
-})
-
-test('Gives success code in response if proper string', (t) => {
-  t.equals(send('someUrl'), 0)
+test('Non-existent url gives failure code', (t) => {
+  t.equals(send(urlFail, exampleResult), 1)
   t.end()
 })
