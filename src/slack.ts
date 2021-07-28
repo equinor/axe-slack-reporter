@@ -24,8 +24,8 @@ const prepareAndSendMessage: PrepareAndSendType = (axeResult) => (url) =>
     TE.map((result) => result.text),
   )
 
-type SendType = (url: O.Option<string>, axeResult: Result) => TE.TaskEither<Error, string>
-export const send: SendType = (url, axeResult) =>
+type SendType = (url: O.Option<string>) => (axeResult: Result) => TE.TaskEither<Error, string>
+export const send: SendType = (url) => (axeResult) =>
   pipe(
     url,
     TE.fromOption(() => new Error('Unable to get hold of a URL')),
