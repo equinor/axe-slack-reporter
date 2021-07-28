@@ -114,25 +114,23 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(2186);
 const fs_1 = __importDefault(__nccwpck_require__(5747));
 const axe_result_parser_1 = __nccwpck_require__(5391);
-const Option_1 = __nccwpck_require__(2569);
+const O = __importStar(__nccwpck_require__(2569));
 const T = __importStar(__nccwpck_require__(2664));
 const E = __importStar(__nccwpck_require__(7534));
 const function_1 = __nccwpck_require__(6985);
 const slack_1 = __nccwpck_require__(568);
-const getWebhookURL = () => () => Option_1.fromNullable(process.env.SLACK_WEBHOOK_URL);
+const function_2 = __nccwpck_require__(6985);
+const getWebhookURL = () => O.fromNullable(process.env.SLACK_WEBHOOK_URL);
+const getFileName = () => function_2.pipe(core_1.getInput('fileName'), O.fromPredicate((fileName) => fileName.length > 3), O.getOrElse(() => 'example-files/dagbladet.json'));
 const setSuccess = (text) => core_1.setOutput(text, '0');
 try {
     console.log('Report axe findings to Slack');
     // TODO: Possibly also use fp-ts here
-    const getFileName = () => core_1.getInput('fileName') || 'example-files/dagbladet.json';
     // TODO: convert to task-based approach with error handling
     const getFileContent = (fileName) => JSON.parse(fs_1.default.readFileSync(fileName, { encoding: 'utf8' }));
-    // So the magic!
-    const doDaThing = function_1.flow(getFileName, getFileContent, axe_result_parser_1.parse, slack_1.send(getWebhookURL()()), T.map(E.fold(core_1.setFailed, setSuccess)))();
+    // Do the magic!
+    const doDaThing = function_1.flow(getFileName, getFileContent, axe_result_parser_1.parse, slack_1.send(getWebhookURL()), T.map(E.fold(core_1.setFailed, setSuccess)))();
     doDaThing();
-    // Get the JSON webhook payload for the event that triggered the workflow
-    // const payload = JSON.stringify(context.payload, undefined, 2)
-    // console.log(`The event payload: ${payload}`)
 }
 catch (error) {
     core_1.setFailed(error.message);
