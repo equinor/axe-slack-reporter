@@ -12,7 +12,7 @@ test:
 	npm run test:dev
 
 watch:
-	npm run watch
+	npm run watch & npm run test:watch
 
 help: Makefile
 	@echo ''
