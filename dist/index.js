@@ -125,7 +125,7 @@ try {
     console.log('Report axe findings to Slack');
     // Do the magic!
     const doDaThing = function_1.flow(getFileName, getFileContent, TE.map(axe_result_parser_1.parse), TE.chain(slack_1.send(getWebhookURL())), T.map(E.fold(core_1.setFailed, setSuccess)))();
-    doDaThing();
+    doDaThing(); // Should be awaited, but not allowed at top level
 }
 catch (error) {
     core_1.setFailed(error.message);
@@ -162,13 +162,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.send = void 0;
 const E = __importStar(__nccwpck_require__(7534));
 const TE = __importStar(__nccwpck_require__(437));
+const RTE = __importStar(__nccwpck_require__(5043));
 const function_1 = __nccwpck_require__(6985);
 const webhook_1 = __nccwpck_require__(1095);
 const fromTemplate = (numberOfViolations, numberOfIncomplete) => `Number of violations: ${numberOfViolations}\nNumber of incomplete: ${numberOfIncomplete}`;
-const prepareMessage = (axeResult) => fromTemplate(axeResult.numberOfViolations, axeResult.numberOfIncomplete);
-const postToSlack = (webhook) => (message) => TE.tryCatch(() => webhook.send(message), E.toError);
-const prepareAndSendMessage = (axeResult) => (url) => function_1.pipe(prepareMessage(axeResult), postToSlack(new webhook_1.IncomingWebhook(url)), // Perhaps use Reader to inject webhook instead
-TE.map((result) => result.text));
+const prepareMessage = ({ numberOfViolations, numberOfIncomplete }) => fromTemplate(numberOfViolations, numberOfIncomplete);
+const postToSlack = (message) => (webhook) => TE.tryCatch(() => webhook.send(message), E.toError);
+const prepareAndSendMessage = (axeResult) => (url) => function_1.pipe(prepareMessage(axeResult), postToSlack, RTE.map((result) => result.text))(new webhook_1.IncomingWebhook(url));
 const send = (url) => (axeResult) => function_1.pipe(url, TE.fromOption(() => new Error('Unable to get hold of a URL')), TE.chain(prepareAndSendMessage(axeResult)));
 exports.send = send;
 
@@ -6480,6 +6480,65 @@ exports.chainFirstIOK = chainFirstIOK;
 
 /***/ }),
 
+/***/ 678:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.chainFirstReaderK = exports.chainReaderK = exports.fromReaderK = exports.asks = exports.ask = void 0;
+/**
+ * Lift a computation from the `Reader` monad.
+ *
+ * @since 2.11.0
+ */
+var Chain_1 = __nccwpck_require__(2372);
+var function_1 = __nccwpck_require__(6985);
+var R = __importStar(__nccwpck_require__(786));
+function ask(F) {
+    return function () { return F.fromReader(R.ask()); };
+}
+exports.ask = ask;
+function asks(F) {
+    return F.fromReader;
+}
+exports.asks = asks;
+function fromReaderK(F) {
+    return function (f) { return function_1.flow(f, F.fromReader); };
+}
+exports.fromReaderK = fromReaderK;
+function chainReaderK(F, M) {
+    var fromReaderKF = fromReaderK(F);
+    return function (f) { return function (ma) { return M.chain(ma, fromReaderKF(f)); }; };
+}
+exports.chainReaderK = chainReaderK;
+function chainFirstReaderK(F, M) {
+    return function_1.flow(fromReaderK(F), Chain_1.chainFirst(M));
+}
+exports.chainFirstReaderK = chainFirstReaderK;
+
+
+/***/ }),
+
 /***/ 2038:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
@@ -8367,6 +8426,2442 @@ exports.or = or;
  */
 var and = function (second) { return function (first) { return function (a) { return first(a) && second(a); }; }; };
 exports.and = and;
+
+
+/***/ }),
+
+/***/ 786:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getSemigroup = exports.reader = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.Do = exports.bindW = exports.bind = exports.bindTo = exports.Choice = exports.Strong = exports.Category = exports.Profunctor = exports.chainFirstW = exports.chainFirst = exports.Monad = exports.Chain = exports.Applicative = exports.apSecond = exports.apFirst = exports.Apply = exports.Pointed = exports.flap = exports.Functor = exports.URI = exports.right = exports.left = exports.second = exports.first = exports.id = exports.promap = exports.compose = exports.flatten = exports.flattenW = exports.chain = exports.chainW = exports.of = exports.ap = exports.apW = exports.map = exports.asksReader = exports.asksReaderW = exports.local = exports.asks = exports.ask = void 0;
+exports.getMonoid = void 0;
+/**
+ * @since 2.0.0
+ */
+var Applicative_1 = __nccwpck_require__(4766);
+var Apply_1 = __nccwpck_require__(205);
+var Chain_1 = __nccwpck_require__(2372);
+var E = __importStar(__nccwpck_require__(7534));
+var function_1 = __nccwpck_require__(6985);
+var Functor_1 = __nccwpck_require__(5533);
+var _ = __importStar(__nccwpck_require__(1840));
+// -------------------------------------------------------------------------------------
+// constructors
+// -------------------------------------------------------------------------------------
+/**
+ * Reads the current context
+ *
+ * @category constructors
+ * @since 2.0.0
+ */
+var ask = function () { return function_1.identity; };
+exports.ask = ask;
+/**
+ * Projects a value from the global context in a Reader
+ *
+ * @category constructors
+ * @since 2.0.0
+ */
+exports.asks = function_1.identity;
+// -------------------------------------------------------------------------------------
+// combinators
+// -------------------------------------------------------------------------------------
+/**
+ * Changes the value of the local context during the execution of the action `ma` (similar to `Contravariant`'s
+ * `contramap`).
+ *
+ * @category combinators
+ * @since 2.0.0
+ */
+var local = function (f) { return function (ma) { return function (r2) {
+    return ma(f(r2));
+}; }; };
+exports.local = local;
+/**
+ * Less strict version of [`asksReader`](#asksreader).
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+var asksReaderW = function (f) { return function (r) { return f(r)(r); }; };
+exports.asksReaderW = asksReaderW;
+/**
+ * Effectfully accesses the environment.
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.asksReader = exports.asksReaderW;
+// -------------------------------------------------------------------------------------
+// non-pipeables
+// -------------------------------------------------------------------------------------
+/* istanbul ignore next */
+var _map = function (fa, f) { return function_1.pipe(fa, exports.map(f)); };
+/* istanbul ignore next */
+var _ap = function (fab, fa) { return function_1.pipe(fab, exports.ap(fa)); };
+/* istanbul ignore next */
+var _chain = function (ma, f) { return function_1.pipe(ma, exports.chain(f)); };
+var _compose = function (bc, ab) { return function_1.pipe(bc, exports.compose(ab)); };
+var _promap = function (fea, f, g) { return function_1.pipe(fea, exports.promap(f, g)); };
+// -------------------------------------------------------------------------------------
+// type class members
+// -------------------------------------------------------------------------------------
+/**
+ * `map` can be used to turn functions `(a: A) => B` into functions `(fa: F<A>) => F<B>` whose argument and return types
+ * use the type constructor `F` to represent some computational context.
+ *
+ * @category Functor
+ * @since 2.0.0
+ */
+var map = function (f) { return function (fa) { return function (r) { return f(fa(r)); }; }; };
+exports.map = map;
+/**
+ * Less strict version of [`ap`](#ap).
+ *
+ * @category Apply
+ * @since 2.8.0
+ */
+var apW = function (fa) { return function (fab) { return function (r) { return fab(r)(fa(r)); }; }; };
+exports.apW = apW;
+/**
+ * Apply a function to an argument under a type constructor.
+ *
+ * @category Apply
+ * @since 2.0.0
+ */
+exports.ap = exports.apW;
+/**
+ * @category Pointed
+ * @since 2.0.0
+ */
+exports.of = function_1.constant;
+/**
+ * Less strict version of [`chain`](#chain).
+ *
+ * @category Monad
+ * @since 2.6.0
+ */
+var chainW = function (f) { return function (fa) { return function (r) { return f(fa(r))(r); }; }; };
+exports.chainW = chainW;
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation.
+ *
+ * @category Monad
+ * @since 2.0.0
+ */
+exports.chain = exports.chainW;
+/**
+ * Less strict version of [`flatten`](#flatten).
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.flattenW = 
+/*#__PURE__*/
+exports.chainW(function_1.identity);
+/**
+ * Derivable from `Chain`.
+ *
+ * @category combinators
+ * @since 2.0.0
+ */
+exports.flatten = exports.flattenW;
+/**
+ * @category Semigroupoid
+ * @since 2.0.0
+ */
+var compose = function (ab) { return function (bc) { return function_1.flow(ab, bc); }; };
+exports.compose = compose;
+/**
+ * @category Profunctor
+ * @since 2.0.0
+ */
+var promap = function (f, g) { return function (fea) { return function (a) { return g(fea(f(a))); }; }; };
+exports.promap = promap;
+/**
+ * @category Category
+ * @since 2.0.0
+ */
+var id = function () { return function_1.identity; };
+exports.id = id;
+/**
+ * @category Strong
+ * @since 2.10.0
+ */
+var first = function (pab) { return function (_a) {
+    var a = _a[0], c = _a[1];
+    return [pab(a), c];
+}; };
+exports.first = first;
+/**
+ * @category Strong
+ * @since 2.10.0
+ */
+var second = function (pbc) { return function (_a) {
+    var a = _a[0], b = _a[1];
+    return [a, pbc(b)];
+}; };
+exports.second = second;
+/**
+ * @category Choice
+ * @since 2.10.0
+ */
+var left = function (pab) { return E.fold(function (a) { return _.left(pab(a)); }, E.right); };
+exports.left = left;
+/**
+ * @category Choice
+ * @since 2.10.0
+ */
+var right = function (pbc) { return E.fold(E.left, function (b) { return _.right(pbc(b)); }); };
+exports.right = right;
+// -------------------------------------------------------------------------------------
+// instances
+// -------------------------------------------------------------------------------------
+/**
+ * @category instances
+ * @since 2.0.0
+ */
+exports.URI = 'Reader';
+/**
+ * @category instances
+ * @since 2.7.0
+ */
+exports.Functor = {
+    URI: exports.URI,
+    map: _map
+};
+/**
+ * Derivable from `Functor`.
+ *
+ * @category combinators
+ * @since 2.10.0
+ */
+exports.flap = 
+/*#_PURE_*/
+Functor_1.flap(exports.Functor);
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.Pointed = {
+    URI: exports.URI,
+    of: exports.of
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.Apply = {
+    URI: exports.URI,
+    map: _map,
+    ap: _ap
+};
+/**
+ * Combine two effectful actions, keeping only the result of the first.
+ *
+ * Derivable from `Apply`.
+ *
+ * @category combinators
+ * @since 2.0.0
+ */
+exports.apFirst = 
+/*#__PURE__*/
+Apply_1.apFirst(exports.Apply);
+/**
+ * Combine two effectful actions, keeping only the result of the second.
+ *
+ * Derivable from `Apply`.
+ *
+ * @category combinators
+ * @since 2.0.0
+ */
+exports.apSecond = 
+/*#__PURE__*/
+Apply_1.apSecond(exports.Apply);
+/**
+ * @category instances
+ * @since 2.7.0
+ */
+exports.Applicative = {
+    URI: exports.URI,
+    map: _map,
+    ap: _ap,
+    of: exports.of
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.Chain = {
+    URI: exports.URI,
+    map: _map,
+    ap: _ap,
+    chain: _chain
+};
+/**
+ * @category instances
+ * @since 2.7.0
+ */
+exports.Monad = {
+    URI: exports.URI,
+    map: _map,
+    of: exports.of,
+    ap: _ap,
+    chain: _chain
+};
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * Derivable from `Chain`.
+ *
+ * @category combinators
+ * @since 2.0.0
+ */
+exports.chainFirst = 
+/*#__PURE__*/
+Chain_1.chainFirst(exports.Chain);
+/**
+ * Less strict version of [`chainFirst`](#chainfirst).
+ *
+ * Derivable from `Chain`.
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.chainFirstW = exports.chainFirst;
+/**
+ * @category instances
+ * @since 2.7.0
+ */
+exports.Profunctor = {
+    URI: exports.URI,
+    map: _map,
+    promap: _promap
+};
+/**
+ * @category instances
+ * @since 2.7.0
+ */
+exports.Category = {
+    URI: exports.URI,
+    compose: _compose,
+    id: exports.id
+};
+/**
+ * @category instances
+ * @since 2.8.3
+ */
+exports.Strong = {
+    URI: exports.URI,
+    map: _map,
+    promap: _promap,
+    first: exports.first,
+    second: exports.second
+};
+/**
+ * @category instances
+ * @since 2.8.3
+ */
+exports.Choice = {
+    URI: exports.URI,
+    map: _map,
+    promap: _promap,
+    left: exports.left,
+    right: exports.right
+};
+// -------------------------------------------------------------------------------------
+// do notation
+// -------------------------------------------------------------------------------------
+/**
+ * @since 2.8.0
+ */
+exports.bindTo = 
+/*#__PURE__*/
+Functor_1.bindTo(exports.Functor);
+/**
+ * @since 2.8.0
+ */
+exports.bind = 
+/*#__PURE__*/
+Chain_1.bind(exports.Chain);
+/**
+ * @since 2.8.0
+ */
+exports.bindW = exports.bind;
+// -------------------------------------------------------------------------------------
+// pipeable sequence S
+// -------------------------------------------------------------------------------------
+/**
+ * @since 2.9.0
+ */
+exports.Do = 
+/*#__PURE__*/
+exports.of(_.emptyRecord);
+/**
+ * @since 2.8.0
+ */
+exports.apS = 
+/*#__PURE__*/
+Apply_1.apS(exports.Apply);
+/**
+ * @since 2.8.0
+ */
+exports.apSW = exports.apS;
+// -------------------------------------------------------------------------------------
+// sequence T
+// -------------------------------------------------------------------------------------
+/**
+ * @since 2.11.0
+ */
+exports.ApT = exports.of(_.emptyReadonlyArray);
+// -------------------------------------------------------------------------------------
+// array utils
+// -------------------------------------------------------------------------------------
+/**
+ * Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(Applicative)`.
+ *
+ * @since 2.11.0
+ */
+var traverseReadonlyNonEmptyArrayWithIndex = function (f) { return function (as) { return function (r) {
+    var out = [f(0, _.head(as))(r)];
+    for (var i = 1; i < as.length; i++) {
+        out.push(f(i, as[i])(r));
+    }
+    return out;
+}; }; };
+exports.traverseReadonlyNonEmptyArrayWithIndex = traverseReadonlyNonEmptyArrayWithIndex;
+/**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
+ *
+ * @since 2.11.0
+ */
+var traverseReadonlyArrayWithIndex = function (f) {
+    var g = exports.traverseReadonlyNonEmptyArrayWithIndex(f);
+    return function (as) { return (_.isNonEmpty(as) ? g(as) : exports.ApT); };
+};
+exports.traverseReadonlyArrayWithIndex = traverseReadonlyArrayWithIndex;
+/**
+ * @since 2.9.0
+ */
+exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex;
+/**
+ * @since 2.9.0
+ */
+var traverseArray = function (f) { return exports.traverseReadonlyArrayWithIndex(function (_, a) { return f(a); }); };
+exports.traverseArray = traverseArray;
+/**
+ * @since 2.9.0
+ */
+exports.sequenceArray = 
+/*#__PURE__*/
+exports.traverseArray(function_1.identity);
+// -------------------------------------------------------------------------------------
+// deprecated
+// -------------------------------------------------------------------------------------
+// tslint:disable: deprecation
+/**
+ * Use small, specific instances instead.
+ *
+ * @category instances
+ * @since 2.0.0
+ * @deprecated
+ */
+exports.reader = {
+    URI: exports.URI,
+    map: _map,
+    of: exports.of,
+    ap: _ap,
+    chain: _chain,
+    promap: _promap,
+    compose: _compose,
+    id: exports.id,
+    first: exports.first,
+    second: exports.second,
+    left: exports.left,
+    right: exports.right
+};
+/**
+ * Use [`getApplySemigroup`](./Apply.ts.html#getapplysemigroup) instead.
+ *
+ * @category instances
+ * @since 2.0.0
+ * @deprecated
+ */
+exports.getSemigroup = 
+/*#__PURE__*/
+Apply_1.getApplySemigroup(exports.Apply);
+/**
+ * Use [`getApplicativeMonoid`](./Applicative.ts.html#getapplicativemonoid) instead.
+ *
+ * @category instances
+ * @since 2.0.0
+ * @deprecated
+ */
+exports.getMonoid = 
+/*#__PURE__*/
+Applicative_1.getApplicativeMonoid(exports.Applicative);
+
+
+/***/ }),
+
+/***/ 6170:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getReaderM = exports.fromNaturalTransformation = exports.fromReader = exports.chain = exports.ap = exports.map = exports.of = void 0;
+var function_1 = __nccwpck_require__(6985);
+function of(F) {
+    return function (a) { return function () { return F.of(a); }; };
+}
+exports.of = of;
+function map(F) {
+    return function (f) { return function (fa) { return function (r) { return F.map(fa(r), f); }; }; };
+}
+exports.map = map;
+function ap(F) {
+    return function (fa) { return function (fab) { return function (r) { return F.ap(fab(r), fa(r)); }; }; };
+}
+exports.ap = ap;
+function chain(M) {
+    return function (f) { return function (ma) { return function (r) { return M.chain(ma(r), function (a) { return f(a)(r); }); }; }; };
+}
+exports.chain = chain;
+function fromReader(F) {
+    return function (ma) { return function_1.flow(ma, F.of); };
+}
+exports.fromReader = fromReader;
+function fromNaturalTransformation(nt) {
+    return function (f) { return function_1.flow(f, nt); };
+}
+exports.fromNaturalTransformation = fromNaturalTransformation;
+/** @deprecated */
+/* istanbul ignore next */
+function getReaderM(M) {
+    var _ap = ap(M);
+    var _map = map(M);
+    var _chain = chain(M);
+    return {
+        map: function (fa, f) { return function_1.pipe(fa, _map(f)); },
+        ap: function (fab, fa) { return function_1.pipe(fab, _ap(fa)); },
+        of: of(M),
+        chain: function (ma, f) { return function_1.pipe(ma, _chain(f)); },
+        ask: function () { return M.of; },
+        asks: function (f) { return function_1.flow(f, M.of); },
+        local: function (ma, f) { return function (q) { return ma(f(q)); }; },
+        fromReader: fromReader(M),
+        fromM: function (ma) { return function () { return ma; }; }
+    };
+}
+exports.getReaderM = getReaderM;
+
+
+/***/ }),
+
+/***/ 7605:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.bindW = exports.bind = exports.bindTo = exports.Do = exports.chainFirstTaskK = exports.chainTaskK = exports.fromTaskK = exports.FromTask = exports.chainFirstReaderKW = exports.chainFirstReaderK = exports.chainReaderKW = exports.chainReaderK = exports.fromReaderK = exports.asks = exports.ask = exports.FromReader = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.FromIO = exports.chainFirstW = exports.chainFirst = exports.MonadTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecond = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.Functor = exports.URI = exports.flatten = exports.flattenW = exports.chainW = exports.chain = exports.of = exports.apW = exports.ap = exports.map = exports.asksReaderTask = exports.asksReaderTaskW = exports.local = exports.fromIO = exports.fromTask = exports.fromReader = void 0;
+exports.run = exports.getMonoid = exports.getSemigroup = exports.readerTaskSeq = exports.readerTask = exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = void 0;
+/**
+ * @since 2.3.0
+ */
+var Applicative_1 = __nccwpck_require__(4766);
+var Apply_1 = __nccwpck_require__(205);
+var Chain_1 = __nccwpck_require__(2372);
+var FromIO_1 = __nccwpck_require__(7948);
+var FromReader_1 = __nccwpck_require__(678);
+var FromTask_1 = __nccwpck_require__(2038);
+var function_1 = __nccwpck_require__(6985);
+var Functor_1 = __nccwpck_require__(5533);
+var _ = __importStar(__nccwpck_require__(1840));
+var R = __importStar(__nccwpck_require__(786));
+var RT = __importStar(__nccwpck_require__(6170));
+var T = __importStar(__nccwpck_require__(2664));
+// -------------------------------------------------------------------------------------
+// natural transformations
+// -------------------------------------------------------------------------------------
+/**
+ * @category natural transformations
+ * @since 2.3.0
+ */
+exports.fromReader = 
+/*#__PURE__*/
+RT.fromReader(T.Pointed);
+/**
+ * @category natural transformations
+ * @since 2.3.0
+ */
+exports.fromTask = 
+/*#__PURE__*/
+R.of;
+/**
+ * @category natural transformations
+ * @since 2.3.0
+ */
+exports.fromIO = 
+/*#__PURE__*/
+function_1.flow(T.fromIO, exports.fromTask);
+// -------------------------------------------------------------------------------------
+// combinators
+// -------------------------------------------------------------------------------------
+/**
+ * Changes the value of the local context during the execution of the action `ma` (similar to `Contravariant`'s
+ * `contramap`).
+ *
+ * @category combinators
+ * @since 2.3.0
+ */
+exports.local = R.local;
+/**
+ * Less strict version of [`asksReaderTask`](#asksreadertask).
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.asksReaderTaskW = R.asksReaderW;
+/**
+ * Effectfully accesses the environment.
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.asksReaderTask = exports.asksReaderTaskW;
+// -------------------------------------------------------------------------------------
+// type class members
+// -------------------------------------------------------------------------------------
+var _map = function (fa, f) { return function_1.pipe(fa, exports.map(f)); };
+var _apPar = function (fab, fa) { return function_1.pipe(fab, exports.ap(fa)); };
+var _apSeq = function (fab, fa) {
+    return function_1.pipe(fab, exports.chain(function (f) { return function_1.pipe(fa, exports.map(f)); }));
+};
+var _chain = function (ma, f) { return function_1.pipe(ma, exports.chain(f)); };
+/**
+ * `map` can be used to turn functions `(a: A) => B` into functions `(fa: F<A>) => F<B>` whose argument and return types
+ * use the type constructor `F` to represent some computational context.
+ *
+ * @category Functor
+ * @since 2.3.0
+ */
+exports.map = 
+/*#__PURE__*/
+RT.map(T.Functor);
+/**
+ * Apply a function to an argument under a type constructor.
+ *
+ * @category Apply
+ * @since 2.3.0
+ */
+exports.ap = 
+/*#__PURE__*/
+RT.ap(T.ApplyPar);
+/**
+ * Less strict version of [`ap`](#ap).
+ *
+ * @category Apply
+ * @since 2.8.0
+ */
+exports.apW = exports.ap;
+/**
+ * @category Pointed
+ * @since 2.3.0
+ */
+exports.of = 
+/*#__PURE__*/
+RT.of(T.Pointed);
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation.
+ *
+ * @category Monad
+ * @since 2.3.0
+ */
+exports.chain = 
+/*#__PURE__*/
+RT.chain(T.Monad);
+/**
+ * Less strict version of  [`chain`](#chain).
+ *
+ * @category Monad
+ * @since 2.6.7
+ */
+exports.chainW = exports.chain;
+/**
+ * Less strict version of [`flatten`](#flatten).
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.flattenW = 
+/*#__PURE__*/
+exports.chainW(function_1.identity);
+/**
+ * Derivable from `Chain`.
+ *
+ * @category combinators
+ * @since 2.3.0
+ */
+exports.flatten = exports.flattenW;
+// -------------------------------------------------------------------------------------
+// instances
+// -------------------------------------------------------------------------------------
+/**
+ * @category instances
+ * @since 2.3.0
+ */
+exports.URI = 'ReaderTask';
+/**
+ * @category instances
+ * @since 2.7.0
+ */
+exports.Functor = {
+    URI: exports.URI,
+    map: _map
+};
+/**
+ * Derivable from `Functor`.
+ *
+ * @category combinators
+ * @since 2.10.0
+ */
+exports.flap = 
+/*#_PURE_*/
+Functor_1.flap(exports.Functor);
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.Pointed = {
+    URI: exports.URI,
+    of: exports.of
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.ApplyPar = {
+    URI: exports.URI,
+    map: _map,
+    ap: _apPar
+};
+/**
+ * Combine two effectful actions, keeping only the result of the first.
+ *
+ * Derivable from `Apply`.
+ *
+ * @category combinators
+ * @since 2.3.0
+ */
+exports.apFirst = 
+/*#__PURE__*/
+Apply_1.apFirst(exports.ApplyPar);
+/**
+ * Combine two effectful actions, keeping only the result of the second.
+ *
+ * Derivable from `Apply`.
+ *
+ * @category combinators
+ * @since 2.3.0
+ */
+exports.apSecond = 
+/*#__PURE__*/
+Apply_1.apSecond(exports.ApplyPar);
+/**
+ * @category instances
+ * @since 2.7.0
+ */
+exports.ApplicativePar = {
+    URI: exports.URI,
+    map: _map,
+    ap: _apPar,
+    of: exports.of
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.ApplySeq = {
+    URI: exports.URI,
+    map: _map,
+    ap: _apSeq
+};
+/**
+ * @category instances
+ * @since 2.7.0
+ */
+exports.ApplicativeSeq = {
+    URI: exports.URI,
+    map: _map,
+    ap: _apSeq,
+    of: exports.of
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.Chain = {
+    URI: exports.URI,
+    map: _map,
+    ap: _apPar,
+    chain: _chain
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.Monad = {
+    URI: exports.URI,
+    map: _map,
+    of: exports.of,
+    ap: _apPar,
+    chain: _chain
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.MonadIO = {
+    URI: exports.URI,
+    map: _map,
+    of: exports.of,
+    ap: _apPar,
+    chain: _chain,
+    fromIO: exports.fromIO
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.MonadTask = {
+    URI: exports.URI,
+    map: _map,
+    of: exports.of,
+    ap: _apPar,
+    chain: _chain,
+    fromIO: exports.fromIO,
+    fromTask: exports.fromTask
+};
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * Derivable from `Chain`.
+ *
+ * @category combinators
+ * @since 2.3.0
+ */
+exports.chainFirst = 
+/*#__PURE__*/
+Chain_1.chainFirst(exports.Chain);
+/**
+ * Less strict version of [`chainFirst`](#chainfirst).
+ *
+ * Derivable from `Chain`.
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.chainFirstW = exports.chainFirst;
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.FromIO = {
+    URI: exports.URI,
+    fromIO: exports.fromIO
+};
+/**
+ * @category combinators
+ * @since 2.4.0
+ */
+exports.fromIOK = 
+/*#__PURE__*/
+FromIO_1.fromIOK(exports.FromIO);
+/**
+ * @category combinators
+ * @since 2.4.0
+ */
+exports.chainIOK = 
+/*#__PURE__*/
+FromIO_1.chainIOK(exports.FromIO, exports.Chain);
+/**
+ * @category combinators
+ * @since 2.10.0
+ */
+exports.chainFirstIOK = 
+/*#__PURE__*/
+FromIO_1.chainFirstIOK(exports.FromIO, exports.Chain);
+/**
+ * @category instances
+ * @since 2.11.0
+ */
+exports.FromReader = {
+    URI: exports.URI,
+    fromReader: exports.fromReader
+};
+/**
+ * Reads the current context.
+ *
+ * @category constructors
+ * @since 2.3.0
+ */
+exports.ask = 
+/*#__PURE__*/
+FromReader_1.ask(exports.FromReader);
+/**
+ * Projects a value from the global context in a `ReaderTask`.
+ *
+ * @category constructors
+ * @since 2.3.0
+ */
+exports.asks = 
+/*#__PURE__*/
+FromReader_1.asks(exports.FromReader);
+/**
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.fromReaderK = 
+/*#__PURE__*/
+FromReader_1.fromReaderK(exports.FromReader);
+/**
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.chainReaderK = 
+/*#__PURE__*/
+FromReader_1.chainReaderK(exports.FromReader, exports.Chain);
+/**
+ * Less strict version of [`chainReaderK`](#chainreaderk).
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.chainReaderKW = exports.chainReaderK;
+/**
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.chainFirstReaderK = 
+/*#__PURE__*/
+FromReader_1.chainFirstReaderK(exports.FromReader, exports.Chain);
+/**
+ * Less strict version of [`chainFirstReaderK`](#chainfirstreaderk).
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.chainFirstReaderKW = exports.chainFirstReaderK;
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.FromTask = {
+    URI: exports.URI,
+    fromIO: exports.fromIO,
+    fromTask: exports.fromTask
+};
+/**
+ * @category combinators
+ * @since 2.4.0
+ */
+exports.fromTaskK = 
+/*#__PURE__*/
+FromTask_1.fromTaskK(exports.FromTask);
+/**
+ * @category combinators
+ * @since 2.4.0
+ */
+exports.chainTaskK = 
+/*#__PURE__*/
+FromTask_1.chainTaskK(exports.FromTask, exports.Chain);
+/**
+ * @category combinators
+ * @since 2.10.0
+ */
+exports.chainFirstTaskK = 
+/*#__PURE__*/
+FromTask_1.chainFirstTaskK(exports.FromTask, exports.Chain);
+// -------------------------------------------------------------------------------------
+// do notation
+// -------------------------------------------------------------------------------------
+/**
+ * @since 2.9.0
+ */
+exports.Do = 
+/*#__PURE__*/
+exports.of(_.emptyRecord);
+/**
+ * @since 2.8.0
+ */
+exports.bindTo = 
+/*#__PURE__*/
+Functor_1.bindTo(exports.Functor);
+/**
+ * @since 2.8.0
+ */
+exports.bind = 
+/*#__PURE__*/
+Chain_1.bind(exports.Chain);
+/**
+ * @since 2.8.0
+ */
+exports.bindW = exports.bind;
+// -------------------------------------------------------------------------------------
+// pipeable sequence S
+// -------------------------------------------------------------------------------------
+/**
+ * @since 2.8.0
+ */
+exports.apS = 
+/*#__PURE__*/
+Apply_1.apS(exports.ApplyPar);
+/**
+ * @since 2.8.0
+ */
+exports.apSW = exports.apS;
+// -------------------------------------------------------------------------------------
+// sequence T
+// -------------------------------------------------------------------------------------
+/**
+ * @since 2.11.0
+ */
+exports.ApT = exports.of(_.emptyReadonlyArray);
+// -------------------------------------------------------------------------------------
+// array utils
+// -------------------------------------------------------------------------------------
+/**
+ * Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(Applicative)`.
+ *
+ * @since 2.11.0
+ */
+var traverseReadonlyNonEmptyArrayWithIndex = function (f) {
+    return function_1.flow(R.traverseReadonlyNonEmptyArrayWithIndex(f), R.map(T.traverseReadonlyNonEmptyArrayWithIndex(function_1.SK)));
+};
+exports.traverseReadonlyNonEmptyArrayWithIndex = traverseReadonlyNonEmptyArrayWithIndex;
+/**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
+ *
+ * @since 2.11.0
+ */
+var traverseReadonlyArrayWithIndex = function (f) {
+    var g = exports.traverseReadonlyNonEmptyArrayWithIndex(f);
+    return function (as) { return (_.isNonEmpty(as) ? g(as) : exports.ApT); };
+};
+exports.traverseReadonlyArrayWithIndex = traverseReadonlyArrayWithIndex;
+/**
+ * Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(ApplicativeSeq)`.
+ *
+ * @since 2.11.0
+ */
+var traverseReadonlyNonEmptyArrayWithIndexSeq = function (f) {
+    return function_1.flow(R.traverseReadonlyNonEmptyArrayWithIndex(f), R.map(T.traverseReadonlyNonEmptyArrayWithIndexSeq(function_1.SK)));
+};
+exports.traverseReadonlyNonEmptyArrayWithIndexSeq = traverseReadonlyNonEmptyArrayWithIndexSeq;
+/**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativeSeq)`.
+ *
+ * @since 2.11.0
+ */
+var traverseReadonlyArrayWithIndexSeq = function (f) {
+    var g = exports.traverseReadonlyNonEmptyArrayWithIndexSeq(f);
+    return function (as) { return (_.isNonEmpty(as) ? g(as) : exports.ApT); };
+};
+exports.traverseReadonlyArrayWithIndexSeq = traverseReadonlyArrayWithIndexSeq;
+/**
+ * @since 2.9.0
+ */
+exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex;
+/**
+ * @since 2.9.0
+ */
+var traverseArray = function (f) { return exports.traverseReadonlyArrayWithIndex(function (_, a) { return f(a); }); };
+exports.traverseArray = traverseArray;
+/**
+ * @since 2.9.0
+ */
+exports.sequenceArray = 
+/*#__PURE__*/
+exports.traverseArray(function_1.identity);
+/**
+ * @since 2.10.0
+ */
+exports.traverseSeqArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq;
+/**
+ * @since 2.10.0
+ */
+var traverseSeqArray = function (f) { return exports.traverseReadonlyArrayWithIndexSeq(function (_, a) { return f(a); }); };
+exports.traverseSeqArray = traverseSeqArray;
+/**
+ * Use `traverseReadonlyArrayWithIndexSeq` instead.
+ *
+ * @since 2.10.0
+ * @deprecated
+ */
+exports.sequenceSeqArray = 
+/*#__PURE__*/
+exports.traverseSeqArray(function_1.identity);
+// -------------------------------------------------------------------------------------
+// deprecated
+// -------------------------------------------------------------------------------------
+// tslint:disable: deprecation
+/**
+ * Use small, specific instances instead.
+ *
+ * @category instances
+ * @since 2.3.0
+ * @deprecated
+ */
+exports.readerTask = {
+    URI: exports.URI,
+    map: _map,
+    of: exports.of,
+    ap: _apPar,
+    chain: _chain,
+    fromIO: exports.fromIO,
+    fromTask: exports.fromTask
+};
+/**
+ * Use small, specific instances instead.
+ *
+ * @category instances
+ * @since 2.3.0
+ * @deprecated
+ */
+exports.readerTaskSeq = {
+    URI: exports.URI,
+    map: _map,
+    of: exports.of,
+    ap: _apSeq,
+    chain: _chain,
+    fromIO: exports.fromIO,
+    fromTask: exports.fromTask
+};
+/**
+ * Use [`getApplySemigroup`](./Apply.ts.html#getapplysemigroup) instead.
+ *
+ * @category instances
+ * @since 2.3.0
+ * @deprecated
+ */
+exports.getSemigroup = 
+/*#__PURE__*/
+Apply_1.getApplySemigroup(exports.ApplySeq);
+/**
+ * Use [`getApplicativeMonoid`](./Applicative.ts.html#getapplicativemonoid) instead.
+ *
+ * @category instances
+ * @since 2.3.0
+ * @deprecated
+ */
+exports.getMonoid = 
+/*#__PURE__*/
+Applicative_1.getApplicativeMonoid(exports.ApplicativeSeq);
+/**
+ * @since 2.4.0
+ * @deprecated
+ */
+/* istanbul ignore next */
+function run(ma, r) {
+    return ma(r)();
+}
+exports.run = run;
+
+
+/***/ }),
+
+/***/ 5043:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.bimap = exports.map = exports.chainFirstReaderEitherK = exports.chainFirstReaderEitherKW = exports.chainReaderEitherK = exports.chainReaderEitherKW = exports.fromReaderEitherK = exports.chainFirstTaskEitherK = exports.chainFirstTaskEitherKW = exports.chainTaskEitherK = exports.chainTaskEitherKW = exports.fromTaskEitherK = exports.chainIOEitherK = exports.chainIOEitherKW = exports.fromIOEitherK = exports.swap = exports.orLeft = exports.orElseFirstW = exports.orElseFirst = exports.orElseW = exports.orElse = exports.asksReaderTaskEither = exports.asksReaderTaskEitherW = exports.local = exports.toUnion = exports.getOrElseW = exports.getOrElse = exports.foldW = exports.matchEW = exports.fold = exports.matchE = exports.matchW = exports.match = exports.fromReaderEither = exports.fromIOEither = exports.fromTask = exports.fromIO = exports.fromReader = exports.fromEither = exports.leftIO = exports.rightIO = exports.leftReaderTask = exports.rightReaderTask = exports.leftReader = exports.rightReader = exports.leftTask = exports.rightTask = exports.right = exports.left = exports.fromTaskEither = void 0;
+exports.fromOptionK = exports.fromOption = exports.FromEither = exports.chainFirstReaderTaskK = exports.chainFirstReaderTaskKW = exports.chainReaderTaskK = exports.chainReaderTaskKW = exports.fromReaderTaskK = exports.chainFirstReaderKW = exports.chainFirstReaderK = exports.chainReaderKW = exports.chainReaderK = exports.fromReaderK = exports.asks = exports.ask = exports.FromReader = exports.Alt = exports.Bifunctor = exports.chainFirstW = exports.chainFirst = exports.MonadThrow = exports.MonadTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecond = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.Functor = exports.getAltReaderTaskValidation = exports.getApplicativeReaderTaskValidation = exports.getFilterable = exports.getCompactable = exports.URI = exports.throwError = exports.altW = exports.alt = exports.flatten = exports.flattenW = exports.chainW = exports.chain = exports.of = exports.apW = exports.ap = exports.mapLeft = void 0;
+exports.run = exports.getReaderTaskValidation = exports.getSemigroup = exports.getApplyMonoid = exports.getApplySemigroup = exports.readerTaskEitherSeq = exports.readerTaskEither = exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.bindTo = exports.Do = exports.bracket = exports.chainFirstTaskK = exports.chainTaskK = exports.fromTaskK = exports.FromTask = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.FromIO = exports.fromEitherK = exports.filterOrElseW = exports.filterOrElse = exports.fromPredicate = exports.chainEitherKW = exports.chainEitherK = exports.chainOptionK = void 0;
+var Applicative_1 = __nccwpck_require__(4766);
+var Apply_1 = __nccwpck_require__(205);
+var Chain_1 = __nccwpck_require__(2372);
+var Compactable_1 = __nccwpck_require__(729);
+var E = __importStar(__nccwpck_require__(7534));
+var ET = __importStar(__nccwpck_require__(9803));
+var Filterable_1 = __nccwpck_require__(6907);
+var FromEither_1 = __nccwpck_require__(1964);
+var FromIO_1 = __nccwpck_require__(7948);
+var FromReader_1 = __nccwpck_require__(678);
+var FromTask_1 = __nccwpck_require__(2038);
+var function_1 = __nccwpck_require__(6985);
+var Functor_1 = __nccwpck_require__(5533);
+var _ = __importStar(__nccwpck_require__(1840));
+var R = __importStar(__nccwpck_require__(786));
+var RT = __importStar(__nccwpck_require__(7605));
+var T = __importStar(__nccwpck_require__(2664));
+var TE = __importStar(__nccwpck_require__(437));
+// -------------------------------------------------------------------------------------
+// constructors
+// -------------------------------------------------------------------------------------
+/**
+ * @category natural transformations
+ * @since 2.0.0
+ */
+exports.fromTaskEither = 
+/*#__PURE__*/
+R.of;
+/**
+ * @category constructors
+ * @since 2.0.0
+ */
+exports.left = 
+/*#__PURE__*/
+ET.left(RT.Pointed);
+/**
+ * @category constructors
+ * @since 2.0.0
+ */
+exports.right = 
+/*#__PURE__*/
+ET.right(RT.Pointed);
+/**
+ * @category constructors
+ * @since 2.0.0
+ */
+exports.rightTask = 
+/*#__PURE__*/
+function_1.flow(TE.rightTask, exports.fromTaskEither);
+/**
+ * @category constructors
+ * @since 2.0.0
+ */
+exports.leftTask = 
+/*#__PURE__*/
+function_1.flow(TE.leftTask, exports.fromTaskEither);
+/**
+ * @category constructors
+ * @since 2.0.0
+ */
+var rightReader = function (ma) {
+    return function_1.flow(ma, TE.right);
+};
+exports.rightReader = rightReader;
+/**
+ * @category constructors
+ * @since 2.0.0
+ */
+var leftReader = function (me) {
+    return function_1.flow(me, TE.left);
+};
+exports.leftReader = leftReader;
+/**
+ * @category constructors
+ * @since 2.5.0
+ */
+exports.rightReaderTask = 
+/*#__PURE__*/
+ET.rightF(RT.Functor);
+/**
+ * @category constructors
+ * @since 2.5.0
+ */
+exports.leftReaderTask = 
+/*#__PURE__*/
+ET.leftF(RT.Functor);
+/**
+ * @category constructors
+ * @since 2.0.0
+ */
+exports.rightIO = 
+/*#__PURE__*/
+function_1.flow(TE.rightIO, exports.fromTaskEither);
+/**
+ * @category constructors
+ * @since 2.0.0
+ */
+exports.leftIO = 
+/*#__PURE__*/
+function_1.flow(TE.leftIO, exports.fromTaskEither);
+// -------------------------------------------------------------------------------------
+// natural transformations
+// -------------------------------------------------------------------------------------
+/**
+ * @category natural transformations
+ * @since 2.0.0
+ */
+exports.fromEither = RT.of;
+/**
+ * @category natural transformations
+ * @since 2.11.0
+ */
+exports.fromReader = exports.rightReader;
+/**
+ * @category natural transformations
+ * @since 2.0.0
+ */
+exports.fromIO = exports.rightIO;
+/**
+ * @category natural transformations
+ * @since 2.0.0
+ */
+exports.fromTask = exports.rightTask;
+/**
+ * @category natural transformations
+ * @since 2.0.0
+ */
+exports.fromIOEither = 
+/*#__PURE__*/
+function_1.flow(TE.fromIOEither, exports.fromTaskEither);
+/**
+ * @category constructors
+ * @since 2.0.0
+ */
+var fromReaderEither = function (ma) { return function_1.flow(ma, TE.fromEither); };
+exports.fromReaderEither = fromReaderEither;
+// -------------------------------------------------------------------------------------
+// destructors
+// -------------------------------------------------------------------------------------
+/**
+ * @category destructors
+ * @since 2.10.0
+ */
+exports.match = 
+/*#__PURE__*/
+ET.match(RT.Functor);
+/**
+ * Less strict version of [`match`](#match).
+ *
+ * @category destructors
+ * @since 2.10.0
+ */
+exports.matchW = exports.match;
+/**
+ * @category destructors
+ * @since 2.10.0
+ */
+exports.matchE = 
+/*#__PURE__*/
+ET.matchE(RT.Chain);
+/**
+ * Alias of [`matchE`](#matche).
+ *
+ * @category destructors
+ * @since 2.0.0
+ */
+exports.fold = exports.matchE;
+/**
+ * Less strict version of [`matchE`](#matche).
+ *
+ * @category destructors
+ * @since 2.10.0
+ */
+exports.matchEW = exports.matchE;
+/**
+ * Alias of [`matchEW`](#matchew).
+ *
+ * @category destructors
+ * @since 2.10.0
+ */
+exports.foldW = exports.matchEW;
+/**
+ * @category destructors
+ * @since 2.0.0
+ */
+exports.getOrElse = 
+/*#__PURE__*/
+ET.getOrElse(RT.Monad);
+/**
+ * Less strict version of [`getOrElse`](#getorelse).
+ *
+ * @category destructors
+ * @since 2.6.0
+ */
+exports.getOrElseW = exports.getOrElse;
+// -------------------------------------------------------------------------------------
+// interop
+// -------------------------------------------------------------------------------------
+/**
+ * @category interop
+ * @since 2.10.0
+ */
+exports.toUnion = 
+/*#__PURE__*/
+ET.toUnion(RT.Functor);
+// -------------------------------------------------------------------------------------
+// combinators
+// -------------------------------------------------------------------------------------
+/**
+ * Changes the value of the local context during the execution of the action `ma` (similar to `Contravariant`'s
+ * `contramap`).
+ *
+ * @category combinators
+ * @since 2.0.0
+ */
+exports.local = R.local;
+/**
+ * Less strict version of [`asksReaderTaskEither`](#asksreadertaskeither).
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.asksReaderTaskEitherW = R.asksReaderW;
+/**
+ * Effectfully accesses the environment.
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.asksReaderTaskEither = exports.asksReaderTaskEitherW;
+/**
+ * @category combinators
+ * @since 2.0.0
+ */
+exports.orElse = 
+/*#__PURE__*/
+ET.orElse(RT.Monad);
+/**
+ * Less strict version of [`orElse`](#orelse).
+ *
+ * @category combinators
+ * @since 2.10.0
+ */
+exports.orElseW = exports.orElse;
+/**
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.orElseFirst = 
+/*#__PURE__*/
+ET.orElseFirst(RT.Monad);
+/**
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.orElseFirstW = exports.orElseFirst;
+/**
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.orLeft = 
+/*#__PURE__*/
+ET.orLeft(RT.Monad);
+/**
+ * @category combinators
+ * @since 2.0.0
+ */
+exports.swap = 
+/*#__PURE__*/
+ET.swap(RT.Functor);
+/**
+ * @category combinators
+ * @since 2.4.0
+ */
+var fromIOEitherK = function (f) { return function_1.flow(f, exports.fromIOEither); };
+exports.fromIOEitherK = fromIOEitherK;
+/**
+ * Less strict version of [`chainIOEitherK`](#chainioeitherk).
+ *
+ * @category combinators
+ * @since 2.6.1
+ */
+var chainIOEitherKW = function (f) { return exports.chainW(exports.fromIOEitherK(f)); };
+exports.chainIOEitherKW = chainIOEitherKW;
+/**
+ * @category combinators
+ * @since 2.4.0
+ */
+exports.chainIOEitherK = exports.chainIOEitherKW;
+/**
+ * @category combinators
+ * @since 2.4.0
+ */
+var fromTaskEitherK = function (f) { return function_1.flow(f, exports.fromTaskEither); };
+exports.fromTaskEitherK = fromTaskEitherK;
+/**
+ * Less strict version of [`chainTaskEitherK`](#chaintaskeitherk).
+ *
+ * @category combinators
+ * @since 2.6.1
+ */
+var chainTaskEitherKW = function (f) { return exports.chainW(exports.fromTaskEitherK(f)); };
+exports.chainTaskEitherKW = chainTaskEitherKW;
+/**
+ * @category combinators
+ * @since 2.4.0
+ */
+exports.chainTaskEitherK = exports.chainTaskEitherKW;
+/**
+ * Less strict version of [`chainFirstTaskEitherK`](#chainfirsttaskeitherk).
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+var chainFirstTaskEitherKW = function (f) { return exports.chainFirstW(exports.fromTaskEitherK(f)); };
+exports.chainFirstTaskEitherKW = chainFirstTaskEitherKW;
+/**
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.chainFirstTaskEitherK = exports.chainFirstTaskEitherKW;
+/**
+ * @category combinators
+ * @since 2.11.0
+ */
+var fromReaderEitherK = function (f) { return function_1.flow(f, exports.fromReaderEither); };
+exports.fromReaderEitherK = fromReaderEitherK;
+/**
+ * Less strict version of [`chainReaderEitherK`](#chainreadereitherk).
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+var chainReaderEitherKW = function (f) {
+    return exports.chainW(exports.fromReaderEitherK(f));
+};
+exports.chainReaderEitherKW = chainReaderEitherKW;
+/**
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.chainReaderEitherK = exports.chainReaderEitherKW;
+/**
+ * Less strict version of [`chainFirstReaderEitherK`](#chainfirstreadereitherk).
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+var chainFirstReaderEitherKW = function (f) {
+    return exports.chainFirstW(exports.fromReaderEitherK(f));
+};
+exports.chainFirstReaderEitherKW = chainFirstReaderEitherKW;
+/**
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.chainFirstReaderEitherK = exports.chainFirstReaderEitherKW;
+// -------------------------------------------------------------------------------------
+// non-pipeables
+// -------------------------------------------------------------------------------------
+var _map = function (fa, f) { return function_1.pipe(fa, exports.map(f)); };
+var _apPar = function (fab, fa) { return function_1.pipe(fab, exports.ap(fa)); };
+var _apSeq = function (fab, fa) {
+    return function_1.pipe(fab, exports.chain(function (f) { return function_1.pipe(fa, exports.map(f)); }));
+};
+/* istanbul ignore next */
+var _chain = function (ma, f) { return function_1.pipe(ma, exports.chain(f)); };
+/* istanbul ignore next */
+var _alt = function (fa, that) { return function_1.pipe(fa, exports.alt(that)); };
+/* istanbul ignore next */
+var _bimap = function (fa, f, g) { return function_1.pipe(fa, exports.bimap(f, g)); };
+/* istanbul ignore next */
+var _mapLeft = function (fa, f) { return function_1.pipe(fa, exports.mapLeft(f)); };
+// -------------------------------------------------------------------------------------
+// type class members
+// -------------------------------------------------------------------------------------
+/**
+ * `map` can be used to turn functions `(a: A) => B` into functions `(fa: F<A>) => F<B>` whose argument and return types
+ * use the type constructor `F` to represent some computational context.
+ *
+ * @category Functor
+ * @since 2.0.0
+ */
+exports.map = 
+/*#__PURE__*/
+ET.map(RT.Functor);
+/**
+ * Map a pair of functions over the two last type arguments of the bifunctor.
+ *
+ * @category Bifunctor
+ * @since 2.0.0
+ */
+exports.bimap = 
+/*#__PURE__*/
+ET.bimap(RT.Functor);
+/**
+ * Map a function over the second type argument of a bifunctor.
+ *
+ * @category Bifunctor
+ * @since 2.0.0
+ */
+exports.mapLeft = 
+/*#__PURE__*/
+ET.mapLeft(RT.Functor);
+/**
+ * Apply a function to an argument under a type constructor.
+ *
+ * @category Apply
+ * @since 2.0.0
+ */
+exports.ap = 
+/*#__PURE__*/
+ET.ap(RT.ApplyPar);
+/**
+ * Less strict version of [`ap`](#ap).
+ *
+ * @category Apply
+ * @since 2.8.0
+ */
+exports.apW = exports.ap;
+/**
+ * @category Pointed
+ * @since 2.7.0
+ */
+exports.of = exports.right;
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation.
+ *
+ * @category Monad
+ * @since 2.0.0
+ */
+exports.chain = 
+/*#__PURE__*/
+ET.chain(RT.Monad);
+/**
+ * Less strict version of [`chain`](#chain).
+ *
+ * @category Monad
+ * @since 2.6.0
+ */
+exports.chainW = exports.chain;
+/**
+ * Less strict version of [`flatten`](#flatten).
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.flattenW = 
+/*#__PURE__*/
+exports.chainW(function_1.identity);
+/**
+ * Derivable from `Chain`.
+ *
+ * @category combinators
+ * @since 2.0.0
+ */
+exports.flatten = exports.flattenW;
+/**
+ * Identifies an associative operation on a type constructor. It is similar to `Semigroup`, except that it applies to
+ * types of kind `* -> *`.
+ *
+ * @category Alt
+ * @since 2.0.0
+ */
+exports.alt = 
+/*#__PURE__*/
+ET.alt(RT.Monad);
+/**
+ * Less strict version of [`alt`](#alt).
+ *
+ * @category Alt
+ * @since 2.9.0
+ */
+exports.altW = exports.alt;
+/**
+ * @category MonadThrow
+ * @since 2.0.0
+ */
+exports.throwError = exports.left;
+// -------------------------------------------------------------------------------------
+// instances
+// -------------------------------------------------------------------------------------
+/**
+ * @category instances
+ * @since 2.0.0
+ */
+exports.URI = 'ReaderTaskEither';
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+var getCompactable = function (M) {
+    var C = E.getCompactable(M);
+    return {
+        URI: exports.URI,
+        _E: undefined,
+        compact: Compactable_1.compact(RT.Functor, C),
+        separate: Compactable_1.separate(RT.Functor, C, E.Functor)
+    };
+};
+exports.getCompactable = getCompactable;
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+function getFilterable(M) {
+    var F = E.getFilterable(M);
+    var C = exports.getCompactable(M);
+    var filter = Filterable_1.filter(RT.Functor, F);
+    var filterMap = Filterable_1.filterMap(RT.Functor, F);
+    var partition = Filterable_1.partition(RT.Functor, F);
+    var partitionMap = Filterable_1.partitionMap(RT.Functor, F);
+    return {
+        URI: exports.URI,
+        _E: undefined,
+        map: _map,
+        compact: C.compact,
+        separate: C.separate,
+        filter: function (fa, predicate) { return function_1.pipe(fa, filter(predicate)); },
+        filterMap: function (fa, f) { return function_1.pipe(fa, filterMap(f)); },
+        partition: function (fa, predicate) { return function_1.pipe(fa, partition(predicate)); },
+        partitionMap: function (fa, f) { return function_1.pipe(fa, partitionMap(f)); }
+    };
+}
+exports.getFilterable = getFilterable;
+/**
+ * @category instances
+ * @since 2.7.0
+ */
+function getApplicativeReaderTaskValidation(A, S) {
+    var ap = Apply_1.ap(R.Apply, TE.getApplicativeTaskValidation(A, S));
+    return {
+        URI: exports.URI,
+        _E: undefined,
+        map: _map,
+        ap: function (fab, fa) { return function_1.pipe(fab, ap(fa)); },
+        of: exports.of
+    };
+}
+exports.getApplicativeReaderTaskValidation = getApplicativeReaderTaskValidation;
+/**
+ * @category instances
+ * @since 2.7.0
+ */
+function getAltReaderTaskValidation(S) {
+    var alt = ET.altValidation(RT.Monad, S);
+    return {
+        URI: exports.URI,
+        _E: undefined,
+        map: _map,
+        alt: function (fa, that) { return function_1.pipe(fa, alt(that)); }
+    };
+}
+exports.getAltReaderTaskValidation = getAltReaderTaskValidation;
+/**
+ * @category instances
+ * @since 2.7.0
+ */
+exports.Functor = {
+    URI: exports.URI,
+    map: _map
+};
+/**
+ * Derivable from `Functor`.
+ *
+ * @category combinators
+ * @since 2.10.0
+ */
+exports.flap = 
+/*#_PURE_*/
+Functor_1.flap(exports.Functor);
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.Pointed = {
+    URI: exports.URI,
+    of: exports.of
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.ApplyPar = {
+    URI: exports.URI,
+    map: _map,
+    ap: _apPar
+};
+/**
+ * Combine two effectful actions, keeping only the result of the first.
+ *
+ * Derivable from `Apply`.
+ *
+ * @category combinators
+ * @since 2.0.0
+ */
+exports.apFirst = 
+/*#__PURE__*/
+Apply_1.apFirst(exports.ApplyPar);
+/**
+ * Combine two effectful actions, keeping only the result of the second.
+ *
+ * Derivable from `Apply`.
+ *
+ * @category combinators
+ * @since 2.0.0
+ */
+exports.apSecond = 
+/*#__PURE__*/
+Apply_1.apSecond(exports.ApplyPar);
+/**
+ * @category instances
+ * @since 2.7.0
+ */
+exports.ApplicativePar = {
+    URI: exports.URI,
+    map: _map,
+    ap: _apPar,
+    of: exports.of
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.ApplySeq = {
+    URI: exports.URI,
+    map: _map,
+    ap: _apSeq
+};
+/**
+ * @category instances
+ * @since 2.7.0
+ */
+exports.ApplicativeSeq = {
+    URI: exports.URI,
+    map: _map,
+    ap: _apSeq,
+    of: exports.of
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.Chain = {
+    URI: exports.URI,
+    map: _map,
+    ap: _apPar,
+    chain: _chain
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.Monad = {
+    URI: exports.URI,
+    map: _map,
+    ap: _apPar,
+    chain: _chain,
+    of: exports.of
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.MonadIO = {
+    URI: exports.URI,
+    map: _map,
+    ap: _apPar,
+    chain: _chain,
+    of: exports.of,
+    fromIO: exports.fromIO
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.MonadTask = {
+    URI: exports.URI,
+    map: _map,
+    ap: _apPar,
+    chain: _chain,
+    of: exports.of,
+    fromIO: exports.fromIO,
+    fromTask: exports.fromTask
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.MonadThrow = {
+    URI: exports.URI,
+    map: _map,
+    ap: _apPar,
+    chain: _chain,
+    of: exports.of,
+    throwError: exports.throwError
+};
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * Derivable from `Chain`.
+ *
+ * @category combinators
+ * @since 2.0.0
+ */
+exports.chainFirst = 
+/*#__PURE__*/
+Chain_1.chainFirst(exports.Chain);
+/**
+ * Less strict version of [`chainFirst`](#chainfirst).
+ *
+ * Derivable from `Chain`.
+ *
+ * @category combinators
+ * @since 2.8.0
+ */
+exports.chainFirstW = exports.chainFirst;
+/**
+ * @category instances
+ * @since 2.7.0
+ */
+exports.Bifunctor = {
+    URI: exports.URI,
+    bimap: _bimap,
+    mapLeft: _mapLeft
+};
+/**
+ * @category instances
+ * @since 2.7.0
+ */
+exports.Alt = {
+    URI: exports.URI,
+    map: _map,
+    alt: _alt
+};
+/**
+ * @category instances
+ * @since 2.11.0
+ */
+exports.FromReader = {
+    URI: exports.URI,
+    fromReader: exports.fromReader
+};
+/**
+ * Reads the current context.
+ *
+ * @category constructors
+ * @since 2.0.0
+ */
+exports.ask = 
+/*#__PURE__*/
+FromReader_1.ask(exports.FromReader);
+/**
+ * Projects a value from the global context in a `ReaderEither`.
+ *
+ * @category constructors
+ * @since 2.0.0
+ */
+exports.asks = 
+/*#__PURE__*/
+FromReader_1.asks(exports.FromReader);
+/**
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.fromReaderK = 
+/*#__PURE__*/
+FromReader_1.fromReaderK(exports.FromReader);
+/**
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.chainReaderK = 
+/*#__PURE__*/
+FromReader_1.chainReaderK(exports.FromReader, exports.Chain);
+/**
+ * Less strict version of [`chainReaderK`](#chainreaderk).
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.chainReaderKW = exports.chainReaderK;
+/**
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.chainFirstReaderK = 
+/*#__PURE__*/
+FromReader_1.chainFirstReaderK(exports.FromReader, exports.Chain);
+/**
+ * Less strict version of [`chainFirstReaderK`](#chainfirstreaderk).
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.chainFirstReaderKW = exports.chainFirstReaderK;
+/**
+ * @category combinators
+ * @since 2.11.0
+ */
+var fromReaderTaskK = function (f) { return function () {
+    var a = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        a[_i] = arguments[_i];
+    }
+    return exports.rightReaderTask(f.apply(void 0, a));
+}; };
+exports.fromReaderTaskK = fromReaderTaskK;
+/**
+ * Less strict version of [`chainReaderTaskK`](#chainreadertaskk).
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+var chainReaderTaskKW = function (f) {
+    return exports.chainW(exports.fromReaderTaskK(f));
+};
+exports.chainReaderTaskKW = chainReaderTaskKW;
+/**
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.chainReaderTaskK = exports.chainReaderTaskKW;
+/**
+ * Less strict version of [`chainFirstReaderTaskK`](#chainfirstreadertaskk).
+ *
+ * @category combinators
+ * @since 2.11.0
+ */
+var chainFirstReaderTaskKW = function (f) {
+    return exports.chainFirstW(exports.fromReaderTaskK(f));
+};
+exports.chainFirstReaderTaskKW = chainFirstReaderTaskKW;
+/**
+ * @category combinators
+ * @since 2.11.0
+ */
+exports.chainFirstReaderTaskK = exports.chainFirstReaderTaskKW;
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.FromEither = {
+    URI: exports.URI,
+    fromEither: exports.fromEither
+};
+/**
+ * @category natural transformations
+ * @since 2.0.0
+ */
+exports.fromOption = 
+/*#__PURE__*/
+FromEither_1.fromOption(exports.FromEither);
+/**
+ * @category combinators
+ * @since 2.10.0
+ */
+exports.fromOptionK = 
+/*#__PURE__*/
+FromEither_1.fromOptionK(exports.FromEither);
+/**
+ * @category combinators
+ * @since 2.10.0
+ */
+exports.chainOptionK = 
+/*#__PURE__*/
+FromEither_1.chainOptionK(exports.FromEither, exports.Chain);
+/**
+ * @category combinators
+ * @since 2.4.0
+ */
+exports.chainEitherK = 
+/*#__PURE__*/
+FromEither_1.chainEitherK(exports.FromEither, exports.Chain);
+/**
+ * Less strict version of [`chainEitherK`](#chaineitherk).
+ *
+ * @category combinators
+ * @since 2.6.1
+ */
+exports.chainEitherKW = exports.chainEitherK;
+/**
+ * @category constructors
+ * @since 2.0.0
+ */
+exports.fromPredicate = 
+/*#__PURE__*/
+FromEither_1.fromPredicate(exports.FromEither);
+/**
+ * @category combinators
+ * @since 2.0.0
+ */
+exports.filterOrElse = 
+/*#__PURE__*/
+FromEither_1.filterOrElse(exports.FromEither, exports.Chain);
+/**
+ * Less strict version of [`filterOrElse`](#filterorelse).
+ *
+ * @category combinators
+ * @since 2.9.0
+ */
+exports.filterOrElseW = exports.filterOrElse;
+/**
+ * @category combinators
+ * @since 2.4.0
+ */
+exports.fromEitherK = 
+/*#__PURE__*/
+FromEither_1.fromEitherK(exports.FromEither);
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.FromIO = {
+    URI: exports.URI,
+    fromIO: exports.fromIO
+};
+/**
+ * @category combinators
+ * @since 2.10.0
+ */
+exports.fromIOK = 
+/*#__PURE__*/
+FromIO_1.fromIOK(exports.FromIO);
+/**
+ * @category combinators
+ * @since 2.10.0
+ */
+exports.chainIOK = 
+/*#__PURE__*/
+FromIO_1.chainIOK(exports.FromIO, exports.Chain);
+/**
+ * @category combinators
+ * @since 2.10.0
+ */
+exports.chainFirstIOK = 
+/*#__PURE__*/
+FromIO_1.chainFirstIOK(exports.FromIO, exports.Chain);
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.FromTask = {
+    URI: exports.URI,
+    fromIO: exports.fromIO,
+    fromTask: exports.fromTask
+};
+/**
+ * @category combinators
+ * @since 2.10.0
+ */
+exports.fromTaskK = 
+/*#__PURE__*/
+FromTask_1.fromTaskK(exports.FromTask);
+/**
+ * @category combinators
+ * @since 2.10.0
+ */
+exports.chainTaskK = 
+/*#__PURE__*/
+FromTask_1.chainTaskK(exports.FromTask, exports.Chain);
+/**
+ * @category combinators
+ * @since 2.10.0
+ */
+exports.chainFirstTaskK = 
+/*#__PURE__*/
+FromTask_1.chainFirstTaskK(exports.FromTask, exports.Chain);
+// -------------------------------------------------------------------------------------
+// utils
+// -------------------------------------------------------------------------------------
+/**
+ * Make sure that a resource is cleaned up in the event of an exception (\*). The release action is called regardless of
+ * whether the body action throws (\*) or returns.
+ *
+ * (\*) i.e. returns a `Left`
+ *
+ * @since 2.0.4
+ */
+function bracket(aquire, use, release) {
+    return function (r) {
+        return TE.bracket(aquire(r), function (a) { return use(a)(r); }, function (a, e) { return release(a, e)(r); });
+    };
+}
+exports.bracket = bracket;
+// -------------------------------------------------------------------------------------
+// do notation
+// -------------------------------------------------------------------------------------
+/**
+ * @since 2.9.0
+ */
+exports.Do = 
+/*#__PURE__*/
+exports.of(_.emptyRecord);
+/**
+ * @since 2.8.0
+ */
+exports.bindTo = 
+/*#__PURE__*/
+Functor_1.bindTo(exports.Functor);
+/**
+ * @since 2.8.0
+ */
+exports.bind = 
+/*#__PURE__*/
+Chain_1.bind(exports.Chain);
+/**
+ * @since 2.8.0
+ */
+exports.bindW = exports.bind;
+// -------------------------------------------------------------------------------------
+// pipeable sequence S
+// -------------------------------------------------------------------------------------
+/**
+ * @since 2.8.0
+ */
+exports.apS = 
+/*#__PURE__*/
+Apply_1.apS(exports.ApplyPar);
+/**
+ * @since 2.8.0
+ */
+exports.apSW = exports.apS;
+// -------------------------------------------------------------------------------------
+// sequence T
+// -------------------------------------------------------------------------------------
+/**
+ * @since 2.11.0
+ */
+exports.ApT = exports.of(_.emptyReadonlyArray);
+// -------------------------------------------------------------------------------------
+// array utils
+// -------------------------------------------------------------------------------------
+/**
+ * Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(ApplicativePar)`.
+ *
+ * @since 2.11.0
+ */
+var traverseReadonlyNonEmptyArrayWithIndex = function (f) {
+    return function_1.flow(R.traverseReadonlyNonEmptyArrayWithIndex(f), R.map(TE.traverseReadonlyNonEmptyArrayWithIndex(function_1.SK)));
+};
+exports.traverseReadonlyNonEmptyArrayWithIndex = traverseReadonlyNonEmptyArrayWithIndex;
+/**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativePar)`.
+ *
+ * @since 2.11.0
+ */
+var traverseReadonlyArrayWithIndex = function (f) {
+    var g = exports.traverseReadonlyNonEmptyArrayWithIndex(f);
+    return function (as) { return (_.isNonEmpty(as) ? g(as) : exports.ApT); };
+};
+exports.traverseReadonlyArrayWithIndex = traverseReadonlyArrayWithIndex;
+/**
+ * Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(ApplicativeSeq)`.
+ *
+ * @since 2.11.0
+ */
+var traverseReadonlyNonEmptyArrayWithIndexSeq = function (f) {
+    return function_1.flow(R.traverseReadonlyNonEmptyArrayWithIndex(f), R.map(TE.traverseReadonlyNonEmptyArrayWithIndexSeq(function_1.SK)));
+};
+exports.traverseReadonlyNonEmptyArrayWithIndexSeq = traverseReadonlyNonEmptyArrayWithIndexSeq;
+/**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativeSeq)`.
+ *
+ * @since 2.11.0
+ */
+var traverseReadonlyArrayWithIndexSeq = function (f) {
+    var g = exports.traverseReadonlyNonEmptyArrayWithIndexSeq(f);
+    return function (as) { return (_.isNonEmpty(as) ? g(as) : exports.ApT); };
+};
+exports.traverseReadonlyArrayWithIndexSeq = traverseReadonlyArrayWithIndexSeq;
+/**
+ * @since 2.9.0
+ */
+exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex;
+/**
+ * @since 2.9.0
+ */
+var traverseArray = function (f) {
+    return exports.traverseReadonlyArrayWithIndex(function (_, a) { return f(a); });
+};
+exports.traverseArray = traverseArray;
+/**
+ * @since 2.9.0
+ */
+exports.sequenceArray = 
+/*#__PURE__*/
+exports.traverseArray(function_1.identity);
+/**
+ * @since 2.9.0
+ */
+exports.traverseSeqArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq;
+/**
+ * @since 2.9.0
+ */
+var traverseSeqArray = function (f) {
+    return exports.traverseReadonlyArrayWithIndexSeq(function (_, a) { return f(a); });
+};
+exports.traverseSeqArray = traverseSeqArray;
+/**
+ * @since 2.9.0
+ */
+exports.sequenceSeqArray = 
+/*#__PURE__*/
+exports.traverseSeqArray(function_1.identity);
+// -------------------------------------------------------------------------------------
+// deprecated
+// -------------------------------------------------------------------------------------
+// tslint:disable: deprecation
+/**
+ * Use small, specific instances instead.
+ *
+ * @category instances
+ * @since 2.0.0
+ * @deprecated
+ */
+exports.readerTaskEither = {
+    URI: exports.URI,
+    map: _map,
+    of: exports.of,
+    ap: _apPar,
+    chain: _chain,
+    alt: _alt,
+    bimap: _bimap,
+    mapLeft: _mapLeft,
+    fromIO: exports.fromIO,
+    fromTask: exports.fromTask,
+    throwError: exports.throwError
+};
+/**
+ * Use small, specific instances instead.
+ *
+ * @category instances
+ * @since 2.0.0
+ * @deprecated
+ */
+exports.readerTaskEitherSeq = {
+    URI: exports.URI,
+    map: _map,
+    of: exports.of,
+    ap: _apSeq,
+    chain: _chain,
+    alt: _alt,
+    bimap: _bimap,
+    mapLeft: _mapLeft,
+    fromIO: exports.fromIO,
+    fromTask: exports.fromTask,
+    throwError: exports.throwError
+};
+/**
+ * Use [`getApplySemigroup`](./Apply.ts.html#getapplysemigroup) instead.
+ *
+ * Semigroup returning the left-most `Left` value. If both operands are `Right`s then the inner values
+ * are concatenated using the provided `Semigroup`
+ *
+ * @category instances
+ * @since 2.0.0
+ * @deprecated
+ */
+exports.getApplySemigroup = 
+/*#__PURE__*/
+Apply_1.getApplySemigroup(exports.ApplySeq);
+/**
+ * Use [`getApplicativeMonoid`](./Applicative.ts.html#getapplicativemonoid) instead.
+ *
+ * @category instances
+ * @since 2.0.0
+ * @deprecated
+ */
+exports.getApplyMonoid = 
+/*#__PURE__*/
+Applicative_1.getApplicativeMonoid(exports.ApplicativeSeq);
+/**
+ * Use [`getApplySemigroup`](./Apply.ts.html#getapplysemigroup) instead.
+ *
+ * @category instances
+ * @since 2.0.0
+ * @deprecated
+ */
+var getSemigroup = function (S) {
+    return Apply_1.getApplySemigroup(RT.ApplySeq)(E.getSemigroup(S));
+};
+exports.getSemigroup = getSemigroup;
+/**
+ * Use [`getApplicativeReaderTaskValidation`](#getapplicativereadertaskvalidation) and [`getAltReaderTaskValidation`](#getaltreadertaskvalidation) instead.
+ *
+ * @category instances
+ * @since 2.3.0
+ * @deprecated
+ */
+function getReaderTaskValidation(SE) {
+    var applicativeReaderTaskValidation = getApplicativeReaderTaskValidation(T.ApplicativePar, SE);
+    var altReaderTaskValidation = getAltReaderTaskValidation(SE);
+    return {
+        URI: exports.URI,
+        _E: undefined,
+        map: _map,
+        of: exports.of,
+        chain: _chain,
+        bimap: _bimap,
+        mapLeft: _mapLeft,
+        ap: applicativeReaderTaskValidation.ap,
+        alt: altReaderTaskValidation.alt,
+        fromIO: exports.fromIO,
+        fromTask: exports.fromTask,
+        throwError: exports.throwError
+    };
+}
+exports.getReaderTaskValidation = getReaderTaskValidation;
+/**
+ * @since 2.0.0
+ * @deprecated
+ */
+/* istanbul ignore next */
+function run(ma, r) {
+    return ma(r)();
+}
+exports.run = run;
 
 
 /***/ }),
