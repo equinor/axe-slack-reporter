@@ -10,5 +10,5 @@ const countViolations = (result: AxeResult): Result => ({
   numberOfIncomplete: result?.incomplete?.length ?? 0,
 })
 
-type ParseType = (json: unknown) => Result
+type ParseType = (json: any) => Result
 export const parse: ParseType = compose(countViolations, firstOrDefault(emptyResult), parseJson)

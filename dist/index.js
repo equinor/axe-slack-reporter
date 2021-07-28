@@ -107,29 +107,24 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(2186);
-const fs_1 = __importDefault(__nccwpck_require__(5747));
+const fs_1 = __nccwpck_require__(5747);
 const axe_result_parser_1 = __nccwpck_require__(5391);
 const O = __importStar(__nccwpck_require__(2569));
 const T = __importStar(__nccwpck_require__(2664));
 const E = __importStar(__nccwpck_require__(7534));
+const TE = __importStar(__nccwpck_require__(437));
 const function_1 = __nccwpck_require__(6985);
 const slack_1 = __nccwpck_require__(568);
-const function_2 = __nccwpck_require__(6985);
 const getWebhookURL = () => O.fromNullable(process.env.SLACK_WEBHOOK_URL);
-const getFileName = () => function_2.pipe(core_1.getInput('fileName'), O.fromPredicate((fileName) => fileName.length > 3), O.getOrElse(() => 'example-files/dagbladet.json'));
+const getFileName = () => function_1.pipe(core_1.getInput('fileName'), O.fromPredicate((fileName) => fileName.length > 3), O.getOrElse(() => 'example-files/dagbladet.json'));
+const getFileContent = (fileName) => function_1.pipe(TE.tryCatch(() => fs_1.promises.readFile(fileName, { encoding: 'utf8' }), E.toError), TE.map(JSON.parse));
 const setSuccess = (text) => core_1.setOutput(text, '0');
 try {
     console.log('Report axe findings to Slack');
-    // TODO: Possibly also use fp-ts here
-    // TODO: convert to task-based approach with error handling
-    const getFileContent = (fileName) => JSON.parse(fs_1.default.readFileSync(fileName, { encoding: 'utf8' }));
     // Do the magic!
-    const doDaThing = function_1.flow(getFileName, getFileContent, axe_result_parser_1.parse, slack_1.send(getWebhookURL()), T.map(E.fold(core_1.setFailed, setSuccess)))();
+    const doDaThing = function_1.flow(getFileName, getFileContent, TE.map(axe_result_parser_1.parse), TE.chain(slack_1.send(getWebhookURL())), T.map(E.fold(core_1.setFailed, setSuccess)))();
     doDaThing();
 }
 catch (error) {
