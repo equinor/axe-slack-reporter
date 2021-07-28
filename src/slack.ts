@@ -1,7 +1,9 @@
 import { none, some, match, fromNullable, Option } from 'fp-ts/lib/Option'
+import * as T from 'fp-ts/lib/Task'
 import * as E from 'fp-ts/lib/Either'
 import { pipe, flow, identity } from 'fp-ts/lib/function'
-import { IncomingWebhook } from '@slack/webhook'
+import * as TE from 'fp-ts/lib/TaskEither'
+import { IncomingWebhook, IncomingWebhookResult } from '@slack/webhook'
 import { Result } from './types'
 
 type FromTemplateType = (numberOfViolations: number, numberOfIncomplete: number) => string
@@ -12,20 +14,27 @@ type PrepareMessageType = (axeResult: Result) => string
 const prepareMessage: PrepareMessageType = (axeResult) =>
   fromTemplate(axeResult.numberOfViolations, axeResult.numberOfIncomplete)
 
-type SendMessageToSlackType = (axeResult: Result) => (url: string) => number // TODO: Replace with proper success type
-const sendMessageToSlack: SendMessageToSlackType = (axeResult) => (url) => 0
+type PostToSlackType = (webhook: IncomingWebhook) => (message: string) => TE.TaskEither<Error, IncomingWebhookResult>
+const postToSlack: PostToSlackType = (webhook) => (message) => TE.tryCatch(() => webhook.send(message), E.toError)
 
-type SendType = (url: Option<string>, axeResult: Result) => number
+type PrepareAndSendType = (axeResult: Result) => (url: string) => TE.TaskEither<Error, string>
+const prepareAndSendMessage: PrepareAndSendType = (axeResult) => (url) =>
+  pipe(
+    prepareMessage(axeResult),
+    postToSlack(new IncomingWebhook(url)), // Perhaps use Reader to inject webhook instead
+    TE.map((result) => result.text),
+  )
+
+type SendType = (url: Option<string>, axeResult: Result) => TE.TaskEither<Error, string>
 export const send: SendType = (url, axeResult) =>
   pipe(
     url,
-    E.fromOption(() => 1),
-    E.map(sendMessageToSlack(axeResult)),
-    E.fold(identity, identity),
+    TE.fromOption(() => new Error('Unable to get hold of a URL')),
+    TE.chain(prepareAndSendMessage(axeResult)),
+    //T.map(E.fold(console.error, console.log)),
   )
 
 // const webhook = new IncomingWebhook(url)
-
 /*
 1. Get data to be sent
 2. Put data into template for body payload
