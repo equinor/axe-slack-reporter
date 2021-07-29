@@ -7,8 +7,10 @@
   },
   "extends": [
     "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
+    "plugin:import/typescript",
     "prettier"
   ],
   "parserOptions": {
@@ -16,10 +18,9 @@
     "ecmaVersion": 12
   },
   "rules": {
-    "no-unused-vars": ["warn"],
     "semi": ["error", "never"],
     // This rule was so noicy so let's turn it off and see how that works
     "import/newline-after-import": ["error"],
-    "react/prop-types": "off"
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   }
 }

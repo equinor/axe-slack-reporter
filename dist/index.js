@@ -44,6 +44,42 @@ exports.firstOrDefault = firstOrDefault;
 
 /***/ }),
 
+/***/ 8252:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getJsonFileContent = void 0;
+const fs_1 = __nccwpck_require__(5747);
+const E = __importStar(__nccwpck_require__(7534));
+const TE = __importStar(__nccwpck_require__(437));
+const function_1 = __nccwpck_require__(6985);
+const getJsonFileContent = (fileName) => function_1.pipe(TE.tryCatch(() => fs_1.promises.readFile(fileName, { encoding: 'utf8' }), E.toError), TE.map(JSON.parse));
+exports.getJsonFileContent = getJsonFileContent;
+
+
+/***/ }),
+
 /***/ 3593:
 /***/ ((__unused_webpack_module, exports) => {
 
@@ -79,6 +115,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 __exportStar(__nccwpck_require__(3593), exports);
 __exportStar(__nccwpck_require__(4257), exports);
+__exportStar(__nccwpck_require__(8252), exports);
 
 
 /***/ }),
@@ -109,22 +146,21 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(2186);
-const fs_1 = __nccwpck_require__(5747);
 const axe_result_parser_1 = __nccwpck_require__(5391);
 const O = __importStar(__nccwpck_require__(2569));
 const T = __importStar(__nccwpck_require__(2664));
 const E = __importStar(__nccwpck_require__(7534));
 const TE = __importStar(__nccwpck_require__(437));
 const function_1 = __nccwpck_require__(6985);
+const common_1 = __nccwpck_require__(1911);
 const slack_1 = __nccwpck_require__(568);
 const getWebhookURL = () => O.fromNullable(process.env.SLACK_WEBHOOK_URL);
 const getFileName = () => function_1.pipe(core_1.getInput('fileName'), O.fromPredicate((fileName) => fileName.length > 3), O.getOrElse(() => 'example-files/dagbladet.json'));
-const getFileContent = (fileName) => function_1.pipe(TE.tryCatch(() => fs_1.promises.readFile(fileName, { encoding: 'utf8' }), E.toError), TE.map(JSON.parse));
 const setSuccess = (text) => core_1.setOutput(text, '0');
 try {
     console.log('Report axe findings to Slack');
     // Do the magic!
-    const doDaThing = function_1.flow(getFileName, getFileContent, TE.map(axe_result_parser_1.parse), TE.chain(slack_1.send(getWebhookURL())), T.map(E.fold(core_1.setFailed, setSuccess)))();
+    const doDaThing = function_1.flow(getFileName, common_1.getJsonFileContent, TE.map(axe_result_parser_1.parse), TE.chain(slack_1.send(getWebhookURL())), T.map(E.fold(core_1.setFailed, setSuccess)))();
     doDaThing(); // Should be awaited, but not allowed at top level
 }
 catch (error) {

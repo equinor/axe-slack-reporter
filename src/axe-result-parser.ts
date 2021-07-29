@@ -10,5 +10,6 @@ const countViolations = (result: AxeResult): Result => ({
   numberOfIncomplete: result?.incomplete?.length ?? 0,
 })
 
-type ParseType = (json: any) => Result
+// eslint-disable-next-line no-unused-vars
+type ParseType = (json: unknown) => Result
 export const parse: ParseType = compose(countViolations, firstOrDefault(emptyResult), parseJson)
