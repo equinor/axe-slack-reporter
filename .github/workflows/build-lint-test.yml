@@ -1,0 +1,39 @@
+name: Build, Lint and Test 
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**/*.jsx?'
+      - 'src/**/*.tsx?'
+jobs:
+  check_code:
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+      - name: Install dependencies 🔧
+        id: install-dependencies
+        run: |
+          npm install
+      - name: Run ESLint 🔎
+        id: lint
+        run: |
+          npm run lint
+      - name: Build ⚙️
+        id: build
+        run: |
+          npm build
+      - name: Run tests 🔍
+        id: test
+        run: |
+          npm run test
+      - name: log-errors-to-slack 📄
+        uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()
