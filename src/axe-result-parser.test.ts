@@ -11,6 +11,7 @@ test('Empty json does not crash', (t) => {
 })
 
 test('Invalid json does not crash', (t) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   t.assert(parse({ foo: 'bar' } as unknown as any[]))
   t.end()
 })
