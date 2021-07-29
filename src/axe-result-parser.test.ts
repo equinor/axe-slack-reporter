@@ -1,6 +1,8 @@
 import test from 'tape'
+import * as E from 'fp-ts/lib/Either'
 import { parse } from './axe-result-parser'
-import json from '../example-files/dagbladet.json'
+import json from '../example-files/result.json'
+import { pipe } from 'fp-ts/lib/function'
 
 test('Empty json does not crash', (t) => {
   t.assert(parse(undefined))
@@ -18,15 +20,27 @@ test('Valid json does not crash', (t) => {
   t.end()
 })
 
-test('Testing output', (t) => {
+test('Testing output with proper json input', (t) => {
   t.plan(2)
   const res = parse(json)
-  t.test('3 incomplete tests are found in json', (subTest) => {
-    subTest.equals(res.numberOfIncomplete, 3)
+  t.test('0 incomplete tests are found in json', (subTest) => {
+    pipe(
+      res,
+      E.match(
+        (error) => subTest.notOk(error),
+        (r) => subTest.equals(r.numberOfIncomplete, 0),
+      ),
+    )
     subTest.end()
   })
   t.test('4 violations are found in json', (subTest) => {
-    subTest.equal(res.numberOfViolations, 4)
+    pipe(
+      res,
+      E.match(
+        (error) => subTest.notOk(error),
+        (r) => subTest.equals(r.numberOfViolations, 4),
+      ),
+    )
     subTest.end()
   })
   t.end()

@@ -10,30 +10,44 @@ module.exports = JSON.parse('{"name":"@slack/webhook","version":"6.0.0","descrip
 /***/ }),
 
 /***/ 5391:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.parse = void 0;
-const common_1 = __nccwpck_require__(1911);
-const function_1 = __nccwpck_require__(6985);
-const emptyResult = {};
-const parseJson = (json) => json;
-const countViolations = (result) => {
-    var _a, _b, _c, _d;
-    return ({
-        numberOfViolations: (_b = (_a = result === null || result === void 0 ? void 0 : result.violations) === null || _a === void 0 ? void 0 : _a.length) !== null && _b !== void 0 ? _b : 0,
-        numberOfIncomplete: (_d = (_c = result === null || result === void 0 ? void 0 : result.incomplete) === null || _c === void 0 ? void 0 : _c.length) !== null && _d !== void 0 ? _d : 0,
-    });
-};
-const log = (result) => {
-    var _a;
-    console.log('parsed result: ', result);
-    console.log('Number of violations: ', (_a = result[0].violations) === null || _a === void 0 ? void 0 : _a.length);
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
     return result;
 };
-exports.parse = function_1.flow(parseJson, log, common_1.firstOrDefault(emptyResult), countViolations);
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.parse = void 0;
+const E = __importStar(__nccwpck_require__(7534));
+const function_1 = __nccwpck_require__(6985);
+const parseJson = (json) => function_1.pipe(json, E.fromPredicate((o) => (o === null || o === void 0 ? void 0 : o.violations) !== undefined, () => new Error('Not a valid AxeResult')));
+const countViolations = (result) => ({
+    numberOfViolations: result.violations.length,
+    numberOfIncomplete: result.incomplete.length,
+});
+const log = (result) => {
+    console.log('parsed result: ', result);
+    console.log('Number of violations: ', result.violations.length);
+    return result;
+};
+exports.parse = function_1.flow(parseJson, E.map(log), E.map(countViolations));
 
 
 /***/ }),
@@ -150,16 +164,14 @@ const withLogging = (fn, caption) => (message) => {
     console.log(caption, message);
     fn(message);
 };
-try {
-    console.log('Report axe findings to Slack');
-    // Do the magic!
-    const doDaThing = function_1.flow(getFileName, common_1.getJsonFileContent, TE.map(axe_result_parser_1.parse), TE.chain(slack_1.send(getWebhookURL())), T.map(E.fold(withLogging(core_1.setFailed, 'error'), withLogging(setSuccess, 'success'))))();
-    doDaThing(); // Should be awaited, but not allowed at top level
-}
-catch (error) {
+console.log('Report axe findings to Slack');
+// Do the magic!
+const doDaThing = function_1.flow(getFileName, common_1.getJsonFileContent, TE.chainEitherK(axe_result_parser_1.parse), TE.chain(slack_1.send(getWebhookURL())), T.map(E.fold(withLogging(core_1.setFailed, 'error'), withLogging(setSuccess, 'success'))))();
+// TODO: Handle all errors monadic. Then this catch would not be needed.
+doDaThing().catch((error) => {
     console.log(error.message);
     core_1.setFailed(error.message);
-}
+});
 
 
 /***/ }),

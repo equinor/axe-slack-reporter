@@ -1,22 +1,27 @@
-import { AxeResult } from './generated-interfaces'
+import { AxeResults } from 'axe-core'
+import * as E from 'fp-ts/lib/Either'
 import { Result } from './types'
-import { firstOrDefault } from './common'
-import { flow } from 'fp-ts/lib/function'
+import { flow, pipe } from 'fp-ts/lib/function'
 
-const emptyResult = {} as AxeResult
-
-const parseJson = (json: unknown): AxeResult[] => <AxeResult[]>json
-const countViolations = (result: AxeResult): Result => ({
-  numberOfViolations: result?.violations?.length ?? 0,
-  numberOfIncomplete: result?.incomplete?.length ?? 0,
+const parseJson = (json: unknown): E.Either<Error, AxeResults> => 
+  pipe(
+    <AxeResults>json,
+    E.fromPredicate(
+      (o) => o?.violations !== undefined,
+      () => new Error('Not a valid AxeResult'),
+    ),
+  )
+const countViolations = (result: AxeResults): Result => ({
+  numberOfViolations: result.violations.length,
+  numberOfIncomplete: result.incomplete.length,
 })
 
-const log = (result: AxeResult[]): AxeResult[] => {
+const log = (result: AxeResults): AxeResults => {
   console.log('parsed result: ', result)
-  console.log('Number of violations: ', result[0].violations?.length)
+  console.log('Number of violations: ', result.violations.length)
   return result
-} 
+}
 
 // eslint-disable-next-line no-unused-vars
-type ParseType = (json: unknown) => Result
-export const parse: ParseType = flow(parseJson, log, firstOrDefault(emptyResult), countViolations)
+type ParseType = (json: unknown) => E.Either<Error, Result>
+export const parse: ParseType = flow(parseJson, E.map(log), E.map(countViolations))
