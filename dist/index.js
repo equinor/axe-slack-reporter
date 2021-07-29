@@ -17,6 +17,7 @@ module.exports = JSON.parse('{"name":"@slack/webhook","version":"6.0.0","descrip
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.parse = void 0;
 const common_1 = __nccwpck_require__(1911);
+const function_1 = __nccwpck_require__(6985);
 const emptyResult = {};
 const parseJson = (json) => json;
 const countViolations = (result) => {
@@ -26,7 +27,11 @@ const countViolations = (result) => {
         numberOfIncomplete: (_d = (_c = result === null || result === void 0 ? void 0 : result.incomplete) === null || _c === void 0 ? void 0 : _c.length) !== null && _d !== void 0 ? _d : 0,
     });
 };
-exports.parse = common_1.compose(countViolations, common_1.firstOrDefault(emptyResult), parseJson);
+const log = (result) => {
+    console.log('parsed result: ', JSON.stringify(result));
+    return result;
+};
+exports.parse = function_1.flow(parseJson, log, common_1.firstOrDefault(emptyResult), countViolations);
 
 
 /***/ }),
@@ -80,23 +85,6 @@ exports.getJsonFileContent = getJsonFileContent;
 
 /***/ }),
 
-/***/ 3593:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.compose = void 0;
-const reducer = (...args) => (acc, fn) => {
-    const [, ...rest] = args;
-    return acc == null ? fn(...args) : fn(acc, ...rest);
-};
-const compose = (...fns) => (...args) => fns.reduceRight(reducer(...args), undefined);
-exports.compose = compose;
-
-
-/***/ }),
-
 /***/ 1911:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -113,7 +101,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-__exportStar(__nccwpck_require__(3593), exports);
 __exportStar(__nccwpck_require__(4257), exports);
 __exportStar(__nccwpck_require__(8252), exports);
 
@@ -157,13 +144,18 @@ const slack_1 = __nccwpck_require__(568);
 const getWebhookURL = () => O.fromNullable(process.env.SLACK_WEBHOOK_URL);
 const getFileName = () => function_1.pipe(core_1.getInput('fileName'), O.fromPredicate((fileName) => fileName.length > 3), O.getOrElse(() => 'example-files/dagbladet.json'));
 const setSuccess = (text) => core_1.setOutput(text, '0');
+const withLogging = (fn, caption) => (message) => {
+    console.log(caption, message);
+    fn(message);
+};
 try {
     console.log('Report axe findings to Slack');
     // Do the magic!
-    const doDaThing = function_1.flow(getFileName, common_1.getJsonFileContent, TE.map(axe_result_parser_1.parse), TE.chain(slack_1.send(getWebhookURL())), T.map(E.fold(core_1.setFailed, setSuccess)))();
+    const doDaThing = function_1.flow(getFileName, common_1.getJsonFileContent, TE.map(axe_result_parser_1.parse), TE.chain(slack_1.send(getWebhookURL())), T.map(E.fold(withLogging(core_1.setFailed, 'error'), withLogging(setSuccess, 'success'))))();
     doDaThing(); // Should be awaited, but not allowed at top level
 }
 catch (error) {
+    console.log(error.message);
     core_1.setFailed(error.message);
 }
 
