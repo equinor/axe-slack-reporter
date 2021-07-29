@@ -25,7 +25,7 @@ const prepareAndSendMessage: PrepareAndSendType = (axeResult) => (url) =>
     postToSlack,
     RTE.map((result) => result.text),
   )(new IncomingWebhook(url))
-  
+
 type SendType = (url: O.Option<string>) => (axeResult: Result) => TE.TaskEither<Error, string>
 export const send: SendType = (url) => (axeResult) =>
   pipe(
@@ -33,3 +33,9 @@ export const send: SendType = (url) => (axeResult) =>
     TE.fromOption(() => new Error('Unable to get hold of a URL')),
     TE.chain(prepareAndSendMessage(axeResult)),
   )
+
+type MaybeSendType = (
+  predicate: (axeResult: Result) => boolean,
+) => (url: O.Option<string>) => (axeResult: Result) => TE.TaskEither<Error, string>
+export const maybeSend: MaybeSendType = (predicate) => (url) => (axeResult) =>
+  predicate(axeResult) ? send(url)(axeResult) : TE.of('Nothing to report!')

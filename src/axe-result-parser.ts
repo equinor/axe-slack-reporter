@@ -16,12 +16,5 @@ const countViolations = (result: AxeResults): Result => ({
   numberOfIncomplete: result.incomplete.length,
 })
 
-const log = (result: AxeResults): AxeResults => {
-  console.log('parsed result: ', result)
-  console.log('Number of violations: ', result.violations.length)
-  return result
-}
-
-// eslint-disable-next-line no-unused-vars
 type ParseType = (json: unknown) => E.Either<Error, Result>
-export const parse: ParseType = flow(parseJson, E.map(log), E.map(countViolations))
+export const parse: ParseType = flow(parseJson, E.map(countViolations))

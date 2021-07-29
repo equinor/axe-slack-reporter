@@ -42,12 +42,7 @@ const countViolations = (result) => ({
     numberOfViolations: result.violations.length,
     numberOfIncomplete: result.incomplete.length,
 });
-const log = (result) => {
-    console.log('parsed result: ', result);
-    console.log('Number of violations: ', result.violations.length);
-    return result;
-};
-exports.parse = function_1.flow(parseJson, E.map(log), E.map(countViolations));
+exports.parse = function_1.flow(parseJson, E.map(countViolations));
 
 
 /***/ }),
@@ -164,9 +159,10 @@ const withLogging = (fn, caption) => (message) => {
     console.log(caption, message);
     fn(message);
 };
+const checkIfWeShouldLog = ({ numberOfViolations, numberOfIncomplete }) => numberOfViolations > 0 && numberOfIncomplete > 0;
 console.log('Report axe findings to Slack');
 // Do the magic!
-const doDaThing = function_1.flow(getFileName, common_1.getJsonFileContent, TE.chainEitherK(axe_result_parser_1.parse), TE.chain(slack_1.send(getWebhookURL())), T.map(E.fold(withLogging(core_1.setFailed, 'error'), withLogging(setSuccess, 'success'))))();
+const doDaThing = function_1.flow(getFileName, common_1.getJsonFileContent, TE.chainEitherK(axe_result_parser_1.parse), TE.chain(slack_1.maybeSend(checkIfWeShouldLog)(getWebhookURL())), T.map(E.fold(withLogging(core_1.setFailed, 'error'), withLogging(setSuccess, 'success'))))();
 // TODO: Handle all errors monadic. Then this catch would not be needed.
 doDaThing().catch((error) => {
     console.log(error.message);
@@ -201,7 +197,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.send = void 0;
+exports.maybeSend = exports.send = void 0;
 const E = __importStar(__nccwpck_require__(7534));
 const TE = __importStar(__nccwpck_require__(437));
 const RTE = __importStar(__nccwpck_require__(5043));
@@ -213,6 +209,8 @@ const postToSlack = (message) => (webhook) => TE.tryCatch(() => webhook.send(mes
 const prepareAndSendMessage = (axeResult) => (url) => function_1.pipe(prepareMessage(axeResult), postToSlack, RTE.map((result) => result.text))(new webhook_1.IncomingWebhook(url));
 const send = (url) => (axeResult) => function_1.pipe(url, TE.fromOption(() => new Error('Unable to get hold of a URL')), TE.chain(prepareAndSendMessage(axeResult)));
 exports.send = send;
+const maybeSend = (predicate) => (url) => (axeResult) => predicate(axeResult) ? exports.send(url)(axeResult) : TE.of('Nothing to report!');
+exports.maybeSend = maybeSend;
 
 
 /***/ }),
