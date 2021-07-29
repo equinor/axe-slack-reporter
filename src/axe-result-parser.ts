@@ -1,6 +1,7 @@
 import { AxeResult } from './generated-interfaces'
 import { Result } from './types'
-import { compose, firstOrDefault } from './common'
+import { firstOrDefault } from './common'
+import { flow } from 'fp-ts/lib/function'
 
 const emptyResult = {} as AxeResult
 
@@ -12,4 +13,4 @@ const countViolations = (result: AxeResult): Result => ({
 
 // eslint-disable-next-line no-unused-vars
 type ParseType = (json: unknown) => Result
-export const parse: ParseType = compose(countViolations, firstOrDefault(emptyResult), parseJson)
+export const parse: ParseType = flow(parseJson, firstOrDefault(emptyResult), countViolations)
