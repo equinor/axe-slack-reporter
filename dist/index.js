@@ -28,7 +28,9 @@ const countViolations = (result) => {
     });
 };
 const log = (result) => {
-    console.log('parsed result: ', JSON.stringify(result));
+    var _a;
+    console.log('parsed result: ', result);
+    console.log('Number of violations: ', (_a = result[0].violations) === null || _a === void 0 ? void 0 : _a.length);
     return result;
 };
 exports.parse = function_1.flow(parseJson, log, common_1.firstOrDefault(emptyResult), countViolations);

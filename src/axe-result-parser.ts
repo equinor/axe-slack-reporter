@@ -12,7 +12,8 @@ const countViolations = (result: AxeResult): Result => ({
 })
 
 const log = (result: AxeResult[]): AxeResult[] => {
-  console.log('parsed result: ', JSON.stringify(result))
+  console.log('parsed result: ', result)
+  console.log('Number of violations: ', result[0].violations?.length)
   return result
 } 
 
