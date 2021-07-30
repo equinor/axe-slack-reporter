@@ -164,7 +164,7 @@ const withLogging = (fn, caption) => (message) => {
 const checkIfWeShouldSend = ({ numberOfViolations, numberOfIncomplete }) => numberOfViolations > 0 && numberOfIncomplete > 0;
 console.log('Report axe findings to Slack');
 // Do the magic!
-const doDaThing = function_1.pipe(getFileName(), common_1.getJsonFileContent, TE.chainEitherK(axe_result_parser_1.parse), RTE.fromTaskEither, RTE.chain(slack_1.maybeSend(checkIfWeShouldSend)), RT.map(E.fold(withLogging(core_1.setFailed, 'error'), withLogging(setSuccess, 'success'))));
+const doDaThing = function_1.flow(getFileName, common_1.getJsonFileContent, TE.chainEitherK(axe_result_parser_1.parse), RTE.fromTaskEither, RTE.chain(slack_1.maybeSend(checkIfWeShouldSend)), RT.map(E.fold(withLogging(core_1.setFailed, 'error'), withLogging(setSuccess, 'success'))))();
 function_1.flow(getWebhookURL, O.match(() => core_1.setFailed('No url provided! Canceling!'), (url) => doDaThing(new webhook_1.IncomingWebhook(url))().catch((error) => {
     console.log(error.message);
     core_1.setFailed(error.message);

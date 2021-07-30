@@ -9,7 +9,7 @@ import * as RTE from 'fp-ts/lib/ReaderTaskEither'
 import { flow, pipe } from 'fp-ts/lib/function'
 import { getJsonFileContent } from './common'
 import { maybeSend } from './slack'
-import { IWebhook, Result } from './types'
+import { Webhook, Result } from './types'
 import { IncomingWebhook } from '@slack/webhook'
 
 const getWebhookURL: IO.IO<O.Option<string>> = () => O.fromNullable(process.env.SLACK_WEBHOOK_URL)
@@ -49,7 +49,7 @@ flow(
   O.match(
     () => setFailed('No url provided! Canceling!'),
     (url) =>
-      doDaThing(new IncomingWebhook(url) as IWebhook)().catch((error) => {
+      doDaThing(new IncomingWebhook(url) as Webhook)().catch((error) => {
         console.log(error.message)
         setFailed(error.message)
       }),

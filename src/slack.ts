@@ -3,7 +3,7 @@ import * as TE from 'fp-ts/lib/TaskEither'
 import * as RTE from 'fp-ts/lib/ReaderTaskEither'
 import { pipe } from 'fp-ts/lib/function'
 import { IncomingWebhook, IncomingWebhookResult } from '@slack/webhook'
-import { IWebhook, Result } from './types'
+import { Webhook, Result } from './types'
 
 const foo = new IncomingWebhook('bar')
 foo.send
@@ -17,10 +17,10 @@ type PrepareMessageType = (axeResult: Result) => string
 const prepareMessage: PrepareMessageType = ({ numberOfViolations, numberOfIncomplete }) =>
   fromTemplate(numberOfViolations, numberOfIncomplete)
 
-type PostToSlackType = (message: string) => RTE.ReaderTaskEither<IWebhook, Error, IncomingWebhookResult>
+type PostToSlackType = (message: string) => RTE.ReaderTaskEither<Webhook, Error, IncomingWebhookResult>
 const postToSlack: PostToSlackType = (message) => (webhook) => TE.tryCatch(() => webhook.send(message), E.toError)
 
-type PrepareAndSendType = (axeResult: Result) => RTE.ReaderTaskEither<IWebhook, Error, string>
+type PrepareAndSendType = (axeResult: Result) => RTE.ReaderTaskEither<Webhook, Error, string>
 const prepareAndSendMessage: PrepareAndSendType = (axeResult) =>
   pipe(
     prepareMessage(axeResult),
@@ -30,6 +30,6 @@ const prepareAndSendMessage: PrepareAndSendType = (axeResult) =>
 
 type MaybeSendType = (
   predicate: (axeResult: Result) => boolean,
-) => (axeResult: Result) => RTE.ReaderTaskEither<IWebhook, Error, string>
+) => (axeResult: Result) => RTE.ReaderTaskEither<Webhook, Error, string>
 export const maybeSend: MaybeSendType = (predicate) => (axeResult) =>
   predicate(axeResult) ? prepareAndSendMessage(axeResult) : RTE.of('Nothing to report!')

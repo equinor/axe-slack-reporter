@@ -5,6 +5,6 @@ export type Result = {
   numberOfIncomplete: number
 }
 
-export interface IWebhook {
+export interface Webhook {
   send: (text: string | IncomingWebhookSendArguments) => Promise<IncomingWebhookResult>
 }
