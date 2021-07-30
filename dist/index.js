@@ -146,12 +146,14 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(2186);
 const axe_result_parser_1 = __nccwpck_require__(5391);
 const O = __importStar(__nccwpck_require__(2569));
-const T = __importStar(__nccwpck_require__(2664));
 const E = __importStar(__nccwpck_require__(7534));
 const TE = __importStar(__nccwpck_require__(437));
+const RT = __importStar(__nccwpck_require__(7605));
+const RTE = __importStar(__nccwpck_require__(5043));
 const function_1 = __nccwpck_require__(6985);
 const common_1 = __nccwpck_require__(1911);
 const slack_1 = __nccwpck_require__(568);
+const webhook_1 = __nccwpck_require__(1095);
 const getWebhookURL = () => O.fromNullable(process.env.SLACK_WEBHOOK_URL);
 const getFileName = () => function_1.pipe(core_1.getInput('fileName'), O.fromPredicate((fileName) => fileName.length > 3), O.getOrElse(() => 'example-files/dagbladet.json'));
 const setSuccess = (text) => core_1.setOutput(text, '0');
@@ -159,15 +161,14 @@ const withLogging = (fn, caption) => (message) => {
     console.log(caption, message);
     fn(message);
 };
-const checkIfWeShouldLog = ({ numberOfViolations, numberOfIncomplete }) => numberOfViolations > 0 && numberOfIncomplete > 0;
+const checkIfWeShouldSend = ({ numberOfViolations, numberOfIncomplete }) => numberOfViolations > 0 && numberOfIncomplete > 0;
 console.log('Report axe findings to Slack');
 // Do the magic!
-const doDaThing = function_1.flow(getFileName, common_1.getJsonFileContent, TE.chainEitherK(axe_result_parser_1.parse), TE.chain(slack_1.maybeSend(checkIfWeShouldLog)(getWebhookURL())), T.map(E.fold(withLogging(core_1.setFailed, 'error'), withLogging(setSuccess, 'success'))))();
-// TODO: Handle all errors monadic. Then this catch would not be needed.
-doDaThing().catch((error) => {
+const doDaThing = function_1.pipe(getFileName(), common_1.getJsonFileContent, TE.chainEitherK(axe_result_parser_1.parse), RTE.fromTaskEither, RTE.chain(slack_1.maybeSend(checkIfWeShouldSend)), RT.map(E.fold(withLogging(core_1.setFailed, 'error'), withLogging(setSuccess, 'success'))));
+function_1.flow(getWebhookURL, O.match(() => core_1.setFailed('No url provided! Canceling!'), (url) => doDaThing(new webhook_1.IncomingWebhook(url))().catch((error) => {
     console.log(error.message);
     core_1.setFailed(error.message);
-});
+})))();
 
 
 /***/ }),
@@ -197,19 +198,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.maybeSend = exports.send = void 0;
+exports.maybeSend = void 0;
 const E = __importStar(__nccwpck_require__(7534));
 const TE = __importStar(__nccwpck_require__(437));
 const RTE = __importStar(__nccwpck_require__(5043));
 const function_1 = __nccwpck_require__(6985);
 const webhook_1 = __nccwpck_require__(1095);
+const foo = new webhook_1.IncomingWebhook('bar');
+foo.send;
 const fromTemplate = (numberOfViolations, numberOfIncomplete) => `Number of violations: ${numberOfViolations}\nNumber of incomplete: ${numberOfIncomplete}`;
 const prepareMessage = ({ numberOfViolations, numberOfIncomplete }) => fromTemplate(numberOfViolations, numberOfIncomplete);
 const postToSlack = (message) => (webhook) => TE.tryCatch(() => webhook.send(message), E.toError);
-const prepareAndSendMessage = (axeResult) => (url) => function_1.pipe(prepareMessage(axeResult), postToSlack, RTE.map((result) => result.text))(new webhook_1.IncomingWebhook(url));
-const send = (url) => (axeResult) => function_1.pipe(url, TE.fromOption(() => new Error('Unable to get hold of a URL')), TE.chain(prepareAndSendMessage(axeResult)));
-exports.send = send;
-const maybeSend = (predicate) => (url) => (axeResult) => predicate(axeResult) ? exports.send(url)(axeResult) : TE.of('Nothing to report!');
+const prepareAndSendMessage = (axeResult) => function_1.pipe(prepareMessage(axeResult), postToSlack, RTE.map((result) => result.text));
+const maybeSend = (predicate) => (axeResult) => predicate(axeResult) ? prepareAndSendMessage(axeResult) : RTE.of('Nothing to report!');
 exports.maybeSend = maybeSend;
 
 
