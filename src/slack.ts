@@ -2,11 +2,8 @@ import * as E from 'fp-ts/lib/Either'
 import * as TE from 'fp-ts/lib/TaskEither'
 import * as RTE from 'fp-ts/lib/ReaderTaskEither'
 import { pipe } from 'fp-ts/lib/function'
-import { IncomingWebhook, IncomingWebhookResult } from '@slack/webhook'
+import { IncomingWebhookResult } from '@slack/webhook'
 import { Webhook, Result } from './types'
-
-const foo = new IncomingWebhook('bar')
-foo.send
 
 // TODO: Make super fancy template for Slack body eventually
 type FromTemplateType = (numberOfViolations: number, numberOfIncomplete: number) => string
