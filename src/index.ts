@@ -28,6 +28,7 @@ const withLogging: WithLoggingType = (fn, caption) => (message) => {
   fn(message)
 }
 
+// Predicate to use to see if we should send slack message
 type CheckIfWeShouldSendType = (axeResult: Result) => boolean
 const checkIfWeShouldSend: CheckIfWeShouldSendType = ({ numberOfViolations, numberOfIncomplete }) =>
   numberOfViolations > 0 && numberOfIncomplete > 0
@@ -36,22 +37,22 @@ console.log('Report axe findings to Slack')
 
 // Do the magic!
 const doDaThing = flow(
-  getFileName,
-  getJsonFileContent,
-  TE.chainEitherK(parse),
-  RTE.fromTaskEither,
-  RTE.chain(maybeSend(checkIfWeShouldSend)),
-  RT.map(E.fold(withLogging(setFailed, 'error'), withLogging(setSuccess, 'success'))),
-)()
+  getFileName,                              // Get filename from action input
+  getJsonFileContent,                       // Read file content from disk
+  TE.chainEitherK(parse),                   // Apply parse function to a TaskEither result
+  RTE.fromTaskEither,                       // Convert TaskEither to ReaderTaskEither (need to match output to input)
+  RTE.chain(maybeSend(checkIfWeShouldSend)),// Invoke maybeSend with results from parse function. PS: Reader means we inject a dependency.
+  RT.map(E.fold(withLogging(setFailed, 'error'), withLogging(setSuccess, 'success'))), // Handle result from previous operations
+)()                                         // The result is a function for a task. Execute to get the task
 
 flow(
-  getWebhookURL,
-  O.match(
-    () => setFailed('No url provided! Canceling!'),
-    (url) =>
+  getWebhookURL,                                    // Get webhook url from environment variable
+  O.match(                                          // Choose what to do depending on result from previous function
+    () => setFailed('No url provided! Canceling!'), // If url not avialable, set failed status for action
+    (url) =>                                        // If url is available, go ahead and to your thing!
       doDaThing(new IncomingWebhook(url) as Webhook)().catch((error) => {
-        console.log(error.message)
-        setFailed(error.message)
+        console.log(error.message)                  // Even though we are handling most errors, exceptions may be thrown. Handle the
+        setFailed(error.message)                    // errors by logging and setting status for action to failed
       }),
   ),
 )()
