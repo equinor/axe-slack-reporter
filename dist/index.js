@@ -37,25 +37,15 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.parse = void 0;
 const E = __importStar(__nccwpck_require__(7534));
 const function_1 = __nccwpck_require__(6985);
-const parseJson = (json) => function_1.pipe(json, E.fromPredicate((o) => (o === null || o === void 0 ? void 0 : o.violations) !== undefined, () => new Error('Not a valid AxeResult')));
+const parseJson = (json) => function_1.pipe(json, // Try to cast json to an AxeResult
+E.fromPredicate(// Find out if casting went ok by applying a predicate
+(o) => (o === null || o === void 0 ? void 0 : o.violations) !== undefined, // If we find violations, we assume that the json was parsed successfully
+() => new Error('Not a valid AxeResult')));
 const countViolations = (result) => ({
     numberOfViolations: result.violations.length,
     numberOfIncomplete: result.incomplete.length,
 });
 exports.parse = function_1.flow(parseJson, E.map(countViolations));
-
-
-/***/ }),
-
-/***/ 4257:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.firstOrDefault = void 0;
-const firstOrDefault = (defaultValue) => (value) => { var _a; return (_a = value === null || value === void 0 ? void 0 : value[0]) !== null && _a !== void 0 ? _a : defaultValue; };
-exports.firstOrDefault = firstOrDefault;
 
 
 /***/ }),
@@ -112,7 +102,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-__exportStar(__nccwpck_require__(4257), exports);
 __exportStar(__nccwpck_require__(8252), exports);
 
 
@@ -164,10 +153,19 @@ const withLogging = (fn, caption) => (message) => {
 const checkIfWeShouldSend = ({ numberOfViolations, numberOfIncomplete }) => numberOfViolations > 0 && numberOfIncomplete > 0;
 console.log('Report axe findings to Slack');
 // Do the magic!
-const doDaThing = function_1.flow(getFileName, common_1.getJsonFileContent, TE.chainEitherK(axe_result_parser_1.parse), RTE.fromTaskEither, RTE.chain(slack_1.maybeSend(checkIfWeShouldSend)), RT.map(E.fold(withLogging(core_1.setFailed, 'error'), withLogging(setSuccess, 'success'))))();
-function_1.flow(getWebhookURL, O.match(() => core_1.setFailed('No url provided! Canceling!'), (url) => doDaThing(new webhook_1.IncomingWebhook(url))().catch((error) => {
-    console.log(error.message);
-    core_1.setFailed(error.message);
+const doDaThing = function_1.flow(getFileName, // Get filename from action input
+common_1.getJsonFileContent, // Read file content from disk
+TE.chainEitherK(axe_result_parser_1.parse), // Apply parse function to a TaskEither result
+RTE.fromTaskEither, // Convert TaskEither to ReaderTaskEither (need to match output to input)
+RTE.chain(slack_1.maybeSend(checkIfWeShouldSend)), // Invoke maybeSend with results from parse function. PS: Reader means we inject a dependency.
+RT.map(E.fold(withLogging(core_1.setFailed, 'error'), withLogging(setSuccess, 'success'))))(); // The result is a function for a task. Execute to get the task
+function_1.flow(getWebhookURL, // Get webhook url from environment variable
+O.match(// Choose what to do depending on result from previous function
+() => core_1.setFailed('No url provided! Canceling!'), // If url not avialable, set failed status for action
+(url) => // If url is available, go ahead and to your thing!
+ doDaThing(new webhook_1.IncomingWebhook(url))().catch((error) => {
+    console.log(error.message); // Even though we are handling most errors, exceptions may be thrown. Handle the
+    core_1.setFailed(error.message); // errors by logging and setting status for action to failed
 })))();
 
 
