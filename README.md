@@ -57,7 +57,8 @@ npm run bundle
 ```
 
 ### Bundling
-Before this action can be used by anyone else, it is paramount that the code is built and bundled. Then the result (which is found in the `dist` folder) needs to be pushed to GitHub. New versions should also be tagged:  
+Before this action can be used by anyone else, it is paramount that the code is built and bundled. Then the result (which is found in the `dist` folder) needs to be pushed to GitHub. So **do not put the `dist` folder in `.gitignore`**.  
+New versions should also be tagged:  
 
 ```bash
 git tag -a -m "Version comment" v1.8
@@ -74,7 +75,7 @@ This project is developed using the Functional Programming paradigm.
 A tl;dr on Functional Programming:
 > Functional programming (often abbreviated FP) is the process of building software by composing pure functions, avoiding shared state, mutable data, and side-effects. Functional programming is declarative rather than imperative, and application state flows through pure functions.
 
-So, there you have it. **Application state flows through pure functions**  
+So, there you have it. **Application state flows through pure functions**.  
 To help facilitate this flow, a brilliant library called [fp-ts](https://github.com/gcanti/fp-ts) is used. This library aims to allow developers to use popular patterns and abstractions, that are available in most functional languages, in TypeScript.
 
 One of the important features from FP that is missing from TypeScript is functional composition and piping. The concept is to take the result from one function and use that as input in the next function. In FP this is used a lot to enable bottom-up development where one build new functions from smaller functions. `pipe()` and `flow()` are used for that purpose in this project.
