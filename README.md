@@ -80,5 +80,5 @@ To help facilitate this flow, a brilliant library called [fp-ts](https://github.
 
 One of the important features from FP that is missing from TypeScript is functional composition and piping. The concept is to take the result from one function and use that as input in the next function. In FP this is used a lot to enable bottom-up development where one build new functions from smaller functions. `pipe()` and `flow()` are used for that purpose in this project.
 
-One other important feature (or rather a set of features) that we need is somehow to align the output types from one function with the input type for the next function. This is where functions like `map()` and `chain()` comes into the picture. Read about these concepts and more on the documentation page for fp-ts, https://gcanti.github.io/fp-ts/
+One other important feature (or rather a set of features) that we need is somehow to align the output types from one function with the input type for the next function. This is where functions like `map()` and `chain()` come into play. Read about these concepts and more on the documentation page for fp-ts, https://gcanti.github.io/fp-ts/.  
 This page also links to other excellent resources for learning about Functional Programming.
