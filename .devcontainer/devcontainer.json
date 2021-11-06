@@ -37,7 +37,6 @@
 	"features": {
 		"git": "latest",
 		"github-cli": "latest",
-		"homebrew": "latest",
-		"powershell": "latest"
+		"homebrew": "latest"
 	}
 }
