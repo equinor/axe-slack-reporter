@@ -41,6 +41,6 @@
     "@actions/github": "^5.0.0",
     "@slack/webhook": "^6.1.0",
     "axe-core": "^4.3.3",
-    "fp-ts": "^2.11.4"
+    "fp-ts": "^2.11.6"
   }
 }
