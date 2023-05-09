@@ -16,7 +16,11 @@ module.exports = JSON.parse('{"name":"@slack/webhook","version":"6.1.0","descrip
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -37,7 +41,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.parse = void 0;
 const E = __importStar(__nccwpck_require__(7534));
 const function_1 = __nccwpck_require__(6985);
-const parseJson = (json) => function_1.pipe(json, // Try to cast json to an AxeResult
+const parseJson = (json) => (0, function_1.pipe)(json, // Try to cast json to an AxeResult
 E.fromPredicate(// Find out if casting went ok by applying a predicate
 (o) => (o === null || o === void 0 ? void 0 : o.violations) !== undefined, // If we find violations, we assume that the json was parsed successfully
 () => new Error('Not a valid AxeResult')));
@@ -45,7 +49,7 @@ const countViolations = (result) => ({
     numberOfViolations: result.violations.length,
     numberOfIncomplete: result.incomplete.length,
 });
-exports.parse = function_1.flow(parseJson, E.map(countViolations));
+exports.parse = (0, function_1.flow)(parseJson, E.map(countViolations));
 
 
 /***/ }),
@@ -57,7 +61,11 @@ exports.parse = function_1.flow(parseJson, E.map(countViolations));
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -80,7 +88,7 @@ const fs_1 = __nccwpck_require__(5747);
 const E = __importStar(__nccwpck_require__(7534));
 const TE = __importStar(__nccwpck_require__(437));
 const function_1 = __nccwpck_require__(6985);
-const getJsonFileContent = (fileName) => function_1.pipe(TE.tryCatch(() => fs_1.promises.readFile(fileName, { encoding: 'utf8' }), E.toError), TE.map(JSON.parse));
+const getJsonFileContent = (fileName) => (0, function_1.pipe)(TE.tryCatch(() => fs_1.promises.readFile(fileName, { encoding: 'utf8' }), E.toError), TE.map(JSON.parse));
 exports.getJsonFileContent = getJsonFileContent;
 
 
@@ -93,7 +101,11 @@ exports.getJsonFileContent = getJsonFileContent;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -114,7 +126,11 @@ __exportStar(__nccwpck_require__(8252), exports);
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -144,8 +160,8 @@ const common_1 = __nccwpck_require__(1911);
 const slack_1 = __nccwpck_require__(568);
 const webhook_1 = __nccwpck_require__(1095);
 const getWebhookURL = () => O.fromNullable(process.env.SLACK_WEBHOOK_URL);
-const getFileName = () => function_1.pipe(core_1.getInput('fileName'), O.fromPredicate((fileName) => fileName.length > 3), O.getOrElse(() => 'example-files/dagbladet.json'));
-const setSuccess = (text) => core_1.setOutput(text, '0');
+const getFileName = () => (0, function_1.pipe)((0, core_1.getInput)('fileName'), O.fromPredicate((fileName) => fileName.length > 3), O.getOrElse(() => 'example-files/dagbladet.json'));
+const setSuccess = (text) => (0, core_1.setOutput)(text, '0');
 const withLogging = (fn, caption) => (message) => {
     console.log(caption, message);
     fn(message);
@@ -153,19 +169,19 @@ const withLogging = (fn, caption) => (message) => {
 const checkIfWeShouldSend = ({ numberOfViolations, numberOfIncomplete }) => numberOfViolations > 0 && numberOfIncomplete > 0;
 console.log('Report axe findings to Slack');
 // Do the magic!
-const doDaThing = function_1.flow(getFileName, // Get filename from action input
+const doDaThing = (0, function_1.flow)(getFileName, // Get filename from action input
 common_1.getJsonFileContent, // Read file content from disk
 TE.chainEitherK(axe_result_parser_1.parse), // Apply parse function to a TaskEither result
 RTE.fromTaskEither, // Convert TaskEither to ReaderTaskEither (need to match output to input)
-RTE.chain(slack_1.maybeSend(checkIfWeShouldSend)), // Invoke maybeSend with results from parse function. PS: Reader means we inject a dependency.
+RTE.chain((0, slack_1.maybeSend)(checkIfWeShouldSend)), // Invoke maybeSend with results from parse function. PS: Reader means we inject a dependency.
 RT.map(E.fold(withLogging(core_1.setFailed, 'error'), withLogging(setSuccess, 'success'))))(); // The result is a function for a task. Execute to get the task
-function_1.flow(getWebhookURL, // Get webhook url from environment variable
+(0, function_1.flow)(getWebhookURL, // Get webhook url from environment variable
 O.match(// Choose what to do depending on result from previous function
-() => core_1.setFailed('No url provided! Canceling!'), // If url not avialable, set failed status for action
+() => (0, core_1.setFailed)('No url provided! Canceling!'), // If url not avialable, set failed status for action
 (url) => // If url is available, go ahead and to your thing!
  doDaThing(new webhook_1.IncomingWebhook(url))().catch((error) => {
     console.log(error.message); // Even though we are handling most errors, exceptions may be thrown. Handle the
-    core_1.setFailed(error.message); // errors by logging and setting status for action to failed
+    (0, core_1.setFailed)(error.message); // errors by logging and setting status for action to failed
 })))();
 
 
@@ -178,7 +194,11 @@ O.match(// Choose what to do depending on result from previous function
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -204,7 +224,7 @@ const function_1 = __nccwpck_require__(6985);
 const fromTemplate = (numberOfViolations, numberOfIncomplete) => `Number of violations: ${numberOfViolations}\nNumber of incomplete: ${numberOfIncomplete}`;
 const prepareMessage = ({ numberOfViolations, numberOfIncomplete }) => fromTemplate(numberOfViolations, numberOfIncomplete);
 const postToSlack = (message) => (webhook) => TE.tryCatch(() => webhook.send(message), E.toError);
-const prepareAndSendMessage = (axeResult) => function_1.pipe(prepareMessage(axeResult), postToSlack, RTE.map((result) => result.text));
+const prepareAndSendMessage = (axeResult) => (0, function_1.pipe)(prepareMessage(axeResult), postToSlack, RTE.map((result) => result.text));
 const maybeSend = (predicate) => (axeResult) => predicate(axeResult) ? prepareAndSendMessage(axeResult) : RTE.of('Nothing to report!');
 exports.maybeSend = maybeSend;
 
@@ -379,13 +399,9 @@ function exportVariable(name, val) {
     process.env[name] = convertedVal;
     const filePath = process.env['GITHUB_ENV'] || '';
     if (filePath) {
-        const delimiter = '_GitHubActionsFileCommandDelimeter_';
-        const commandValue = `${name}<<${delimiter}${os.EOL}${convertedVal}${os.EOL}${delimiter}`;
-        file_command_1.issueCommand('ENV', commandValue);
+        return file_command_1.issueFileCommand('ENV', file_command_1.prepareKeyValueMessage(name, val));
     }
-    else {
-        command_1.issueCommand('set-env', { name }, convertedVal);
-    }
+    command_1.issueCommand('set-env', { name }, convertedVal);
 }
 exports.exportVariable = exportVariable;
 /**
@@ -403,7 +419,7 @@ exports.setSecret = setSecret;
 function addPath(inputPath) {
     const filePath = process.env['GITHUB_PATH'] || '';
     if (filePath) {
-        file_command_1.issueCommand('PATH', inputPath);
+        file_command_1.issueFileCommand('PATH', inputPath);
     }
     else {
         command_1.issueCommand('add-path', {}, inputPath);
@@ -443,7 +459,10 @@ function getMultilineInput(name, options) {
     const inputs = getInput(name, options)
         .split('\n')
         .filter(x => x !== '');
-    return inputs;
+    if (options && options.trimWhitespace === false) {
+        return inputs;
+    }
+    return inputs.map(input => input.trim());
 }
 exports.getMultilineInput = getMultilineInput;
 /**
@@ -476,8 +495,12 @@ exports.getBooleanInput = getBooleanInput;
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function setOutput(name, value) {
+    const filePath = process.env['GITHUB_OUTPUT'] || '';
+    if (filePath) {
+        return file_command_1.issueFileCommand('OUTPUT', file_command_1.prepareKeyValueMessage(name, value));
+    }
     process.stdout.write(os.EOL);
-    command_1.issueCommand('set-output', { name }, value);
+    command_1.issueCommand('set-output', { name }, utils_1.toCommandValue(value));
 }
 exports.setOutput = setOutput;
 /**
@@ -606,7 +629,11 @@ exports.group = group;
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function saveState(name, value) {
-    command_1.issueCommand('save-state', { name }, value);
+    const filePath = process.env['GITHUB_STATE'] || '';
+    if (filePath) {
+        return file_command_1.issueFileCommand('STATE', file_command_1.prepareKeyValueMessage(name, value));
+    }
+    command_1.issueCommand('save-state', { name }, utils_1.toCommandValue(value));
 }
 exports.saveState = saveState;
 /**
@@ -626,10 +653,22 @@ function getIDToken(aud) {
 }
 exports.getIDToken = getIDToken;
 /**
- * Markdown summary exports
+ * Summary exports
  */
-var markdown_summary_1 = __nccwpck_require__(8042);
-Object.defineProperty(exports, "markdownSummary", ({ enumerable: true, get: function () { return markdown_summary_1.markdownSummary; } }));
+var summary_1 = __nccwpck_require__(1327);
+Object.defineProperty(exports, "summary", ({ enumerable: true, get: function () { return summary_1.summary; } }));
+/**
+ * @deprecated use core.summary
+ */
+var summary_2 = __nccwpck_require__(1327);
+Object.defineProperty(exports, "markdownSummary", ({ enumerable: true, get: function () { return summary_2.markdownSummary; } }));
+/**
+ * Path exports
+ */
+var path_utils_1 = __nccwpck_require__(2981);
+Object.defineProperty(exports, "toPosixPath", ({ enumerable: true, get: function () { return path_utils_1.toPosixPath; } }));
+Object.defineProperty(exports, "toWin32Path", ({ enumerable: true, get: function () { return path_utils_1.toWin32Path; } }));
+Object.defineProperty(exports, "toPlatformPath", ({ enumerable: true, get: function () { return path_utils_1.toPlatformPath; } }));
 //# sourceMappingURL=core.js.map
 
 /***/ }),
@@ -660,13 +699,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.issueCommand = void 0;
+exports.prepareKeyValueMessage = exports.issueFileCommand = void 0;
 // We use any as a valid input type
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const fs = __importStar(__nccwpck_require__(5747));
 const os = __importStar(__nccwpck_require__(2087));
+const uuid_1 = __nccwpck_require__(5840);
 const utils_1 = __nccwpck_require__(5278);
-function issueCommand(command, message) {
+function issueFileCommand(command, message) {
     const filePath = process.env[`GITHUB_${command}`];
     if (!filePath) {
         throw new Error(`Unable to find environment variable for file command ${command}`);
@@ -678,294 +718,23 @@ function issueCommand(command, message) {
         encoding: 'utf8'
     });
 }
-exports.issueCommand = issueCommand;
-//# sourceMappingURL=file-command.js.map
-
-/***/ }),
-
-/***/ 8042:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
-
-"use strict";
-
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.markdownSummary = exports.SUMMARY_DOCS_URL = exports.SUMMARY_ENV_VAR = void 0;
-const os_1 = __nccwpck_require__(2087);
-const fs_1 = __nccwpck_require__(5747);
-const { access, appendFile, writeFile } = fs_1.promises;
-exports.SUMMARY_ENV_VAR = 'GITHUB_STEP_SUMMARY';
-exports.SUMMARY_DOCS_URL = 'https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-markdown-summary';
-class MarkdownSummary {
-    constructor() {
-        this._buffer = '';
+exports.issueFileCommand = issueFileCommand;
+function prepareKeyValueMessage(key, value) {
+    const delimiter = `ghadelimiter_${uuid_1.v4()}`;
+    const convertedValue = utils_1.toCommandValue(value);
+    // These should realistically never happen, but just in case someone finds a
+    // way to exploit uuid generation let's not allow keys or values that contain
+    // the delimiter.
+    if (key.includes(delimiter)) {
+        throw new Error(`Unexpected input: name should not contain the delimiter "${delimiter}"`);
     }
-    /**
-     * Finds the summary file path from the environment, rejects if env var is not found or file does not exist
-     * Also checks r/w permissions.
-     *
-     * @returns step summary file path
-     */
-    filePath() {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this._filePath) {
-                return this._filePath;
-            }
-            const pathFromEnv = process.env[exports.SUMMARY_ENV_VAR];
-            if (!pathFromEnv) {
-                throw new Error(`Unable to find environment variable for $${exports.SUMMARY_ENV_VAR}. Check if your runtime environment supports markdown summaries.`);
-            }
-            try {
-                yield access(pathFromEnv, fs_1.constants.R_OK | fs_1.constants.W_OK);
-            }
-            catch (_a) {
-                throw new Error(`Unable to access summary file: '${pathFromEnv}'. Check if the file has correct read/write permissions.`);
-            }
-            this._filePath = pathFromEnv;
-            return this._filePath;
-        });
+    if (convertedValue.includes(delimiter)) {
+        throw new Error(`Unexpected input: value should not contain the delimiter "${delimiter}"`);
     }
-    /**
-     * Wraps content in an HTML tag, adding any HTML attributes
-     *
-     * @param {string} tag HTML tag to wrap
-     * @param {string | null} content content within the tag
-     * @param {[attribute: string]: string} attrs key-value list of HTML attributes to add
-     *
-     * @returns {string} content wrapped in HTML element
-     */
-    wrap(tag, content, attrs = {}) {
-        const htmlAttrs = Object.entries(attrs)
-            .map(([key, value]) => ` ${key}="${value}"`)
-            .join('');
-        if (!content) {
-            return `<${tag}${htmlAttrs}>`;
-        }
-        return `<${tag}${htmlAttrs}>${content}</${tag}>`;
-    }
-    /**
-     * Writes text in the buffer to the summary buffer file and empties buffer. Will append by default.
-     *
-     * @param {SummaryWriteOptions} [options] (optional) options for write operation
-     *
-     * @returns {Promise<MarkdownSummary>} markdown summary instance
-     */
-    write(options) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const overwrite = !!(options === null || options === void 0 ? void 0 : options.overwrite);
-            const filePath = yield this.filePath();
-            const writeFunc = overwrite ? writeFile : appendFile;
-            yield writeFunc(filePath, this._buffer, { encoding: 'utf8' });
-            return this.emptyBuffer();
-        });
-    }
-    /**
-     * Clears the summary buffer and wipes the summary file
-     *
-     * @returns {MarkdownSummary} markdown summary instance
-     */
-    clear() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.emptyBuffer().write({ overwrite: true });
-        });
-    }
-    /**
-     * Returns the current summary buffer as a string
-     *
-     * @returns {string} string of summary buffer
-     */
-    stringify() {
-        return this._buffer;
-    }
-    /**
-     * If the summary buffer is empty
-     *
-     * @returns {boolen} true if the buffer is empty
-     */
-    isEmptyBuffer() {
-        return this._buffer.length === 0;
-    }
-    /**
-     * Resets the summary buffer without writing to summary file
-     *
-     * @returns {MarkdownSummary} markdown summary instance
-     */
-    emptyBuffer() {
-        this._buffer = '';
-        return this;
-    }
-    /**
-     * Adds raw text to the summary buffer
-     *
-     * @param {string} text content to add
-     * @param {boolean} [addEOL=false] (optional) append an EOL to the raw text (default: false)
-     *
-     * @returns {MarkdownSummary} markdown summary instance
-     */
-    addRaw(text, addEOL = false) {
-        this._buffer += text;
-        return addEOL ? this.addEOL() : this;
-    }
-    /**
-     * Adds the operating system-specific end-of-line marker to the buffer
-     *
-     * @returns {MarkdownSummary} markdown summary instance
-     */
-    addEOL() {
-        return this.addRaw(os_1.EOL);
-    }
-    /**
-     * Adds an HTML codeblock to the summary buffer
-     *
-     * @param {string} code content to render within fenced code block
-     * @param {string} lang (optional) language to syntax highlight code
-     *
-     * @returns {MarkdownSummary} markdown summary instance
-     */
-    addCodeBlock(code, lang) {
-        const attrs = Object.assign({}, (lang && { lang }));
-        const element = this.wrap('pre', this.wrap('code', code), attrs);
-        return this.addRaw(element).addEOL();
-    }
-    /**
-     * Adds an HTML list to the summary buffer
-     *
-     * @param {string[]} items list of items to render
-     * @param {boolean} [ordered=false] (optional) if the rendered list should be ordered or not (default: false)
-     *
-     * @returns {MarkdownSummary} markdown summary instance
-     */
-    addList(items, ordered = false) {
-        const tag = ordered ? 'ol' : 'ul';
-        const listItems = items.map(item => this.wrap('li', item)).join('');
-        const element = this.wrap(tag, listItems);
-        return this.addRaw(element).addEOL();
-    }
-    /**
-     * Adds an HTML table to the summary buffer
-     *
-     * @param {SummaryTableCell[]} rows table rows
-     *
-     * @returns {MarkdownSummary} markdown summary instance
-     */
-    addTable(rows) {
-        const tableBody = rows
-            .map(row => {
-            const cells = row
-                .map(cell => {
-                if (typeof cell === 'string') {
-                    return this.wrap('td', cell);
-                }
-                const { header, data, colspan, rowspan } = cell;
-                const tag = header ? 'th' : 'td';
-                const attrs = Object.assign(Object.assign({}, (colspan && { colspan })), (rowspan && { rowspan }));
-                return this.wrap(tag, data, attrs);
-            })
-                .join('');
-            return this.wrap('tr', cells);
-        })
-            .join('');
-        const element = this.wrap('table', tableBody);
-        return this.addRaw(element).addEOL();
-    }
-    /**
-     * Adds a collapsable HTML details element to the summary buffer
-     *
-     * @param {string} label text for the closed state
-     * @param {string} content collapsable content
-     *
-     * @returns {MarkdownSummary} markdown summary instance
-     */
-    addDetails(label, content) {
-        const element = this.wrap('details', this.wrap('summary', label) + content);
-        return this.addRaw(element).addEOL();
-    }
-    /**
-     * Adds an HTML image tag to the summary buffer
-     *
-     * @param {string} src path to the image you to embed
-     * @param {string} alt text description of the image
-     * @param {SummaryImageOptions} options (optional) addition image attributes
-     *
-     * @returns {MarkdownSummary} markdown summary instance
-     */
-    addImage(src, alt, options) {
-        const { width, height } = options || {};
-        const attrs = Object.assign(Object.assign({}, (width && { width })), (height && { height }));
-        const element = this.wrap('img', null, Object.assign({ src, alt }, attrs));
-        return this.addRaw(element).addEOL();
-    }
-    /**
-     * Adds an HTML section heading element
-     *
-     * @param {string} text heading text
-     * @param {number | string} [level=1] (optional) the heading level, default: 1
-     *
-     * @returns {MarkdownSummary} markdown summary instance
-     */
-    addHeading(text, level) {
-        const tag = `h${level}`;
-        const allowedTag = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(tag)
-            ? tag
-            : 'h1';
-        const element = this.wrap(allowedTag, text);
-        return this.addRaw(element).addEOL();
-    }
-    /**
-     * Adds an HTML thematic break (<hr>) to the summary buffer
-     *
-     * @returns {MarkdownSummary} markdown summary instance
-     */
-    addSeparator() {
-        const element = this.wrap('hr', null);
-        return this.addRaw(element).addEOL();
-    }
-    /**
-     * Adds an HTML line break (<br>) to the summary buffer
-     *
-     * @returns {MarkdownSummary} markdown summary instance
-     */
-    addBreak() {
-        const element = this.wrap('br', null);
-        return this.addRaw(element).addEOL();
-    }
-    /**
-     * Adds an HTML blockquote to the summary buffer
-     *
-     * @param {string} text quote text
-     * @param {string} cite (optional) citation url
-     *
-     * @returns {MarkdownSummary} markdown summary instance
-     */
-    addQuote(text, cite) {
-        const attrs = Object.assign({}, (cite && { cite }));
-        const element = this.wrap('blockquote', text, attrs);
-        return this.addRaw(element).addEOL();
-    }
-    /**
-     * Adds an HTML anchor tag to the summary buffer
-     *
-     * @param {string} text link text/content
-     * @param {string} href hyperlink
-     *
-     * @returns {MarkdownSummary} markdown summary instance
-     */
-    addLink(text, href) {
-        const element = this.wrap('a', text, { href });
-        return this.addRaw(element).addEOL();
-    }
+    return `${key}<<${delimiter}${os.EOL}${convertedValue}${os.EOL}${delimiter}`;
 }
-// singleton export
-exports.markdownSummary = new MarkdownSummary();
-//# sourceMappingURL=markdown-summary.js.map
+exports.prepareKeyValueMessage = prepareKeyValueMessage;
+//# sourceMappingURL=file-command.js.map
 
 /***/ }),
 
@@ -985,8 +754,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.OidcClient = void 0;
-const http_client_1 = __nccwpck_require__(9925);
-const auth_1 = __nccwpck_require__(3702);
+const http_client_1 = __nccwpck_require__(6255);
+const auth_1 = __nccwpck_require__(5526);
 const core_1 = __nccwpck_require__(2186);
 class OidcClient {
     static createHttpClient(allowRetry = true, maxRetry = 10) {
@@ -1053,6 +822,361 @@ exports.OidcClient = OidcClient;
 
 /***/ }),
 
+/***/ 2981:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.toPlatformPath = exports.toWin32Path = exports.toPosixPath = void 0;
+const path = __importStar(__nccwpck_require__(5622));
+/**
+ * toPosixPath converts the given path to the posix form. On Windows, \\ will be
+ * replaced with /.
+ *
+ * @param pth. Path to transform.
+ * @return string Posix path.
+ */
+function toPosixPath(pth) {
+    return pth.replace(/[\\]/g, '/');
+}
+exports.toPosixPath = toPosixPath;
+/**
+ * toWin32Path converts the given path to the win32 form. On Linux, / will be
+ * replaced with \\.
+ *
+ * @param pth. Path to transform.
+ * @return string Win32 path.
+ */
+function toWin32Path(pth) {
+    return pth.replace(/[/]/g, '\\');
+}
+exports.toWin32Path = toWin32Path;
+/**
+ * toPlatformPath converts the given path to a platform-specific path. It does
+ * this by replacing instances of / and \ with the platform-specific path
+ * separator.
+ *
+ * @param pth The path to platformize.
+ * @return string The platform-specific path.
+ */
+function toPlatformPath(pth) {
+    return pth.replace(/[/\\]/g, path.sep);
+}
+exports.toPlatformPath = toPlatformPath;
+//# sourceMappingURL=path-utils.js.map
+
+/***/ }),
+
+/***/ 1327:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.summary = exports.markdownSummary = exports.SUMMARY_DOCS_URL = exports.SUMMARY_ENV_VAR = void 0;
+const os_1 = __nccwpck_require__(2087);
+const fs_1 = __nccwpck_require__(5747);
+const { access, appendFile, writeFile } = fs_1.promises;
+exports.SUMMARY_ENV_VAR = 'GITHUB_STEP_SUMMARY';
+exports.SUMMARY_DOCS_URL = 'https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary';
+class Summary {
+    constructor() {
+        this._buffer = '';
+    }
+    /**
+     * Finds the summary file path from the environment, rejects if env var is not found or file does not exist
+     * Also checks r/w permissions.
+     *
+     * @returns step summary file path
+     */
+    filePath() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this._filePath) {
+                return this._filePath;
+            }
+            const pathFromEnv = process.env[exports.SUMMARY_ENV_VAR];
+            if (!pathFromEnv) {
+                throw new Error(`Unable to find environment variable for $${exports.SUMMARY_ENV_VAR}. Check if your runtime environment supports job summaries.`);
+            }
+            try {
+                yield access(pathFromEnv, fs_1.constants.R_OK | fs_1.constants.W_OK);
+            }
+            catch (_a) {
+                throw new Error(`Unable to access summary file: '${pathFromEnv}'. Check if the file has correct read/write permissions.`);
+            }
+            this._filePath = pathFromEnv;
+            return this._filePath;
+        });
+    }
+    /**
+     * Wraps content in an HTML tag, adding any HTML attributes
+     *
+     * @param {string} tag HTML tag to wrap
+     * @param {string | null} content content within the tag
+     * @param {[attribute: string]: string} attrs key-value list of HTML attributes to add
+     *
+     * @returns {string} content wrapped in HTML element
+     */
+    wrap(tag, content, attrs = {}) {
+        const htmlAttrs = Object.entries(attrs)
+            .map(([key, value]) => ` ${key}="${value}"`)
+            .join('');
+        if (!content) {
+            return `<${tag}${htmlAttrs}>`;
+        }
+        return `<${tag}${htmlAttrs}>${content}</${tag}>`;
+    }
+    /**
+     * Writes text in the buffer to the summary buffer file and empties buffer. Will append by default.
+     *
+     * @param {SummaryWriteOptions} [options] (optional) options for write operation
+     *
+     * @returns {Promise<Summary>} summary instance
+     */
+    write(options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const overwrite = !!(options === null || options === void 0 ? void 0 : options.overwrite);
+            const filePath = yield this.filePath();
+            const writeFunc = overwrite ? writeFile : appendFile;
+            yield writeFunc(filePath, this._buffer, { encoding: 'utf8' });
+            return this.emptyBuffer();
+        });
+    }
+    /**
+     * Clears the summary buffer and wipes the summary file
+     *
+     * @returns {Summary} summary instance
+     */
+    clear() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.emptyBuffer().write({ overwrite: true });
+        });
+    }
+    /**
+     * Returns the current summary buffer as a string
+     *
+     * @returns {string} string of summary buffer
+     */
+    stringify() {
+        return this._buffer;
+    }
+    /**
+     * If the summary buffer is empty
+     *
+     * @returns {boolen} true if the buffer is empty
+     */
+    isEmptyBuffer() {
+        return this._buffer.length === 0;
+    }
+    /**
+     * Resets the summary buffer without writing to summary file
+     *
+     * @returns {Summary} summary instance
+     */
+    emptyBuffer() {
+        this._buffer = '';
+        return this;
+    }
+    /**
+     * Adds raw text to the summary buffer
+     *
+     * @param {string} text content to add
+     * @param {boolean} [addEOL=false] (optional) append an EOL to the raw text (default: false)
+     *
+     * @returns {Summary} summary instance
+     */
+    addRaw(text, addEOL = false) {
+        this._buffer += text;
+        return addEOL ? this.addEOL() : this;
+    }
+    /**
+     * Adds the operating system-specific end-of-line marker to the buffer
+     *
+     * @returns {Summary} summary instance
+     */
+    addEOL() {
+        return this.addRaw(os_1.EOL);
+    }
+    /**
+     * Adds an HTML codeblock to the summary buffer
+     *
+     * @param {string} code content to render within fenced code block
+     * @param {string} lang (optional) language to syntax highlight code
+     *
+     * @returns {Summary} summary instance
+     */
+    addCodeBlock(code, lang) {
+        const attrs = Object.assign({}, (lang && { lang }));
+        const element = this.wrap('pre', this.wrap('code', code), attrs);
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML list to the summary buffer
+     *
+     * @param {string[]} items list of items to render
+     * @param {boolean} [ordered=false] (optional) if the rendered list should be ordered or not (default: false)
+     *
+     * @returns {Summary} summary instance
+     */
+    addList(items, ordered = false) {
+        const tag = ordered ? 'ol' : 'ul';
+        const listItems = items.map(item => this.wrap('li', item)).join('');
+        const element = this.wrap(tag, listItems);
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML table to the summary buffer
+     *
+     * @param {SummaryTableCell[]} rows table rows
+     *
+     * @returns {Summary} summary instance
+     */
+    addTable(rows) {
+        const tableBody = rows
+            .map(row => {
+            const cells = row
+                .map(cell => {
+                if (typeof cell === 'string') {
+                    return this.wrap('td', cell);
+                }
+                const { header, data, colspan, rowspan } = cell;
+                const tag = header ? 'th' : 'td';
+                const attrs = Object.assign(Object.assign({}, (colspan && { colspan })), (rowspan && { rowspan }));
+                return this.wrap(tag, data, attrs);
+            })
+                .join('');
+            return this.wrap('tr', cells);
+        })
+            .join('');
+        const element = this.wrap('table', tableBody);
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds a collapsable HTML details element to the summary buffer
+     *
+     * @param {string} label text for the closed state
+     * @param {string} content collapsable content
+     *
+     * @returns {Summary} summary instance
+     */
+    addDetails(label, content) {
+        const element = this.wrap('details', this.wrap('summary', label) + content);
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML image tag to the summary buffer
+     *
+     * @param {string} src path to the image you to embed
+     * @param {string} alt text description of the image
+     * @param {SummaryImageOptions} options (optional) addition image attributes
+     *
+     * @returns {Summary} summary instance
+     */
+    addImage(src, alt, options) {
+        const { width, height } = options || {};
+        const attrs = Object.assign(Object.assign({}, (width && { width })), (height && { height }));
+        const element = this.wrap('img', null, Object.assign({ src, alt }, attrs));
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML section heading element
+     *
+     * @param {string} text heading text
+     * @param {number | string} [level=1] (optional) the heading level, default: 1
+     *
+     * @returns {Summary} summary instance
+     */
+    addHeading(text, level) {
+        const tag = `h${level}`;
+        const allowedTag = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(tag)
+            ? tag
+            : 'h1';
+        const element = this.wrap(allowedTag, text);
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML thematic break (<hr>) to the summary buffer
+     *
+     * @returns {Summary} summary instance
+     */
+    addSeparator() {
+        const element = this.wrap('hr', null);
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML line break (<br>) to the summary buffer
+     *
+     * @returns {Summary} summary instance
+     */
+    addBreak() {
+        const element = this.wrap('br', null);
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML blockquote to the summary buffer
+     *
+     * @param {string} text quote text
+     * @param {string} cite (optional) citation url
+     *
+     * @returns {Summary} summary instance
+     */
+    addQuote(text, cite) {
+        const attrs = Object.assign({}, (cite && { cite }));
+        const element = this.wrap('blockquote', text, attrs);
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML anchor tag to the summary buffer
+     *
+     * @param {string} text link text/content
+     * @param {string} href hyperlink
+     *
+     * @returns {Summary} summary instance
+     */
+    addLink(text, href) {
+        const element = this.wrap('a', text, { href });
+        return this.addRaw(element).addEOL();
+    }
+}
+const _summary = new Summary();
+/**
+ * @deprecated use `core.summary`
+ */
+exports.markdownSummary = _summary;
+exports.summary = _summary;
+//# sourceMappingURL=summary.js.map
+
+/***/ }),
+
 /***/ 5278:
 /***/ ((__unused_webpack_module, exports) => {
 
@@ -1100,28 +1224,41 @@ exports.toCommandProperties = toCommandProperties;
 
 /***/ }),
 
-/***/ 3702:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ 5526:
+/***/ (function(__unused_webpack_module, exports) {
 
 "use strict";
 
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PersonalAccessTokenCredentialHandler = exports.BearerCredentialHandler = exports.BasicCredentialHandler = void 0;
 class BasicCredentialHandler {
     constructor(username, password) {
         this.username = username;
         this.password = password;
     }
     prepareRequest(options) {
-        options.headers['Authorization'] =
-            'Basic ' +
-                Buffer.from(this.username + ':' + this.password).toString('base64');
+        if (!options.headers) {
+            throw Error('The request has no headers');
+        }
+        options.headers['Authorization'] = `Basic ${Buffer.from(`${this.username}:${this.password}`).toString('base64')}`;
     }
     // This handler cannot handle 401
-    canHandleAuthentication(response) {
+    canHandleAuthentication() {
         return false;
     }
-    handleAuthentication(httpClient, requestInfo, objs) {
-        return null;
+    handleAuthentication() {
+        return __awaiter(this, void 0, void 0, function* () {
+            throw new Error('not implemented');
+        });
     }
 }
 exports.BasicCredentialHandler = BasicCredentialHandler;
@@ -1132,14 +1269,19 @@ class BearerCredentialHandler {
     // currently implements pre-authorization
     // TODO: support preAuth = false where it hooks on 401
     prepareRequest(options) {
-        options.headers['Authorization'] = 'Bearer ' + this.token;
+        if (!options.headers) {
+            throw Error('The request has no headers');
+        }
+        options.headers['Authorization'] = `Bearer ${this.token}`;
     }
     // This handler cannot handle 401
-    canHandleAuthentication(response) {
+    canHandleAuthentication() {
         return false;
     }
-    handleAuthentication(httpClient, requestInfo, objs) {
-        return null;
+    handleAuthentication() {
+        return __awaiter(this, void 0, void 0, function* () {
+            throw new Error('not implemented');
+        });
     }
 }
 exports.BearerCredentialHandler = BearerCredentialHandler;
@@ -1150,32 +1292,66 @@ class PersonalAccessTokenCredentialHandler {
     // currently implements pre-authorization
     // TODO: support preAuth = false where it hooks on 401
     prepareRequest(options) {
-        options.headers['Authorization'] =
-            'Basic ' + Buffer.from('PAT:' + this.token).toString('base64');
+        if (!options.headers) {
+            throw Error('The request has no headers');
+        }
+        options.headers['Authorization'] = `Basic ${Buffer.from(`PAT:${this.token}`).toString('base64')}`;
     }
     // This handler cannot handle 401
-    canHandleAuthentication(response) {
+    canHandleAuthentication() {
         return false;
     }
-    handleAuthentication(httpClient, requestInfo, objs) {
-        return null;
+    handleAuthentication() {
+        return __awaiter(this, void 0, void 0, function* () {
+            throw new Error('not implemented');
+        });
     }
 }
 exports.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHandler;
-
+//# sourceMappingURL=auth.js.map
 
 /***/ }),
 
-/***/ 9925:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+/***/ 6255:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const http = __nccwpck_require__(8605);
-const https = __nccwpck_require__(7211);
-const pm = __nccwpck_require__(6443);
-let tunnel;
+exports.HttpClient = exports.isHttps = exports.HttpClientResponse = exports.HttpClientError = exports.getProxyUrl = exports.MediaTypes = exports.Headers = exports.HttpCodes = void 0;
+const http = __importStar(__nccwpck_require__(8605));
+const https = __importStar(__nccwpck_require__(7211));
+const pm = __importStar(__nccwpck_require__(9835));
+const tunnel = __importStar(__nccwpck_require__(4294));
 var HttpCodes;
 (function (HttpCodes) {
     HttpCodes[HttpCodes["OK"] = 200] = "OK";
@@ -1220,7 +1396,7 @@ var MediaTypes;
  * @param serverUrl  The server URL where the request will be sent. For example, https://api.github.com
  */
 function getProxyUrl(serverUrl) {
-    let proxyUrl = pm.getProxyUrl(new URL(serverUrl));
+    const proxyUrl = pm.getProxyUrl(new URL(serverUrl));
     return proxyUrl ? proxyUrl.href : '';
 }
 exports.getProxyUrl = getProxyUrl;
@@ -1253,20 +1429,22 @@ class HttpClientResponse {
         this.message = message;
     }
     readBody() {
-        return new Promise(async (resolve, reject) => {
-            let output = Buffer.alloc(0);
-            this.message.on('data', (chunk) => {
-                output = Buffer.concat([output, chunk]);
-            });
-            this.message.on('end', () => {
-                resolve(output.toString());
-            });
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
+                let output = Buffer.alloc(0);
+                this.message.on('data', (chunk) => {
+                    output = Buffer.concat([output, chunk]);
+                });
+                this.message.on('end', () => {
+                    resolve(output.toString());
+                });
+            }));
         });
     }
 }
 exports.HttpClientResponse = HttpClientResponse;
 function isHttps(requestUrl) {
-    let parsedUrl = new URL(requestUrl);
+    const parsedUrl = new URL(requestUrl);
     return parsedUrl.protocol === 'https:';
 }
 exports.isHttps = isHttps;
@@ -1309,141 +1487,169 @@ class HttpClient {
         }
     }
     options(requestUrl, additionalHeaders) {
-        return this.request('OPTIONS', requestUrl, null, additionalHeaders || {});
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.request('OPTIONS', requestUrl, null, additionalHeaders || {});
+        });
     }
     get(requestUrl, additionalHeaders) {
-        return this.request('GET', requestUrl, null, additionalHeaders || {});
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.request('GET', requestUrl, null, additionalHeaders || {});
+        });
     }
     del(requestUrl, additionalHeaders) {
-        return this.request('DELETE', requestUrl, null, additionalHeaders || {});
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.request('DELETE', requestUrl, null, additionalHeaders || {});
+        });
     }
     post(requestUrl, data, additionalHeaders) {
-        return this.request('POST', requestUrl, data, additionalHeaders || {});
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.request('POST', requestUrl, data, additionalHeaders || {});
+        });
     }
     patch(requestUrl, data, additionalHeaders) {
-        return this.request('PATCH', requestUrl, data, additionalHeaders || {});
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.request('PATCH', requestUrl, data, additionalHeaders || {});
+        });
     }
     put(requestUrl, data, additionalHeaders) {
-        return this.request('PUT', requestUrl, data, additionalHeaders || {});
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.request('PUT', requestUrl, data, additionalHeaders || {});
+        });
     }
     head(requestUrl, additionalHeaders) {
-        return this.request('HEAD', requestUrl, null, additionalHeaders || {});
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.request('HEAD', requestUrl, null, additionalHeaders || {});
+        });
     }
     sendStream(verb, requestUrl, stream, additionalHeaders) {
-        return this.request(verb, requestUrl, stream, additionalHeaders);
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.request(verb, requestUrl, stream, additionalHeaders);
+        });
     }
     /**
      * Gets a typed object from an endpoint
      * Be aware that not found returns a null.  Other errors (4xx, 5xx) reject the promise
      */
-    async getJson(requestUrl, additionalHeaders = {}) {
-        additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-        let res = await this.get(requestUrl, additionalHeaders);
-        return this._processResponse(res, this.requestOptions);
+    getJson(requestUrl, additionalHeaders = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+            additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
+            const res = yield this.get(requestUrl, additionalHeaders);
+            return this._processResponse(res, this.requestOptions);
+        });
     }
-    async postJson(requestUrl, obj, additionalHeaders = {}) {
-        let data = JSON.stringify(obj, null, 2);
-        additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-        additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
-        let res = await this.post(requestUrl, data, additionalHeaders);
-        return this._processResponse(res, this.requestOptions);
+    postJson(requestUrl, obj, additionalHeaders = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const data = JSON.stringify(obj, null, 2);
+            additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
+            additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
+            const res = yield this.post(requestUrl, data, additionalHeaders);
+            return this._processResponse(res, this.requestOptions);
+        });
     }
-    async putJson(requestUrl, obj, additionalHeaders = {}) {
-        let data = JSON.stringify(obj, null, 2);
-        additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-        additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
-        let res = await this.put(requestUrl, data, additionalHeaders);
-        return this._processResponse(res, this.requestOptions);
+    putJson(requestUrl, obj, additionalHeaders = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const data = JSON.stringify(obj, null, 2);
+            additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
+            additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
+            const res = yield this.put(requestUrl, data, additionalHeaders);
+            return this._processResponse(res, this.requestOptions);
+        });
     }
-    async patchJson(requestUrl, obj, additionalHeaders = {}) {
-        let data = JSON.stringify(obj, null, 2);
-        additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-        additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
-        let res = await this.patch(requestUrl, data, additionalHeaders);
-        return this._processResponse(res, this.requestOptions);
+    patchJson(requestUrl, obj, additionalHeaders = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const data = JSON.stringify(obj, null, 2);
+            additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
+            additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
+            const res = yield this.patch(requestUrl, data, additionalHeaders);
+            return this._processResponse(res, this.requestOptions);
+        });
     }
     /**
      * Makes a raw http request.
      * All other methods such as get, post, patch, and request ultimately call this.
      * Prefer get, del, post and patch
      */
-    async request(verb, requestUrl, data, headers) {
-        if (this._disposed) {
-            throw new Error('Client has already been disposed.');
-        }
-        let parsedUrl = new URL(requestUrl);
-        let info = this._prepareRequest(verb, parsedUrl, headers);
-        // Only perform retries on reads since writes may not be idempotent.
-        let maxTries = this._allowRetries && RetryableHttpVerbs.indexOf(verb) != -1
-            ? this._maxRetries + 1
-            : 1;
-        let numTries = 0;
-        let response;
-        while (numTries < maxTries) {
-            response = await this.requestRaw(info, data);
-            // Check if it's an authentication challenge
-            if (response &&
-                response.message &&
-                response.message.statusCode === HttpCodes.Unauthorized) {
-                let authenticationHandler;
-                for (let i = 0; i < this.handlers.length; i++) {
-                    if (this.handlers[i].canHandleAuthentication(response)) {
-                        authenticationHandler = this.handlers[i];
-                        break;
-                    }
-                }
-                if (authenticationHandler) {
-                    return authenticationHandler.handleAuthentication(this, info, data);
-                }
-                else {
-                    // We have received an unauthorized response but have no handlers to handle it.
-                    // Let the response return to the caller.
-                    return response;
-                }
+    request(verb, requestUrl, data, headers) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this._disposed) {
+                throw new Error('Client has already been disposed.');
             }
-            let redirectsRemaining = this._maxRedirects;
-            while (HttpRedirectCodes.indexOf(response.message.statusCode) != -1 &&
-                this._allowRedirects &&
-                redirectsRemaining > 0) {
-                const redirectUrl = response.message.headers['location'];
-                if (!redirectUrl) {
-                    // if there's no location to redirect to, we won't
-                    break;
-                }
-                let parsedRedirectUrl = new URL(redirectUrl);
-                if (parsedUrl.protocol == 'https:' &&
-                    parsedUrl.protocol != parsedRedirectUrl.protocol &&
-                    !this._allowRedirectDowngrade) {
-                    throw new Error('Redirect from HTTPS to HTTP protocol. This downgrade is not allowed for security reasons. If you want to allow this behavior, set the allowRedirectDowngrade option to true.');
-                }
-                // we need to finish reading the response before reassigning response
-                // which will leak the open socket.
-                await response.readBody();
-                // strip authorization header if redirected to a different hostname
-                if (parsedRedirectUrl.hostname !== parsedUrl.hostname) {
-                    for (let header in headers) {
-                        // header names are case insensitive
-                        if (header.toLowerCase() === 'authorization') {
-                            delete headers[header];
+            const parsedUrl = new URL(requestUrl);
+            let info = this._prepareRequest(verb, parsedUrl, headers);
+            // Only perform retries on reads since writes may not be idempotent.
+            const maxTries = this._allowRetries && RetryableHttpVerbs.includes(verb)
+                ? this._maxRetries + 1
+                : 1;
+            let numTries = 0;
+            let response;
+            do {
+                response = yield this.requestRaw(info, data);
+                // Check if it's an authentication challenge
+                if (response &&
+                    response.message &&
+                    response.message.statusCode === HttpCodes.Unauthorized) {
+                    let authenticationHandler;
+                    for (const handler of this.handlers) {
+                        if (handler.canHandleAuthentication(response)) {
+                            authenticationHandler = handler;
+                            break;
                         }
                     }
+                    if (authenticationHandler) {
+                        return authenticationHandler.handleAuthentication(this, info, data);
+                    }
+                    else {
+                        // We have received an unauthorized response but have no handlers to handle it.
+                        // Let the response return to the caller.
+                        return response;
+                    }
                 }
-                // let's make the request with the new redirectUrl
-                info = this._prepareRequest(verb, parsedRedirectUrl, headers);
-                response = await this.requestRaw(info, data);
-                redirectsRemaining--;
-            }
-            if (HttpResponseRetryCodes.indexOf(response.message.statusCode) == -1) {
-                // If not a retry code, return immediately instead of retrying
-                return response;
-            }
-            numTries += 1;
-            if (numTries < maxTries) {
-                await response.readBody();
-                await this._performExponentialBackoff(numTries);
-            }
-        }
-        return response;
+                let redirectsRemaining = this._maxRedirects;
+                while (response.message.statusCode &&
+                    HttpRedirectCodes.includes(response.message.statusCode) &&
+                    this._allowRedirects &&
+                    redirectsRemaining > 0) {
+                    const redirectUrl = response.message.headers['location'];
+                    if (!redirectUrl) {
+                        // if there's no location to redirect to, we won't
+                        break;
+                    }
+                    const parsedRedirectUrl = new URL(redirectUrl);
+                    if (parsedUrl.protocol === 'https:' &&
+                        parsedUrl.protocol !== parsedRedirectUrl.protocol &&
+                        !this._allowRedirectDowngrade) {
+                        throw new Error('Redirect from HTTPS to HTTP protocol. This downgrade is not allowed for security reasons. If you want to allow this behavior, set the allowRedirectDowngrade option to true.');
+                    }
+                    // we need to finish reading the response before reassigning response
+                    // which will leak the open socket.
+                    yield response.readBody();
+                    // strip authorization header if redirected to a different hostname
+                    if (parsedRedirectUrl.hostname !== parsedUrl.hostname) {
+                        for (const header in headers) {
+                            // header names are case insensitive
+                            if (header.toLowerCase() === 'authorization') {
+                                delete headers[header];
+                            }
+                        }
+                    }
+                    // let's make the request with the new redirectUrl
+                    info = this._prepareRequest(verb, parsedRedirectUrl, headers);
+                    response = yield this.requestRaw(info, data);
+                    redirectsRemaining--;
+                }
+                if (!response.message.statusCode ||
+                    !HttpResponseRetryCodes.includes(response.message.statusCode)) {
+                    // If not a retry code, return immediately instead of retrying
+                    return response;
+                }
+                numTries += 1;
+                if (numTries < maxTries) {
+                    yield response.readBody();
+                    yield this._performExponentialBackoff(numTries);
+                }
+            } while (numTries < maxTries);
+            return response;
+        });
     }
     /**
      * Needs to be called if keepAlive is set to true in request options.
@@ -1460,14 +1666,22 @@ class HttpClient {
      * @param data
      */
     requestRaw(info, data) {
-        return new Promise((resolve, reject) => {
-            let callbackForResult = function (err, res) {
-                if (err) {
-                    reject(err);
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => {
+                function callbackForResult(err, res) {
+                    if (err) {
+                        reject(err);
+                    }
+                    else if (!res) {
+                        // If `err` is not passed, then `res` must be passed.
+                        reject(new Error('Unknown error'));
+                    }
+                    else {
+                        resolve(res);
+                    }
                 }
-                resolve(res);
-            };
-            this.requestRawWithCallback(info, data, callbackForResult);
+                this.requestRawWithCallback(info, data, callbackForResult);
+            });
         });
     }
     /**
@@ -1477,21 +1691,24 @@ class HttpClient {
      * @param onResult
      */
     requestRawWithCallback(info, data, onResult) {
-        let socket;
         if (typeof data === 'string') {
+            if (!info.options.headers) {
+                info.options.headers = {};
+            }
             info.options.headers['Content-Length'] = Buffer.byteLength(data, 'utf8');
         }
         let callbackCalled = false;
-        let handleResult = (err, res) => {
+        function handleResult(err, res) {
             if (!callbackCalled) {
                 callbackCalled = true;
                 onResult(err, res);
             }
-        };
-        let req = info.httpModule.request(info.options, (msg) => {
-            let res = new HttpClientResponse(msg);
-            handleResult(null, res);
+        }
+        const req = info.httpModule.request(info.options, (msg) => {
+            const res = new HttpClientResponse(msg);
+            handleResult(undefined, res);
         });
+        let socket;
         req.on('socket', sock => {
             socket = sock;
         });
@@ -1500,12 +1717,12 @@ class HttpClient {
             if (socket) {
                 socket.end();
             }
-            handleResult(new Error('Request timeout: ' + info.options.path), null);
+            handleResult(new Error(`Request timeout: ${info.options.path}`));
         });
         req.on('error', function (err) {
             // err has statusCode property
             // res should have headers
-            handleResult(err, null);
+            handleResult(err);
         });
         if (data && typeof data === 'string') {
             req.write(data, 'utf8');
@@ -1526,7 +1743,7 @@ class HttpClient {
      * @param serverUrl  The server URL where the request will be sent. For example, https://api.github.com
      */
     getAgent(serverUrl) {
-        let parsedUrl = new URL(serverUrl);
+        const parsedUrl = new URL(serverUrl);
         return this._getAgent(parsedUrl);
     }
     _prepareRequest(method, requestUrl, headers) {
@@ -1550,21 +1767,19 @@ class HttpClient {
         info.options.agent = this._getAgent(info.parsedUrl);
         // gives handlers an opportunity to participate
         if (this.handlers) {
-            this.handlers.forEach(handler => {
+            for (const handler of this.handlers) {
                 handler.prepareRequest(info.options);
-            });
+            }
         }
         return info;
     }
     _mergeHeaders(headers) {
-        const lowercaseKeys = obj => Object.keys(obj).reduce((c, k) => ((c[k.toLowerCase()] = obj[k]), c), {});
         if (this.requestOptions && this.requestOptions.headers) {
-            return Object.assign({}, lowercaseKeys(this.requestOptions.headers), lowercaseKeys(headers));
+            return Object.assign({}, lowercaseKeys(this.requestOptions.headers), lowercaseKeys(headers || {}));
         }
         return lowercaseKeys(headers || {});
     }
     _getExistingOrDefaultHeader(additionalHeaders, header, _default) {
-        const lowercaseKeys = obj => Object.keys(obj).reduce((c, k) => ((c[k.toLowerCase()] = obj[k]), c), {});
         let clientHeader;
         if (this.requestOptions && this.requestOptions.headers) {
             clientHeader = lowercaseKeys(this.requestOptions.headers)[header];
@@ -1573,8 +1788,8 @@ class HttpClient {
     }
     _getAgent(parsedUrl) {
         let agent;
-        let proxyUrl = pm.getProxyUrl(parsedUrl);
-        let useProxy = proxyUrl && proxyUrl.hostname;
+        const proxyUrl = pm.getProxyUrl(parsedUrl);
+        const useProxy = proxyUrl && proxyUrl.hostname;
         if (this._keepAlive && useProxy) {
             agent = this._proxyAgent;
         }
@@ -1582,29 +1797,22 @@ class HttpClient {
             agent = this._agent;
         }
         // if agent is already assigned use that agent.
-        if (!!agent) {
+        if (agent) {
             return agent;
         }
         const usingSsl = parsedUrl.protocol === 'https:';
         let maxSockets = 100;
-        if (!!this.requestOptions) {
+        if (this.requestOptions) {
             maxSockets = this.requestOptions.maxSockets || http.globalAgent.maxSockets;
         }
-        if (useProxy) {
-            // If using proxy, need tunnel
-            if (!tunnel) {
-                tunnel = __nccwpck_require__(4294);
-            }
+        // This is `useProxy` again, but we need to check `proxyURl` directly for TypeScripts's flow analysis.
+        if (proxyUrl && proxyUrl.hostname) {
             const agentOptions = {
-                maxSockets: maxSockets,
+                maxSockets,
                 keepAlive: this._keepAlive,
-                proxy: {
-                    ...((proxyUrl.username || proxyUrl.password) && {
-                        proxyAuth: `${proxyUrl.username}:${proxyUrl.password}`
-                    }),
-                    host: proxyUrl.hostname,
-                    port: proxyUrl.port
-                }
+                proxy: Object.assign(Object.assign({}, ((proxyUrl.username || proxyUrl.password) && {
+                    proxyAuth: `${proxyUrl.username}:${proxyUrl.password}`
+                })), { host: proxyUrl.hostname, port: proxyUrl.port })
             };
             let tunnelAgent;
             const overHttps = proxyUrl.protocol === 'https:';
@@ -1619,7 +1827,7 @@ class HttpClient {
         }
         // if reusing agent across request and tunneling agent isn't assigned create a new agent
         if (this._keepAlive && !agent) {
-            const options = { keepAlive: this._keepAlive, maxSockets: maxSockets };
+            const options = { keepAlive: this._keepAlive, maxSockets };
             agent = usingSsl ? new https.Agent(options) : new http.Agent(options);
             this._agent = agent;
         }
@@ -1638,109 +1846,121 @@ class HttpClient {
         return agent;
     }
     _performExponentialBackoff(retryNumber) {
-        retryNumber = Math.min(ExponentialBackoffCeiling, retryNumber);
-        const ms = ExponentialBackoffTimeSlice * Math.pow(2, retryNumber);
-        return new Promise(resolve => setTimeout(() => resolve(), ms));
+        return __awaiter(this, void 0, void 0, function* () {
+            retryNumber = Math.min(ExponentialBackoffCeiling, retryNumber);
+            const ms = ExponentialBackoffTimeSlice * Math.pow(2, retryNumber);
+            return new Promise(resolve => setTimeout(() => resolve(), ms));
+        });
     }
-    static dateTimeDeserializer(key, value) {
-        if (typeof value === 'string') {
-            let a = new Date(value);
-            if (!isNaN(a.valueOf())) {
-                return a;
-            }
-        }
-        return value;
-    }
-    async _processResponse(res, options) {
-        return new Promise(async (resolve, reject) => {
-            const statusCode = res.message.statusCode;
-            const response = {
-                statusCode: statusCode,
-                result: null,
-                headers: {}
-            };
-            // not found leads to null obj returned
-            if (statusCode == HttpCodes.NotFound) {
-                resolve(response);
-            }
-            let obj;
-            let contents;
-            // get the result from the body
-            try {
-                contents = await res.readBody();
-                if (contents && contents.length > 0) {
-                    if (options && options.deserializeDates) {
-                        obj = JSON.parse(contents, HttpClient.dateTimeDeserializer);
+    _processResponse(res, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+                const statusCode = res.message.statusCode || 0;
+                const response = {
+                    statusCode,
+                    result: null,
+                    headers: {}
+                };
+                // not found leads to null obj returned
+                if (statusCode === HttpCodes.NotFound) {
+                    resolve(response);
+                }
+                // get the result from the body
+                function dateTimeDeserializer(key, value) {
+                    if (typeof value === 'string') {
+                        const a = new Date(value);
+                        if (!isNaN(a.valueOf())) {
+                            return a;
+                        }
+                    }
+                    return value;
+                }
+                let obj;
+                let contents;
+                try {
+                    contents = yield res.readBody();
+                    if (contents && contents.length > 0) {
+                        if (options && options.deserializeDates) {
+                            obj = JSON.parse(contents, dateTimeDeserializer);
+                        }
+                        else {
+                            obj = JSON.parse(contents);
+                        }
+                        response.result = obj;
+                    }
+                    response.headers = res.message.headers;
+                }
+                catch (err) {
+                    // Invalid resource (contents not json);  leaving result obj null
+                }
+                // note that 3xx redirects are handled by the http layer.
+                if (statusCode > 299) {
+                    let msg;
+                    // if exception/error in body, attempt to get better error
+                    if (obj && obj.message) {
+                        msg = obj.message;
+                    }
+                    else if (contents && contents.length > 0) {
+                        // it may be the case that the exception is in the body message as string
+                        msg = contents;
                     }
                     else {
-                        obj = JSON.parse(contents);
+                        msg = `Failed request: (${statusCode})`;
                     }
-                    response.result = obj;
-                }
-                response.headers = res.message.headers;
-            }
-            catch (err) {
-                // Invalid resource (contents not json);  leaving result obj null
-            }
-            // note that 3xx redirects are handled by the http layer.
-            if (statusCode > 299) {
-                let msg;
-                // if exception/error in body, attempt to get better error
-                if (obj && obj.message) {
-                    msg = obj.message;
-                }
-                else if (contents && contents.length > 0) {
-                    // it may be the case that the exception is in the body message as string
-                    msg = contents;
+                    const err = new HttpClientError(msg, statusCode);
+                    err.result = response.result;
+                    reject(err);
                 }
                 else {
-                    msg = 'Failed request: (' + statusCode + ')';
+                    resolve(response);
                 }
-                let err = new HttpClientError(msg, statusCode);
-                err.result = response.result;
-                reject(err);
-            }
-            else {
-                resolve(response);
-            }
+            }));
         });
     }
 }
 exports.HttpClient = HttpClient;
-
+const lowercaseKeys = (obj) => Object.keys(obj).reduce((c, k) => ((c[k.toLowerCase()] = obj[k]), c), {});
+//# sourceMappingURL=index.js.map
 
 /***/ }),
 
-/***/ 6443:
+/***/ 9835:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.checkBypass = exports.getProxyUrl = void 0;
 function getProxyUrl(reqUrl) {
-    let usingSsl = reqUrl.protocol === 'https:';
-    let proxyUrl;
+    const usingSsl = reqUrl.protocol === 'https:';
     if (checkBypass(reqUrl)) {
-        return proxyUrl;
+        return undefined;
     }
-    let proxyVar;
-    if (usingSsl) {
-        proxyVar = process.env['https_proxy'] || process.env['HTTPS_PROXY'];
+    const proxyVar = (() => {
+        if (usingSsl) {
+            return process.env['https_proxy'] || process.env['HTTPS_PROXY'];
+        }
+        else {
+            return process.env['http_proxy'] || process.env['HTTP_PROXY'];
+        }
+    })();
+    if (proxyVar) {
+        return new URL(proxyVar);
     }
     else {
-        proxyVar = process.env['http_proxy'] || process.env['HTTP_PROXY'];
+        return undefined;
     }
-    if (proxyVar) {
-        proxyUrl = new URL(proxyVar);
-    }
-    return proxyUrl;
 }
 exports.getProxyUrl = getProxyUrl;
 function checkBypass(reqUrl) {
     if (!reqUrl.hostname) {
         return false;
     }
-    let noProxy = process.env['no_proxy'] || process.env['NO_PROXY'] || '';
+    const reqHost = reqUrl.hostname;
+    if (isLoopbackAddress(reqHost)) {
+        return true;
+    }
+    const noProxy = process.env['no_proxy'] || process.env['NO_PROXY'] || '';
     if (!noProxy) {
         return false;
     }
@@ -1756,23 +1976,34 @@ function checkBypass(reqUrl) {
         reqPort = 443;
     }
     // Format the request hostname and hostname with port
-    let upperReqHosts = [reqUrl.hostname.toUpperCase()];
+    const upperReqHosts = [reqUrl.hostname.toUpperCase()];
     if (typeof reqPort === 'number') {
         upperReqHosts.push(`${upperReqHosts[0]}:${reqPort}`);
     }
     // Compare request host against noproxy
-    for (let upperNoProxyItem of noProxy
+    for (const upperNoProxyItem of noProxy
         .split(',')
         .map(x => x.trim().toUpperCase())
         .filter(x => x)) {
-        if (upperReqHosts.some(x => x === upperNoProxyItem)) {
+        if (upperNoProxyItem === '*' ||
+            upperReqHosts.some(x => x === upperNoProxyItem ||
+                x.endsWith(`.${upperNoProxyItem}`) ||
+                (upperNoProxyItem.startsWith('.') &&
+                    x.endsWith(`${upperNoProxyItem}`)))) {
             return true;
         }
     }
     return false;
 }
 exports.checkBypass = checkBypass;
-
+function isLoopbackAddress(host) {
+    const hostLower = host.toLowerCase();
+    return (hostLower === 'localhost' ||
+        hostLower.startsWith('127.') ||
+        hostLower.startsWith('[::1]') ||
+        hostLower.startsWith('[0:0:0:0:0:0:0:1]'));
+}
+//# sourceMappingURL=proxy.js.map
 
 /***/ }),
 
@@ -4605,7 +4836,7 @@ function setup(env) {
 
 	/**
 	* Selects a color for a debug namespace
-	* @param {String} namespace The namespace string for the for the debug instance to be colored
+	* @param {String} namespace The namespace string for the debug instance to be colored
 	* @return {Number|String} An ANSI color code for the given namespace
 	* @api private
 	*/
@@ -4750,7 +4981,7 @@ function setup(env) {
 			namespaces = split[i].replace(/\*/g, '.*?');
 
 			if (namespaces[0] === '-') {
-				createDebug.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+				createDebug.skips.push(new RegExp('^' + namespaces.slice(1) + '$'));
 			} else {
 				createDebug.names.push(new RegExp('^' + namespaces + '$'));
 			}
@@ -4858,13 +5089,13 @@ module.exports = setup;
 if (typeof process === 'undefined' || process.type === 'renderer' || process.browser === true || process.__nwjs) {
 	module.exports = __nccwpck_require__(8222);
 } else {
-	module.exports = __nccwpck_require__(5332);
+	module.exports = __nccwpck_require__(4874);
 }
 
 
 /***/ }),
 
-/***/ 5332:
+/***/ 4874:
 /***/ ((module, exports, __nccwpck_require__) => {
 
 /**
@@ -5176,6 +5407,11 @@ events.forEach(function (event) {
   };
 });
 
+var InvalidUrlError = createErrorType(
+  "ERR_INVALID_URL",
+  "Invalid URL",
+  TypeError
+);
 // Error types with codes
 var RedirectionError = createErrorType(
   "ERR_FR_REDIRECTION_FAILURE",
@@ -5236,10 +5472,10 @@ RedirectableRequest.prototype.write = function (data, encoding, callback) {
   }
 
   // Validate input and shift parameters if necessary
-  if (!(typeof data === "string" || typeof data === "object" && ("length" in data))) {
+  if (!isString(data) && !isBuffer(data)) {
     throw new TypeError("data should be a string, Buffer or Uint8Array");
   }
-  if (typeof encoding === "function") {
+  if (isFunction(encoding)) {
     callback = encoding;
     encoding = null;
   }
@@ -5268,11 +5504,11 @@ RedirectableRequest.prototype.write = function (data, encoding, callback) {
 // Ends the current native request
 RedirectableRequest.prototype.end = function (data, encoding, callback) {
   // Shift parameters if necessary
-  if (typeof data === "function") {
+  if (isFunction(data)) {
     callback = data;
     data = encoding = null;
   }
-  else if (typeof encoding === "function") {
+  else if (isFunction(encoding)) {
     callback = encoding;
     encoding = null;
   }
@@ -5449,7 +5685,7 @@ RedirectableRequest.prototype._performRequest = function () {
     url.format(this._options) :
     // When making a request to a proxy, […]
     // a client MUST send the target URI in absolute-form […].
-    this._currentUrl = this._options.path;
+    this._options.path;
 
   // End a redirected request
   // (The first request must be ended explicitly with RedirectableRequest#end)
@@ -5570,7 +5806,7 @@ RedirectableRequest.prototype._processResponse = function (response) {
     redirectUrl = url.resolve(currentUrl, location);
   }
   catch (cause) {
-    this.emit("error", new RedirectionError(cause));
+    this.emit("error", new RedirectionError({ cause: cause }));
     return;
   }
 
@@ -5590,7 +5826,7 @@ RedirectableRequest.prototype._processResponse = function (response) {
   }
 
   // Evaluate the beforeRedirect callback
-  if (typeof beforeRedirect === "function") {
+  if (isFunction(beforeRedirect)) {
     var responseDetails = {
       headers: response.headers,
       statusCode: statusCode,
@@ -5615,7 +5851,7 @@ RedirectableRequest.prototype._processResponse = function (response) {
     this._performRequest();
   }
   catch (cause) {
-    this.emit("error", new RedirectionError(cause));
+    this.emit("error", new RedirectionError({ cause: cause }));
   }
 };
 
@@ -5637,15 +5873,19 @@ function wrap(protocols) {
     // Executes a request, following redirects
     function request(input, options, callback) {
       // Parse parameters
-      if (typeof input === "string") {
-        var urlStr = input;
+      if (isString(input)) {
+        var parsed;
         try {
-          input = urlToOptions(new URL(urlStr));
+          parsed = urlToOptions(new URL(input));
         }
         catch (err) {
           /* istanbul ignore next */
-          input = url.parse(urlStr);
+          parsed = url.parse(input);
         }
+        if (!isString(parsed.protocol)) {
+          throw new InvalidUrlError({ input });
+        }
+        input = parsed;
       }
       else if (URL && (input instanceof URL)) {
         input = urlToOptions(input);
@@ -5655,7 +5895,7 @@ function wrap(protocols) {
         options = input;
         input = { protocol: protocol };
       }
-      if (typeof options === "function") {
+      if (isFunction(options)) {
         callback = options;
         options = null;
       }
@@ -5666,6 +5906,9 @@ function wrap(protocols) {
         maxBodyLength: exports.maxBodyLength,
       }, input, options);
       options.nativeProtocols = nativeProtocols;
+      if (!isString(options.host) && !isString(options.hostname)) {
+        options.hostname = "::1";
+      }
 
       assert.equal(options.protocol, protocol, "protocol mismatch");
       debug("options", options);
@@ -5723,21 +5966,19 @@ function removeMatchingHeaders(regex, headers) {
     undefined : String(lastValue).trim();
 }
 
-function createErrorType(code, defaultMessage) {
-  function CustomError(cause) {
+function createErrorType(code, message, baseClass) {
+  // Create constructor
+  function CustomError(properties) {
     Error.captureStackTrace(this, this.constructor);
-    if (!cause) {
-      this.message = defaultMessage;
-    }
-    else {
-      this.message = defaultMessage + ": " + cause.message;
-      this.cause = cause;
-    }
+    Object.assign(this, properties || {});
+    this.code = code;
+    this.message = this.cause ? message + ": " + this.cause.message : message;
   }
-  CustomError.prototype = new Error();
+
+  // Attach constructor and set default properties
+  CustomError.prototype = new (baseClass || Error)();
   CustomError.prototype.constructor = CustomError;
   CustomError.prototype.name = "Error [" + code + "]";
-  CustomError.prototype.code = code;
   return CustomError;
 }
 
@@ -5750,8 +5991,21 @@ function abortRequest(request) {
 }
 
 function isSubdomain(subdomain, domain) {
-  const dot = subdomain.length - domain.length - 1;
+  assert(isString(subdomain) && isString(domain));
+  var dot = subdomain.length - domain.length - 1;
   return dot > 0 && subdomain[dot] === "." && subdomain.endsWith(domain);
+}
+
+function isString(value) {
+  return typeof value === "string" || value instanceof String;
+}
+
+function isFunction(value) {
+  return typeof value === "function";
+}
+
+function isBuffer(value) {
+  return typeof value === "object" && ("length" in value);
 }
 
 // Exports
@@ -5791,7 +6045,7 @@ var Apply_1 = __nccwpck_require__(205);
 var function_1 = __nccwpck_require__(6985);
 var Functor_1 = __nccwpck_require__(5533);
 function getApplicativeMonoid(F) {
-    var f = Apply_1.getApplySemigroup(F);
+    var f = (0, Apply_1.getApplySemigroup)(F);
     return function (M) { return ({
         concat: f(M).concat,
         empty: F.of(M.empty)
@@ -5800,12 +6054,12 @@ function getApplicativeMonoid(F) {
 exports.getApplicativeMonoid = getApplicativeMonoid;
 /** @deprecated */
 function getApplicativeComposition(F, G) {
-    var map = Functor_1.getFunctorComposition(F, G).map;
-    var _ap = Apply_1.ap(F, G);
+    var map = (0, Functor_1.getFunctorComposition)(F, G).map;
+    var _ap = (0, Apply_1.ap)(F, G);
     return {
         map: map,
         of: function (a) { return F.of(G.of(a)); },
-        ap: function (fgab, fga) { return function_1.pipe(fgab, _ap(fga)); }
+        ap: function (fgab, fga) { return (0, function_1.pipe)(fgab, _ap(fga)); }
     };
 }
 exports.getApplicativeComposition = getApplicativeComposition;
@@ -5814,17 +6068,43 @@ exports.getApplicativeComposition = getApplicativeComposition;
 /***/ }),
 
 /***/ 205:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.sequenceS = exports.sequenceT = exports.getApplySemigroup = exports.apS = exports.apSecond = exports.apFirst = exports.ap = void 0;
 var function_1 = __nccwpck_require__(6985);
+var _ = __importStar(__nccwpck_require__(1840));
 function ap(F, G) {
-    return function (fa) { return function (fab) {
-        return F.ap(F.map(fab, function (gab) { return function (ga) { return G.ap(gab, ga); }; }), fa);
-    }; };
+    return function (fa) {
+        return function (fab) {
+            return F.ap(F.map(fab, function (gab) { return function (ga) { return G.ap(gab, ga); }; }), fa);
+        };
+    };
 }
 exports.ap = ap;
 function apFirst(A) {
@@ -5834,18 +6114,22 @@ function apFirst(A) {
 }
 exports.apFirst = apFirst;
 function apSecond(A) {
-    return function (second) { return function (first) {
-        return A.ap(A.map(first, function () { return function (b) { return b; }; }), second);
-    }; };
+    return function (second) {
+        return function (first) {
+            return A.ap(A.map(first, function () { return function (b) { return b; }; }), second);
+        };
+    };
 }
 exports.apSecond = apSecond;
 function apS(F) {
-    return function (name, fb) { return function (fa) {
-        return F.ap(F.map(fa, function (a) { return function (b) {
-            var _a;
-            return Object.assign({}, a, (_a = {}, _a[name] = b, _a));
-        }; }), fb);
-    }; };
+    return function (name, fb) {
+        return function (fa) {
+            return F.ap(F.map(fa, function (a) { return function (b) {
+                var _a;
+                return Object.assign({}, a, (_a = {}, _a[name] = b, _a));
+            }; }), fb);
+        };
+    };
 }
 exports.apS = apS;
 function getApplySemigroup(F) {
@@ -5874,7 +6158,7 @@ var tupleConstructors = {
     5: function (a) { return function (b) { return function (c) { return function (d) { return function (e) { return [a, b, c, d, e]; }; }; }; }; }
 };
 function getTupleConstructor(len) {
-    if (!tupleConstructors.hasOwnProperty(len)) {
+    if (!_.has.call(tupleConstructors, len)) {
         tupleConstructors[len] = curried(function_1.tuple, len - 1, []);
     }
     return tupleConstructors[len];
@@ -6016,7 +6300,11 @@ exports.tailRec = tailRec;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -6045,13 +6333,13 @@ function compact(F, G) {
 exports.compact = compact;
 function separate(F, C, G) {
     var _compact = compact(F, C);
-    var _map = Functor_1.map(F, G);
-    return function (fge) { return S.separated(_compact(function_1.pipe(fge, _map(Option_1.getLeft))), _compact(function_1.pipe(fge, _map(Option_1.getRight)))); };
+    var _map = (0, Functor_1.map)(F, G);
+    return function (fge) { return S.separated(_compact((0, function_1.pipe)(fge, _map(Option_1.getLeft))), _compact((0, function_1.pipe)(fge, _map(Option_1.getRight)))); };
 }
 exports.separate = separate;
 /** @deprecated */
 function getCompactableComposition(F, G) {
-    var map = Functor_1.getFunctorComposition(F, G).map;
+    var map = (0, Functor_1.getFunctorComposition)(F, G).map;
     return {
         map: map,
         compact: compact(F, G),
@@ -6070,7 +6358,11 @@ exports.getCompactableComposition = getCompactableComposition;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -6089,7 +6381,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.fold = exports.match = exports.foldW = exports.matchW = exports.isRight = exports.isLeft = exports.fromOption = exports.fromPredicate = exports.FromEither = exports.MonadThrow = exports.throwError = exports.ChainRec = exports.Extend = exports.extend = exports.Alt = exports.alt = exports.altW = exports.Bifunctor = exports.mapLeft = exports.bimap = exports.Traversable = exports.sequence = exports.traverse = exports.Foldable = exports.reduceRight = exports.foldMap = exports.reduce = exports.Monad = exports.Chain = exports.chain = exports.chainW = exports.Applicative = exports.Apply = exports.ap = exports.apW = exports.Pointed = exports.of = exports.Functor = exports.map = exports.getAltValidation = exports.getApplicativeValidation = exports.getWitherable = exports.getFilterable = exports.getCompactable = exports.getSemigroup = exports.getEq = exports.getShow = exports.URI = exports.right = exports.left = void 0;
-exports.getValidation = exports.getValidationMonoid = exports.getValidationSemigroup = exports.getApplyMonoid = exports.getApplySemigroup = exports.either = exports.stringifyJSON = exports.parseJSON = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.bindTo = exports.Do = exports.exists = exports.elem = exports.toError = exports.toUnion = exports.chainNullableK = exports.fromNullableK = exports.tryCatchK = exports.tryCatch = exports.fromNullable = exports.orElse = exports.orElseW = exports.swap = exports.filterOrElseW = exports.filterOrElse = exports.chainOptionK = exports.fromOptionK = exports.duplicate = exports.flatten = exports.flattenW = exports.chainFirstW = exports.chainFirst = exports.apSecond = exports.apFirst = exports.flap = exports.getOrElse = exports.getOrElseW = void 0;
+exports.getValidation = exports.getValidationMonoid = exports.getValidationSemigroup = exports.getApplyMonoid = exports.getApplySemigroup = exports.either = exports.stringifyJSON = exports.parseJSON = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.let = exports.bindTo = exports.Do = exports.exists = exports.elem = exports.toError = exports.toUnion = exports.chainNullableK = exports.fromNullableK = exports.tryCatchK = exports.tryCatch = exports.fromNullable = exports.orElse = exports.orElseW = exports.swap = exports.filterOrElseW = exports.filterOrElse = exports.chainOptionK = exports.fromOptionK = exports.duplicate = exports.flatten = exports.flattenW = exports.chainFirstW = exports.chainFirst = exports.apSecondW = exports.apSecond = exports.apFirstW = exports.apFirst = exports.flap = exports.getOrElse = exports.getOrElseW = void 0;
 var Applicative_1 = __nccwpck_require__(4766);
 var Apply_1 = __nccwpck_require__(205);
 var Chain_1 = __nccwpck_require__(2372);
@@ -6119,42 +6411,36 @@ exports.left = _.left;
  * @since 2.0.0
  */
 exports.right = _.right;
-// -------------------------------------------------------------------------------------
-// non-pipeables
-// -------------------------------------------------------------------------------------
-var _map = function (fa, f) { return function_1.pipe(fa, exports.map(f)); };
-var _ap = function (fab, fa) { return function_1.pipe(fab, exports.ap(fa)); };
+var _map = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); };
+var _ap = function (fab, fa) { return (0, function_1.pipe)(fab, (0, exports.ap)(fa)); };
 /* istanbul ignore next */
-var _chain = function (ma, f) { return function_1.pipe(ma, exports.chain(f)); };
+var _chain = function (ma, f) { return (0, function_1.pipe)(ma, (0, exports.chain)(f)); };
 /* istanbul ignore next */
-var _reduce = function (fa, b, f) { return function_1.pipe(fa, exports.reduce(b, f)); };
+var _reduce = function (fa, b, f) { return (0, function_1.pipe)(fa, (0, exports.reduce)(b, f)); };
 /* istanbul ignore next */
 var _foldMap = function (M) { return function (fa, f) {
-    var foldMapM = exports.foldMap(M);
-    return function_1.pipe(fa, foldMapM(f));
+    var foldMapM = (0, exports.foldMap)(M);
+    return (0, function_1.pipe)(fa, foldMapM(f));
 }; };
 /* istanbul ignore next */
-var _reduceRight = function (fa, b, f) { return function_1.pipe(fa, exports.reduceRight(b, f)); };
+var _reduceRight = function (fa, b, f) { return (0, function_1.pipe)(fa, (0, exports.reduceRight)(b, f)); };
 var _traverse = function (F) {
-    var traverseF = exports.traverse(F);
-    return function (ta, f) { return function_1.pipe(ta, traverseF(f)); };
+    var traverseF = (0, exports.traverse)(F);
+    return function (ta, f) { return (0, function_1.pipe)(ta, traverseF(f)); };
 };
-var _bimap = function (fa, f, g) { return function_1.pipe(fa, exports.bimap(f, g)); };
-var _mapLeft = function (fa, f) { return function_1.pipe(fa, exports.mapLeft(f)); };
+var _bimap = function (fa, f, g) { return (0, function_1.pipe)(fa, (0, exports.bimap)(f, g)); };
+var _mapLeft = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.mapLeft)(f)); };
 /* istanbul ignore next */
-var _alt = function (fa, that) { return function_1.pipe(fa, exports.alt(that)); };
+var _alt = function (fa, that) { return (0, function_1.pipe)(fa, (0, exports.alt)(that)); };
 /* istanbul ignore next */
-var _extend = function (wa, f) { return function_1.pipe(wa, exports.extend(f)); };
+var _extend = function (wa, f) { return (0, function_1.pipe)(wa, (0, exports.extend)(f)); };
 var _chainRec = function (a, f) {
-    return ChainRec_1.tailRec(f(a), function (e) {
-        return exports.isLeft(e) ? exports.right(exports.left(e.left)) : exports.isLeft(e.right) ? exports.left(f(e.right.left)) : exports.right(exports.right(e.right.right));
+    return (0, ChainRec_1.tailRec)(f(a), function (e) {
+        return (0, exports.isLeft)(e) ? (0, exports.right)((0, exports.left)(e.left)) : (0, exports.isLeft)(e.right) ? (0, exports.left)(f(e.right.left)) : (0, exports.right)((0, exports.right)(e.right.right));
     });
 };
-// -------------------------------------------------------------------------------------
-// instances
-// -------------------------------------------------------------------------------------
 /**
- * @category instances
+ * @category type lambdas
  * @since 2.0.0
  */
 exports.URI = 'Either';
@@ -6163,7 +6449,7 @@ exports.URI = 'Either';
  * @since 2.0.0
  */
 var getShow = function (SE, SA) { return ({
-    show: function (ma) { return (exports.isLeft(ma) ? "left(" + SE.show(ma.left) + ")" : "right(" + SA.show(ma.right) + ")"); }
+    show: function (ma) { return ((0, exports.isLeft)(ma) ? "left(".concat(SE.show(ma.left), ")") : "right(".concat(SA.show(ma.right), ")")); }
 }); };
 exports.getShow = getShow;
 /**
@@ -6172,7 +6458,7 @@ exports.getShow = getShow;
  */
 var getEq = function (EL, EA) { return ({
     equals: function (x, y) {
-        return x === y || (exports.isLeft(x) ? exports.isLeft(y) && EL.equals(x.left, y.left) : exports.isRight(y) && EA.equals(x.right, y.right));
+        return x === y || ((0, exports.isLeft)(x) ? (0, exports.isLeft)(y) && EL.equals(x.left, y.left) : (0, exports.isRight)(y) && EA.equals(x.right, y.right));
     }
 }); };
 exports.getEq = getEq;
@@ -6194,27 +6480,27 @@ exports.getEq = getEq;
  * @since 2.0.0
  */
 var getSemigroup = function (S) { return ({
-    concat: function (x, y) { return (exports.isLeft(y) ? x : exports.isLeft(x) ? y : exports.right(S.concat(x.right, y.right))); }
+    concat: function (x, y) { return ((0, exports.isLeft)(y) ? x : (0, exports.isLeft)(x) ? y : (0, exports.right)(S.concat(x.right, y.right))); }
 }); };
 exports.getSemigroup = getSemigroup;
 /**
  * Builds a `Compactable` instance for `Either` given `Monoid` for the left side.
  *
- * @category instances
+ * @category filtering
  * @since 2.10.0
  */
 var getCompactable = function (M) {
-    var empty = exports.left(M.empty);
+    var empty = (0, exports.left)(M.empty);
     return {
         URI: exports.URI,
         _E: undefined,
-        compact: function (ma) { return (exports.isLeft(ma) ? ma : ma.right._tag === 'None' ? empty : exports.right(ma.right.value)); },
+        compact: function (ma) { return ((0, exports.isLeft)(ma) ? ma : ma.right._tag === 'None' ? empty : (0, exports.right)(ma.right.value)); },
         separate: function (ma) {
-            return exports.isLeft(ma)
-                ? Separated_1.separated(ma, ma)
-                : exports.isLeft(ma.right)
-                    ? Separated_1.separated(exports.right(ma.right.left), empty)
-                    : Separated_1.separated(empty, exports.right(ma.right.right));
+            return (0, exports.isLeft)(ma)
+                ? (0, Separated_1.separated)(ma, ma)
+                : (0, exports.isLeft)(ma.right)
+                    ? (0, Separated_1.separated)((0, exports.right)(ma.right.left), empty)
+                    : (0, Separated_1.separated)(empty, (0, exports.right)(ma.right.right));
         }
     };
 };
@@ -6222,21 +6508,21 @@ exports.getCompactable = getCompactable;
 /**
  * Builds a `Filterable` instance for `Either` given `Monoid` for the left side
  *
- * @category instances
+ * @category filtering
  * @since 2.10.0
  */
 var getFilterable = function (M) {
-    var empty = exports.left(M.empty);
-    var _a = exports.getCompactable(M), compact = _a.compact, separate = _a.separate;
+    var empty = (0, exports.left)(M.empty);
+    var _a = (0, exports.getCompactable)(M), compact = _a.compact, separate = _a.separate;
     var filter = function (ma, predicate) {
-        return exports.isLeft(ma) ? ma : predicate(ma.right) ? ma : empty;
+        return (0, exports.isLeft)(ma) ? ma : predicate(ma.right) ? ma : empty;
     };
     var partition = function (ma, p) {
-        return exports.isLeft(ma)
-            ? Separated_1.separated(ma, ma)
+        return (0, exports.isLeft)(ma)
+            ? (0, Separated_1.separated)(ma, ma)
             : p(ma.right)
-                ? Separated_1.separated(empty, exports.right(ma.right))
-                : Separated_1.separated(exports.right(ma.right), empty);
+                ? (0, Separated_1.separated)(empty, (0, exports.right)(ma.right))
+                : (0, Separated_1.separated)((0, exports.right)(ma.right), empty);
     };
     return {
         URI: exports.URI,
@@ -6246,19 +6532,19 @@ var getFilterable = function (M) {
         separate: separate,
         filter: filter,
         filterMap: function (ma, f) {
-            if (exports.isLeft(ma)) {
+            if ((0, exports.isLeft)(ma)) {
                 return ma;
             }
             var ob = f(ma.right);
-            return ob._tag === 'None' ? empty : exports.right(ob.value);
+            return ob._tag === 'None' ? empty : (0, exports.right)(ob.value);
         },
         partition: partition,
         partitionMap: function (ma, f) {
-            if (exports.isLeft(ma)) {
-                return Separated_1.separated(ma, ma);
+            if ((0, exports.isLeft)(ma)) {
+                return (0, Separated_1.separated)(ma, ma);
             }
             var e = f(ma.right);
-            return exports.isLeft(e) ? Separated_1.separated(exports.right(e.left), empty) : Separated_1.separated(empty, exports.right(e.right));
+            return (0, exports.isLeft)(e) ? (0, Separated_1.separated)((0, exports.right)(e.left), empty) : (0, Separated_1.separated)(empty, (0, exports.right)(e.right));
         }
     };
 };
@@ -6266,12 +6552,12 @@ exports.getFilterable = getFilterable;
 /**
  * Builds `Witherable` instance for `Either` given `Monoid` for the left side
  *
- * @category instances
+ * @category filtering
  * @since 2.0.0
  */
 var getWitherable = function (M) {
-    var F_ = exports.getFilterable(M);
-    var C = exports.getCompactable(M);
+    var F_ = (0, exports.getFilterable)(M);
+    var C = (0, exports.getCompactable)(M);
     return {
         URI: exports.URI,
         _E: undefined,
@@ -6287,13 +6573,62 @@ var getWitherable = function (M) {
         reduce: _reduce,
         foldMap: _foldMap,
         reduceRight: _reduceRight,
-        wither: Witherable_1.witherDefault(exports.Traversable, C),
-        wilt: Witherable_1.wiltDefault(exports.Traversable, C)
+        wither: (0, Witherable_1.witherDefault)(exports.Traversable, C),
+        wilt: (0, Witherable_1.wiltDefault)(exports.Traversable, C)
     };
 };
 exports.getWitherable = getWitherable;
 /**
- * @category instances
+ * The default [`Applicative`](#applicative) instance returns the first error, if you want to
+ * get all errors you need to provide a way to concatenate them via a `Semigroup`.
+ *
+ * @example
+ * import * as A from 'fp-ts/Apply'
+ * import * as E from 'fp-ts/Either'
+ * import { pipe } from 'fp-ts/function'
+ * import * as S from 'fp-ts/Semigroup'
+ * import * as string from 'fp-ts/string'
+ *
+ * const parseString = (u: unknown): E.Either<string, string> =>
+ *   typeof u === 'string' ? E.right(u) : E.left('not a string')
+ *
+ * const parseNumber = (u: unknown): E.Either<string, number> =>
+ *   typeof u === 'number' ? E.right(u) : E.left('not a number')
+ *
+ * interface Person {
+ *   readonly name: string
+ *   readonly age: number
+ * }
+ *
+ * const parsePerson = (
+ *   input: Record<string, unknown>
+ * ): E.Either<string, Person> =>
+ *   pipe(
+ *     E.Do,
+ *     E.apS('name', parseString(input.name)),
+ *     E.apS('age', parseNumber(input.age))
+ *   )
+ *
+ * assert.deepStrictEqual(parsePerson({}), E.left('not a string')) // <= first error
+ *
+ * const Applicative = E.getApplicativeValidation(
+ *   pipe(string.Semigroup, S.intercalate(', '))
+ * )
+ *
+ * const apS = A.apS(Applicative)
+ *
+ * const parsePersonAll = (
+ *   input: Record<string, unknown>
+ * ): E.Either<string, Person> =>
+ *   pipe(
+ *     E.Do,
+ *     apS('name', parseString(input.name)),
+ *     apS('age', parseNumber(input.age))
+ *   )
+ *
+ * assert.deepStrictEqual(parsePersonAll({}), E.left('not a string, not a number')) // <= all errors
+ *
+ * @category error handling
  * @since 2.7.0
  */
 var getApplicativeValidation = function (SE) { return ({
@@ -6301,19 +6636,49 @@ var getApplicativeValidation = function (SE) { return ({
     _E: undefined,
     map: _map,
     ap: function (fab, fa) {
-        return exports.isLeft(fab)
-            ? exports.isLeft(fa)
-                ? exports.left(SE.concat(fab.left, fa.left))
+        return (0, exports.isLeft)(fab)
+            ? (0, exports.isLeft)(fa)
+                ? (0, exports.left)(SE.concat(fab.left, fa.left))
                 : fab
-            : exports.isLeft(fa)
+            : (0, exports.isLeft)(fa)
                 ? fa
-                : exports.right(fab.right(fa.right));
+                : (0, exports.right)(fab.right(fa.right));
     },
     of: exports.of
 }); };
 exports.getApplicativeValidation = getApplicativeValidation;
 /**
- * @category instances
+ * The default [`Alt`](#alt) instance returns the last error, if you want to
+ * get all errors you need to provide a way to concatenate them via a `Semigroup`.
+ *
+ * @example
+ * import * as E from 'fp-ts/Either'
+ * import { pipe } from 'fp-ts/function'
+ * import * as S from 'fp-ts/Semigroup'
+ * import * as string from 'fp-ts/string'
+ *
+ * const parseString = (u: unknown): E.Either<string, string> =>
+ *   typeof u === 'string' ? E.right(u) : E.left('not a string')
+ *
+ * const parseNumber = (u: unknown): E.Either<string, number> =>
+ *   typeof u === 'number' ? E.right(u) : E.left('not a number')
+ *
+ * const parse = (u: unknown): E.Either<string, string | number> =>
+ *   pipe(
+ *     parseString(u),
+ *     E.alt<string, string | number>(() => parseNumber(u))
+ *   )
+ *
+ * assert.deepStrictEqual(parse(true), E.left('not a number')) // <= last error
+ *
+ * const Alt = E.getAltValidation(pipe(string.Semigroup, S.intercalate(', ')))
+ *
+ * const parseAll = (u: unknown): E.Either<string, string | number> =>
+ *   Alt.alt<string | number>(parseString(u), () => parseNumber(u))
+ *
+ * assert.deepStrictEqual(parseAll(true), E.left('not a string, not a number')) // <= all errors
+ *
+ * @category error handling
  * @since 2.7.0
  */
 var getAltValidation = function (SE) { return ({
@@ -6321,20 +6686,20 @@ var getAltValidation = function (SE) { return ({
     _E: undefined,
     map: _map,
     alt: function (me, that) {
-        if (exports.isRight(me)) {
+        if ((0, exports.isRight)(me)) {
             return me;
         }
         var ea = that();
-        return exports.isLeft(ea) ? exports.left(SE.concat(me.left, ea.left)) : ea;
+        return (0, exports.isLeft)(ea) ? (0, exports.left)(SE.concat(me.left, ea.left)) : ea;
     }
 }); };
 exports.getAltValidation = getAltValidation;
 /**
- * @category instance operations
+ * @category mapping
  * @since 2.0.0
  */
 var map = function (f) { return function (fa) {
-    return exports.isLeft(fa) ? fa : exports.right(f(fa.right));
+    return (0, exports.isLeft)(fa) ? fa : (0, exports.right)(f(fa.right));
 }; };
 exports.map = map;
 /**
@@ -6346,7 +6711,7 @@ exports.Functor = {
     map: _map
 };
 /**
- * @category instance operations
+ * @category constructors
  * @since 2.7.0
  */
 exports.of = exports.right;
@@ -6361,15 +6726,15 @@ exports.Pointed = {
 /**
  * Less strict version of [`ap`](#ap).
  *
- * @category instance operations
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
  * @since 2.8.0
  */
-var apW = function (fa) { return function (fab) { return (exports.isLeft(fab) ? fab : exports.isLeft(fa) ? fa : exports.right(fab.right(fa.right))); }; };
+var apW = function (fa) { return function (fab) {
+    return (0, exports.isLeft)(fab) ? fab : (0, exports.isLeft)(fa) ? fa : (0, exports.right)(fab.right(fa.right));
+}; };
 exports.apW = apW;
 /**
- * Apply a function to an argument under a type constructor.
- *
- * @category instance operations
  * @since 2.0.0
  */
 exports.ap = exports.apW;
@@ -6395,17 +6760,41 @@ exports.Applicative = {
 /**
  * Less strict version of [`chain`](#chain).
  *
- * @category instance operations
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @example
+ * import * as E from 'fp-ts/Either'
+ * import { pipe } from 'fp-ts/function'
+ *
+ * const e1: E.Either<string, number> = E.right(1)
+ * const e2: E.Either<number, number> = E.right(2)
+ *
+ * export const result1 = pipe(
+ *   // @ts-expect-error
+ *   e1,
+ *   E.chain(() => e2)
+ * )
+ *
+ * // merged error types -----v-------------v
+ * // const result2: E.Either<string | number, number>
+ * export const result2 = pipe(
+ *   e1, // no error
+ *   E.chainW(() => e2)
+ * )
+ *
+ * @category sequencing
  * @since 2.6.0
  */
-var chainW = function (f) { return function (ma) {
-    return exports.isLeft(ma) ? ma : f(ma.right);
-}; };
+var chainW = function (f) {
+    return function (ma) {
+        return (0, exports.isLeft)(ma) ? ma : f(ma.right);
+    };
+};
 exports.chainW = chainW;
 /**
  * Composes computations in sequence, using the return value of one computation to determine the next computation.
  *
- * @category instance operations
+ * @category sequencing
  * @since 2.0.0
  */
 exports.chain = exports.chainW;
@@ -6450,11 +6839,11 @@ exports.Monad = {
  *   'prefix'
  * )
  *
- * @category instance operations
+ * @category folding
  * @since 2.0.0
  */
 var reduce = function (b, f) { return function (fa) {
-    return exports.isLeft(fa) ? b : f(b, fa.right);
+    return (0, exports.isLeft)(fa) ? b : f(b, fa.right);
 }; };
 exports.reduce = reduce;
 /**
@@ -6477,11 +6866,11 @@ exports.reduce = reduce;
  *   S.Monoid.empty
  * )
  *
- * @category instance operations
+ * @category folding
  * @since 2.0.0
  */
 var foldMap = function (M) { return function (f) { return function (fa) {
-    return exports.isLeft(fa) ? M.empty : f(fa.right);
+    return (0, exports.isLeft)(fa) ? M.empty : f(fa.right);
 }; }; };
 exports.foldMap = foldMap;
 /**
@@ -6504,11 +6893,11 @@ exports.foldMap = foldMap;
  *   'postfix'
  * )
  *
- * @category instance operations
+ * @category folding
  * @since 2.0.0
  */
 var reduceRight = function (b, f) { return function (fa) {
-    return exports.isLeft(fa) ? b : f(fa.right, b);
+    return (0, exports.isLeft)(fa) ? b : f(fa.right, b);
 }; };
 exports.reduceRight = reduceRight;
 /**
@@ -6540,10 +6929,16 @@ exports.Foldable = {
  *   O.none
  * )
  *
- * @category instance operations
+ * @category traversing
  * @since 2.6.3
  */
-var traverse = function (F) { return function (f) { return function (ta) { return (exports.isLeft(ta) ? F.of(exports.left(ta.left)) : F.map(f(ta.right), exports.right)); }; }; };
+var traverse = function (F) {
+    return function (f) {
+        return function (ta) {
+            return (0, exports.isLeft)(ta) ? F.of((0, exports.left)(ta.left)) : F.map(f(ta.right), exports.right);
+        };
+    };
+};
 exports.traverse = traverse;
 /**
  * Evaluate each monadic action in the structure from left to right, and collect the results.
@@ -6563,12 +6958,14 @@ exports.traverse = traverse;
  *   O.none
  * )
  *
- * @category instance operations
+ * @category traversing
  * @since 2.6.3
  */
-var sequence = function (F) { return function (ma) {
-    return exports.isLeft(ma) ? F.of(exports.left(ma.left)) : F.map(ma.right, exports.right);
-}; };
+var sequence = function (F) {
+    return function (ma) {
+        return (0, exports.isLeft)(ma) ? F.of((0, exports.left)(ma.left)) : F.map(ma.right, exports.right);
+    };
+};
 exports.sequence = sequence;
 /**
  * @category instances
@@ -6586,19 +6983,21 @@ exports.Traversable = {
 /**
  * Map a pair of functions over the two type arguments of the bifunctor.
  *
- * @category instance operations
+ * @category mapping
  * @since 2.0.0
  */
-var bimap = function (f, g) { return function (fa) { return (exports.isLeft(fa) ? exports.left(f(fa.left)) : exports.right(g(fa.right))); }; };
+var bimap = function (f, g) { return function (fa) {
+    return (0, exports.isLeft)(fa) ? (0, exports.left)(f(fa.left)) : (0, exports.right)(g(fa.right));
+}; };
 exports.bimap = bimap;
 /**
  * Map a function over the first type argument of a bifunctor.
  *
- * @category instance operations
+ * @category error handling
  * @since 2.0.0
  */
 var mapLeft = function (f) { return function (fa) {
-    return exports.isLeft(fa) ? exports.left(f(fa.left)) : fa;
+    return (0, exports.isLeft)(fa) ? (0, exports.left)(f(fa.left)) : fa;
 }; };
 exports.mapLeft = mapLeft;
 /**
@@ -6613,16 +7012,62 @@ exports.Bifunctor = {
 /**
  * Less strict version of [`alt`](#alt).
  *
- * @category instance operations
+ * The `W` suffix (short for **W**idening) means that the error and the return types will be merged.
+ *
+ * @category error handling
  * @since 2.9.0
  */
-var altW = function (that) { return function (fa) { return (exports.isLeft(fa) ? that() : fa); }; };
+var altW = function (that) { return function (fa) {
+    return (0, exports.isLeft)(fa) ? that() : fa;
+}; };
 exports.altW = altW;
 /**
  * Identifies an associative operation on a type constructor. It is similar to `Semigroup`, except that it applies to
  * types of kind `* -> *`.
  *
- * @category instance operations
+ * In case of `Either` returns the left-most non-`Left` value (or the right-most `Left` value if both values are `Left`).
+ *
+ * | x        | y        | pipe(x, alt(() => y) |
+ * | -------- | -------- | -------------------- |
+ * | left(a)  | left(b)  | left(b)              |
+ * | left(a)  | right(2) | right(2)             |
+ * | right(1) | left(b)  | right(1)             |
+ * | right(1) | right(2) | right(1)             |
+ *
+ * @example
+ * import * as E from 'fp-ts/Either'
+ * import { pipe } from 'fp-ts/function'
+ *
+ * assert.deepStrictEqual(
+ *   pipe(
+ *     E.left('a'),
+ *     E.alt(() => E.left('b'))
+ *   ),
+ *   E.left('b')
+ * )
+ * assert.deepStrictEqual(
+ *   pipe(
+ *     E.left('a'),
+ *     E.alt(() => E.right(2))
+ *   ),
+ *   E.right(2)
+ * )
+ * assert.deepStrictEqual(
+ *   pipe(
+ *     E.right(1),
+ *     E.alt(() => E.left('b'))
+ *   ),
+ *   E.right(1)
+ * )
+ * assert.deepStrictEqual(
+ *   pipe(
+ *     E.right(1),
+ *     E.alt(() => E.right(2))
+ *   ),
+ *   E.right(1)
+ * )
+ *
+ * @category error handling
  * @since 2.0.0
  */
 exports.alt = exports.altW;
@@ -6636,11 +7081,10 @@ exports.Alt = {
     alt: _alt
 };
 /**
- * @category instance operations
  * @since 2.0.0
  */
 var extend = function (f) { return function (wa) {
-    return exports.isLeft(wa) ? wa : exports.right(f(wa));
+    return (0, exports.isLeft)(wa) ? wa : (0, exports.right)(f(wa));
 }; };
 exports.extend = extend;
 /**
@@ -6664,7 +7108,6 @@ exports.ChainRec = {
     chainRec: _chainRec
 };
 /**
- * @category instance operations
  * @since 2.6.3
  */
 exports.throwError = exports.left;
@@ -6714,14 +7157,12 @@ exports.FromEither = {
  *   left('error')
  * )
  *
- * @category constructors
+ * @category lifting
  * @since 2.0.0
  */
-exports.fromPredicate = 
-/*#__PURE__*/
-FromEither_1.fromPredicate(exports.FromEither);
+exports.fromPredicate = (0, FromEither_1.fromPredicate)(exports.FromEither);
 // -------------------------------------------------------------------------------------
-// natural transformations
+// conversions
 // -------------------------------------------------------------------------------------
 /**
  * @example
@@ -6744,12 +7185,11 @@ FromEither_1.fromPredicate(exports.FromEither);
  *   E.left('error')
  * )
  *
- * @category natural transformations
+ * @category conversions
  * @since 2.0.0
  */
 exports.fromOption = 
-/*#__PURE__*/
-FromEither_1.fromOption(exports.FromEither);
+/*#__PURE__*/ (0, FromEither_1.fromOption)(exports.FromEither);
 // -------------------------------------------------------------------------------------
 // refinements
 // -------------------------------------------------------------------------------------
@@ -6767,23 +7207,24 @@ exports.isLeft = _.isLeft;
  * @since 2.0.0
  */
 exports.isRight = _.isRight;
-// -------------------------------------------------------------------------------------
-// destructors
-// -------------------------------------------------------------------------------------
 /**
  * Less strict version of [`match`](#match).
  *
- * @category destructors
+ * The `W` suffix (short for **W**idening) means that the handler return types will be merged.
+ *
+ * @category pattern matching
  * @since 2.10.0
  */
-var matchW = function (onLeft, onRight) { return function (ma) {
-    return exports.isLeft(ma) ? onLeft(ma.left) : onRight(ma.right);
-}; };
+var matchW = function (onLeft, onRight) {
+    return function (ma) {
+        return (0, exports.isLeft)(ma) ? onLeft(ma.left) : onRight(ma.right);
+    };
+};
 exports.matchW = matchW;
 /**
  * Alias of [`matchW`](#matchw).
  *
- * @category destructors
+ * @category pattern matching
  * @since 2.10.0
  */
 exports.foldW = exports.matchW;
@@ -6818,26 +7259,30 @@ exports.foldW = exports.matchW;
  *   'Errors: error 1, error 2'
  * )
  *
- * @category destructors
+ * @category pattern matching
  * @since 2.10.0
  */
 exports.match = exports.matchW;
 /**
  * Alias of [`match`](#match).
  *
- * @category destructors
+ * @category pattern matching
  * @since 2.0.0
  */
 exports.fold = exports.match;
 /**
  * Less strict version of [`getOrElse`](#getorelse).
  *
- * @category destructors
+ * The `W` suffix (short for **W**idening) means that the handler return type will be merged.
+ *
+ * @category error handling
  * @since 2.6.0
  */
-var getOrElseW = function (onLeft) { return function (ma) {
-    return exports.isLeft(ma) ? onLeft(ma.left) : ma.right;
-}; };
+var getOrElseW = function (onLeft) {
+    return function (ma) {
+        return (0, exports.isLeft)(ma) ? onLeft(ma.left) : ma.right;
+    };
+};
 exports.getOrElseW = getOrElseW;
 /**
  * Returns the wrapped value if it's a `Right` or a default value if is a `Left`.
@@ -6861,7 +7306,7 @@ exports.getOrElseW = getOrElseW;
  *   0
  * )
  *
- * @category destructors
+ * @category error handling
  * @since 2.0.0
  */
 exports.getOrElse = exports.getOrElseW;
@@ -6869,70 +7314,68 @@ exports.getOrElse = exports.getOrElseW;
 // combinators
 // -------------------------------------------------------------------------------------
 /**
- * Derivable from `Functor`.
- *
- * @category combinators
+ * @category mapping
  * @since 2.10.0
  */
-exports.flap = 
-/*#__PURE__*/
-Functor_1.flap(exports.Functor);
+exports.flap = (0, Functor_1.flap)(exports.Functor);
 /**
  * Combine two effectful actions, keeping only the result of the first.
  *
- * Derivable from `Apply`.
- *
- * @category combinators
  * @since 2.0.0
  */
-exports.apFirst = 
-/*#__PURE__*/
-Apply_1.apFirst(exports.Apply);
+exports.apFirst = (0, Apply_1.apFirst)(exports.Apply);
+/**
+ * Less strict version of [`apFirst`](#apfirst)
+ *
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @since 2.12.0
+ */
+exports.apFirstW = exports.apFirst;
 /**
  * Combine two effectful actions, keeping only the result of the second.
  *
- * Derivable from `Apply`.
- *
- * @category combinators
  * @since 2.0.0
  */
-exports.apSecond = 
-/*#__PURE__*/
-Apply_1.apSecond(exports.Apply);
+exports.apSecond = (0, Apply_1.apSecond)(exports.Apply);
+/**
+ * Less strict version of [`apSecond`](#apsecond)
+ *
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @since 2.12.0
+ */
+exports.apSecondW = exports.apSecond;
 /**
  * Composes computations in sequence, using the return value of one computation to determine the next computation and
  * keeping only the result of the first.
  *
- * Derivable from `Chain`.
- *
- * @category combinators
+ * @category sequencing
  * @since 2.0.0
  */
 exports.chainFirst = 
-/*#__PURE__*/
-Chain_1.chainFirst(exports.Chain);
+/*#__PURE__*/ (0, Chain_1.chainFirst)(exports.Chain);
 /**
  * Less strict version of [`chainFirst`](#chainfirst)
  *
- * Derivable from `Chain`.
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
  *
- * @category combinators
+ * @category sequencing
  * @since 2.8.0
  */
 exports.chainFirstW = exports.chainFirst;
 /**
  * Less strict version of [`flatten`](#flatten).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.11.0
  */
 exports.flattenW = 
-/*#__PURE__*/
-exports.chainW(function_1.identity);
+/*#__PURE__*/ (0, exports.chainW)(function_1.identity);
 /**
  * The `flatten` function is the conventional monad join operator. It is used to remove one level of monadic structure, projecting its bound argument into the outer level.
- *
- * Derivable from `Chain`.
  *
  * @example
  * import * as E from 'fp-ts/Either'
@@ -6941,33 +7384,25 @@ exports.chainW(function_1.identity);
  * assert.deepStrictEqual(E.flatten(E.right(E.left('e'))), E.left('e'))
  * assert.deepStrictEqual(E.flatten(E.left('e')), E.left('e'))
  *
- * @category combinators
+ * @category sequencing
  * @since 2.0.0
  */
 exports.flatten = exports.flattenW;
 /**
- * Derivable from `Extend`.
- *
- * @category combinators
  * @since 2.0.0
  */
-exports.duplicate = 
-/*#__PURE__*/
-exports.extend(function_1.identity);
+exports.duplicate = (0, exports.extend)(function_1.identity);
 /**
- * @category combinators
+ * @category lifting
  * @since 2.10.0
  */
 exports.fromOptionK = 
-/*#__PURE__*/
-FromEither_1.fromOptionK(exports.FromEither);
+/*#__PURE__*/ (0, FromEither_1.fromOptionK)(exports.FromEither);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.11.0
  */
-exports.chainOptionK = 
-/*#__PURE__*/
-FromEither_1.chainOptionK(exports.FromEither, exports.Chain);
+exports.chainOptionK = (0, FromEither_1.chainOptionK)(exports.FromEither, exports.Chain);
 /**
  * @example
  * import * as E from 'fp-ts/Either'
@@ -7004,47 +7439,47 @@ FromEither_1.chainOptionK(exports.FromEither, exports.Chain);
  *   E.left('a')
  * )
  *
- * @category combinators
+ * @category filtering
  * @since 2.0.0
  */
-exports.filterOrElse = 
-/*#__PURE__*/
-FromEither_1.filterOrElse(exports.FromEither, exports.Chain);
+exports.filterOrElse = (0, FromEither_1.filterOrElse)(exports.FromEither, exports.Chain);
 /**
  * Less strict version of [`filterOrElse`](#filterorelse).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @category filtering
  * @since 2.9.0
  */
 exports.filterOrElseW = exports.filterOrElse;
 /**
  * Returns a `Right` if is a `Left` (and vice versa).
  *
- * @category combinators
  * @since 2.0.0
  */
-var swap = function (ma) { return (exports.isLeft(ma) ? exports.right(ma.left) : exports.left(ma.right)); };
+var swap = function (ma) { return ((0, exports.isLeft)(ma) ? (0, exports.right)(ma.left) : (0, exports.left)(ma.right)); };
 exports.swap = swap;
 /**
  * Less strict version of [`orElse`](#orelse).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the return types will be merged.
+ *
+ * @category error handling
  * @since 2.10.0
  */
-var orElseW = function (onLeft) { return function (ma) {
-    return exports.isLeft(ma) ? onLeft(ma.left) : ma;
-}; };
+var orElseW = function (onLeft) {
+    return function (ma) {
+        return (0, exports.isLeft)(ma) ? onLeft(ma.left) : ma;
+    };
+};
 exports.orElseW = orElseW;
 /**
  * Useful for recovering from errors.
  *
- * @category combinators
+ * @category error handling
  * @since 2.0.0
  */
 exports.orElse = exports.orElseW;
-// -------------------------------------------------------------------------------------
-// interop
-// -------------------------------------------------------------------------------------
 /**
  * Takes a default and a nullable value, if the value is not nully, turn it into a `Right`, if the value is nully use
  * the provided default as a `Left`.
@@ -7057,12 +7492,14 @@ exports.orElse = exports.orElseW;
  * assert.deepStrictEqual(parse(1), right(1))
  * assert.deepStrictEqual(parse(null), left('nully'))
  *
- * @category interop
+ * @category conversions
  * @since 2.0.0
  */
-var fromNullable = function (e) { return function (a) {
-    return a == null ? exports.left(e) : exports.right(a);
-}; };
+var fromNullable = function (e) {
+    return function (a) {
+        return a == null ? (0, exports.left)(e) : (0, exports.right)(a);
+    };
+};
 exports.fromNullable = fromNullable;
 /**
  * Constructs a new `Either` from a function that might throw.
@@ -7091,10 +7528,10 @@ exports.fromNullable = fromNullable;
  */
 var tryCatch = function (f, onThrow) {
     try {
-        return exports.right(f());
+        return (0, exports.right)(f());
     }
     catch (e) {
-        return exports.left(onThrow(e));
+        return (0, exports.left)(onThrow(e));
     }
 };
 exports.tryCatch = tryCatch;
@@ -7104,39 +7541,39 @@ exports.tryCatch = tryCatch;
  * @category interop
  * @since 2.10.0
  */
-var tryCatchK = function (f, onThrow) { return function () {
-    var a = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        a[_i] = arguments[_i];
-    }
-    return exports.tryCatch(function () { return f.apply(void 0, a); }, onThrow);
-}; };
+var tryCatchK = function (f, onThrow) {
+    return function () {
+        var a = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            a[_i] = arguments[_i];
+        }
+        return (0, exports.tryCatch)(function () { return f.apply(void 0, a); }, onThrow);
+    };
+};
 exports.tryCatchK = tryCatchK;
 /**
- * @category interop
+ * @category lifting
  * @since 2.9.0
  */
 var fromNullableK = function (e) {
-    var from = exports.fromNullable(e);
-    return function (f) { return function_1.flow(f, from); };
+    var from = (0, exports.fromNullable)(e);
+    return function (f) { return (0, function_1.flow)(f, from); };
 };
 exports.fromNullableK = fromNullableK;
 /**
- * @category interop
+ * @category sequencing
  * @since 2.9.0
  */
 var chainNullableK = function (e) {
-    var from = exports.fromNullableK(e);
-    return function (f) { return exports.chain(from(f)); };
+    var from = (0, exports.fromNullableK)(e);
+    return function (f) { return (0, exports.chain)(from(f)); };
 };
 exports.chainNullableK = chainNullableK;
 /**
- * @category interop
+ * @category conversions
  * @since 2.10.0
  */
-exports.toUnion = 
-/*#__PURE__*/
-exports.foldW(function_1.identity, function_1.identity);
+exports.toUnion = (0, exports.foldW)(function_1.identity, function_1.identity);
 // -------------------------------------------------------------------------------------
 // utils
 // -------------------------------------------------------------------------------------
@@ -7155,7 +7592,7 @@ function elem(E) {
             var elemE_1 = elem(E);
             return function (ma) { return elemE_1(a, ma); };
         }
-        return exports.isLeft(ma) ? false : E.equals(a, ma.right);
+        return (0, exports.isLeft)(ma) ? false : E.equals(a, ma.right);
     };
 }
 exports.elem = elem;
@@ -7173,126 +7610,138 @@ exports.elem = elem;
  *
  * @since 2.0.0
  */
-var exists = function (predicate) { return function (ma) {
-    return exports.isLeft(ma) ? false : predicate(ma.right);
-}; };
+var exists = function (predicate) {
+    return function (ma) {
+        return (0, exports.isLeft)(ma) ? false : predicate(ma.right);
+    };
+};
 exports.exists = exists;
 // -------------------------------------------------------------------------------------
 // do notation
 // -------------------------------------------------------------------------------------
 /**
+ * @category do notation
  * @since 2.9.0
  */
-exports.Do = 
-/*#__PURE__*/
-exports.of(_.emptyRecord);
+exports.Do = (0, exports.of)(_.emptyRecord);
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.bindTo = 
-/*#__PURE__*/
-Functor_1.bindTo(exports.Functor);
+exports.bindTo = (0, Functor_1.bindTo)(exports.Functor);
+var let_ = /*#__PURE__*/ (0, Functor_1.let)(exports.Functor);
+exports.let = let_;
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.bind = 
-/*#__PURE__*/
-Chain_1.bind(exports.Chain);
+exports.bind = (0, Chain_1.bind)(exports.Chain);
 /**
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @category do notation
  * @since 2.8.0
  */
 exports.bindW = exports.bind;
-// -------------------------------------------------------------------------------------
-// pipeable sequence S
-// -------------------------------------------------------------------------------------
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.apS = 
-/*#__PURE__*/
-Apply_1.apS(exports.Apply);
+exports.apS = (0, Apply_1.apS)(exports.Apply);
 /**
+ * Less strict version of [`apS`](#aps).
+ *
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @category do notation
  * @since 2.8.0
  */
 exports.apSW = exports.apS;
-// -------------------------------------------------------------------------------------
-// sequence T
-// -------------------------------------------------------------------------------------
 /**
  * @since 2.11.0
  */
-exports.ApT = 
-/*#__PURE__*/
-exports.of(_.emptyReadonlyArray);
+exports.ApT = (0, exports.of)(_.emptyReadonlyArray);
 // -------------------------------------------------------------------------------------
 // array utils
 // -------------------------------------------------------------------------------------
 /**
  * Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(Applicative)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
-var traverseReadonlyNonEmptyArrayWithIndex = function (f) { return function (as) {
-    var e = f(0, _.head(as));
-    if (exports.isLeft(e)) {
-        return e;
-    }
-    var out = [e.right];
-    for (var i = 1; i < as.length; i++) {
-        var e_1 = f(i, as[i]);
-        if (exports.isLeft(e_1)) {
-            return e_1;
+var traverseReadonlyNonEmptyArrayWithIndex = function (f) {
+    return function (as) {
+        var e = f(0, _.head(as));
+        if ((0, exports.isLeft)(e)) {
+            return e;
         }
-        out.push(e_1.right);
-    }
-    return exports.right(out);
-}; };
+        var out = [e.right];
+        for (var i = 1; i < as.length; i++) {
+            var e_1 = f(i, as[i]);
+            if ((0, exports.isLeft)(e_1)) {
+                return e_1;
+            }
+            out.push(e_1.right);
+        }
+        return (0, exports.right)(out);
+    };
+};
 exports.traverseReadonlyNonEmptyArrayWithIndex = traverseReadonlyNonEmptyArrayWithIndex;
 /**
  * Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
 var traverseReadonlyArrayWithIndex = function (f) {
-    var g = exports.traverseReadonlyNonEmptyArrayWithIndex(f);
+    var g = (0, exports.traverseReadonlyNonEmptyArrayWithIndex)(f);
     return function (as) { return (_.isNonEmpty(as) ? g(as) : exports.ApT); };
 };
 exports.traverseReadonlyArrayWithIndex = traverseReadonlyArrayWithIndex;
 /**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex;
 /**
+ * Equivalent to `ReadonlyArray#traverse(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
-var traverseArray = function (f) { return exports.traverseReadonlyArrayWithIndex(function (_, a) { return f(a); }); };
+var traverseArray = function (f) { return (0, exports.traverseReadonlyArrayWithIndex)(function (_, a) { return f(a); }); };
 exports.traverseArray = traverseArray;
 /**
+ * Equivalent to `ReadonlyArray#sequence(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.sequenceArray = 
-/*#__PURE__*/
-exports.traverseArray(function_1.identity);
+/*#__PURE__*/ (0, exports.traverseArray)(function_1.identity);
 /**
  * Use [`parse`](./Json.ts.html#parse) instead.
  *
- * @category constructors
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
 function parseJSON(s, onError) {
-    return exports.tryCatch(function () { return JSON.parse(s); }, onError);
+    return (0, exports.tryCatch)(function () { return JSON.parse(s); }, onError);
 }
 exports.parseJSON = parseJSON;
 /**
  * Use [`stringify`](./Json.ts.html#stringify) instead.
  *
- * @category constructors
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
 var stringifyJSON = function (u, onError) {
-    return exports.tryCatch(function () {
+    return (0, exports.tryCatch)(function () {
         var s = JSON.stringify(u);
         if (typeof s !== 'string') {
             throw new Error('Converting unsupported structure to JSON');
@@ -7302,9 +7751,11 @@ var stringifyJSON = function (u, onError) {
 };
 exports.stringifyJSON = stringifyJSON;
 /**
- * Use small, specific instances instead.
+ * This instance is deprecated, use small, specific instances instead.
+ * For example if a function needs a `Functor` instance, pass `E.Functor` instead of `E.either`
+ * (where `E` is from `import E from 'fp-ts/Either'`)
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -7332,55 +7783,53 @@ exports.either = {
  * Semigroup returning the left-most `Left` value. If both operands are `Right`s then the inner values
  * are concatenated using the provided `Semigroup`
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
 exports.getApplySemigroup = 
-/*#__PURE__*/
-Apply_1.getApplySemigroup(exports.Apply);
+/*#__PURE__*/ (0, Apply_1.getApplySemigroup)(exports.Apply);
 /**
  * Use [`getApplicativeMonoid`](./Applicative.ts.html#getapplicativemonoid) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
 exports.getApplyMonoid = 
-/*#__PURE__*/
-Applicative_1.getApplicativeMonoid(exports.Applicative);
+/*#__PURE__*/ (0, Applicative_1.getApplicativeMonoid)(exports.Applicative);
 /**
  * Use [`getApplySemigroup`](./Apply.ts.html#getapplysemigroup) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
 var getValidationSemigroup = function (SE, SA) {
-    return Apply_1.getApplySemigroup(exports.getApplicativeValidation(SE))(SA);
+    return (0, Apply_1.getApplySemigroup)((0, exports.getApplicativeValidation)(SE))(SA);
 };
 exports.getValidationSemigroup = getValidationSemigroup;
 /**
  * Use [`getApplicativeMonoid`](./Applicative.ts.html#getapplicativemonoid) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
 var getValidationMonoid = function (SE, MA) {
-    return Applicative_1.getApplicativeMonoid(exports.getApplicativeValidation(SE))(MA);
+    return (0, Applicative_1.getApplicativeMonoid)((0, exports.getApplicativeValidation)(SE))(MA);
 };
 exports.getValidationMonoid = getValidationMonoid;
 /**
  * Use [`getApplicativeValidation`](#getapplicativevalidation) and [`getAltValidation`](#getaltvalidation) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
 function getValidation(SE) {
-    var ap = exports.getApplicativeValidation(SE).ap;
-    var alt = exports.getAltValidation(SE).alt;
+    var ap = (0, exports.getApplicativeValidation)(SE).ap;
+    var alt = (0, exports.getAltValidation)(SE).alt;
     return {
         URI: exports.URI,
         _E: undefined,
@@ -7413,7 +7862,11 @@ exports.getValidation = getValidation;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -7431,17 +7884,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getEitherM = exports.toUnion = exports.swap = exports.orLeft = exports.orElseFirst = exports.orElse = exports.getOrElse = exports.matchE = exports.match = exports.altValidation = exports.mapLeft = exports.bimap = exports.alt = exports.chain = exports.ap = exports.map = exports.leftF = exports.rightF = exports.left = exports.right = void 0;
+exports.getEitherM = exports.toUnion = exports.swap = exports.orLeft = exports.orElseFirst = exports.orElse = exports.getOrElse = exports.matchE = exports.match = exports.altValidation = exports.mapLeft = exports.bimap = exports.alt = exports.chain = exports.ap = exports.map = exports.chainNullableK = exports.fromNullableK = exports.fromNullable = exports.leftF = exports.rightF = exports.left = exports.right = void 0;
 var Apply_1 = __nccwpck_require__(205);
 var E = __importStar(__nccwpck_require__(7534));
 var function_1 = __nccwpck_require__(6985);
 var Functor_1 = __nccwpck_require__(5533);
 function right(F) {
-    return function_1.flow(E.right, F.of);
+    return (0, function_1.flow)(E.right, F.of);
 }
 exports.right = right;
 function left(F) {
-    return function_1.flow(E.left, F.of);
+    return (0, function_1.flow)(E.left, F.of);
 }
 exports.left = left;
 function rightF(F) {
@@ -7452,12 +7905,33 @@ function leftF(F) {
     return function (fe) { return F.map(fe, E.left); };
 }
 exports.leftF = leftF;
+function fromNullable(F) {
+    return function (e) { return (0, function_1.flow)(E.fromNullable(e), F.of); };
+}
+exports.fromNullable = fromNullable;
+function fromNullableK(F) {
+    var fromNullableF = fromNullable(F);
+    return function (e) {
+        var fromNullableFE = fromNullableF(e);
+        return function (f) { return (0, function_1.flow)(f, fromNullableFE); };
+    };
+}
+exports.fromNullableK = fromNullableK;
+function chainNullableK(M) {
+    var chainM = chain(M);
+    var fromNullableKM = fromNullableK(M);
+    return function (e) {
+        var fromNullableKMe = fromNullableKM(e);
+        return function (f) { return chainM(fromNullableKMe(f)); };
+    };
+}
+exports.chainNullableK = chainNullableK;
 function map(F) {
-    return Functor_1.map(F, E.Functor);
+    return (0, Functor_1.map)(F, E.Functor);
 }
 exports.map = map;
 function ap(F) {
-    return Apply_1.ap(F, E.Apply);
+    return (0, Apply_1.ap)(F, E.Apply);
 }
 exports.ap = ap;
 function chain(M) {
@@ -7532,16 +8006,16 @@ function getEitherM(M) {
     var _getOrElse = getOrElse(M);
     var _orElse = orElse(M);
     return {
-        map: function (fa, f) { return function_1.pipe(fa, _map(f)); },
-        ap: function (fab, fa) { return function_1.pipe(fab, _ap(fa)); },
+        map: function (fa, f) { return (0, function_1.pipe)(fa, _map(f)); },
+        ap: function (fab, fa) { return (0, function_1.pipe)(fab, _ap(fa)); },
         of: right(M),
-        chain: function (ma, f) { return function_1.pipe(ma, _chain(f)); },
-        alt: function (fa, that) { return function_1.pipe(fa, _alt(that)); },
-        bimap: function (fea, f, g) { return function_1.pipe(fea, _bimap(f, g)); },
-        mapLeft: function (fea, f) { return function_1.pipe(fea, _mapLeft(f)); },
-        fold: function (fa, onLeft, onRight) { return function_1.pipe(fa, _fold(onLeft, onRight)); },
-        getOrElse: function (fa, onLeft) { return function_1.pipe(fa, _getOrElse(onLeft)); },
-        orElse: function (fa, f) { return function_1.pipe(fa, _orElse(f)); },
+        chain: function (ma, f) { return (0, function_1.pipe)(ma, _chain(f)); },
+        alt: function (fa, that) { return (0, function_1.pipe)(fa, _alt(that)); },
+        bimap: function (fea, f, g) { return (0, function_1.pipe)(fea, _bimap(f, g)); },
+        mapLeft: function (fea, f) { return (0, function_1.pipe)(fea, _mapLeft(f)); },
+        fold: function (fa, onLeft, onRight) { return (0, function_1.pipe)(fa, _fold(onLeft, onRight)); },
+        getOrElse: function (fa, onLeft) { return (0, function_1.pipe)(fa, _getOrElse(onLeft)); },
+        orElse: function (fa, f) { return (0, function_1.pipe)(fa, _orElse(f)); },
         swap: swap(M),
         rightM: rightF(M),
         leftM: leftF(M),
@@ -7576,11 +8050,10 @@ exports.fromEquals = fromEquals;
 // combinators
 // -------------------------------------------------------------------------------------
 /**
- * @category combinators
  * @since 2.10.0
  */
 var struct = function (eqs) {
-    return exports.fromEquals(function (first, second) {
+    return (0, exports.fromEquals)(function (first, second) {
         for (var key in eqs) {
             if (!eqs[key].equals(first[key], second[key])) {
                 return false;
@@ -7605,7 +8078,6 @@ exports.struct = struct;
  * assert.strictEqual(E.equals(['a', 1, true], ['a', 2, true]), false)
  * assert.strictEqual(E.equals(['a', 1, true], ['a', 1, false]), false)
  *
- * @category combinators
  * @since 2.10.0
  */
 var tuple = function () {
@@ -7613,30 +8085,66 @@ var tuple = function () {
     for (var _i = 0; _i < arguments.length; _i++) {
         eqs[_i] = arguments[_i];
     }
-    return exports.fromEquals(function (first, second) { return eqs.every(function (E, i) { return E.equals(first[i], second[i]); }); });
+    return (0, exports.fromEquals)(function (first, second) { return eqs.every(function (E, i) { return E.equals(first[i], second[i]); }); });
 };
 exports.tuple = tuple;
-// -------------------------------------------------------------------------------------
-// non-pipeables
-// -------------------------------------------------------------------------------------
 /* istanbul ignore next */
-var contramap_ = function (fa, f) { return function_1.pipe(fa, exports.contramap(f)); };
-// -------------------------------------------------------------------------------------
-// type class members
-// -------------------------------------------------------------------------------------
+var contramap_ = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.contramap)(f)); };
 /**
- * @category Contravariant
+ * A typical use case for `contramap` would be like, given some `User` type, to construct an `Eq<User>`.
+ *
+ * We can do so with a function from `User -> X` where `X` is some value that we know how to compare
+ * for equality (meaning we have an `Eq<X>`)
+ *
+ * For example, given the following `User` type, we want to construct an `Eq<User>` that just looks at the `key` field
+ * for each user (since it's known to be unique).
+ *
+ * If we have a way of comparing `UUID`s for equality (`eqUUID: Eq<UUID>`) and we know how to go from `User -> UUID`,
+ * using `contramap` we can do this
+ *
+ * @example
+ * import { contramap, Eq } from 'fp-ts/Eq'
+ * import { pipe } from 'fp-ts/function'
+ * import * as S from 'fp-ts/string'
+ *
+ * type UUID = string
+ *
+ * interface User {
+ *   readonly key: UUID
+ *   readonly firstName: string
+ *   readonly lastName: string
+ * }
+ *
+ * const eqUUID: Eq<UUID> = S.Eq
+ *
+ * const eqUserByKey: Eq<User> = pipe(
+ *   eqUUID,
+ *   contramap((user) => user.key)
+ * )
+ *
+ * assert.deepStrictEqual(
+ *   eqUserByKey.equals(
+ *     { key: 'k1', firstName: 'a1', lastName: 'b1' },
+ *     { key: 'k2', firstName: 'a1', lastName: 'b1' }
+ *   ),
+ *   false
+ * )
+ * assert.deepStrictEqual(
+ *   eqUserByKey.equals(
+ *     { key: 'k1', firstName: 'a1', lastName: 'b1' },
+ *     { key: 'k1', firstName: 'a2', lastName: 'b1' }
+ *   ),
+ *   true
+ * )
+ *
  * @since 2.0.0
  */
 var contramap = function (f) { return function (fa) {
-    return exports.fromEquals(function (x, y) { return fa.equals(f(x), f(y)); });
+    return (0, exports.fromEquals)(function (x, y) { return fa.equals(f(x), f(y)); });
 }; };
 exports.contramap = contramap;
-// -------------------------------------------------------------------------------------
-// instances
-// -------------------------------------------------------------------------------------
 /**
- * @category instances
+ * @category type lambdas
  * @since 2.0.0
  */
 exports.URI = 'Eq';
@@ -7655,7 +8163,7 @@ var empty = {
  * @since 2.10.0
  */
 var getSemigroup = function () { return ({
-    concat: function (x, y) { return exports.fromEquals(function (a, b) { return x.equals(a, b) && y.equals(a, b); }); }
+    concat: function (x, y) { return (0, exports.fromEquals)(function (a, b) { return x.equals(a, b) && y.equals(a, b); }); }
 }); };
 exports.getSemigroup = getSemigroup;
 /**
@@ -7663,7 +8171,7 @@ exports.getSemigroup = getSemigroup;
  * @since 2.6.0
  */
 var getMonoid = function () { return ({
-    concat: exports.getSemigroup().concat,
+    concat: (0, exports.getSemigroup)().concat,
     empty: empty
 }); };
 exports.getMonoid = getMonoid;
@@ -7681,7 +8189,7 @@ exports.Contravariant = {
 /**
  * Use [`tuple`](#tuple) instead.
  *
- * @category combinators
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -7689,7 +8197,7 @@ exports.getTupleEq = exports.tuple;
 /**
  * Use [`struct`](#struct) instead.
  *
- * @category combinators
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -7697,14 +8205,17 @@ exports.getStructEq = exports.struct;
 /**
  * Use [`eqStrict`](#eqstrict) instead
  *
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
 exports.strictEqual = exports.eqStrict.equals;
 /**
- * Use small, specific instances instead.
+ * This instance is deprecated, use small, specific instances instead.
+ * For example if a function needs a `Contravariant` instance, pass `E.Contravariant` instead of `E.eq`
+ * (where `E` is from `import E from 'fp-ts/Eq'`)
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -7712,7 +8223,7 @@ exports.eq = exports.Contravariant;
 /**
  * Use [`Eq`](./boolean.ts.html#eq) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -7720,7 +8231,7 @@ exports.eqBoolean = exports.eqStrict;
 /**
  * Use [`Eq`](./string.ts.html#eq) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -7728,7 +8239,7 @@ exports.eqString = exports.eqStrict;
 /**
  * Use [`Eq`](./number.ts.html#eq) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -7736,7 +8247,7 @@ exports.eqNumber = exports.eqStrict;
 /**
  * Use [`Eq`](./Date.ts.html#eq) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -7778,24 +8289,24 @@ exports.filterMap = filterMap;
 function partition(F, G) {
     var _filter = filter(F, G);
     return function (predicate) {
-        var left = _filter(Predicate_1.not(predicate));
+        var left = _filter((0, Predicate_1.not)(predicate));
         var right = _filter(predicate);
-        return function (fgb) { return Separated_1.separated(left(fgb), right(fgb)); };
+        return function (fgb) { return (0, Separated_1.separated)(left(fgb), right(fgb)); };
     };
 }
 exports.partition = partition;
 function partitionMap(F, G) {
     var _filterMap = filterMap(F, G);
     return function (f) { return function (fga) {
-        return Separated_1.separated(function_1.pipe(fga, _filterMap(function (a) { return Option_1.getLeft(f(a)); })), function_1.pipe(fga, _filterMap(function (a) { return Option_1.getRight(f(a)); })));
+        return (0, Separated_1.separated)((0, function_1.pipe)(fga, _filterMap(function (a) { return (0, Option_1.getLeft)(f(a)); })), (0, function_1.pipe)(fga, _filterMap(function (a) { return (0, Option_1.getRight)(f(a)); })));
     }; };
 }
 exports.partitionMap = partitionMap;
 /** @deprecated */
 function getFilterableComposition(F, G) {
-    var map = Functor_1.getFunctorComposition(F, G).map;
-    var _compact = Compactable_1.compact(F, G);
-    var _separate = Compactable_1.separate(F, G, G);
+    var map = (0, Functor_1.getFunctorComposition)(F, G).map;
+    var _compact = (0, Compactable_1.compact)(F, G);
+    var _separate = (0, Compactable_1.separate)(F, G, G);
     var _filter = filter(F, G);
     var _filterMap = filterMap(F, G);
     var _partition = partition(F, G);
@@ -7804,10 +8315,10 @@ function getFilterableComposition(F, G) {
         map: map,
         compact: _compact,
         separate: _separate,
-        filter: function (fga, f) { return function_1.pipe(fga, _filter(f)); },
-        filterMap: function (fga, f) { return function_1.pipe(fga, _filterMap(f)); },
-        partition: function (fga, p) { return function_1.pipe(fga, _partition(p)); },
-        partitionMap: function (fga, f) { return function_1.pipe(fga, _partitionMap(f)); }
+        filter: function (fga, f) { return (0, function_1.pipe)(fga, _filter(f)); },
+        filterMap: function (fga, f) { return (0, function_1.pipe)(fga, _filterMap(f)); },
+        partition: function (fga, p) { return (0, function_1.pipe)(fga, _partition(p)); },
+        partitionMap: function (fga, f) { return (0, function_1.pipe)(fga, _partitionMap(f)); }
     };
 }
 exports.getFilterableComposition = getFilterableComposition;
@@ -7827,7 +8338,11 @@ exports.getFilterableComposition = getFilterableComposition;
  */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -7845,7 +8360,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.filterOrElse = exports.chainEitherK = exports.fromEitherK = exports.chainOptionK = exports.fromOptionK = exports.fromPredicate = exports.fromOption = void 0;
+exports.filterOrElse = exports.chainFirstEitherK = exports.chainEitherK = exports.fromEitherK = exports.chainOptionK = exports.fromOptionK = exports.fromPredicate = exports.fromOption = void 0;
+var Chain_1 = __nccwpck_require__(2372);
 var function_1 = __nccwpck_require__(6985);
 var _ = __importStar(__nccwpck_require__(1840));
 function fromOption(F) {
@@ -7853,16 +8369,18 @@ function fromOption(F) {
 }
 exports.fromOption = fromOption;
 function fromPredicate(F) {
-    return function (predicate, onFalse) { return function (a) {
-        return F.fromEither(predicate(a) ? _.right(a) : _.left(onFalse(a)));
-    }; };
+    return function (predicate, onFalse) {
+        return function (a) {
+            return F.fromEither(predicate(a) ? _.right(a) : _.left(onFalse(a)));
+        };
+    };
 }
 exports.fromPredicate = fromPredicate;
 function fromOptionK(F) {
     var fromOptionF = fromOption(F);
     return function (onNone) {
         var from = fromOptionF(onNone);
-        return function (f) { return function_1.flow(f, from); };
+        return function (f) { return (0, function_1.flow)(f, from); };
     };
 }
 exports.fromOptionK = fromOptionK;
@@ -7875,7 +8393,7 @@ function chainOptionK(F, M) {
 }
 exports.chainOptionK = chainOptionK;
 function fromEitherK(F) {
-    return function (f) { return function_1.flow(f, F.fromEither); };
+    return function (f) { return (0, function_1.flow)(f, F.fromEither); };
 }
 exports.fromEitherK = fromEitherK;
 function chainEitherK(F, M) {
@@ -7883,10 +8401,16 @@ function chainEitherK(F, M) {
     return function (f) { return function (ma) { return M.chain(ma, fromEitherKF(f)); }; };
 }
 exports.chainEitherK = chainEitherK;
+function chainFirstEitherK(F, M) {
+    return (0, function_1.flow)(fromEitherK(F), (0, Chain_1.chainFirst)(M));
+}
+exports.chainFirstEitherK = chainFirstEitherK;
 function filterOrElse(F, M) {
-    return function (predicate, onFalse) { return function (ma) {
-        return M.chain(ma, function (a) { return F.fromEither(predicate(a) ? _.right(a) : _.left(onFalse(a))); });
-    }; };
+    return function (predicate, onFalse) {
+        return function (ma) {
+            return M.chain(ma, function (a) { return F.fromEither(predicate(a) ? _.right(a) : _.left(onFalse(a))); });
+        };
+    };
 }
 exports.filterOrElse = filterOrElse;
 
@@ -7908,19 +8432,19 @@ exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = void 0;
 var Chain_1 = __nccwpck_require__(2372);
 var function_1 = __nccwpck_require__(6985);
 function fromIOK(F) {
-    return function (f) { return function_1.flow(f, F.fromIO); };
+    return function (f) { return (0, function_1.flow)(f, F.fromIO); };
 }
 exports.fromIOK = fromIOK;
 function chainIOK(F, M) {
     return function (f) {
-        var g = function_1.flow(f, F.fromIO);
+        var g = (0, function_1.flow)(f, F.fromIO);
         return function (first) { return M.chain(first, g); };
     };
 }
 exports.chainIOK = chainIOK;
 function chainFirstIOK(F, M) {
-    var chainFirstM = Chain_1.chainFirst(M);
-    return function (f) { return chainFirstM(function_1.flow(f, F.fromIO)); };
+    var chainFirstM = (0, Chain_1.chainFirst)(M);
+    return function (f) { return chainFirstM((0, function_1.flow)(f, F.fromIO)); };
 }
 exports.chainFirstIOK = chainFirstIOK;
 
@@ -7934,7 +8458,11 @@ exports.chainFirstIOK = chainFirstIOK;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -7970,7 +8498,7 @@ function asks(F) {
 }
 exports.asks = asks;
 function fromReaderK(F) {
-    return function (f) { return function_1.flow(f, F.fromReader); };
+    return function (f) { return (0, function_1.flow)(f, F.fromReader); };
 }
 exports.fromReaderK = fromReaderK;
 function chainReaderK(F, M) {
@@ -7979,7 +8507,7 @@ function chainReaderK(F, M) {
 }
 exports.chainReaderK = chainReaderK;
 function chainFirstReaderK(F, M) {
-    return function_1.flow(fromReaderK(F), Chain_1.chainFirst(M));
+    return (0, function_1.flow)(fromReaderK(F), (0, Chain_1.chainFirst)(M));
 }
 exports.chainFirstReaderK = chainFirstReaderK;
 
@@ -8001,19 +8529,19 @@ exports.chainFirstTaskK = exports.chainTaskK = exports.fromTaskK = void 0;
 var Chain_1 = __nccwpck_require__(2372);
 var function_1 = __nccwpck_require__(6985);
 function fromTaskK(F) {
-    return function (f) { return function_1.flow(f, F.fromTask); };
+    return function (f) { return (0, function_1.flow)(f, F.fromTask); };
 }
 exports.fromTaskK = fromTaskK;
 function chainTaskK(F, M) {
     return function (f) {
-        var g = function_1.flow(f, F.fromTask);
+        var g = (0, function_1.flow)(f, F.fromTask);
         return function (first) { return M.chain(first, g); };
     };
 }
 exports.chainTaskK = chainTaskK;
 function chainFirstTaskK(F, M) {
-    var chainFirstM = Chain_1.chainFirst(M);
-    return function (f) { return chainFirstM(function_1.flow(f, F.fromTask)); };
+    var chainFirstM = (0, Chain_1.chainFirst)(M);
+    return function (f) { return chainFirstM((0, function_1.flow)(f, F.fromTask)); };
 }
 exports.chainFirstTaskK = chainFirstTaskK;
 
@@ -8026,7 +8554,7 @@ exports.chainFirstTaskK = chainFirstTaskK;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getFunctorComposition = exports.bindTo = exports.flap = exports.map = void 0;
+exports.getFunctorComposition = exports.let = exports.bindTo = exports.flap = exports.map = void 0;
 /**
  * A `Functor` is a type constructor which supports a mapping operation `map`.
  *
@@ -8056,11 +8584,18 @@ function bindTo(F) {
     }); }; };
 }
 exports.bindTo = bindTo;
+function let_(F) {
+    return function (name, f) { return function (fa) { return F.map(fa, function (a) {
+        var _a;
+        return Object.assign({}, a, (_a = {}, _a[name] = f(a), _a));
+    }); }; };
+}
+exports.let = let_;
 /** @deprecated */
 function getFunctorComposition(F, G) {
     var _map = map(F, G);
     return {
-        map: function (fga, f) { return function_1.pipe(fga, _map(f)); }
+        map: function (fga, f) { return (0, function_1.pipe)(fga, _map(f)); }
     };
 }
 exports.getFunctorComposition = getFunctorComposition;
@@ -8096,7 +8631,6 @@ exports.concatAll = exports.endo = exports.filterSecond = exports.filterFirst = 
  *
  * assert.deepStrictEqual(subAll([1, 2, 3]), 2)
  *
- * @category combinators
  * @since 2.11.0
  */
 var reverse = function (M) { return ({
@@ -8104,28 +8638,31 @@ var reverse = function (M) { return ({
 }); };
 exports.reverse = reverse;
 /**
- * @category combinators
  * @since 2.11.0
  */
-var filterFirst = function (predicate) { return function (M) { return ({
-    concat: function (first, second) { return (predicate(first) ? M.concat(first, second) : second); }
-}); }; };
+var filterFirst = function (predicate) {
+    return function (M) { return ({
+        concat: function (first, second) { return (predicate(first) ? M.concat(first, second) : second); }
+    }); };
+};
 exports.filterFirst = filterFirst;
 /**
- * @category combinators
  * @since 2.11.0
  */
-var filterSecond = function (predicate) { return function (M) { return ({
-    concat: function (first, second) { return (predicate(second) ? M.concat(first, second) : first); }
-}); }; };
+var filterSecond = function (predicate) {
+    return function (M) { return ({
+        concat: function (first, second) { return (predicate(second) ? M.concat(first, second) : first); }
+    }); };
+};
 exports.filterSecond = filterSecond;
 /**
- * @category combinators
  * @since 2.11.0
  */
-var endo = function (f) { return function (M) { return ({
-    concat: function (first, second) { return M.concat(f(first), f(second)); }
-}); }; };
+var endo = function (f) {
+    return function (M) { return ({
+        concat: function (first, second) { return M.concat(f(first), f(second)); }
+    }); };
+};
 exports.endo = endo;
 // -------------------------------------------------------------------------------------
 // utils
@@ -8145,9 +8682,13 @@ exports.endo = endo;
  *
  * @since 2.11.0
  */
-var concatAll = function (M) { return function (startWith) { return function (as) {
-    return as.reduce(function (a, acc) { return M.concat(a, acc); }, startWith);
-}; }; };
+var concatAll = function (M) {
+    return function (startWith) {
+        return function (as) {
+            return as.reduce(function (a, acc) { return M.concat(a, acc); }, startWith);
+        };
+    };
+};
 exports.concatAll = concatAll;
 
 
@@ -8160,7 +8701,11 @@ exports.concatAll = concatAll;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -8179,7 +8724,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.fromEither = exports.MonadThrow = exports.throwError = exports.Witherable = exports.wilt = exports.wither = exports.Traversable = exports.sequence = exports.traverse = exports.Filterable = exports.partitionMap = exports.partition = exports.filterMap = exports.filter = exports.Compactable = exports.separate = exports.compact = exports.Extend = exports.extend = exports.Alternative = exports.guard = exports.Zero = exports.zero = exports.Alt = exports.alt = exports.altW = exports.Foldable = exports.reduceRight = exports.foldMap = exports.reduce = exports.Monad = exports.Chain = exports.chain = exports.Applicative = exports.Apply = exports.ap = exports.Pointed = exports.of = exports.Functor = exports.map = exports.getMonoid = exports.getOrd = exports.getEq = exports.getShow = exports.URI = exports.getRight = exports.getLeft = exports.fromPredicate = exports.some = exports.none = void 0;
-exports.getLastMonoid = exports.getFirstMonoid = exports.getApplyMonoid = exports.getApplySemigroup = exports.option = exports.mapNullable = exports.getRefinement = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apS = exports.bind = exports.bindTo = exports.Do = exports.exists = exports.elem = exports.toUndefined = exports.toNullable = exports.chainNullableK = exports.fromNullableK = exports.tryCatchK = exports.tryCatch = exports.fromNullable = exports.chainEitherK = exports.fromEitherK = exports.duplicate = exports.chainFirst = exports.flatten = exports.apSecond = exports.apFirst = exports.flap = exports.getOrElse = exports.getOrElseW = exports.fold = exports.match = exports.foldW = exports.matchW = exports.isNone = exports.isSome = exports.FromEither = void 0;
+exports.getLastMonoid = exports.getFirstMonoid = exports.getApplyMonoid = exports.getApplySemigroup = exports.option = exports.mapNullable = exports.getRefinement = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apS = exports.bind = exports.let = exports.bindTo = exports.Do = exports.exists = exports.elem = exports.toUndefined = exports.toNullable = exports.chainNullableK = exports.fromNullableK = exports.tryCatchK = exports.tryCatch = exports.fromNullable = exports.chainFirstEitherK = exports.chainEitherK = exports.fromEitherK = exports.duplicate = exports.chainFirst = exports.flatten = exports.apSecond = exports.apFirst = exports.flap = exports.getOrElse = exports.getOrElseW = exports.fold = exports.match = exports.foldW = exports.matchW = exports.isNone = exports.isSome = exports.FromEither = void 0;
 var Applicative_1 = __nccwpck_require__(4766);
 var Apply_1 = __nccwpck_require__(205);
 var Chain_1 = __nccwpck_require__(2372);
@@ -8210,7 +8755,7 @@ exports.none = _.none;
  */
 exports.some = _.some;
 function fromPredicate(predicate) {
-    return function (a) { return (predicate(a) ? exports.some(a) : exports.none); };
+    return function (a) { return (predicate(a) ? (0, exports.some)(a) : exports.none); };
 }
 exports.fromPredicate = fromPredicate;
 /**
@@ -8226,7 +8771,7 @@ exports.fromPredicate = fromPredicate;
  * @category constructors
  * @since 2.0.0
  */
-var getLeft = function (ma) { return (ma._tag === 'Right' ? exports.none : exports.some(ma.left)); };
+var getLeft = function (ma) { return (ma._tag === 'Right' ? exports.none : (0, exports.some)(ma.left)); };
 exports.getLeft = getLeft;
 /**
  * Returns the `Right` value of an `Either` if possible.
@@ -8241,42 +8786,36 @@ exports.getLeft = getLeft;
  * @category constructors
  * @since 2.0.0
  */
-var getRight = function (ma) { return (ma._tag === 'Left' ? exports.none : exports.some(ma.right)); };
+var getRight = function (ma) { return (ma._tag === 'Left' ? exports.none : (0, exports.some)(ma.right)); };
 exports.getRight = getRight;
-// -------------------------------------------------------------------------------------
-// non-pipeables
-// -------------------------------------------------------------------------------------
-var _map = function (fa, f) { return function_1.pipe(fa, exports.map(f)); };
-var _ap = function (fab, fa) { return function_1.pipe(fab, exports.ap(fa)); };
-var _chain = function (ma, f) { return function_1.pipe(ma, exports.chain(f)); };
-var _reduce = function (fa, b, f) { return function_1.pipe(fa, exports.reduce(b, f)); };
+var _map = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); };
+var _ap = function (fab, fa) { return (0, function_1.pipe)(fab, (0, exports.ap)(fa)); };
+var _chain = function (ma, f) { return (0, function_1.pipe)(ma, (0, exports.chain)(f)); };
+var _reduce = function (fa, b, f) { return (0, function_1.pipe)(fa, (0, exports.reduce)(b, f)); };
 var _foldMap = function (M) {
-    var foldMapM = exports.foldMap(M);
-    return function (fa, f) { return function_1.pipe(fa, foldMapM(f)); };
+    var foldMapM = (0, exports.foldMap)(M);
+    return function (fa, f) { return (0, function_1.pipe)(fa, foldMapM(f)); };
 };
-var _reduceRight = function (fa, b, f) { return function_1.pipe(fa, exports.reduceRight(b, f)); };
+var _reduceRight = function (fa, b, f) { return (0, function_1.pipe)(fa, (0, exports.reduceRight)(b, f)); };
 var _traverse = function (F) {
-    var traverseF = exports.traverse(F);
-    return function (ta, f) { return function_1.pipe(ta, traverseF(f)); };
+    var traverseF = (0, exports.traverse)(F);
+    return function (ta, f) { return (0, function_1.pipe)(ta, traverseF(f)); };
 };
 /* istanbul ignore next */
-var _alt = function (fa, that) { return function_1.pipe(fa, exports.alt(that)); };
-var _filter = function (fa, predicate) { return function_1.pipe(fa, exports.filter(predicate)); };
+var _alt = function (fa, that) { return (0, function_1.pipe)(fa, (0, exports.alt)(that)); };
+var _filter = function (fa, predicate) { return (0, function_1.pipe)(fa, (0, exports.filter)(predicate)); };
 /* istanbul ignore next */
-var _filterMap = function (fa, f) { return function_1.pipe(fa, exports.filterMap(f)); };
+var _filterMap = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.filterMap)(f)); };
 /* istanbul ignore next */
-var _extend = function (wa, f) { return function_1.pipe(wa, exports.extend(f)); };
+var _extend = function (wa, f) { return (0, function_1.pipe)(wa, (0, exports.extend)(f)); };
 /* istanbul ignore next */
 var _partition = function (fa, predicate) {
-    return function_1.pipe(fa, exports.partition(predicate));
+    return (0, function_1.pipe)(fa, (0, exports.partition)(predicate));
 };
 /* istanbul ignore next */
-var _partitionMap = function (fa, f) { return function_1.pipe(fa, exports.partitionMap(f)); };
-// -------------------------------------------------------------------------------------
-// instances
-// -------------------------------------------------------------------------------------
+var _partitionMap = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.partitionMap)(f)); };
 /**
- * @category instances
+ * @category type lambdas
  * @since 2.0.0
  */
 exports.URI = 'Option';
@@ -8285,7 +8824,7 @@ exports.URI = 'Option';
  * @since 2.0.0
  */
 var getShow = function (S) { return ({
-    show: function (ma) { return (exports.isNone(ma) ? 'none' : "some(" + S.show(ma.value) + ")"); }
+    show: function (ma) { return ((0, exports.isNone)(ma) ? 'none' : "some(".concat(S.show(ma.value), ")")); }
 }); };
 exports.getShow = getShow;
 /**
@@ -8304,7 +8843,7 @@ exports.getShow = getShow;
  * @since 2.0.0
  */
 var getEq = function (E) { return ({
-    equals: function (x, y) { return x === y || (exports.isNone(x) ? exports.isNone(y) : exports.isNone(y) ? false : E.equals(x.value, y.value)); }
+    equals: function (x, y) { return x === y || ((0, exports.isNone)(x) ? (0, exports.isNone)(y) : (0, exports.isNone)(y) ? false : E.equals(x.value, y.value)); }
 }); };
 exports.getEq = getEq;
 /**
@@ -8330,8 +8869,8 @@ exports.getEq = getEq;
  * @since 2.0.0
  */
 var getOrd = function (O) { return ({
-    equals: exports.getEq(O).equals,
-    compare: function (x, y) { return (x === y ? 0 : exports.isSome(x) ? (exports.isSome(y) ? O.compare(x.value, y.value) : 1) : -1); }
+    equals: (0, exports.getEq)(O).equals,
+    compare: function (x, y) { return (x === y ? 0 : (0, exports.isSome)(x) ? ((0, exports.isSome)(y) ? O.compare(x.value, y.value) : 1) : -1); }
 }); };
 exports.getOrd = getOrd;
 /**
@@ -8359,16 +8898,16 @@ exports.getOrd = getOrd;
  * @since 2.0.0
  */
 var getMonoid = function (S) { return ({
-    concat: function (x, y) { return (exports.isNone(x) ? y : exports.isNone(y) ? x : exports.some(S.concat(x.value, y.value))); },
+    concat: function (x, y) { return ((0, exports.isNone)(x) ? y : (0, exports.isNone)(y) ? x : (0, exports.some)(S.concat(x.value, y.value))); },
     empty: exports.none
 }); };
 exports.getMonoid = getMonoid;
 /**
- * @category instance operations
+ * @category mapping
  * @since 2.0.0
  */
 var map = function (f) { return function (fa) {
-    return exports.isNone(fa) ? exports.none : exports.some(f(fa.value));
+    return (0, exports.isNone)(fa) ? exports.none : (0, exports.some)(f(fa.value));
 }; };
 exports.map = map;
 /**
@@ -8380,7 +8919,7 @@ exports.Functor = {
     map: _map
 };
 /**
- * @category instance operations
+ * @category constructors
  * @since 2.7.0
  */
 exports.of = exports.some;
@@ -8393,11 +8932,10 @@ exports.Pointed = {
     of: exports.of
 };
 /**
- * @category instance operations
  * @since 2.0.0
  */
 var ap = function (fa) { return function (fab) {
-    return exports.isNone(fab) ? exports.none : exports.isNone(fa) ? exports.none : exports.some(fab.value(fa.value));
+    return (0, exports.isNone)(fab) ? exports.none : (0, exports.isNone)(fa) ? exports.none : (0, exports.some)(fab.value(fa.value));
 }; };
 exports.ap = ap;
 /**
@@ -8422,11 +8960,11 @@ exports.Applicative = {
 /**
  * Composes computations in sequence, using the return value of one computation to determine the next computation.
  *
- * @category instance operations
+ * @category sequencing
  * @since 2.0.0
  */
 var chain = function (f) { return function (ma) {
-    return exports.isNone(ma) ? exports.none : f(ma.value);
+    return (0, exports.isNone)(ma) ? exports.none : f(ma.value);
 }; };
 exports.chain = chain;
 /**
@@ -8451,27 +8989,27 @@ exports.Monad = {
     chain: _chain
 };
 /**
- * @category instance operations
+ * @category folding
  * @since 2.0.0
  */
 var reduce = function (b, f) { return function (fa) {
-    return exports.isNone(fa) ? b : f(b, fa.value);
+    return (0, exports.isNone)(fa) ? b : f(b, fa.value);
 }; };
 exports.reduce = reduce;
 /**
- * @category instance operations
+ * @category folding
  * @since 2.0.0
  */
 var foldMap = function (M) { return function (f) { return function (fa) {
-    return exports.isNone(fa) ? M.empty : f(fa.value);
+    return (0, exports.isNone)(fa) ? M.empty : f(fa.value);
 }; }; };
 exports.foldMap = foldMap;
 /**
- * @category instance operations
+ * @category folding
  * @since 2.0.0
  */
 var reduceRight = function (b, f) { return function (fa) {
-    return exports.isNone(fa) ? b : f(fa.value, b);
+    return (0, exports.isNone)(fa) ? b : f(fa.value, b);
 }; };
 exports.reduceRight = reduceRight;
 /**
@@ -8487,11 +9025,13 @@ exports.Foldable = {
 /**
  * Less strict version of [`alt`](#alt).
  *
- * @category instance operations
+ * The `W` suffix (short for **W**idening) means that the return types will be merged.
+ *
+ * @category error handling
  * @since 2.9.0
  */
 var altW = function (that) { return function (fa) {
-    return exports.isNone(fa) ? that() : fa;
+    return (0, exports.isNone)(fa) ? that() : fa;
 }; };
 exports.altW = altW;
 /**
@@ -8500,14 +9040,28 @@ exports.altW = altW;
  *
  * In case of `Option` returns the left-most non-`None` value.
  *
+ * | x       | y       | pipe(x, alt(() => y) |
+ * | ------- | ------- | -------------------- |
+ * | none    | none    | none                 |
+ * | some(a) | none    | some(a)              |
+ * | none    | some(b) | some(b)              |
+ * | some(a) | some(b) | some(a)              |
+ *
  * @example
  * import * as O from 'fp-ts/Option'
  * import { pipe } from 'fp-ts/function'
  *
  * assert.deepStrictEqual(
  *   pipe(
+ *     O.none,
+ *     O.alt(() => O.none)
+ *   ),
+ *   O.none
+ * )
+ * assert.deepStrictEqual(
+ *   pipe(
  *     O.some('a'),
- *     O.alt(() => O.some('b'))
+ *     O.alt<string>(() => O.none)
  *   ),
  *   O.some('a')
  * )
@@ -8518,8 +9072,15 @@ exports.altW = altW;
  *   ),
  *   O.some('b')
  * )
+ * assert.deepStrictEqual(
+ *   pipe(
+ *     O.some('a'),
+ *     O.alt(() => O.some('b'))
+ *   ),
+ *   O.some('a')
+ * )
  *
- * @category instance operations
+ * @category error handling
  * @since 2.0.0
  */
 exports.alt = exports.altW;
@@ -8533,7 +9094,6 @@ exports.Alt = {
     alt: _alt
 };
 /**
- * @category instance operations
  * @since 2.7.0
  */
 var zero = function () { return exports.none; };
@@ -8547,12 +9107,10 @@ exports.Zero = {
     zero: exports.zero
 };
 /**
- * @category constructors
+ * @category do notation
  * @since 2.11.0
  */
-exports.guard = 
-/*#__PURE__*/
-Zero_1.guard(exports.Zero, exports.Pointed);
+exports.guard = (0, Zero_1.guard)(exports.Zero, exports.Pointed);
 /**
  * @category instances
  * @since 2.7.0
@@ -8566,11 +9124,10 @@ exports.Alternative = {
     zero: exports.zero
 };
 /**
- * @category instance operations
  * @since 2.0.0
  */
 var extend = function (f) { return function (wa) {
-    return exports.isNone(wa) ? exports.none : exports.some(f(wa));
+    return (0, exports.isNone)(wa) ? exports.none : (0, exports.some)(f(wa));
 }; };
 exports.extend = extend;
 /**
@@ -8583,21 +9140,17 @@ exports.Extend = {
     extend: _extend
 };
 /**
- * @category instance operations
+ * @category filtering
  * @since 2.0.0
  */
-exports.compact = 
-/*#__PURE__*/
-exports.chain(function_1.identity);
-var defaultSeparated = 
-/*#__PURE__*/
-Separated_1.separated(exports.none, exports.none);
+exports.compact = (0, exports.chain)(function_1.identity);
+var defaultSeparated = /*#__PURE__*/ (0, Separated_1.separated)(exports.none, exports.none);
 /**
- * @category instance operations
+ * @category filtering
  * @since 2.0.0
  */
 var separate = function (ma) {
-    return exports.isNone(ma) ? defaultSeparated : Separated_1.separated(exports.getLeft(ma.value), exports.getRight(ma.value));
+    return (0, exports.isNone)(ma) ? defaultSeparated : (0, Separated_1.separated)((0, exports.getLeft)(ma.value), (0, exports.getRight)(ma.value));
 };
 exports.separate = separate;
 /**
@@ -8610,30 +9163,38 @@ exports.Compactable = {
     separate: exports.separate
 };
 /**
- * @category instance operations
+ * @category filtering
  * @since 2.0.0
  */
-var filter = function (predicate) { return function (fa) { return (exports.isNone(fa) ? exports.none : predicate(fa.value) ? fa : exports.none); }; };
+var filter = function (predicate) {
+    return function (fa) {
+        return (0, exports.isNone)(fa) ? exports.none : predicate(fa.value) ? fa : exports.none;
+    };
+};
 exports.filter = filter;
 /**
- * @category instance operations
+ * @category filtering
  * @since 2.0.0
  */
 var filterMap = function (f) { return function (fa) {
-    return exports.isNone(fa) ? exports.none : f(fa.value);
+    return (0, exports.isNone)(fa) ? exports.none : f(fa.value);
 }; };
 exports.filterMap = filterMap;
 /**
- * @category instance operations
+ * @category filtering
  * @since 2.0.0
  */
-var partition = function (predicate) { return function (fa) { return Separated_1.separated(_filter(fa, Predicate_1.not(predicate)), _filter(fa, predicate)); }; };
+var partition = function (predicate) {
+    return function (fa) {
+        return (0, Separated_1.separated)(_filter(fa, (0, Predicate_1.not)(predicate)), _filter(fa, predicate));
+    };
+};
 exports.partition = partition;
 /**
- * @category instance operations
+ * @category filtering
  * @since 2.0.0
  */
-var partitionMap = function (f) { return function_1.flow(exports.map(f), exports.separate); };
+var partitionMap = function (f) { return (0, function_1.flow)((0, exports.map)(f), exports.separate); };
 exports.partitionMap = partitionMap;
 /**
  * @category instances
@@ -8650,16 +9211,26 @@ exports.Filterable = {
     partitionMap: _partitionMap
 };
 /**
- * @category instance operations
+ * @category traversing
  * @since 2.6.3
  */
-var traverse = function (F) { return function (f) { return function (ta) { return (exports.isNone(ta) ? F.of(exports.none) : F.map(f(ta.value), exports.some)); }; }; };
+var traverse = function (F) {
+    return function (f) {
+        return function (ta) {
+            return (0, exports.isNone)(ta) ? F.of(exports.none) : F.map(f(ta.value), exports.some);
+        };
+    };
+};
 exports.traverse = traverse;
 /**
- * @category instance operations
+ * @category traversing
  * @since 2.6.3
  */
-var sequence = function (F) { return function (ta) { return (exports.isNone(ta) ? F.of(exports.none) : F.map(ta.value, exports.some)); }; };
+var sequence = function (F) {
+    return function (ta) {
+        return (0, exports.isNone)(ta) ? F.of(exports.none) : F.map(ta.value, exports.some);
+    };
+};
 exports.sequence = sequence;
 /**
  * @category instances
@@ -8674,14 +9245,10 @@ exports.Traversable = {
     traverse: _traverse,
     sequence: exports.sequence
 };
-var _wither = 
-/*#__PURE__*/
-Witherable_1.witherDefault(exports.Traversable, exports.Compactable);
-var _wilt = 
-/*#__PURE__*/
-Witherable_1.wiltDefault(exports.Traversable, exports.Compactable);
+var _wither = /*#__PURE__*/ (0, Witherable_1.witherDefault)(exports.Traversable, exports.Compactable);
+var _wilt = /*#__PURE__*/ (0, Witherable_1.wiltDefault)(exports.Traversable, exports.Compactable);
 /**
- * @category instance operations
+ * @category filtering
  * @since 2.6.5
  */
 var wither = function (F) {
@@ -8690,7 +9257,7 @@ var wither = function (F) {
 };
 exports.wither = wither;
 /**
- * @category instance operations
+ * @category filtering
  * @since 2.6.5
  */
 var wilt = function (F) {
@@ -8720,7 +9287,6 @@ exports.Witherable = {
     wilt: _wilt
 };
 /**
- * @category instance operations
  * @since 2.7.0
  */
 var throwError = function () { return exports.none; };
@@ -8742,7 +9308,7 @@ exports.MonadThrow = {
  *
  * Alias of [getRight](#getright)
  *
- * @category natural transformations
+ * @category conversions
  * @since 2.0.0
  */
 exports.fromEither = exports.getRight;
@@ -8784,23 +9350,24 @@ exports.isSome = _.isSome;
  */
 var isNone = function (fa) { return fa._tag === 'None'; };
 exports.isNone = isNone;
-// -------------------------------------------------------------------------------------
-// destructors
-// -------------------------------------------------------------------------------------
 /**
  * Less strict version of [`match`](#match).
  *
- * @category destructors
+ * The `W` suffix (short for **W**idening) means that the handler return types will be merged.
+ *
+ * @category pattern matching
  * @since 2.10.0
  */
-var matchW = function (onNone, onSome) { return function (ma) {
-    return exports.isNone(ma) ? onNone() : onSome(ma.value);
-}; };
+var matchW = function (onNone, onSome) {
+    return function (ma) {
+        return (0, exports.isNone)(ma) ? onNone() : onSome(ma.value);
+    };
+};
 exports.matchW = matchW;
 /**
  * Alias of [`matchW`](#matchw).
  *
- * @category destructors
+ * @category pattern matching
  * @since 2.10.0
  */
 exports.foldW = exports.matchW;
@@ -8828,24 +9395,30 @@ exports.foldW = exports.matchW;
  *   'a none'
  * )
  *
- * @category destructors
+ * @category pattern matching
  * @since 2.10.0
  */
 exports.match = exports.matchW;
 /**
  * Alias of [`match`](#match).
  *
- * @category destructors
+ * @category pattern matching
  * @since 2.0.0
  */
 exports.fold = exports.match;
 /**
  * Less strict version of [`getOrElse`](#getorelse).
  *
- * @category destructors
+ * The `W` suffix (short for **W**idening) means that the handler return type will be merged.
+ *
+ * @category error handling
  * @since 2.6.0
  */
-var getOrElseW = function (onNone) { return function (ma) { return (exports.isNone(ma) ? onNone() : ma.value); }; };
+var getOrElseW = function (onNone) {
+    return function (ma) {
+        return (0, exports.isNone)(ma) ? onNone() : ma.value;
+    };
+};
 exports.getOrElseW = getOrElseW;
 /**
  * Extracts the value out of the structure, if it exists. Otherwise returns the given default value
@@ -8869,48 +9442,29 @@ exports.getOrElseW = getOrElseW;
  *   0
  * )
  *
- * @category destructors
+ * @category error handling
  * @since 2.0.0
  */
 exports.getOrElse = exports.getOrElseW;
-// -------------------------------------------------------------------------------------
-// combinators
-// -------------------------------------------------------------------------------------
 /**
- * Derivable from `Functor`.
- *
- * @category combinators
+ * @category mapping
  * @since 2.10.0
  */
-exports.flap = 
-/*#__PURE__*/
-Functor_1.flap(exports.Functor);
+exports.flap = (0, Functor_1.flap)(exports.Functor);
 /**
  * Combine two effectful actions, keeping only the result of the first.
  *
- * Derivable from `Apply`.
- *
- * @category combinators
  * @since 2.0.0
  */
-exports.apFirst = 
-/*#__PURE__*/
-Apply_1.apFirst(exports.Apply);
+exports.apFirst = (0, Apply_1.apFirst)(exports.Apply);
 /**
  * Combine two effectful actions, keeping only the result of the second.
  *
- * Derivable from `Apply`.
- *
- * @category combinators
  * @since 2.0.0
  */
-exports.apSecond = 
-/*#__PURE__*/
-Apply_1.apSecond(exports.Apply);
+exports.apSecond = (0, Apply_1.apSecond)(exports.Apply);
 /**
- * Derivable from `Chain`.
- *
- * @category combinators
+ * @category sequencing
  * @since 2.0.0
  */
 exports.flatten = exports.compact;
@@ -8918,40 +9472,32 @@ exports.flatten = exports.compact;
  * Composes computations in sequence, using the return value of one computation to determine the next computation and
  * keeping only the result of the first.
  *
- * Derivable from `Chain`.
- *
- * @category combinators
+ * @category sequencing
  * @since 2.0.0
  */
 exports.chainFirst = 
-/*#__PURE__*/
-Chain_1.chainFirst(exports.Chain);
+/*#__PURE__*/ (0, Chain_1.chainFirst)(exports.Chain);
 /**
- * Derivable from `Extend`.
- *
- * @category combinators
  * @since 2.0.0
  */
-exports.duplicate = 
-/*#__PURE__*/
-exports.extend(function_1.identity);
+exports.duplicate = (0, exports.extend)(function_1.identity);
 /**
- * @category combinators
+ * @category lifting
  * @since 2.11.0
  */
-exports.fromEitherK = 
-/*#__PURE__*/
-FromEither_1.fromEitherK(exports.FromEither);
+exports.fromEitherK = (0, FromEither_1.fromEitherK)(exports.FromEither);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.11.0
  */
 exports.chainEitherK = 
-/*#__PURE__*/
-FromEither_1.chainEitherK(exports.FromEither, exports.Chain);
-// -------------------------------------------------------------------------------------
-// interop
-// -------------------------------------------------------------------------------------
+/*#__PURE__*/ (0, FromEither_1.chainEitherK)(exports.FromEither, exports.Chain);
+/**
+ * @category sequencing
+ * @since 2.12.0
+ */
+exports.chainFirstEitherK = 
+/*#__PURE__*/ (0, FromEither_1.chainFirstEitherK)(exports.FromEither, exports.Chain);
 /**
  * Constructs a new `Option` from a nullable type. If the value is `null` or `undefined`, returns `None`, otherwise
  * returns the value wrapped in a `Some`.
@@ -8963,10 +9509,10 @@ FromEither_1.chainEitherK(exports.FromEither, exports.Chain);
  * assert.deepStrictEqual(fromNullable(null), none)
  * assert.deepStrictEqual(fromNullable(1), some(1))
  *
- * @category interop
+ * @category conversions
  * @since 2.0.0
  */
-var fromNullable = function (a) { return (a == null ? exports.none : exports.some(a)); };
+var fromNullable = function (a) { return (a == null ? exports.none : (0, exports.some)(a)); };
 exports.fromNullable = fromNullable;
 /**
  * Transforms an exception into an `Option`. If `f` throws, returns `None`, otherwise returns the output wrapped in a
@@ -8990,7 +9536,7 @@ exports.fromNullable = fromNullable;
  */
 var tryCatch = function (f) {
     try {
-        return exports.some(f());
+        return (0, exports.some)(f());
     }
     catch (e) {
         return exports.none;
@@ -9003,13 +9549,15 @@ exports.tryCatch = tryCatch;
  * @category interop
  * @since 2.10.0
  */
-var tryCatchK = function (f) { return function () {
-    var a = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        a[_i] = arguments[_i];
-    }
-    return exports.tryCatch(function () { return f.apply(void 0, a); });
-}; };
+var tryCatchK = function (f) {
+    return function () {
+        var a = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            a[_i] = arguments[_i];
+        }
+        return (0, exports.tryCatch)(function () { return f.apply(void 0, a); });
+    };
+};
 exports.tryCatchK = tryCatchK;
 /**
  * Returns a *smart constructor* from a function that returns a nullable value.
@@ -9027,10 +9575,10 @@ exports.tryCatchK = tryCatchK;
  * assert.deepStrictEqual(g('1'), some(1))
  * assert.deepStrictEqual(g('a'), none)
  *
- * @category interop
+ * @category lifting
  * @since 2.9.0
  */
-var fromNullableK = function (f) { return function_1.flow(f, exports.fromNullable); };
+var fromNullableK = function (f) { return (0, function_1.flow)(f, exports.fromNullable); };
 exports.fromNullableK = fromNullableK;
 /**
  * This is `chain` + `fromNullable`, useful when working with optional values.
@@ -9073,12 +9621,14 @@ exports.fromNullableK = fromNullableK;
  *   none
  * )
  *
- * @category interop
+ * @category sequencing
  * @since 2.9.0
  */
-var chainNullableK = function (f) { return function (ma) {
-    return exports.isNone(ma) ? exports.none : exports.fromNullable(f(ma.value));
-}; };
+var chainNullableK = function (f) {
+    return function (ma) {
+        return (0, exports.isNone)(ma) ? exports.none : (0, exports.fromNullable)(f(ma.value));
+    };
+};
 exports.chainNullableK = chainNullableK;
 /**
  * Extracts the value out of the structure, if it exists. Otherwise returns `null`.
@@ -9102,12 +9652,10 @@ exports.chainNullableK = chainNullableK;
  *   null
  * )
  *
- * @category interop
+ * @category conversions
  * @since 2.0.0
  */
-exports.toNullable = 
-/*#__PURE__*/
-exports.match(function_1.constNull, function_1.identity);
+exports.toNullable = (0, exports.match)(function_1.constNull, function_1.identity);
 /**
  * Extracts the value out of the structure, if it exists. Otherwise returns `undefined`.
  *
@@ -9130,19 +9678,17 @@ exports.match(function_1.constNull, function_1.identity);
  *   undefined
  * )
  *
- * @category interop
+ * @category conversions
  * @since 2.0.0
  */
-exports.toUndefined = 
-/*#__PURE__*/
-exports.match(function_1.constUndefined, function_1.identity);
+exports.toUndefined = (0, exports.match)(function_1.constUndefined, function_1.identity);
 function elem(E) {
     return function (a, ma) {
         if (ma === undefined) {
             var elemE_1 = elem(E);
             return function (ma) { return elemE_1(a, ma); };
         }
-        return exports.isNone(ma) ? false : E.equals(a, ma.value);
+        return (0, exports.isNone)(ma) ? false : E.equals(a, ma.value);
     };
 }
 exports.elem = elem;
@@ -9177,126 +9723,132 @@ exports.elem = elem;
  *
  * @since 2.0.0
  */
-var exists = function (predicate) { return function (ma) {
-    return exports.isNone(ma) ? false : predicate(ma.value);
-}; };
+var exists = function (predicate) {
+    return function (ma) {
+        return (0, exports.isNone)(ma) ? false : predicate(ma.value);
+    };
+};
 exports.exists = exists;
 // -------------------------------------------------------------------------------------
 // do notation
 // -------------------------------------------------------------------------------------
 /**
+ * @category do notation
  * @since 2.9.0
  */
-exports.Do = 
-/*#__PURE__*/
-exports.of(_.emptyRecord);
+exports.Do = (0, exports.of)(_.emptyRecord);
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.bindTo = 
-/*#__PURE__*/
-Functor_1.bindTo(exports.Functor);
+exports.bindTo = (0, Functor_1.bindTo)(exports.Functor);
+var let_ = /*#__PURE__*/ (0, Functor_1.let)(exports.Functor);
+exports.let = let_;
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.bind = 
-/*#__PURE__*/
-Chain_1.bind(exports.Chain);
-// -------------------------------------------------------------------------------------
-// pipeable sequence S
-// -------------------------------------------------------------------------------------
+exports.bind = (0, Chain_1.bind)(exports.Chain);
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.apS = 
-/*#__PURE__*/
-Apply_1.apS(exports.Apply);
-// -------------------------------------------------------------------------------------
-// sequence T
-// -------------------------------------------------------------------------------------
+exports.apS = (0, Apply_1.apS)(exports.Apply);
 /**
  * @since 2.11.0
  */
-exports.ApT = 
-/*#__PURE__*/
-exports.of(_.emptyReadonlyArray);
+exports.ApT = (0, exports.of)(_.emptyReadonlyArray);
 // -------------------------------------------------------------------------------------
 // array utils
 // -------------------------------------------------------------------------------------
 /**
  * Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(Applicative)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
-var traverseReadonlyNonEmptyArrayWithIndex = function (f) { return function (as) {
-    var o = f(0, _.head(as));
-    if (exports.isNone(o)) {
-        return exports.none;
-    }
-    var out = [o.value];
-    for (var i = 1; i < as.length; i++) {
-        var o_1 = f(i, as[i]);
-        if (exports.isNone(o_1)) {
+var traverseReadonlyNonEmptyArrayWithIndex = function (f) {
+    return function (as) {
+        var o = f(0, _.head(as));
+        if ((0, exports.isNone)(o)) {
             return exports.none;
         }
-        out.push(o_1.value);
-    }
-    return exports.some(out);
-}; };
+        var out = [o.value];
+        for (var i = 1; i < as.length; i++) {
+            var o_1 = f(i, as[i]);
+            if ((0, exports.isNone)(o_1)) {
+                return exports.none;
+            }
+            out.push(o_1.value);
+        }
+        return (0, exports.some)(out);
+    };
+};
 exports.traverseReadonlyNonEmptyArrayWithIndex = traverseReadonlyNonEmptyArrayWithIndex;
 /**
  * Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
 var traverseReadonlyArrayWithIndex = function (f) {
-    var g = exports.traverseReadonlyNonEmptyArrayWithIndex(f);
+    var g = (0, exports.traverseReadonlyNonEmptyArrayWithIndex)(f);
     return function (as) { return (_.isNonEmpty(as) ? g(as) : exports.ApT); };
 };
 exports.traverseReadonlyArrayWithIndex = traverseReadonlyArrayWithIndex;
 /**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex;
 /**
+ * Equivalent to `ReadonlyArray#traverse(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 var traverseArray = function (f) {
-    return exports.traverseReadonlyArrayWithIndex(function (_, a) { return f(a); });
+    return (0, exports.traverseReadonlyArrayWithIndex)(function (_, a) { return f(a); });
 };
 exports.traverseArray = traverseArray;
 /**
+ * Equivalent to `ReadonlyArray#sequence(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.sequenceArray = 
-/*#__PURE__*/
-exports.traverseArray(function_1.identity);
+/*#__PURE__*/ (0, exports.traverseArray)(function_1.identity);
 // -------------------------------------------------------------------------------------
 // deprecated
 // -------------------------------------------------------------------------------------
-// tslint:disable: deprecation
 /**
  * Use `Refinement` module instead.
  *
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
 function getRefinement(getOption) {
-    return function (a) { return exports.isSome(getOption(a)); };
+    return function (a) { return (0, exports.isSome)(getOption(a)); };
 }
 exports.getRefinement = getRefinement;
 /**
  * Use [`chainNullableK`](#chainnullablek) instead.
  *
- * @category combinators
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
 exports.mapNullable = exports.chainNullableK;
 /**
- * Use small, specific instances instead.
+ * This instance is deprecated, use small, specific instances instead.
+ * For example if a function needs a `Functor` instance, pass `O.Functor` instead of `O.option`
+ * (where `O` is from `import O from 'fp-ts/Option'`)
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -9327,23 +9879,19 @@ exports.option = {
 /**
  * Use [`getApplySemigroup`](./Apply.ts.html#getapplysemigroup) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
-exports.getApplySemigroup = 
-/*#__PURE__*/
-Apply_1.getApplySemigroup(exports.Apply);
+exports.getApplySemigroup = (0, Apply_1.getApplySemigroup)(exports.Apply);
 /**
  * Use [`getApplicativeMonoid`](./Applicative.ts.html#getapplicativemonoid) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
-exports.getApplyMonoid = 
-/*#__PURE__*/
-Applicative_1.getApplicativeMonoid(exports.Applicative);
+exports.getApplyMonoid = (0, Applicative_1.getApplicativeMonoid)(exports.Applicative);
 /**
  * Use
  *
@@ -9374,11 +9922,11 @@ Applicative_1.getApplicativeMonoid(exports.Applicative);
  * assert.deepStrictEqual(M.concat(none, some(2)), some(2))
  * assert.deepStrictEqual(M.concat(some(1), some(2)), some(1))
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
-var getFirstMonoid = function () { return exports.getMonoid(Semigroup_1.first()); };
+var getFirstMonoid = function () { return (0, exports.getMonoid)((0, Semigroup_1.first)()); };
 exports.getFirstMonoid = getFirstMonoid;
 /**
  * Use
@@ -9410,11 +9958,11 @@ exports.getFirstMonoid = getFirstMonoid;
  * assert.deepStrictEqual(M.concat(none, some(2)), some(2))
  * assert.deepStrictEqual(M.concat(some(1), some(2)), some(2))
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
-var getLastMonoid = function () { return exports.getMonoid(Semigroup_1.last()); };
+var getLastMonoid = function () { return (0, exports.getMonoid)((0, Semigroup_1.last)()); };
 exports.getLastMonoid = getLastMonoid;
 
 
@@ -9436,9 +9984,11 @@ var function_1 = __nccwpck_require__(6985);
  * @category defaults
  * @since 2.10.0
  */
-var equalsDefault = function (compare) { return function (first, second) {
-    return first === second || compare(first, second) === 0;
-}; };
+var equalsDefault = function (compare) {
+    return function (first, second) {
+        return first === second || compare(first, second) === 0;
+    };
+};
 exports.equalsDefault = equalsDefault;
 // -------------------------------------------------------------------------------------
 // constructors
@@ -9448,7 +9998,7 @@ exports.equalsDefault = equalsDefault;
  * @since 2.0.0
  */
 var fromCompare = function (compare) { return ({
-    equals: exports.equalsDefault(compare),
+    equals: (0, exports.equalsDefault)(compare),
     compare: function (first, second) { return (first === second ? 0 : compare(first, second)); }
 }); };
 exports.fromCompare = fromCompare;
@@ -9469,7 +10019,6 @@ exports.fromCompare = fromCompare;
  * assert.strictEqual(O.compare(['a', 1, true], ['a', 2, true]), -1)
  * assert.strictEqual(O.compare(['a', 1, true], ['a', 1, false]), 1)
  *
- * @category combinators
  * @since 2.10.0
  */
 var tuple = function () {
@@ -9477,7 +10026,7 @@ var tuple = function () {
     for (var _i = 0; _i < arguments.length; _i++) {
         ords[_i] = arguments[_i];
     }
-    return exports.fromCompare(function (first, second) {
+    return (0, exports.fromCompare)(function (first, second) {
         var i = 0;
         for (; i < ords.length - 1; i++) {
             var r = ords[i].compare(first[i], second[i]);
@@ -9490,42 +10039,117 @@ var tuple = function () {
 };
 exports.tuple = tuple;
 /**
- * @category combinators
  * @since 2.10.0
  */
-var reverse = function (O) { return exports.fromCompare(function (first, second) { return O.compare(second, first); }); };
+var reverse = function (O) { return (0, exports.fromCompare)(function (first, second) { return O.compare(second, first); }); };
 exports.reverse = reverse;
-// -------------------------------------------------------------------------------------
-// non-pipeables
-// -------------------------------------------------------------------------------------
 /* istanbul ignore next */
-var contramap_ = function (fa, f) { return function_1.pipe(fa, exports.contramap(f)); };
-// -------------------------------------------------------------------------------------
-// type class members
-// -------------------------------------------------------------------------------------
+var contramap_ = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.contramap)(f)); };
 /**
- * @category Contravariant
+ * A typical use case for `contramap` would be like, given some `User` type, to construct an `Ord<User>`.
+ *
+ * We can do so with a function from `User -> X` where `X` is some value that we know how to compare
+ * for ordering (meaning we have an `Ord<X>`)
+ *
+ * For example, given the following `User` type, there are lots of possible choices for `X`,
+ * but let's say we want to sort a list of users by `lastName`.
+ *
+ * If we have a way of comparing `lastName`s for ordering (`ordLastName: Ord<string>`) and we know how to go from `User -> string`,
+ * using `contramap` we can do this
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function'
+ * import { contramap, Ord } from 'fp-ts/Ord'
+ * import * as RA from 'fp-ts/ReadonlyArray'
+ * import * as S from 'fp-ts/string'
+ *
+ * interface User {
+ *   readonly firstName: string
+ *   readonly lastName: string
+ * }
+ *
+ * const ordLastName: Ord<string> = S.Ord
+ *
+ * const ordByLastName: Ord<User> = pipe(
+ *   ordLastName,
+ *   contramap((user) => user.lastName)
+ * )
+ *
+ * assert.deepStrictEqual(
+ *   RA.sort(ordByLastName)([
+ *     { firstName: 'a', lastName: 'd' },
+ *     { firstName: 'c', lastName: 'b' }
+ *   ]),
+ *   [
+ *     { firstName: 'c', lastName: 'b' },
+ *     { firstName: 'a', lastName: 'd' }
+ *   ]
+ * )
+ *
  * @since 2.0.0
  */
 var contramap = function (f) { return function (fa) {
-    return exports.fromCompare(function (first, second) { return fa.compare(f(first), f(second)); });
+    return (0, exports.fromCompare)(function (first, second) { return fa.compare(f(first), f(second)); });
 }; };
 exports.contramap = contramap;
-// -------------------------------------------------------------------------------------
-// instances
-// -------------------------------------------------------------------------------------
 /**
- * @category instances
+ * @category type lambdas
  * @since 2.0.0
  */
 exports.URI = 'Ord';
 /**
+ * A typical use case for the `Semigroup` instance of `Ord` is merging two or more orderings.
+ *
+ * For example the following snippet builds an `Ord` for a type `User` which
+ * sorts by `created` date descending, and **then** `lastName`
+ *
+ * @example
+ * import * as D from 'fp-ts/Date'
+ * import { pipe } from 'fp-ts/function'
+ * import { contramap, getSemigroup, Ord, reverse } from 'fp-ts/Ord'
+ * import * as RA from 'fp-ts/ReadonlyArray'
+ * import * as S from 'fp-ts/string'
+ *
+ * interface User {
+ *   readonly id: string
+ *   readonly lastName: string
+ *   readonly created: Date
+ * }
+ *
+ * const ordByLastName: Ord<User> = pipe(
+ *   S.Ord,
+ *   contramap((user) => user.lastName)
+ * )
+ *
+ * const ordByCreated: Ord<User> = pipe(
+ *   D.Ord,
+ *   contramap((user) => user.created)
+ * )
+ *
+ * const ordUserByCreatedDescThenLastName = getSemigroup<User>().concat(
+ *   reverse(ordByCreated),
+ *   ordByLastName
+ * )
+ *
+ * assert.deepStrictEqual(
+ *   RA.sort(ordUserByCreatedDescThenLastName)([
+ *     { id: 'c', lastName: 'd', created: new Date(1973, 10, 30) },
+ *     { id: 'a', lastName: 'b', created: new Date(1973, 10, 30) },
+ *     { id: 'e', lastName: 'f', created: new Date(1980, 10, 30) }
+ *   ]),
+ *   [
+ *     { id: 'e', lastName: 'f', created: new Date(1980, 10, 30) },
+ *     { id: 'a', lastName: 'b', created: new Date(1973, 10, 30) },
+ *     { id: 'c', lastName: 'd', created: new Date(1973, 10, 30) }
+ *   ]
+ * )
+ *
  * @category instances
  * @since 2.0.0
  */
 var getSemigroup = function () { return ({
     concat: function (first, second) {
-        return exports.fromCompare(function (a, b) {
+        return (0, exports.fromCompare)(function (a, b) {
             var ox = first.compare(a, b);
             return ox !== 0 ? ox : second.compare(a, b);
         });
@@ -9600,8 +10224,8 @@ exports.getSemigroup = getSemigroup;
  * @since 2.4.0
  */
 var getMonoid = function () { return ({
-    concat: exports.getSemigroup().concat,
-    empty: exports.fromCompare(function () { return 0; })
+    concat: (0, exports.getSemigroup)().concat,
+    empty: (0, exports.fromCompare)(function () { return 0; })
 }); };
 exports.getMonoid = getMonoid;
 /**
@@ -9620,16 +10244,18 @@ exports.Contravariant = {
  */
 exports.trivial = {
     equals: function_1.constTrue,
-    compare: 
-    /*#__PURE__*/
-    function_1.constant(0)
+    compare: /*#__PURE__*/ (0, function_1.constant)(0)
 };
 /**
  * @since 2.11.0
  */
-var equals = function (O) { return function (second) { return function (first) {
-    return first === second || O.compare(first, second) === 0;
-}; }; };
+var equals = function (O) {
+    return function (second) {
+        return function (first) {
+            return first === second || O.compare(first, second) === 0;
+        };
+    };
+};
 exports.equals = equals;
 // TODO: curry in v3
 /**
@@ -9637,7 +10263,11 @@ exports.equals = equals;
  *
  * @since 2.0.0
  */
-var lt = function (O) { return function (first, second) { return O.compare(first, second) === -1; }; };
+var lt = function (O) {
+    return function (first, second) {
+        return O.compare(first, second) === -1;
+    };
+};
 exports.lt = lt;
 // TODO: curry in v3
 /**
@@ -9645,7 +10275,11 @@ exports.lt = lt;
  *
  * @since 2.0.0
  */
-var gt = function (O) { return function (first, second) { return O.compare(first, second) === 1; }; };
+var gt = function (O) {
+    return function (first, second) {
+        return O.compare(first, second) === 1;
+    };
+};
 exports.gt = gt;
 // TODO: curry in v3
 /**
@@ -9653,7 +10287,11 @@ exports.gt = gt;
  *
  * @since 2.0.0
  */
-var leq = function (O) { return function (first, second) { return O.compare(first, second) !== 1; }; };
+var leq = function (O) {
+    return function (first, second) {
+        return O.compare(first, second) !== 1;
+    };
+};
 exports.leq = leq;
 // TODO: curry in v3
 /**
@@ -9661,7 +10299,11 @@ exports.leq = leq;
  *
  * @since 2.0.0
  */
-var geq = function (O) { return function (first, second) { return O.compare(first, second) !== -1; }; };
+var geq = function (O) {
+    return function (first, second) {
+        return O.compare(first, second) !== -1;
+    };
+};
 exports.geq = geq;
 // TODO: curry in v3
 /**
@@ -9669,9 +10311,11 @@ exports.geq = geq;
  *
  * @since 2.0.0
  */
-var min = function (O) { return function (first, second) {
-    return first === second || O.compare(first, second) < 1 ? first : second;
-}; };
+var min = function (O) {
+    return function (first, second) {
+        return first === second || O.compare(first, second) < 1 ? first : second;
+    };
+};
 exports.min = min;
 // TODO: curry in v3
 /**
@@ -9679,9 +10323,11 @@ exports.min = min;
  *
  * @since 2.0.0
  */
-var max = function (O) { return function (first, second) {
-    return first === second || O.compare(first, second) > -1 ? first : second;
-}; };
+var max = function (O) {
+    return function (first, second) {
+        return first === second || O.compare(first, second) > -1 ? first : second;
+    };
+};
 exports.max = max;
 /**
  * Clamp a value between a minimum and a maximum
@@ -9689,8 +10335,8 @@ exports.max = max;
  * @since 2.0.0
  */
 var clamp = function (O) {
-    var minO = exports.min(O);
-    var maxO = exports.max(O);
+    var minO = (0, exports.min)(O);
+    var maxO = (0, exports.max)(O);
     return function (low, hi) { return function (a) { return maxO(minO(a, hi), low); }; };
 };
 exports.clamp = clamp;
@@ -9700,19 +10346,18 @@ exports.clamp = clamp;
  * @since 2.0.0
  */
 var between = function (O) {
-    var ltO = exports.lt(O);
-    var gtO = exports.gt(O);
-    return function (low, hi) { return function (a) { return (ltO(a, low) || gtO(a, hi) ? false : true); }; };
+    var ltO = (0, exports.lt)(O);
+    var gtO = (0, exports.gt)(O);
+    return function (low, hi) { return function (a) { return ltO(a, low) || gtO(a, hi) ? false : true; }; };
 };
 exports.between = between;
 // -------------------------------------------------------------------------------------
 // deprecated
 // -------------------------------------------------------------------------------------
-// tslint:disable: deprecation
 /**
  * Use [`tuple`](#tuple) instead.
  *
- * @category combinators
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -9720,7 +10365,7 @@ exports.getTupleOrd = exports.tuple;
 /**
  * Use [`reverse`](#reverse) instead.
  *
- * @category combinators
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -9728,7 +10373,7 @@ exports.getDualOrd = exports.reverse;
 /**
  * Use [`Contravariant`](#contravariant) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -9744,7 +10389,7 @@ var strictOrd = {
 /**
  * Use [`Ord`](./boolean.ts.html#ord) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -9752,7 +10397,7 @@ exports.ordBoolean = strictOrd;
 /**
  * Use [`Ord`](./string.ts.html#ord) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -9760,7 +10405,7 @@ exports.ordString = strictOrd;
 /**
  * Use [`Ord`](./number.ts.html#ord) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -9768,15 +10413,13 @@ exports.ordNumber = strictOrd;
 /**
  * Use [`Ord`](./Date.ts.html#ord) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
-exports.ordDate = 
+exports.ordDate = (0, function_1.pipe)(exports.ordNumber, 
 /*#__PURE__*/
-function_1.pipe(exports.ordNumber, 
-/*#__PURE__*/
-exports.contramap(function (date) { return date.valueOf(); }));
+(0, exports.contramap)(function (date) { return date.valueOf(); }));
 
 
 /***/ }),
@@ -9789,21 +10432,18 @@ exports.contramap(function (date) { return date.valueOf(); }));
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.and = exports.or = exports.not = exports.Contravariant = exports.getMonoidAll = exports.getSemigroupAll = exports.getMonoidAny = exports.getSemigroupAny = exports.URI = exports.contramap = void 0;
 var function_1 = __nccwpck_require__(6985);
-// -------------------------------------------------------------------------------------
-// type class members
-// -------------------------------------------------------------------------------------
-var contramap_ = function (predicate, f) { return function_1.pipe(predicate, exports.contramap(f)); };
+var contramap_ = function (predicate, f) { return (0, function_1.pipe)(predicate, (0, exports.contramap)(f)); };
 /**
- * @category Contravariant
  * @since 2.11.0
  */
-var contramap = function (f) { return function (predicate) { return function_1.flow(f, predicate); }; };
+var contramap = function (f) {
+    return function (predicate) {
+        return (0, function_1.flow)(f, predicate);
+    };
+};
 exports.contramap = contramap;
-// -------------------------------------------------------------------------------------
-// instances
-// -------------------------------------------------------------------------------------
 /**
- * @category instances
+ * @category type lambdas
  * @since 2.11.0
  */
 exports.URI = 'Predicate';
@@ -9812,7 +10452,7 @@ exports.URI = 'Predicate';
  * @since 2.11.0
  */
 var getSemigroupAny = function () { return ({
-    concat: function (first, second) { return function_1.pipe(first, exports.or(second)); }
+    concat: function (first, second) { return (0, function_1.pipe)(first, (0, exports.or)(second)); }
 }); };
 exports.getSemigroupAny = getSemigroupAny;
 /**
@@ -9820,7 +10460,7 @@ exports.getSemigroupAny = getSemigroupAny;
  * @since 2.11.0
  */
 var getMonoidAny = function () { return ({
-    concat: exports.getSemigroupAny().concat,
+    concat: (0, exports.getSemigroupAny)().concat,
     empty: function_1.constFalse
 }); };
 exports.getMonoidAny = getMonoidAny;
@@ -9829,7 +10469,7 @@ exports.getMonoidAny = getMonoidAny;
  * @since 2.11.0
  */
 var getSemigroupAll = function () { return ({
-    concat: function (first, second) { return function_1.pipe(first, exports.and(second)); }
+    concat: function (first, second) { return (0, function_1.pipe)(first, (0, exports.and)(second)); }
 }); };
 exports.getSemigroupAll = getSemigroupAll;
 /**
@@ -9837,7 +10477,7 @@ exports.getSemigroupAll = getSemigroupAll;
  * @since 2.11.0
  */
 var getMonoidAll = function () { return ({
-    concat: exports.getSemigroupAll().concat,
+    concat: (0, exports.getSemigroupAll)().concat,
     empty: function_1.constTrue
 }); };
 exports.getMonoidAll = getMonoidAll;
@@ -9855,17 +10495,33 @@ exports.Contravariant = {
 /**
  * @since 2.11.0
  */
-var not = function (predicate) { return function (a) { return !predicate(a); }; };
+var not = function (predicate) {
+    return function (a) {
+        return !predicate(a);
+    };
+};
 exports.not = not;
 /**
  * @since 2.11.0
  */
-var or = function (second) { return function (first) { return function (a) { return first(a) || second(a); }; }; };
+var or = function (second) {
+    return function (first) {
+        return function (a) {
+            return first(a) || second(a);
+        };
+    };
+};
 exports.or = or;
 /**
  * @since 2.11.0
  */
-var and = function (second) { return function (first) { return function (a) { return first(a) && second(a); }; }; };
+var and = function (second) {
+    return function (first) {
+        return function (a) {
+            return first(a) && second(a);
+        };
+    };
+};
 exports.and = and;
 
 
@@ -9878,7 +10534,11 @@ exports.and = and;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -9896,9 +10556,46 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getSemigroup = exports.reader = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.Do = exports.bindW = exports.bind = exports.bindTo = exports.Choice = exports.Strong = exports.Category = exports.Profunctor = exports.chainFirstW = exports.chainFirst = exports.Monad = exports.Chain = exports.Applicative = exports.apSecond = exports.apFirst = exports.Apply = exports.Pointed = exports.flap = exports.Functor = exports.URI = exports.right = exports.left = exports.second = exports.first = exports.id = exports.promap = exports.compose = exports.flatten = exports.flattenW = exports.chain = exports.chainW = exports.of = exports.ap = exports.apW = exports.map = exports.asksReader = exports.asksReaderW = exports.local = exports.asks = exports.ask = void 0;
-exports.getMonoid = void 0;
+exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.Do = exports.bindW = exports.bind = exports.let = exports.bindTo = exports.Choice = exports.Strong = exports.Category = exports.Profunctor = exports.chainFirstW = exports.chainFirst = exports.Monad = exports.Chain = exports.Applicative = exports.apSecondW = exports.apSecond = exports.apFirstW = exports.apFirst = exports.Apply = exports.Pointed = exports.flap = exports.Functor = exports.URI = exports.right = exports.left = exports.second = exports.first = exports.id = exports.promap = exports.compose = exports.flatten = exports.flattenW = exports.chain = exports.chainW = exports.of = exports.ap = exports.apW = exports.map = exports.asksReader = exports.asksReaderW = exports.local = exports.asks = exports.ask = void 0;
+exports.getMonoid = exports.getSemigroup = exports.reader = exports.sequenceArray = void 0;
 /**
+ * The `Reader` monad (also called the Environment monad). Represents a computation, which can read values from a shared environment,
+ * pass values from function to function, and execute sub-computations in a modified environment.
+ * Using `Reader` monad for such computations is often clearer and easier than using the `State` monad.
+ *
+ * In this example the `Reader` monad provides access to variable bindings. `Bindings` are a map of `number` variables.
+ * The variable count contains number of variables in the bindings. You can see how to run a `Reader` monad and retrieve
+ * data from it, how to access the `Reader` data with `ask` and `asks`.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function'
+ * import * as O from 'fp-ts/Option'
+ * import * as R from 'fp-ts/Reader'
+ * import * as RR from 'fp-ts/ReadonlyRecord'
+ *
+ * interface Bindings extends RR.ReadonlyRecord<string, number> {}
+ *
+ * // The Reader monad, which implements this complicated check.
+ * const isCountCorrect: R.Reader<Bindings, boolean> = pipe(
+ *   R.Do,
+ *   R.bind('count', () => R.asks(lookupVar('count'))),
+ *   R.bind('bindings', () => R.ask()),
+ *   R.map(({ count, bindings }) => count === RR.size(bindings))
+ * )
+ *
+ * // The selector function to use with 'asks'.
+ * // Returns value of the variable with specified name.
+ * const lookupVar = (name: string) => (bindings: Bindings): number =>
+ *   pipe(
+ *     bindings,
+ *     RR.lookup(name),
+ *     O.getOrElse(() => 0)
+ *   )
+ *
+ * const sampleBindings: Bindings = { count: 3, a: 1, b: 2 }
+ *
+ * assert.deepStrictEqual(isCountCorrect(sampleBindings), true)
+ *
  * @since 2.0.0
  */
 var Applicative_1 = __nccwpck_require__(4766);
@@ -9933,7 +10630,30 @@ exports.asks = function_1.identity;
  * Changes the value of the local context during the execution of the action `ma` (similar to `Contravariant`'s
  * `contramap`).
  *
- * @category combinators
+ * @example
+ * import { pipe } from 'fp-ts/function'
+ * import * as R from 'fp-ts/Reader'
+ * import * as string from 'fp-ts/string'
+ *
+ * const calculateContentLen: R.Reader<string, number> = pipe(
+ *   R.Do,
+ *   R.bind('content', () => R.ask<string>()),
+ *   R.map(({ content }) => string.size(content))
+ * )
+ *
+ * // Calls calculateContentLen after adding a prefix to the Reader content.
+ * const calculateModifiedContentLen: R.Reader<string, number> = pipe(
+ *   calculateContentLen,
+ *   R.local((s) => 'Prefix ' + s)
+ * )
+ *
+ * const s = '12345'
+ *
+ * assert.deepStrictEqual(
+ *   "Modified 's' length: " + calculateModifiedContentLen(s) + '\n' + "Original 's' length: " + calculateContentLen(s),
+ *   "Modified 's' length: 12\nOriginal 's' length: 5"
+ * )
+ *
  * @since 2.0.0
  */
 var local = function (f) { return function (ma) { return function (r2) {
@@ -9943,37 +10663,37 @@ exports.local = local;
 /**
  * Less strict version of [`asksReader`](#asksreader).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
+ * @category constructors
  * @since 2.11.0
  */
-var asksReaderW = function (f) { return function (r) { return f(r)(r); }; };
+var asksReaderW = function (f) {
+    return function (r) {
+        return f(r)(r);
+    };
+};
 exports.asksReaderW = asksReaderW;
 /**
  * Effectfully accesses the environment.
  *
- * @category combinators
+ * @category constructors
  * @since 2.11.0
  */
 exports.asksReader = exports.asksReaderW;
-// -------------------------------------------------------------------------------------
-// non-pipeables
-// -------------------------------------------------------------------------------------
 /* istanbul ignore next */
-var _map = function (fa, f) { return function_1.pipe(fa, exports.map(f)); };
+var _map = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); };
 /* istanbul ignore next */
-var _ap = function (fab, fa) { return function_1.pipe(fab, exports.ap(fa)); };
+var _ap = function (fab, fa) { return (0, function_1.pipe)(fab, (0, exports.ap)(fa)); };
 /* istanbul ignore next */
-var _chain = function (ma, f) { return function_1.pipe(ma, exports.chain(f)); };
-var _compose = function (bc, ab) { return function_1.pipe(bc, exports.compose(ab)); };
-var _promap = function (fea, f, g) { return function_1.pipe(fea, exports.promap(f, g)); };
-// -------------------------------------------------------------------------------------
-// type class members
-// -------------------------------------------------------------------------------------
+var _chain = function (ma, f) { return (0, function_1.pipe)(ma, (0, exports.chain)(f)); };
+var _compose = function (bc, ab) { return (0, function_1.pipe)(bc, (0, exports.compose)(ab)); };
+var _promap = function (fea, f, g) { return (0, function_1.pipe)(fea, (0, exports.promap)(f, g)); };
 /**
  * `map` can be used to turn functions `(a: A) => B` into functions `(fa: F<A>) => F<B>` whose argument and return types
  * use the type constructor `F` to represent some computational context.
  *
- * @category Functor
+ * @category mapping
  * @since 2.0.0
  */
 var map = function (f) { return function (fa) { return function (r) { return f(fa(r)); }; }; };
@@ -9981,107 +10701,107 @@ exports.map = map;
 /**
  * Less strict version of [`ap`](#ap).
  *
- * @category Apply
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
  * @since 2.8.0
  */
-var apW = function (fa) { return function (fab) { return function (r) { return fab(r)(fa(r)); }; }; };
+var apW = function (fa) { return function (fab) { return function (r) {
+    return fab(r)(fa(r));
+}; }; };
 exports.apW = apW;
 /**
- * Apply a function to an argument under a type constructor.
- *
- * @category Apply
  * @since 2.0.0
  */
 exports.ap = exports.apW;
 /**
- * @category Pointed
+ * @category constructors
  * @since 2.0.0
  */
 exports.of = function_1.constant;
 /**
  * Less strict version of [`chain`](#chain).
  *
- * @category Monad
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
+ * @category sequencing
  * @since 2.6.0
  */
-var chainW = function (f) { return function (fa) { return function (r) { return f(fa(r))(r); }; }; };
+var chainW = function (f) { return function (fa) { return function (r) {
+    return f(fa(r))(r);
+}; }; };
 exports.chainW = chainW;
 /**
  * Composes computations in sequence, using the return value of one computation to determine the next computation.
  *
- * @category Monad
+ * @category sequencing
  * @since 2.0.0
  */
 exports.chain = exports.chainW;
 /**
  * Less strict version of [`flatten`](#flatten).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
+ * @category sequencing
  * @since 2.11.0
  */
 exports.flattenW = 
-/*#__PURE__*/
-exports.chainW(function_1.identity);
+/*#__PURE__*/ (0, exports.chainW)(function_1.identity);
 /**
- * Derivable from `Chain`.
- *
- * @category combinators
+ * @category sequencing
  * @since 2.0.0
  */
 exports.flatten = exports.flattenW;
 /**
- * @category Semigroupoid
  * @since 2.0.0
  */
-var compose = function (ab) { return function (bc) { return function_1.flow(ab, bc); }; };
+var compose = function (ab) { return function (bc) { return (0, function_1.flow)(ab, bc); }; };
 exports.compose = compose;
 /**
- * @category Profunctor
  * @since 2.0.0
  */
-var promap = function (f, g) { return function (fea) { return function (a) { return g(fea(f(a))); }; }; };
+var promap = function (f, g) { return function (fea) { return function (a) {
+    return g(fea(f(a)));
+}; }; };
 exports.promap = promap;
 /**
- * @category Category
+ * @category constructors
  * @since 2.0.0
  */
 var id = function () { return function_1.identity; };
 exports.id = id;
 /**
- * @category Strong
  * @since 2.10.0
  */
-var first = function (pab) { return function (_a) {
-    var a = _a[0], c = _a[1];
-    return [pab(a), c];
-}; };
+var first = function (pab) {
+    return function (_a) {
+        var a = _a[0], c = _a[1];
+        return [pab(a), c];
+    };
+};
 exports.first = first;
 /**
- * @category Strong
  * @since 2.10.0
  */
-var second = function (pbc) { return function (_a) {
-    var a = _a[0], b = _a[1];
-    return [a, pbc(b)];
-}; };
+var second = function (pbc) {
+    return function (_a) {
+        var a = _a[0], b = _a[1];
+        return [a, pbc(b)];
+    };
+};
 exports.second = second;
 /**
- * @category Choice
  * @since 2.10.0
  */
 var left = function (pab) { return E.fold(function (a) { return _.left(pab(a)); }, E.right); };
 exports.left = left;
 /**
- * @category Choice
  * @since 2.10.0
  */
 var right = function (pbc) { return E.fold(E.left, function (b) { return _.right(pbc(b)); }); };
 exports.right = right;
-// -------------------------------------------------------------------------------------
-// instances
-// -------------------------------------------------------------------------------------
 /**
- * @category instances
+ * @category type lambdas
  * @since 2.0.0
  */
 exports.URI = 'Reader';
@@ -10094,14 +10814,10 @@ exports.Functor = {
     map: _map
 };
 /**
- * Derivable from `Functor`.
- *
- * @category combinators
+ * @category mapping
  * @since 2.10.0
  */
-exports.flap = 
-/*#__PURE__*/
-Functor_1.flap(exports.Functor);
+exports.flap = (0, Functor_1.flap)(exports.Functor);
 /**
  * @category instances
  * @since 2.10.0
@@ -10122,25 +10838,31 @@ exports.Apply = {
 /**
  * Combine two effectful actions, keeping only the result of the first.
  *
- * Derivable from `Apply`.
- *
- * @category combinators
  * @since 2.0.0
  */
-exports.apFirst = 
-/*#__PURE__*/
-Apply_1.apFirst(exports.Apply);
+exports.apFirst = (0, Apply_1.apFirst)(exports.Apply);
+/**
+ * Less strict version of [`apFirst`](#apfirst).
+ *
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
+ * @since 2.12.0
+ */
+exports.apFirstW = exports.apFirst;
 /**
  * Combine two effectful actions, keeping only the result of the second.
  *
- * Derivable from `Apply`.
- *
- * @category combinators
  * @since 2.0.0
  */
-exports.apSecond = 
-/*#__PURE__*/
-Apply_1.apSecond(exports.Apply);
+exports.apSecond = (0, Apply_1.apSecond)(exports.Apply);
+/**
+ * Less strict version of [`apSecond`](#apsecond).
+ *
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
+ * @since 2.12.0
+ */
+exports.apSecondW = exports.apSecond;
 /**
  * @category instances
  * @since 2.7.0
@@ -10176,20 +10898,17 @@ exports.Monad = {
  * Composes computations in sequence, using the return value of one computation to determine the next computation and
  * keeping only the result of the first.
  *
- * Derivable from `Chain`.
- *
- * @category combinators
+ * @category sequencing
  * @since 2.0.0
  */
 exports.chainFirst = 
-/*#__PURE__*/
-Chain_1.chainFirst(exports.Chain);
+/*#__PURE__*/ (0, Chain_1.chainFirst)(exports.Chain);
 /**
  * Less strict version of [`chainFirst`](#chainfirst).
  *
- * Derivable from `Chain`.
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
  *
- * @category combinators
+ * @category sequencing
  * @since 2.11.0
  */
 exports.chainFirstW = exports.chainFirst;
@@ -10237,98 +10956,111 @@ exports.Choice = {
 // do notation
 // -------------------------------------------------------------------------------------
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.bindTo = 
-/*#__PURE__*/
-Functor_1.bindTo(exports.Functor);
+exports.bindTo = (0, Functor_1.bindTo)(exports.Functor);
+var let_ = /*#__PURE__*/ (0, Functor_1.let)(exports.Functor);
+exports.let = let_;
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.bind = 
-/*#__PURE__*/
-Chain_1.bind(exports.Chain);
+exports.bind = (0, Chain_1.bind)(exports.Chain);
 /**
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
+ * @category do notation
  * @since 2.8.0
  */
 exports.bindW = exports.bind;
-// -------------------------------------------------------------------------------------
-// pipeable sequence S
-// -------------------------------------------------------------------------------------
 /**
+ * @category do notation
  * @since 2.9.0
  */
-exports.Do = 
-/*#__PURE__*/
-exports.of(_.emptyRecord);
+exports.Do = (0, exports.of)(_.emptyRecord);
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.apS = 
-/*#__PURE__*/
-Apply_1.apS(exports.Apply);
+exports.apS = (0, Apply_1.apS)(exports.Apply);
 /**
+ * Less strict version of [`apS`](#aps).
+ *
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
+ * @category do notation
  * @since 2.8.0
  */
 exports.apSW = exports.apS;
-// -------------------------------------------------------------------------------------
-// sequence T
-// -------------------------------------------------------------------------------------
 /**
  * @since 2.11.0
  */
-exports.ApT = 
-/*#__PURE__*/
-exports.of(_.emptyReadonlyArray);
+exports.ApT = (0, exports.of)(_.emptyReadonlyArray);
 // -------------------------------------------------------------------------------------
 // array utils
 // -------------------------------------------------------------------------------------
 /**
  * Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(Applicative)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
-var traverseReadonlyNonEmptyArrayWithIndex = function (f) { return function (as) { return function (r) {
-    var out = [f(0, _.head(as))(r)];
-    for (var i = 1; i < as.length; i++) {
-        out.push(f(i, as[i])(r));
-    }
-    return out;
-}; }; };
+var traverseReadonlyNonEmptyArrayWithIndex = function (f) {
+    return function (as) {
+        return function (r) {
+            var out = [f(0, _.head(as))(r)];
+            for (var i = 1; i < as.length; i++) {
+                out.push(f(i, as[i])(r));
+            }
+            return out;
+        };
+    };
+};
 exports.traverseReadonlyNonEmptyArrayWithIndex = traverseReadonlyNonEmptyArrayWithIndex;
 /**
  * Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
 var traverseReadonlyArrayWithIndex = function (f) {
-    var g = exports.traverseReadonlyNonEmptyArrayWithIndex(f);
+    var g = (0, exports.traverseReadonlyNonEmptyArrayWithIndex)(f);
     return function (as) { return (_.isNonEmpty(as) ? g(as) : exports.ApT); };
 };
 exports.traverseReadonlyArrayWithIndex = traverseReadonlyArrayWithIndex;
 /**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex;
 /**
+ * Equivalent to `ReadonlyArray#traverse(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
-var traverseArray = function (f) { return exports.traverseReadonlyArrayWithIndex(function (_, a) { return f(a); }); };
+var traverseArray = function (f) { return (0, exports.traverseReadonlyArrayWithIndex)(function (_, a) { return f(a); }); };
 exports.traverseArray = traverseArray;
 /**
+ * Equivalent to `ReadonlyArray#sequence(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.sequenceArray = 
-/*#__PURE__*/
-exports.traverseArray(function_1.identity);
+/*#__PURE__*/ (0, exports.traverseArray)(function_1.identity);
 // -------------------------------------------------------------------------------------
 // deprecated
 // -------------------------------------------------------------------------------------
-// tslint:disable: deprecation
 /**
- * Use small, specific instances instead.
+ * This instance is deprecated, use small, specific instances instead.
+ * For example if a function needs a `Functor` instance, pass `R.Functor` instead of `R.reader`
+ * (where `R` is from `import R from 'fp-ts/Reader'`)
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -10349,23 +11081,19 @@ exports.reader = {
 /**
  * Use [`getApplySemigroup`](./Apply.ts.html#getapplysemigroup) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
-exports.getSemigroup = 
-/*#__PURE__*/
-Apply_1.getApplySemigroup(exports.Apply);
+exports.getSemigroup = (0, Apply_1.getApplySemigroup)(exports.Apply);
 /**
  * Use [`getApplicativeMonoid`](./Applicative.ts.html#getapplicativemonoid) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
-exports.getMonoid = 
-/*#__PURE__*/
-Applicative_1.getApplicativeMonoid(exports.Applicative);
+exports.getMonoid = (0, Applicative_1.getApplicativeMonoid)(exports.Applicative);
 
 
 /***/ }),
@@ -10395,11 +11123,11 @@ function chain(M) {
 }
 exports.chain = chain;
 function fromReader(F) {
-    return function (ma) { return function_1.flow(ma, F.of); };
+    return function (ma) { return (0, function_1.flow)(ma, F.of); };
 }
 exports.fromReader = fromReader;
 function fromNaturalTransformation(nt) {
-    return function (f) { return function_1.flow(f, nt); };
+    return function (f) { return (0, function_1.flow)(f, nt); };
 }
 exports.fromNaturalTransformation = fromNaturalTransformation;
 /** @deprecated */
@@ -10409,12 +11137,12 @@ function getReaderM(M) {
     var _map = map(M);
     var _chain = chain(M);
     return {
-        map: function (fa, f) { return function_1.pipe(fa, _map(f)); },
-        ap: function (fab, fa) { return function_1.pipe(fab, _ap(fa)); },
+        map: function (fa, f) { return (0, function_1.pipe)(fa, _map(f)); },
+        ap: function (fab, fa) { return (0, function_1.pipe)(fab, _ap(fa)); },
         of: of(M),
-        chain: function (ma, f) { return function_1.pipe(ma, _chain(f)); },
+        chain: function (ma, f) { return (0, function_1.pipe)(ma, _chain(f)); },
         ask: function () { return M.of; },
-        asks: function (f) { return function_1.flow(f, M.of); },
+        asks: function (f) { return (0, function_1.flow)(f, M.of); },
         local: function (ma, f) { return function (q) { return ma(f(q)); }; },
         fromReader: fromReader(M),
         fromM: function (ma) { return function () { return ma; }; }
@@ -10432,7 +11160,11 @@ exports.getReaderM = getReaderM;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -10450,8 +11182,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.bindW = exports.bind = exports.bindTo = exports.Do = exports.chainFirstTaskK = exports.chainTaskK = exports.fromTaskK = exports.FromTask = exports.chainFirstReaderKW = exports.chainFirstReaderK = exports.chainReaderKW = exports.chainReaderK = exports.fromReaderK = exports.asks = exports.ask = exports.FromReader = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.FromIO = exports.chainFirstW = exports.chainFirst = exports.MonadTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecond = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.Functor = exports.URI = exports.flatten = exports.flattenW = exports.chainW = exports.chain = exports.of = exports.apW = exports.ap = exports.map = exports.asksReaderTask = exports.asksReaderTaskW = exports.local = exports.fromIO = exports.fromTask = exports.fromReader = void 0;
-exports.run = exports.getMonoid = exports.getSemigroup = exports.readerTaskSeq = exports.readerTask = exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = void 0;
+exports.fromTaskK = exports.FromTask = exports.chainFirstReaderIOK = exports.chainFirstReaderIOKW = exports.chainReaderIOK = exports.chainReaderIOKW = exports.fromReaderIOK = exports.chainFirstReaderKW = exports.chainFirstReaderK = exports.chainReaderKW = exports.chainReaderK = exports.fromReaderK = exports.asks = exports.ask = exports.FromReader = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.FromIO = exports.chainFirstW = exports.chainFirst = exports.MonadTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecond = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.Functor = exports.URI = exports.flatten = exports.flattenW = exports.chainW = exports.chain = exports.of = exports.apW = exports.ap = exports.map = exports.asksReaderTask = exports.asksReaderTaskW = exports.local = exports.fromReaderIO = exports.fromIO = exports.fromTask = exports.fromReader = void 0;
+exports.run = exports.getMonoid = exports.getSemigroup = exports.readerTaskSeq = exports.readerTask = exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.let = exports.bindTo = exports.Do = exports.chainFirstTaskK = exports.chainTaskK = void 0;
 /**
  * @since 2.3.0
  */
@@ -10468,29 +11200,28 @@ var R = __importStar(__nccwpck_require__(786));
 var RT = __importStar(__nccwpck_require__(6170));
 var T = __importStar(__nccwpck_require__(2664));
 // -------------------------------------------------------------------------------------
-// natural transformations
+// conversions
 // -------------------------------------------------------------------------------------
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.3.0
  */
-exports.fromReader = 
-/*#__PURE__*/
-RT.fromReader(T.Pointed);
+exports.fromReader = RT.fromReader(T.Pointed);
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.3.0
  */
-exports.fromTask = 
-/*#__PURE__*/
-R.of;
+exports.fromTask = R.of;
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.3.0
  */
-exports.fromIO = 
-/*#__PURE__*/
-function_1.flow(T.fromIO, exports.fromTask);
+exports.fromIO = (0, function_1.flow)(T.fromIO, exports.fromTask);
+/**
+ * @category conversions
+ * @since 2.13.0
+ */
+exports.fromReaderIO = R.map(T.fromIO);
 // -------------------------------------------------------------------------------------
 // combinators
 // -------------------------------------------------------------------------------------
@@ -10498,103 +11229,91 @@ function_1.flow(T.fromIO, exports.fromTask);
  * Changes the value of the local context during the execution of the action `ma` (similar to `Contravariant`'s
  * `contramap`).
  *
- * @category combinators
  * @since 2.3.0
  */
 exports.local = R.local;
 /**
  * Less strict version of [`asksReaderTask`](#asksreadertask).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
+ * @category constructors
  * @since 2.11.0
  */
 exports.asksReaderTaskW = R.asksReaderW;
 /**
  * Effectfully accesses the environment.
  *
- * @category combinators
+ * @category constructors
  * @since 2.11.0
  */
 exports.asksReaderTask = exports.asksReaderTaskW;
-// -------------------------------------------------------------------------------------
-// type class members
-// -------------------------------------------------------------------------------------
-var _map = function (fa, f) { return function_1.pipe(fa, exports.map(f)); };
-var _apPar = function (fab, fa) { return function_1.pipe(fab, exports.ap(fa)); };
+var _map = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); };
+var _apPar = function (fab, fa) { return (0, function_1.pipe)(fab, (0, exports.ap)(fa)); };
 var _apSeq = function (fab, fa) {
-    return function_1.pipe(fab, exports.chain(function (f) { return function_1.pipe(fa, exports.map(f)); }));
+    return (0, function_1.pipe)(fab, (0, exports.chain)(function (f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); }));
 };
-var _chain = function (ma, f) { return function_1.pipe(ma, exports.chain(f)); };
+var _chain = function (ma, f) { return (0, function_1.pipe)(ma, (0, exports.chain)(f)); };
 /**
  * `map` can be used to turn functions `(a: A) => B` into functions `(fa: F<A>) => F<B>` whose argument and return types
  * use the type constructor `F` to represent some computational context.
  *
- * @category Functor
+ * @category mapping
  * @since 2.3.0
  */
-exports.map = 
-/*#__PURE__*/
-RT.map(T.Functor);
+exports.map = RT.map(T.Functor);
 /**
- * Apply a function to an argument under a type constructor.
- *
- * @category Apply
  * @since 2.3.0
  */
 exports.ap = 
-/*#__PURE__*/
-RT.ap(T.ApplyPar);
+/*#__PURE__*/ RT.ap(T.ApplyPar);
 /**
  * Less strict version of [`ap`](#ap).
  *
- * @category Apply
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
  * @since 2.8.0
  */
 exports.apW = exports.ap;
 /**
- * @category Pointed
+ * @category constructors
  * @since 2.3.0
  */
-exports.of = 
-/*#__PURE__*/
-RT.of(T.Pointed);
+exports.of = RT.of(T.Pointed);
 /**
  * Composes computations in sequence, using the return value of one computation to determine the next computation.
  *
- * @category Monad
+ * @category sequencing
  * @since 2.3.0
  */
 exports.chain = 
-/*#__PURE__*/
-RT.chain(T.Monad);
+/*#__PURE__*/ RT.chain(T.Monad);
 /**
  * Less strict version of  [`chain`](#chain).
  *
- * @category Monad
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
+ * @category sequencing
  * @since 2.6.7
  */
 exports.chainW = exports.chain;
 /**
  * Less strict version of [`flatten`](#flatten).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
+ * @category sequencing
  * @since 2.11.0
  */
 exports.flattenW = 
-/*#__PURE__*/
-exports.chainW(function_1.identity);
+/*#__PURE__*/ (0, exports.chainW)(function_1.identity);
 /**
- * Derivable from `Chain`.
- *
- * @category combinators
+ * @category sequencing
  * @since 2.3.0
  */
 exports.flatten = exports.flattenW;
-// -------------------------------------------------------------------------------------
-// instances
-// -------------------------------------------------------------------------------------
 /**
- * @category instances
+ * @category type lambdas
  * @since 2.3.0
  */
 exports.URI = 'ReaderTask';
@@ -10607,14 +11326,10 @@ exports.Functor = {
     map: _map
 };
 /**
- * Derivable from `Functor`.
- *
- * @category combinators
+ * @category mapping
  * @since 2.10.0
  */
-exports.flap = 
-/*#__PURE__*/
-Functor_1.flap(exports.Functor);
+exports.flap = (0, Functor_1.flap)(exports.Functor);
 /**
  * @category instances
  * @since 2.10.0
@@ -10624,6 +11339,8 @@ exports.Pointed = {
     of: exports.of
 };
 /**
+ * Runs computations in parallel.
+ *
  * @category instances
  * @since 2.10.0
  */
@@ -10635,26 +11352,18 @@ exports.ApplyPar = {
 /**
  * Combine two effectful actions, keeping only the result of the first.
  *
- * Derivable from `Apply`.
- *
- * @category combinators
  * @since 2.3.0
  */
-exports.apFirst = 
-/*#__PURE__*/
-Apply_1.apFirst(exports.ApplyPar);
+exports.apFirst = (0, Apply_1.apFirst)(exports.ApplyPar);
 /**
  * Combine two effectful actions, keeping only the result of the second.
  *
- * Derivable from `Apply`.
- *
- * @category combinators
  * @since 2.3.0
  */
-exports.apSecond = 
-/*#__PURE__*/
-Apply_1.apSecond(exports.ApplyPar);
+exports.apSecond = (0, Apply_1.apSecond)(exports.ApplyPar);
 /**
+ * Runs computations in parallel.
+ *
  * @category instances
  * @since 2.7.0
  */
@@ -10665,6 +11374,8 @@ exports.ApplicativePar = {
     of: exports.of
 };
 /**
+ * Runs computations sequentially.
+ *
  * @category instances
  * @since 2.10.0
  */
@@ -10674,6 +11385,8 @@ exports.ApplySeq = {
     ap: _apSeq
 };
 /**
+ * Runs computations sequentially.
+ *
  * @category instances
  * @since 2.7.0
  */
@@ -10733,20 +11446,17 @@ exports.MonadTask = {
  * Composes computations in sequence, using the return value of one computation to determine the next computation and
  * keeping only the result of the first.
  *
- * Derivable from `Chain`.
- *
- * @category combinators
+ * @category sequencing
  * @since 2.3.0
  */
 exports.chainFirst = 
-/*#__PURE__*/
-Chain_1.chainFirst(exports.Chain);
+/*#__PURE__*/ (0, Chain_1.chainFirst)(exports.Chain);
 /**
  * Less strict version of [`chainFirst`](#chainfirst).
  *
- * Derivable from `Chain`.
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
  *
- * @category combinators
+ * @category sequencing
  * @since 2.11.0
  */
 exports.chainFirstW = exports.chainFirst;
@@ -10759,26 +11469,22 @@ exports.FromIO = {
     fromIO: exports.fromIO
 };
 /**
- * @category combinators
+ * @category lifting
  * @since 2.4.0
  */
-exports.fromIOK = 
-/*#__PURE__*/
-FromIO_1.fromIOK(exports.FromIO);
+exports.fromIOK = (0, FromIO_1.fromIOK)(exports.FromIO);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.4.0
  */
 exports.chainIOK = 
-/*#__PURE__*/
-FromIO_1.chainIOK(exports.FromIO, exports.Chain);
+/*#__PURE__*/ (0, FromIO_1.chainIOK)(exports.FromIO, exports.Chain);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.10.0
  */
 exports.chainFirstIOK = 
-/*#__PURE__*/
-FromIO_1.chainFirstIOK(exports.FromIO, exports.Chain);
+/*#__PURE__*/ (0, FromIO_1.chainFirstIOK)(exports.FromIO, exports.Chain);
 /**
  * @category instances
  * @since 2.11.0
@@ -10793,53 +11499,89 @@ exports.FromReader = {
  * @category constructors
  * @since 2.3.0
  */
-exports.ask = 
-/*#__PURE__*/
-FromReader_1.ask(exports.FromReader);
+exports.ask = (0, FromReader_1.ask)(exports.FromReader);
 /**
  * Projects a value from the global context in a `ReaderTask`.
  *
  * @category constructors
  * @since 2.3.0
  */
-exports.asks = 
-/*#__PURE__*/
-FromReader_1.asks(exports.FromReader);
+exports.asks = (0, FromReader_1.asks)(exports.FromReader);
 /**
- * @category combinators
+ * @category lifting
  * @since 2.11.0
  */
-exports.fromReaderK = 
-/*#__PURE__*/
-FromReader_1.fromReaderK(exports.FromReader);
+exports.fromReaderK = (0, FromReader_1.fromReaderK)(exports.FromReader);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.11.0
  */
 exports.chainReaderK = 
-/*#__PURE__*/
-FromReader_1.chainReaderK(exports.FromReader, exports.Chain);
+/*#__PURE__*/ (0, FromReader_1.chainReaderK)(exports.FromReader, exports.Chain);
 /**
  * Less strict version of [`chainReaderK`](#chainreaderk).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
+ * @category sequencing
  * @since 2.11.0
  */
 exports.chainReaderKW = exports.chainReaderK;
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.11.0
  */
 exports.chainFirstReaderK = 
-/*#__PURE__*/
-FromReader_1.chainFirstReaderK(exports.FromReader, exports.Chain);
+/*#__PURE__*/ (0, FromReader_1.chainFirstReaderK)(exports.FromReader, exports.Chain);
 /**
  * Less strict version of [`chainFirstReaderK`](#chainfirstreaderk).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
+ * @category sequencing
  * @since 2.11.0
  */
 exports.chainFirstReaderKW = exports.chainFirstReaderK;
+/**
+ * @category lifting
+ * @since 2.13.0
+ */
+var fromReaderIOK = function (f) {
+    return function () {
+        var a = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            a[_i] = arguments[_i];
+        }
+        return (0, exports.fromReaderIO)(f.apply(void 0, a));
+    };
+};
+exports.fromReaderIOK = fromReaderIOK;
+/**
+ * Less strict version of [`chainReaderIOK`](#chainreaderiok).
+ *
+ * @category sequencing
+ * @since 2.13.0
+ */
+var chainReaderIOKW = function (f) { return (0, exports.chainW)((0, exports.fromReaderIOK)(f)); };
+exports.chainReaderIOKW = chainReaderIOKW;
+/**
+ * @category sequencing
+ * @since 2.13.0
+ */
+exports.chainReaderIOK = exports.chainReaderIOKW;
+/**
+ * Less strict version of [`chainFirstReaderIOK`](#chainfirstreaderiok).
+ *
+ * @category sequencing
+ * @since 2.13.0
+ */
+var chainFirstReaderIOKW = function (f) { return (0, exports.chainFirstW)((0, exports.fromReaderIOK)(f)); };
+exports.chainFirstReaderIOKW = chainFirstReaderIOKW;
+/**
+ * @category sequencing
+ * @since 2.13.0
+ */
+exports.chainFirstReaderIOK = exports.chainFirstReaderIOKW;
 /**
  * @category instances
  * @since 2.10.0
@@ -10850,155 +11592,168 @@ exports.FromTask = {
     fromTask: exports.fromTask
 };
 /**
- * @category combinators
+ * @category lifting
  * @since 2.4.0
  */
-exports.fromTaskK = 
-/*#__PURE__*/
-FromTask_1.fromTaskK(exports.FromTask);
+exports.fromTaskK = (0, FromTask_1.fromTaskK)(exports.FromTask);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.4.0
  */
 exports.chainTaskK = 
-/*#__PURE__*/
-FromTask_1.chainTaskK(exports.FromTask, exports.Chain);
+/*#__PURE__*/ (0, FromTask_1.chainTaskK)(exports.FromTask, exports.Chain);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.10.0
  */
 exports.chainFirstTaskK = 
-/*#__PURE__*/
-FromTask_1.chainFirstTaskK(exports.FromTask, exports.Chain);
+/*#__PURE__*/ (0, FromTask_1.chainFirstTaskK)(exports.FromTask, exports.Chain);
 // -------------------------------------------------------------------------------------
 // do notation
 // -------------------------------------------------------------------------------------
 /**
+ * @category do notation
  * @since 2.9.0
  */
-exports.Do = 
-/*#__PURE__*/
-exports.of(_.emptyRecord);
+exports.Do = (0, exports.of)(_.emptyRecord);
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.bindTo = 
-/*#__PURE__*/
-Functor_1.bindTo(exports.Functor);
+exports.bindTo = (0, Functor_1.bindTo)(exports.Functor);
+var let_ = /*#__PURE__*/ (0, Functor_1.let)(exports.Functor);
+exports.let = let_;
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.bind = 
-/*#__PURE__*/
-Chain_1.bind(exports.Chain);
+exports.bind = (0, Chain_1.bind)(exports.Chain);
 /**
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
+ * @category do notation
  * @since 2.8.0
  */
 exports.bindW = exports.bind;
-// -------------------------------------------------------------------------------------
-// pipeable sequence S
-// -------------------------------------------------------------------------------------
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.apS = 
-/*#__PURE__*/
-Apply_1.apS(exports.ApplyPar);
+exports.apS = (0, Apply_1.apS)(exports.ApplyPar);
 /**
+ * Less strict version of [`apS`](#aps).
+ *
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
+ * @category do notation
  * @since 2.8.0
  */
 exports.apSW = exports.apS;
-// -------------------------------------------------------------------------------------
-// sequence T
-// -------------------------------------------------------------------------------------
 /**
  * @since 2.11.0
  */
-exports.ApT = 
-/*#__PURE__*/
-exports.of(_.emptyReadonlyArray);
+exports.ApT = (0, exports.of)(_.emptyReadonlyArray);
 // -------------------------------------------------------------------------------------
 // array utils
 // -------------------------------------------------------------------------------------
 /**
  * Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(Applicative)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
 var traverseReadonlyNonEmptyArrayWithIndex = function (f) {
-    return function_1.flow(R.traverseReadonlyNonEmptyArrayWithIndex(f), R.map(T.traverseReadonlyNonEmptyArrayWithIndex(function_1.SK)));
+    return (0, function_1.flow)(R.traverseReadonlyNonEmptyArrayWithIndex(f), R.map(T.traverseReadonlyNonEmptyArrayWithIndex(function_1.SK)));
 };
 exports.traverseReadonlyNonEmptyArrayWithIndex = traverseReadonlyNonEmptyArrayWithIndex;
 /**
  * Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
 var traverseReadonlyArrayWithIndex = function (f) {
-    var g = exports.traverseReadonlyNonEmptyArrayWithIndex(f);
+    var g = (0, exports.traverseReadonlyNonEmptyArrayWithIndex)(f);
     return function (as) { return (_.isNonEmpty(as) ? g(as) : exports.ApT); };
 };
 exports.traverseReadonlyArrayWithIndex = traverseReadonlyArrayWithIndex;
 /**
  * Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(ApplicativeSeq)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
 var traverseReadonlyNonEmptyArrayWithIndexSeq = function (f) {
-    return function_1.flow(R.traverseReadonlyNonEmptyArrayWithIndex(f), R.map(T.traverseReadonlyNonEmptyArrayWithIndexSeq(function_1.SK)));
+    return (0, function_1.flow)(R.traverseReadonlyNonEmptyArrayWithIndex(f), R.map(T.traverseReadonlyNonEmptyArrayWithIndexSeq(function_1.SK)));
 };
 exports.traverseReadonlyNonEmptyArrayWithIndexSeq = traverseReadonlyNonEmptyArrayWithIndexSeq;
 /**
  * Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativeSeq)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
 var traverseReadonlyArrayWithIndexSeq = function (f) {
-    var g = exports.traverseReadonlyNonEmptyArrayWithIndexSeq(f);
+    var g = (0, exports.traverseReadonlyNonEmptyArrayWithIndexSeq)(f);
     return function (as) { return (_.isNonEmpty(as) ? g(as) : exports.ApT); };
 };
 exports.traverseReadonlyArrayWithIndexSeq = traverseReadonlyArrayWithIndexSeq;
 /**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex;
 /**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
-var traverseArray = function (f) { return exports.traverseReadonlyArrayWithIndex(function (_, a) { return f(a); }); };
+var traverseArray = function (f) { return (0, exports.traverseReadonlyArrayWithIndex)(function (_, a) { return f(a); }); };
 exports.traverseArray = traverseArray;
 /**
+ * Equivalent to `ReadonlyArray#sequence(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.sequenceArray = 
-/*#__PURE__*/
-exports.traverseArray(function_1.identity);
+/*#__PURE__*/ (0, exports.traverseArray)(function_1.identity);
 /**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativeSeq)`.
+ *
+ * @category traversing
  * @since 2.10.0
  */
 exports.traverseSeqArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq;
 /**
+ * Equivalent to `ReadonlyArray#traverse(ApplicativeSeq)`.
+ *
+ * @category traversing
  * @since 2.10.0
  */
-var traverseSeqArray = function (f) { return exports.traverseReadonlyArrayWithIndexSeq(function (_, a) { return f(a); }); };
+var traverseSeqArray = function (f) { return (0, exports.traverseReadonlyArrayWithIndexSeq)(function (_, a) { return f(a); }); };
 exports.traverseSeqArray = traverseSeqArray;
+// -------------------------------------------------------------------------------------
+// deprecated
+// -------------------------------------------------------------------------------------
 /**
  * Use `traverseReadonlyArrayWithIndexSeq` instead.
  *
+ * @category zone of death
  * @since 2.10.0
  * @deprecated
  */
 exports.sequenceSeqArray = 
-/*#__PURE__*/
-exports.traverseSeqArray(function_1.identity);
-// -------------------------------------------------------------------------------------
-// deprecated
-// -------------------------------------------------------------------------------------
-// tslint:disable: deprecation
+/*#__PURE__*/ (0, exports.traverseSeqArray)(function_1.identity);
 /**
- * Use small, specific instances instead.
+ * This instance is deprecated, use small, specific instances instead.
+ * For example if a function needs a `Functor` instance, pass `RT.Functor` instead of `RT.readerTask`
+ * (where `RT` is from `import RT from 'fp-ts/ReaderTask'`)
  *
- * @category instances
+ * @category zone of death
  * @since 2.3.0
  * @deprecated
  */
@@ -11012,9 +11767,11 @@ exports.readerTask = {
     fromTask: exports.fromTask
 };
 /**
- * Use small, specific instances instead.
+ * This instance is deprecated, use small, specific instances instead.
+ * For example if a function needs a `Functor` instance, pass `RT.Functor` instead of `RT.readerTaskSeq`
+ * (where `RT` is from `import RT from 'fp-ts/ReaderTask'`)
  *
- * @category instances
+ * @category zone of death
  * @since 2.3.0
  * @deprecated
  */
@@ -11030,24 +11787,23 @@ exports.readerTaskSeq = {
 /**
  * Use [`getApplySemigroup`](./Apply.ts.html#getapplysemigroup) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.3.0
  * @deprecated
  */
 exports.getSemigroup = 
-/*#__PURE__*/
-Apply_1.getApplySemigroup(exports.ApplySeq);
+/*#__PURE__*/ (0, Apply_1.getApplySemigroup)(exports.ApplySeq);
 /**
  * Use [`getApplicativeMonoid`](./Applicative.ts.html#getapplicativemonoid) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.3.0
  * @deprecated
  */
 exports.getMonoid = 
-/*#__PURE__*/
-Applicative_1.getApplicativeMonoid(exports.ApplicativeSeq);
+/*#__PURE__*/ (0, Applicative_1.getApplicativeMonoid)(exports.ApplicativeSeq);
 /**
+ * @category zone of death
  * @since 2.4.0
  * @deprecated
  */
@@ -11067,7 +11823,11 @@ exports.run = run;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -11085,9 +11845,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.bimap = exports.map = exports.chainFirstReaderEitherK = exports.chainFirstReaderEitherKW = exports.chainReaderEitherK = exports.chainReaderEitherKW = exports.fromReaderEitherK = exports.chainFirstTaskEitherK = exports.chainFirstTaskEitherKW = exports.chainTaskEitherK = exports.chainTaskEitherKW = exports.fromTaskEitherK = exports.chainIOEitherK = exports.chainIOEitherKW = exports.fromIOEitherK = exports.swap = exports.orLeft = exports.orElseFirstW = exports.orElseFirst = exports.orElseW = exports.orElse = exports.asksReaderTaskEither = exports.asksReaderTaskEitherW = exports.local = exports.toUnion = exports.getOrElseW = exports.getOrElse = exports.foldW = exports.matchEW = exports.fold = exports.matchE = exports.matchW = exports.match = exports.fromReaderEither = exports.fromIOEither = exports.fromTask = exports.fromIO = exports.fromReader = exports.fromEither = exports.leftIO = exports.rightIO = exports.leftReaderTask = exports.rightReaderTask = exports.leftReader = exports.rightReader = exports.leftTask = exports.rightTask = exports.right = exports.left = exports.fromTaskEither = void 0;
-exports.fromOptionK = exports.fromOption = exports.FromEither = exports.chainFirstReaderTaskK = exports.chainFirstReaderTaskKW = exports.chainReaderTaskK = exports.chainReaderTaskKW = exports.fromReaderTaskK = exports.chainFirstReaderKW = exports.chainFirstReaderK = exports.chainReaderKW = exports.chainReaderK = exports.fromReaderK = exports.asks = exports.ask = exports.FromReader = exports.Alt = exports.Bifunctor = exports.chainFirstW = exports.chainFirst = exports.MonadThrow = exports.MonadTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecond = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.Functor = exports.getAltReaderTaskValidation = exports.getApplicativeReaderTaskValidation = exports.getFilterable = exports.getCompactable = exports.URI = exports.throwError = exports.altW = exports.alt = exports.flatten = exports.flattenW = exports.chainW = exports.chain = exports.of = exports.apW = exports.ap = exports.mapLeft = void 0;
-exports.run = exports.getReaderTaskValidation = exports.getSemigroup = exports.getApplyMonoid = exports.getApplySemigroup = exports.readerTaskEitherSeq = exports.readerTaskEither = exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.bindTo = exports.Do = exports.bracket = exports.chainFirstTaskK = exports.chainTaskK = exports.fromTaskK = exports.FromTask = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.FromIO = exports.fromEitherK = exports.filterOrElseW = exports.filterOrElse = exports.fromPredicate = exports.chainEitherKW = exports.chainEitherK = exports.chainOptionK = void 0;
+exports.chainReaderEitherKW = exports.fromReaderEitherK = exports.chainFirstTaskEitherK = exports.chainFirstTaskEitherKW = exports.chainTaskEitherK = exports.chainTaskEitherKW = exports.fromTaskEitherK = exports.chainIOEitherK = exports.chainIOEitherKW = exports.fromIOEitherK = exports.swap = exports.orLeft = exports.orElseFirstW = exports.orElseFirst = exports.orElseW = exports.orElse = exports.asksReaderTaskEither = exports.asksReaderTaskEitherW = exports.local = exports.chainNullableK = exports.fromNullableK = exports.fromNullable = exports.toUnion = exports.getOrElseW = exports.getOrElse = exports.foldW = exports.matchEW = exports.fold = exports.matchE = exports.matchW = exports.match = exports.fromReaderEither = exports.fromIOEither = exports.fromTask = exports.fromIO = exports.fromReader = exports.fromEither = exports.leftReaderIO = exports.rightReaderIO = exports.leftIO = exports.rightIO = exports.leftReaderTask = exports.rightReaderTask = exports.leftReader = exports.rightReader = exports.leftTask = exports.rightTask = exports.right = exports.left = exports.fromTaskEither = void 0;
+exports.fromReaderTaskK = exports.chainFirstReaderKW = exports.chainFirstReaderK = exports.chainReaderKW = exports.chainReaderK = exports.fromReaderK = exports.asks = exports.ask = exports.FromReader = exports.Alt = exports.Bifunctor = exports.chainFirstW = exports.chainFirst = exports.MonadThrow = exports.MonadTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecondW = exports.apSecond = exports.apFirstW = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.Functor = exports.getAltReaderTaskValidation = exports.getApplicativeReaderTaskValidation = exports.getFilterable = exports.getCompactable = exports.URI = exports.throwError = exports.altW = exports.alt = exports.flatten = exports.flattenW = exports.chainW = exports.chain = exports.of = exports.apW = exports.ap = exports.mapLeft = exports.bimap = exports.map = exports.chainFirstReaderEitherK = exports.chainFirstReaderEitherKW = exports.chainReaderEitherK = void 0;
+exports.readerTaskEither = exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.let = exports.bindTo = exports.Do = exports.bracketW = exports.bracket = exports.chainFirstTaskK = exports.chainTaskK = exports.fromTaskK = exports.FromTask = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.FromIO = exports.fromEitherK = exports.filterOrElseW = exports.filterOrElse = exports.fromPredicate = exports.chainFirstEitherKW = exports.chainFirstEitherK = exports.chainEitherKW = exports.chainEitherK = exports.chainOptionK = exports.fromOptionK = exports.fromOption = exports.FromEither = exports.chainFirstReaderIOK = exports.chainFirstReaderIOKW = exports.chainReaderIOK = exports.chainReaderIOKW = exports.fromReaderIOK = exports.chainFirstReaderTaskK = exports.chainFirstReaderTaskKW = exports.chainReaderTaskK = exports.chainReaderTaskKW = void 0;
+exports.run = exports.getReaderTaskValidation = exports.getSemigroup = exports.getApplyMonoid = exports.getApplySemigroup = exports.readerTaskEitherSeq = void 0;
 var Applicative_1 = __nccwpck_require__(4766);
 var Apply_1 = __nccwpck_require__(205);
 var Chain_1 = __nccwpck_require__(2372);
@@ -11110,46 +11871,36 @@ var TE = __importStar(__nccwpck_require__(437));
 // constructors
 // -------------------------------------------------------------------------------------
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.0.0
  */
-exports.fromTaskEither = 
-/*#__PURE__*/
-R.of;
+exports.fromTaskEither = R.of;
 /**
  * @category constructors
  * @since 2.0.0
  */
-exports.left = 
-/*#__PURE__*/
-ET.left(RT.Pointed);
+exports.left = ET.left(RT.Pointed);
 /**
  * @category constructors
  * @since 2.0.0
  */
-exports.right = 
-/*#__PURE__*/
-ET.right(RT.Pointed);
+exports.right = ET.right(RT.Pointed);
 /**
  * @category constructors
  * @since 2.0.0
  */
-exports.rightTask = 
-/*#__PURE__*/
-function_1.flow(TE.rightTask, exports.fromTaskEither);
+exports.rightTask = (0, function_1.flow)(TE.rightTask, exports.fromTaskEither);
 /**
  * @category constructors
  * @since 2.0.0
  */
-exports.leftTask = 
-/*#__PURE__*/
-function_1.flow(TE.leftTask, exports.fromTaskEither);
+exports.leftTask = (0, function_1.flow)(TE.leftTask, exports.fromTaskEither);
 /**
  * @category constructors
  * @since 2.0.0
  */
 var rightReader = function (ma) {
-    return function_1.flow(ma, TE.right);
+    return (0, function_1.flow)(ma, TE.right);
 };
 exports.rightReader = rightReader;
 /**
@@ -11157,7 +11908,7 @@ exports.rightReader = rightReader;
  * @since 2.0.0
  */
 var leftReader = function (me) {
-    return function_1.flow(me, TE.left);
+    return (0, function_1.flow)(me, TE.left);
 };
 exports.leftReader = leftReader;
 /**
@@ -11165,134 +11916,150 @@ exports.leftReader = leftReader;
  * @since 2.5.0
  */
 exports.rightReaderTask = 
-/*#__PURE__*/
-ET.rightF(RT.Functor);
+/*#__PURE__*/ ET.rightF(RT.Functor);
 /**
  * @category constructors
  * @since 2.5.0
  */
 exports.leftReaderTask = 
-/*#__PURE__*/
-ET.leftF(RT.Functor);
+/*#__PURE__*/ ET.leftF(RT.Functor);
 /**
  * @category constructors
  * @since 2.0.0
  */
-exports.rightIO = 
-/*#__PURE__*/
-function_1.flow(TE.rightIO, exports.fromTaskEither);
+exports.rightIO = (0, function_1.flow)(TE.rightIO, exports.fromTaskEither);
 /**
  * @category constructors
  * @since 2.0.0
  */
-exports.leftIO = 
-/*#__PURE__*/
-function_1.flow(TE.leftIO, exports.fromTaskEither);
+exports.leftIO = (0, function_1.flow)(TE.leftIO, exports.fromTaskEither);
+/**
+ * @category constructors
+ * @since 2.13.0
+ */
+var rightReaderIO = function (ma) { return (0, function_1.flow)(ma, TE.rightIO); };
+exports.rightReaderIO = rightReaderIO;
+/**
+ * @category constructors
+ * @since 2.13.0
+ */
+var leftReaderIO = function (me) { return (0, function_1.flow)(me, TE.leftIO); };
+exports.leftReaderIO = leftReaderIO;
 // -------------------------------------------------------------------------------------
-// natural transformations
+// conversions
 // -------------------------------------------------------------------------------------
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.0.0
  */
 exports.fromEither = RT.of;
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.11.0
  */
 exports.fromReader = exports.rightReader;
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.0.0
  */
 exports.fromIO = exports.rightIO;
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.0.0
  */
 exports.fromTask = exports.rightTask;
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.0.0
  */
-exports.fromIOEither = 
-/*#__PURE__*/
-function_1.flow(TE.fromIOEither, exports.fromTaskEither);
+exports.fromIOEither = (0, function_1.flow)(TE.fromIOEither, exports.fromTaskEither);
 /**
- * @category constructors
+ * @category conversions
  * @since 2.0.0
  */
-var fromReaderEither = function (ma) { return function_1.flow(ma, TE.fromEither); };
+var fromReaderEither = function (ma) {
+    return (0, function_1.flow)(ma, TE.fromEither);
+};
 exports.fromReaderEither = fromReaderEither;
-// -------------------------------------------------------------------------------------
-// destructors
-// -------------------------------------------------------------------------------------
 /**
- * @category destructors
+ * @category pattern matching
  * @since 2.10.0
  */
-exports.match = 
-/*#__PURE__*/
-ET.match(RT.Functor);
+exports.match = ET.match(RT.Functor);
 /**
  * Less strict version of [`match`](#match).
  *
- * @category destructors
+ * The `W` suffix (short for **W**idening) means that the handler return types will be merged.
+ *
+ * @category pattern matching
  * @since 2.10.0
  */
 exports.matchW = exports.match;
 /**
- * @category destructors
+ * The `E` suffix (short for **E**ffect) means that the handlers return an effect (`ReaderTask`).
+ *
+ * @category pattern matching
  * @since 2.10.0
  */
-exports.matchE = 
-/*#__PURE__*/
-ET.matchE(RT.Chain);
+exports.matchE = ET.matchE(RT.Chain);
 /**
  * Alias of [`matchE`](#matche).
  *
- * @category destructors
+ * @category pattern matching
  * @since 2.0.0
  */
 exports.fold = exports.matchE;
 /**
  * Less strict version of [`matchE`](#matche).
  *
- * @category destructors
+ * The `W` suffix (short for **W**idening) means that the handler return types will be merged.
+ *
+ * @category pattern matching
  * @since 2.10.0
  */
 exports.matchEW = exports.matchE;
 /**
  * Alias of [`matchEW`](#matchew).
  *
- * @category destructors
+ * @category pattern matching
  * @since 2.10.0
  */
 exports.foldW = exports.matchEW;
 /**
- * @category destructors
+ * @category error handling
  * @since 2.0.0
  */
-exports.getOrElse = 
-/*#__PURE__*/
-ET.getOrElse(RT.Monad);
+exports.getOrElse = ET.getOrElse(RT.Monad);
 /**
  * Less strict version of [`getOrElse`](#getorelse).
  *
- * @category destructors
+ * The `W` suffix (short for **W**idening) means that the handler return type will be merged.
+ *
+ * @category error handling
  * @since 2.6.0
  */
 exports.getOrElseW = exports.getOrElse;
-// -------------------------------------------------------------------------------------
-// interop
-// -------------------------------------------------------------------------------------
 /**
- * @category interop
+ * @category conversions
  * @since 2.10.0
  */
-exports.toUnion = 
-/*#__PURE__*/
-ET.toUnion(RT.Functor);
+exports.toUnion = ET.toUnion(RT.Functor);
+/**
+ * @category conversions
+ * @since 2.12.0
+ */
+exports.fromNullable = 
+/*#__PURE__*/ ET.fromNullable(RT.Pointed);
+/**
+ * @category lifting
+ * @since 2.12.0
+ */
+exports.fromNullableK = ET.fromNullableK(RT.Pointed);
+/**
+ * @category sequencing
+ * @since 2.12.0
+ */
+exports.chainNullableK = ET.chainNullableK(RT.Monad);
 // -------------------------------------------------------------------------------------
 // combinators
 // -------------------------------------------------------------------------------------
@@ -11300,248 +12067,238 @@ ET.toUnion(RT.Functor);
  * Changes the value of the local context during the execution of the action `ma` (similar to `Contravariant`'s
  * `contramap`).
  *
- * @category combinators
  * @since 2.0.0
  */
 exports.local = R.local;
 /**
  * Less strict version of [`asksReaderTaskEither`](#asksreadertaskeither).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types will be merged.
+ *
+ * @category constructors
  * @since 2.11.0
  */
 exports.asksReaderTaskEitherW = R.asksReaderW;
 /**
  * Effectfully accesses the environment.
  *
- * @category combinators
+ * @category constructors
  * @since 2.11.0
  */
 exports.asksReaderTaskEither = exports.asksReaderTaskEitherW;
 /**
- * @category combinators
+ * @category error handling
  * @since 2.0.0
  */
-exports.orElse = 
-/*#__PURE__*/
-ET.orElse(RT.Monad);
+exports.orElse = ET.orElse(RT.Monad);
 /**
  * Less strict version of [`orElse`](#orelse).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types and the return types will be merged.
+ *
+ * @category error handling
  * @since 2.10.0
  */
 exports.orElseW = exports.orElse;
 /**
- * @category combinators
+ * @category error handling
  * @since 2.11.0
  */
-exports.orElseFirst = 
-/*#__PURE__*/
-ET.orElseFirst(RT.Monad);
+exports.orElseFirst = ET.orElseFirst(RT.Monad);
 /**
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types and the return types will be merged.
+ *
+ * @category error handling
  * @since 2.11.0
  */
 exports.orElseFirstW = exports.orElseFirst;
 /**
- * @category combinators
+ * @category error handling
  * @since 2.11.0
  */
-exports.orLeft = 
-/*#__PURE__*/
-ET.orLeft(RT.Monad);
+exports.orLeft = ET.orLeft(RT.Monad);
 /**
- * @category combinators
  * @since 2.0.0
  */
-exports.swap = 
-/*#__PURE__*/
-ET.swap(RT.Functor);
+exports.swap = ET.swap(RT.Functor);
 /**
- * @category combinators
+ * @category lifting
  * @since 2.4.0
  */
-var fromIOEitherK = function (f) { return function_1.flow(f, exports.fromIOEither); };
+var fromIOEitherK = function (f) { return (0, function_1.flow)(f, exports.fromIOEither); };
 exports.fromIOEitherK = fromIOEitherK;
 /**
  * Less strict version of [`chainIOEitherK`](#chainioeitherk).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.6.1
  */
-var chainIOEitherKW = function (f) { return exports.chainW(exports.fromIOEitherK(f)); };
+var chainIOEitherKW = function (f) { return (0, exports.chainW)((0, exports.fromIOEitherK)(f)); };
 exports.chainIOEitherKW = chainIOEitherKW;
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.4.0
  */
 exports.chainIOEitherK = exports.chainIOEitherKW;
 /**
- * @category combinators
+ * @category lifting
  * @since 2.4.0
  */
-var fromTaskEitherK = function (f) { return function_1.flow(f, exports.fromTaskEither); };
+var fromTaskEitherK = function (f) { return (0, function_1.flow)(f, exports.fromTaskEither); };
 exports.fromTaskEitherK = fromTaskEitherK;
 /**
  * Less strict version of [`chainTaskEitherK`](#chaintaskeitherk).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.6.1
  */
-var chainTaskEitherKW = function (f) { return exports.chainW(exports.fromTaskEitherK(f)); };
+var chainTaskEitherKW = function (f) { return (0, exports.chainW)((0, exports.fromTaskEitherK)(f)); };
 exports.chainTaskEitherKW = chainTaskEitherKW;
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.4.0
  */
 exports.chainTaskEitherK = exports.chainTaskEitherKW;
 /**
  * Less strict version of [`chainFirstTaskEitherK`](#chainfirsttaskeitherk).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.11.0
  */
-var chainFirstTaskEitherKW = function (f) { return exports.chainFirstW(exports.fromTaskEitherK(f)); };
+var chainFirstTaskEitherKW = function (f) { return (0, exports.chainFirstW)((0, exports.fromTaskEitherK)(f)); };
 exports.chainFirstTaskEitherKW = chainFirstTaskEitherKW;
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.11.0
  */
 exports.chainFirstTaskEitherK = exports.chainFirstTaskEitherKW;
 /**
- * @category combinators
+ * @category lifting
  * @since 2.11.0
  */
-var fromReaderEitherK = function (f) { return function_1.flow(f, exports.fromReaderEither); };
+var fromReaderEitherK = function (f) { return (0, function_1.flow)(f, exports.fromReaderEither); };
 exports.fromReaderEitherK = fromReaderEitherK;
 /**
  * Less strict version of [`chainReaderEitherK`](#chainreadereitherk).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.11.0
  */
 var chainReaderEitherKW = function (f) {
-    return exports.chainW(exports.fromReaderEitherK(f));
+    return (0, exports.chainW)((0, exports.fromReaderEitherK)(f));
 };
 exports.chainReaderEitherKW = chainReaderEitherKW;
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.11.0
  */
 exports.chainReaderEitherK = exports.chainReaderEitherKW;
 /**
  * Less strict version of [`chainFirstReaderEitherK`](#chainfirstreadereitherk).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.11.0
  */
 var chainFirstReaderEitherKW = function (f) {
-    return exports.chainFirstW(exports.fromReaderEitherK(f));
+    return (0, exports.chainFirstW)((0, exports.fromReaderEitherK)(f));
 };
 exports.chainFirstReaderEitherKW = chainFirstReaderEitherKW;
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.11.0
  */
 exports.chainFirstReaderEitherK = exports.chainFirstReaderEitherKW;
-// -------------------------------------------------------------------------------------
-// non-pipeables
-// -------------------------------------------------------------------------------------
-var _map = function (fa, f) { return function_1.pipe(fa, exports.map(f)); };
-var _apPar = function (fab, fa) { return function_1.pipe(fab, exports.ap(fa)); };
+var _map = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); };
+var _apPar = function (fab, fa) { return (0, function_1.pipe)(fab, (0, exports.ap)(fa)); };
 var _apSeq = function (fab, fa) {
-    return function_1.pipe(fab, exports.chain(function (f) { return function_1.pipe(fa, exports.map(f)); }));
+    return (0, function_1.pipe)(fab, (0, exports.chain)(function (f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); }));
 };
 /* istanbul ignore next */
-var _chain = function (ma, f) { return function_1.pipe(ma, exports.chain(f)); };
+var _chain = function (ma, f) { return (0, function_1.pipe)(ma, (0, exports.chain)(f)); };
 /* istanbul ignore next */
-var _alt = function (fa, that) { return function_1.pipe(fa, exports.alt(that)); };
+var _alt = function (fa, that) { return (0, function_1.pipe)(fa, (0, exports.alt)(that)); };
 /* istanbul ignore next */
-var _bimap = function (fa, f, g) { return function_1.pipe(fa, exports.bimap(f, g)); };
+var _bimap = function (fa, f, g) { return (0, function_1.pipe)(fa, (0, exports.bimap)(f, g)); };
 /* istanbul ignore next */
-var _mapLeft = function (fa, f) { return function_1.pipe(fa, exports.mapLeft(f)); };
-// -------------------------------------------------------------------------------------
-// type class members
-// -------------------------------------------------------------------------------------
+var _mapLeft = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.mapLeft)(f)); };
 /**
  * `map` can be used to turn functions `(a: A) => B` into functions `(fa: F<A>) => F<B>` whose argument and return types
  * use the type constructor `F` to represent some computational context.
  *
- * @category Functor
+ * @category mapping
  * @since 2.0.0
  */
 exports.map = 
-/*#__PURE__*/
-ET.map(RT.Functor);
+/*#__PURE__*/ ET.map(RT.Functor);
 /**
  * Map a pair of functions over the two last type arguments of the bifunctor.
  *
- * @category Bifunctor
+ * @category mapping
  * @since 2.0.0
  */
-exports.bimap = 
-/*#__PURE__*/
-ET.bimap(RT.Functor);
+exports.bimap = ET.bimap(RT.Functor);
 /**
  * Map a function over the second type argument of a bifunctor.
  *
- * @category Bifunctor
+ * @category error handling
  * @since 2.0.0
  */
 exports.mapLeft = 
-/*#__PURE__*/
-ET.mapLeft(RT.Functor);
+/*#__PURE__*/ ET.mapLeft(RT.Functor);
 /**
- * Apply a function to an argument under a type constructor.
- *
- * @category Apply
  * @since 2.0.0
  */
-exports.ap = 
-/*#__PURE__*/
-ET.ap(RT.ApplyPar);
+exports.ap = ET.ap(RT.ApplyPar);
 /**
  * Less strict version of [`ap`](#ap).
  *
- * @category Apply
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
  * @since 2.8.0
  */
 exports.apW = exports.ap;
 /**
- * @category Pointed
+ * @category constructors
  * @since 2.7.0
  */
 exports.of = exports.right;
 /**
  * Composes computations in sequence, using the return value of one computation to determine the next computation.
  *
- * @category Monad
+ * @category sequencing
  * @since 2.0.0
  */
-exports.chain = 
-/*#__PURE__*/
-ET.chain(RT.Monad);
+exports.chain = ET.chain(RT.Monad);
 /**
  * Less strict version of [`chain`](#chain).
  *
- * @category Monad
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.6.0
  */
 exports.chainW = exports.chain;
 /**
  * Less strict version of [`flatten`](#flatten).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.11.0
  */
-exports.flattenW = 
-/*#__PURE__*/
-exports.chainW(function_1.identity);
+exports.flattenW = (0, exports.chainW)(function_1.identity);
 /**
- * Derivable from `Chain`.
- *
- * @category combinators
+ * @category sequencing
  * @since 2.0.0
  */
 exports.flatten = exports.flattenW;
@@ -11549,34 +12306,30 @@ exports.flatten = exports.flattenW;
  * Identifies an associative operation on a type constructor. It is similar to `Semigroup`, except that it applies to
  * types of kind `* -> *`.
  *
- * @category Alt
+ * @category error handling
  * @since 2.0.0
  */
-exports.alt = 
-/*#__PURE__*/
-ET.alt(RT.Monad);
+exports.alt = ET.alt(RT.Monad);
 /**
  * Less strict version of [`alt`](#alt).
  *
- * @category Alt
+ * The `W` suffix (short for **W**idening) means that the environment, the error and the return types will be merged.
+ *
+ * @category error handling
  * @since 2.9.0
  */
 exports.altW = exports.alt;
 /**
- * @category MonadThrow
  * @since 2.0.0
  */
 exports.throwError = exports.left;
-// -------------------------------------------------------------------------------------
-// instances
-// -------------------------------------------------------------------------------------
 /**
- * @category instances
+ * @category type lambdas
  * @since 2.0.0
  */
 exports.URI = 'ReaderTaskEither';
 /**
- * @category instances
+ * @category filtering
  * @since 2.10.0
  */
 var getCompactable = function (M) {
@@ -11584,52 +12337,62 @@ var getCompactable = function (M) {
     return {
         URI: exports.URI,
         _E: undefined,
-        compact: Compactable_1.compact(RT.Functor, C),
-        separate: Compactable_1.separate(RT.Functor, C, E.Functor)
+        compact: (0, Compactable_1.compact)(RT.Functor, C),
+        separate: (0, Compactable_1.separate)(RT.Functor, C, E.Functor)
     };
 };
 exports.getCompactable = getCompactable;
 /**
- * @category instances
+ * @category filtering
  * @since 2.10.0
  */
 function getFilterable(M) {
     var F = E.getFilterable(M);
-    var C = exports.getCompactable(M);
-    var filter = Filterable_1.filter(RT.Functor, F);
-    var filterMap = Filterable_1.filterMap(RT.Functor, F);
-    var partition = Filterable_1.partition(RT.Functor, F);
-    var partitionMap = Filterable_1.partitionMap(RT.Functor, F);
+    var C = (0, exports.getCompactable)(M);
+    var filter = (0, Filterable_1.filter)(RT.Functor, F);
+    var filterMap = (0, Filterable_1.filterMap)(RT.Functor, F);
+    var partition = (0, Filterable_1.partition)(RT.Functor, F);
+    var partitionMap = (0, Filterable_1.partitionMap)(RT.Functor, F);
     return {
         URI: exports.URI,
         _E: undefined,
         map: _map,
         compact: C.compact,
         separate: C.separate,
-        filter: function (fa, predicate) { return function_1.pipe(fa, filter(predicate)); },
-        filterMap: function (fa, f) { return function_1.pipe(fa, filterMap(f)); },
-        partition: function (fa, predicate) { return function_1.pipe(fa, partition(predicate)); },
-        partitionMap: function (fa, f) { return function_1.pipe(fa, partitionMap(f)); }
+        filter: function (fa, predicate) { return (0, function_1.pipe)(fa, filter(predicate)); },
+        filterMap: function (fa, f) { return (0, function_1.pipe)(fa, filterMap(f)); },
+        partition: function (fa, predicate) { return (0, function_1.pipe)(fa, partition(predicate)); },
+        partitionMap: function (fa, f) { return (0, function_1.pipe)(fa, partitionMap(f)); }
     };
 }
 exports.getFilterable = getFilterable;
 /**
- * @category instances
+ * The default [`ApplicativePar`](#applicativepar) instance returns the first error, if you want to
+ * get all errors you need to provide a way to concatenate them via a `Semigroup`.
+ *
+ * See [`getApplicativeValidation`](./Either.ts.html#getapplicativevalidation).
+ *
+ * @category error handling
  * @since 2.7.0
  */
 function getApplicativeReaderTaskValidation(A, S) {
-    var ap = Apply_1.ap(R.Apply, TE.getApplicativeTaskValidation(A, S));
+    var ap = (0, Apply_1.ap)(R.Apply, TE.getApplicativeTaskValidation(A, S));
     return {
         URI: exports.URI,
         _E: undefined,
         map: _map,
-        ap: function (fab, fa) { return function_1.pipe(fab, ap(fa)); },
+        ap: function (fab, fa) { return (0, function_1.pipe)(fab, ap(fa)); },
         of: exports.of
     };
 }
 exports.getApplicativeReaderTaskValidation = getApplicativeReaderTaskValidation;
 /**
- * @category instances
+ * The default [`Alt`](#alt) instance returns the last error, if you want to
+ * get all errors you need to provide a way to concatenate them via a `Semigroup`.
+ *
+ * See [`getAltValidation`](./Either.ts.html#getaltvalidation).
+ *
+ * @category error handling
  * @since 2.7.0
  */
 function getAltReaderTaskValidation(S) {
@@ -11638,7 +12401,7 @@ function getAltReaderTaskValidation(S) {
         URI: exports.URI,
         _E: undefined,
         map: _map,
-        alt: function (fa, that) { return function_1.pipe(fa, alt(that)); }
+        alt: function (fa, that) { return (0, function_1.pipe)(fa, alt(that)); }
     };
 }
 exports.getAltReaderTaskValidation = getAltReaderTaskValidation;
@@ -11651,14 +12414,10 @@ exports.Functor = {
     map: _map
 };
 /**
- * Derivable from `Functor`.
- *
- * @category combinators
+ * @category mapping
  * @since 2.10.0
  */
-exports.flap = 
-/*#__PURE__*/
-Functor_1.flap(exports.Functor);
+exports.flap = (0, Functor_1.flap)(exports.Functor);
 /**
  * @category instances
  * @since 2.10.0
@@ -11668,6 +12427,8 @@ exports.Pointed = {
     of: exports.of
 };
 /**
+ * Runs computations in parallel.
+ *
  * @category instances
  * @since 2.10.0
  */
@@ -11679,26 +12440,34 @@ exports.ApplyPar = {
 /**
  * Combine two effectful actions, keeping only the result of the first.
  *
- * Derivable from `Apply`.
- *
- * @category combinators
  * @since 2.0.0
  */
-exports.apFirst = 
-/*#__PURE__*/
-Apply_1.apFirst(exports.ApplyPar);
+exports.apFirst = (0, Apply_1.apFirst)(exports.ApplyPar);
+/**
+ * Less strict version of [`apFirst`](#apfirst).
+ *
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @since 2.12.0
+ */
+exports.apFirstW = exports.apFirst;
 /**
  * Combine two effectful actions, keeping only the result of the second.
  *
- * Derivable from `Apply`.
- *
- * @category combinators
  * @since 2.0.0
  */
-exports.apSecond = 
-/*#__PURE__*/
-Apply_1.apSecond(exports.ApplyPar);
+exports.apSecond = (0, Apply_1.apSecond)(exports.ApplyPar);
 /**
+ * Less strict version of [`apSecond`](#apsecond).
+ *
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @since 2.12.0
+ */
+exports.apSecondW = exports.apSecond;
+/**
+ * Runs computations in parallel.
+ *
  * @category instances
  * @since 2.7.0
  */
@@ -11709,6 +12478,8 @@ exports.ApplicativePar = {
     of: exports.of
 };
 /**
+ * Runs computations sequentially.
+ *
  * @category instances
  * @since 2.10.0
  */
@@ -11718,6 +12489,8 @@ exports.ApplySeq = {
     ap: _apSeq
 };
 /**
+ * Runs computations sequentially.
+ *
  * @category instances
  * @since 2.7.0
  */
@@ -11789,20 +12562,16 @@ exports.MonadThrow = {
  * Composes computations in sequence, using the return value of one computation to determine the next computation and
  * keeping only the result of the first.
  *
- * Derivable from `Chain`.
- *
- * @category combinators
+ * @category sequencing
  * @since 2.0.0
  */
-exports.chainFirst = 
-/*#__PURE__*/
-Chain_1.chainFirst(exports.Chain);
+exports.chainFirst = (0, Chain_1.chainFirst)(exports.Chain);
 /**
  * Less strict version of [`chainFirst`](#chainfirst).
  *
- * Derivable from `Chain`.
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
  *
- * @category combinators
+ * @category sequencing
  * @since 2.8.0
  */
 exports.chainFirstW = exports.chainFirst;
@@ -11838,95 +12607,131 @@ exports.FromReader = {
  * @category constructors
  * @since 2.0.0
  */
-exports.ask = 
-/*#__PURE__*/
-FromReader_1.ask(exports.FromReader);
+exports.ask = (0, FromReader_1.ask)(exports.FromReader);
 /**
  * Projects a value from the global context in a `ReaderEither`.
  *
  * @category constructors
  * @since 2.0.0
  */
-exports.asks = 
-/*#__PURE__*/
-FromReader_1.asks(exports.FromReader);
+exports.asks = (0, FromReader_1.asks)(exports.FromReader);
 /**
- * @category combinators
+ * @category lifting
  * @since 2.11.0
  */
-exports.fromReaderK = 
-/*#__PURE__*/
-FromReader_1.fromReaderK(exports.FromReader);
+exports.fromReaderK = (0, FromReader_1.fromReaderK)(exports.FromReader);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.11.0
  */
-exports.chainReaderK = 
-/*#__PURE__*/
-FromReader_1.chainReaderK(exports.FromReader, exports.Chain);
+exports.chainReaderK = (0, FromReader_1.chainReaderK)(exports.FromReader, exports.Chain);
 /**
  * Less strict version of [`chainReaderK`](#chainreaderk).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.11.0
  */
 exports.chainReaderKW = exports.chainReaderK;
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.11.0
  */
-exports.chainFirstReaderK = 
-/*#__PURE__*/
-FromReader_1.chainFirstReaderK(exports.FromReader, exports.Chain);
+exports.chainFirstReaderK = (0, FromReader_1.chainFirstReaderK)(exports.FromReader, exports.Chain);
 /**
  * Less strict version of [`chainFirstReaderK`](#chainfirstreaderk).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.11.0
  */
 exports.chainFirstReaderKW = exports.chainFirstReaderK;
 /**
- * @category combinators
+ * @category lifting
  * @since 2.11.0
  */
-var fromReaderTaskK = function (f) { return function () {
-    var a = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        a[_i] = arguments[_i];
-    }
-    return exports.rightReaderTask(f.apply(void 0, a));
-}; };
+var fromReaderTaskK = function (f) {
+    return function () {
+        var a = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            a[_i] = arguments[_i];
+        }
+        return (0, exports.rightReaderTask)(f.apply(void 0, a));
+    };
+};
 exports.fromReaderTaskK = fromReaderTaskK;
 /**
  * Less strict version of [`chainReaderTaskK`](#chainreadertaskk).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.11.0
  */
-var chainReaderTaskKW = function (f) {
-    return exports.chainW(exports.fromReaderTaskK(f));
-};
+var chainReaderTaskKW = function (f) { return (0, exports.chainW)((0, exports.fromReaderTaskK)(f)); };
 exports.chainReaderTaskKW = chainReaderTaskKW;
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.11.0
  */
 exports.chainReaderTaskK = exports.chainReaderTaskKW;
 /**
  * Less strict version of [`chainFirstReaderTaskK`](#chainfirstreadertaskk).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.11.0
  */
-var chainFirstReaderTaskKW = function (f) {
-    return exports.chainFirstW(exports.fromReaderTaskK(f));
-};
+var chainFirstReaderTaskKW = function (f) { return (0, exports.chainFirstW)((0, exports.fromReaderTaskK)(f)); };
 exports.chainFirstReaderTaskKW = chainFirstReaderTaskKW;
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.11.0
  */
 exports.chainFirstReaderTaskK = exports.chainFirstReaderTaskKW;
+/**
+ * @category lifting
+ * @since 2.13.0
+ */
+var fromReaderIOK = function (f) {
+    return function () {
+        var a = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            a[_i] = arguments[_i];
+        }
+        return (0, exports.rightReaderIO)(f.apply(void 0, a));
+    };
+};
+exports.fromReaderIOK = fromReaderIOK;
+/**
+ * Less strict version of [`chainReaderIOK`](#chainreaderiok).
+ *
+ * @category sequencing
+ * @since 2.13.0
+ */
+var chainReaderIOKW = function (f) { return (0, exports.chainW)((0, exports.fromReaderIOK)(f)); };
+exports.chainReaderIOKW = chainReaderIOKW;
+/**
+ * @category sequencing
+ * @since 2.13.0
+ */
+exports.chainReaderIOK = exports.chainReaderIOKW;
+/**
+ * Less strict version of [`chainFirstReaderIOK`](#chainfirstreaderiok).
+ *
+ * @category sequencing
+ * @since 2.13.0
+ */
+var chainFirstReaderIOKW = function (f) { return (0, exports.chainFirstW)((0, exports.fromReaderIOK)(f)); };
+exports.chainFirstReaderIOKW = chainFirstReaderIOKW;
+/**
+ * @category sequencing
+ * @since 2.13.0
+ */
+exports.chainFirstReaderIOK = exports.chainFirstReaderIOKW;
 /**
  * @category instances
  * @since 2.10.0
@@ -11936,68 +12741,74 @@ exports.FromEither = {
     fromEither: exports.fromEither
 };
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.0.0
  */
 exports.fromOption = 
-/*#__PURE__*/
-FromEither_1.fromOption(exports.FromEither);
+/*#__PURE__*/ (0, FromEither_1.fromOption)(exports.FromEither);
 /**
- * @category combinators
+ * @category lifting
  * @since 2.10.0
  */
-exports.fromOptionK = 
-/*#__PURE__*/
-FromEither_1.fromOptionK(exports.FromEither);
+exports.fromOptionK = (0, FromEither_1.fromOptionK)(exports.FromEither);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.10.0
  */
 exports.chainOptionK = 
-/*#__PURE__*/
-FromEither_1.chainOptionK(exports.FromEither, exports.Chain);
+/*#__PURE__*/ (0, FromEither_1.chainOptionK)(exports.FromEither, exports.Chain);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.4.0
  */
-exports.chainEitherK = 
-/*#__PURE__*/
-FromEither_1.chainEitherK(exports.FromEither, exports.Chain);
+exports.chainEitherK = (0, FromEither_1.chainEitherK)(exports.FromEither, exports.Chain);
 /**
  * Less strict version of [`chainEitherK`](#chaineitherk).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.6.1
  */
 exports.chainEitherKW = exports.chainEitherK;
 /**
- * @category constructors
- * @since 2.0.0
+ * @category sequencing
+ * @since 2.12.0
  */
-exports.fromPredicate = 
-/*#__PURE__*/
-FromEither_1.fromPredicate(exports.FromEither);
+exports.chainFirstEitherK = (0, FromEither_1.chainFirstEitherK)(exports.FromEither, exports.Chain);
 /**
- * @category combinators
+ * Less strict version of [`chainFirstEitherK`](#chainfirsteitherk).
+ *
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category sequencing
+ * @since 2.12.0
+ */
+exports.chainFirstEitherKW = exports.chainFirstEitherK;
+/**
+ * @category lifting
  * @since 2.0.0
  */
-exports.filterOrElse = 
-/*#__PURE__*/
-FromEither_1.filterOrElse(exports.FromEither, exports.Chain);
+exports.fromPredicate = (0, FromEither_1.fromPredicate)(exports.FromEither);
+/**
+ * @category filtering
+ * @since 2.0.0
+ */
+exports.filterOrElse = (0, FromEither_1.filterOrElse)(exports.FromEither, exports.Chain);
 /**
  * Less strict version of [`filterOrElse`](#filterorelse).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @category filtering
  * @since 2.9.0
  */
 exports.filterOrElseW = exports.filterOrElse;
 /**
- * @category combinators
+ * @category lifting
  * @since 2.4.0
  */
-exports.fromEitherK = 
-/*#__PURE__*/
-FromEither_1.fromEitherK(exports.FromEither);
+exports.fromEitherK = (0, FromEither_1.fromEitherK)(exports.FromEither);
 /**
  * @category instances
  * @since 2.10.0
@@ -12007,26 +12818,20 @@ exports.FromIO = {
     fromIO: exports.fromIO
 };
 /**
- * @category combinators
+ * @category lifting
  * @since 2.10.0
  */
-exports.fromIOK = 
-/*#__PURE__*/
-FromIO_1.fromIOK(exports.FromIO);
+exports.fromIOK = (0, FromIO_1.fromIOK)(exports.FromIO);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.10.0
  */
-exports.chainIOK = 
-/*#__PURE__*/
-FromIO_1.chainIOK(exports.FromIO, exports.Chain);
+exports.chainIOK = (0, FromIO_1.chainIOK)(exports.FromIO, exports.Chain);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.10.0
  */
-exports.chainFirstIOK = 
-/*#__PURE__*/
-FromIO_1.chainFirstIOK(exports.FromIO, exports.Chain);
+exports.chainFirstIOK = (0, FromIO_1.chainFirstIOK)(exports.FromIO, exports.Chain);
 /**
  * @category instances
  * @since 2.10.0
@@ -12037,26 +12842,20 @@ exports.FromTask = {
     fromTask: exports.fromTask
 };
 /**
- * @category combinators
+ * @category lifting
  * @since 2.10.0
  */
-exports.fromTaskK = 
-/*#__PURE__*/
-FromTask_1.fromTaskK(exports.FromTask);
+exports.fromTaskK = (0, FromTask_1.fromTaskK)(exports.FromTask);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.10.0
  */
-exports.chainTaskK = 
-/*#__PURE__*/
-FromTask_1.chainTaskK(exports.FromTask, exports.Chain);
+exports.chainTaskK = (0, FromTask_1.chainTaskK)(exports.FromTask, exports.Chain);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.10.0
  */
-exports.chainFirstTaskK = 
-/*#__PURE__*/
-FromTask_1.chainFirstTaskK(exports.FromTask, exports.Chain);
+exports.chainFirstTaskK = (0, FromTask_1.chainFirstTaskK)(exports.FromTask, exports.Chain);
 // -------------------------------------------------------------------------------------
 // utils
 // -------------------------------------------------------------------------------------
@@ -12068,142 +12867,168 @@ FromTask_1.chainFirstTaskK(exports.FromTask, exports.Chain);
  *
  * @since 2.0.4
  */
-function bracket(aquire, use, release) {
-    return function (r) {
-        return TE.bracket(aquire(r), function (a) { return use(a)(r); }, function (a, e) { return release(a, e)(r); });
-    };
+function bracket(acquire, use, release) {
+    return bracketW(acquire, use, release);
 }
 exports.bracket = bracket;
+/**
+ * Less strict version of [`bracket`](#bracket).
+ *
+ * @since 2.12.0
+ */
+function bracketW(acquire, use, release) {
+    return function (r) {
+        return TE.bracketW(acquire(r), function (a) { return use(a)(r); }, function (a, e) { return release(a, e)(r); });
+    };
+}
+exports.bracketW = bracketW;
 // -------------------------------------------------------------------------------------
 // do notation
 // -------------------------------------------------------------------------------------
 /**
+ * @category do notation
  * @since 2.9.0
  */
-exports.Do = 
-/*#__PURE__*/
-exports.of(_.emptyRecord);
+exports.Do = (0, exports.of)(_.emptyRecord);
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.bindTo = 
-/*#__PURE__*/
-Functor_1.bindTo(exports.Functor);
+exports.bindTo = (0, Functor_1.bindTo)(exports.Functor);
+var let_ = /*#__PURE__*/ (0, Functor_1.let)(exports.Functor);
+exports.let = let_;
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.bind = 
-/*#__PURE__*/
-Chain_1.bind(exports.Chain);
+exports.bind = (0, Chain_1.bind)(exports.Chain);
 /**
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category do notation
  * @since 2.8.0
  */
 exports.bindW = exports.bind;
-// -------------------------------------------------------------------------------------
-// pipeable sequence S
-// -------------------------------------------------------------------------------------
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.apS = 
-/*#__PURE__*/
-Apply_1.apS(exports.ApplyPar);
+exports.apS = (0, Apply_1.apS)(exports.ApplyPar);
 /**
+ * Less strict version of [`apS`](#aps).
+ *
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category do notation
  * @since 2.8.0
  */
 exports.apSW = exports.apS;
-// -------------------------------------------------------------------------------------
-// sequence T
-// -------------------------------------------------------------------------------------
 /**
  * @since 2.11.0
  */
-exports.ApT = 
-/*#__PURE__*/
-exports.of(_.emptyReadonlyArray);
+exports.ApT = (0, exports.of)(_.emptyReadonlyArray);
 // -------------------------------------------------------------------------------------
 // array utils
 // -------------------------------------------------------------------------------------
 /**
  * Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(ApplicativePar)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
 var traverseReadonlyNonEmptyArrayWithIndex = function (f) {
-    return function_1.flow(R.traverseReadonlyNonEmptyArrayWithIndex(f), R.map(TE.traverseReadonlyNonEmptyArrayWithIndex(function_1.SK)));
+    return (0, function_1.flow)(R.traverseReadonlyNonEmptyArrayWithIndex(f), R.map(TE.traverseReadonlyNonEmptyArrayWithIndex(function_1.SK)));
 };
 exports.traverseReadonlyNonEmptyArrayWithIndex = traverseReadonlyNonEmptyArrayWithIndex;
 /**
  * Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativePar)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
 var traverseReadonlyArrayWithIndex = function (f) {
-    var g = exports.traverseReadonlyNonEmptyArrayWithIndex(f);
+    var g = (0, exports.traverseReadonlyNonEmptyArrayWithIndex)(f);
     return function (as) { return (_.isNonEmpty(as) ? g(as) : exports.ApT); };
 };
 exports.traverseReadonlyArrayWithIndex = traverseReadonlyArrayWithIndex;
 /**
  * Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(ApplicativeSeq)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
 var traverseReadonlyNonEmptyArrayWithIndexSeq = function (f) {
-    return function_1.flow(R.traverseReadonlyNonEmptyArrayWithIndex(f), R.map(TE.traverseReadonlyNonEmptyArrayWithIndexSeq(function_1.SK)));
+    return (0, function_1.flow)(R.traverseReadonlyNonEmptyArrayWithIndex(f), R.map(TE.traverseReadonlyNonEmptyArrayWithIndexSeq(function_1.SK)));
 };
 exports.traverseReadonlyNonEmptyArrayWithIndexSeq = traverseReadonlyNonEmptyArrayWithIndexSeq;
 /**
  * Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativeSeq)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
 var traverseReadonlyArrayWithIndexSeq = function (f) {
-    var g = exports.traverseReadonlyNonEmptyArrayWithIndexSeq(f);
+    var g = (0, exports.traverseReadonlyNonEmptyArrayWithIndexSeq)(f);
     return function (as) { return (_.isNonEmpty(as) ? g(as) : exports.ApT); };
 };
 exports.traverseReadonlyArrayWithIndexSeq = traverseReadonlyArrayWithIndexSeq;
 /**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex;
 /**
+ * Equivalent to `ReadonlyArray#traverse(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 var traverseArray = function (f) {
-    return exports.traverseReadonlyArrayWithIndex(function (_, a) { return f(a); });
+    return (0, exports.traverseReadonlyArrayWithIndex)(function (_, a) { return f(a); });
 };
 exports.traverseArray = traverseArray;
 /**
+ * Equivalent to `ReadonlyArray#sequence(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
-exports.sequenceArray = 
-/*#__PURE__*/
-exports.traverseArray(function_1.identity);
+exports.sequenceArray = (0, exports.traverseArray)(function_1.identity);
 /**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativeSeq)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.traverseSeqArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq;
 /**
+ * Equivalent to `ReadonlyArray#traverse(ApplicativeSeq)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 var traverseSeqArray = function (f) {
-    return exports.traverseReadonlyArrayWithIndexSeq(function (_, a) { return f(a); });
+    return (0, exports.traverseReadonlyArrayWithIndexSeq)(function (_, a) { return f(a); });
 };
 exports.traverseSeqArray = traverseSeqArray;
 /**
+ * Equivalent to `ReadonlyArray#sequence(ApplicativeSeq)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
-exports.sequenceSeqArray = 
-/*#__PURE__*/
-exports.traverseSeqArray(function_1.identity);
+exports.sequenceSeqArray = (0, exports.traverseSeqArray)(function_1.identity);
 // -------------------------------------------------------------------------------------
 // deprecated
 // -------------------------------------------------------------------------------------
-// tslint:disable: deprecation
 /**
- * Use small, specific instances instead.
+ * This instance is deprecated, use small, specific instances instead.
+ * For example if a function needs a `Functor` instance, pass `RTE.Functor` instead of `RTE.readerTaskEither`
+ * (where `RTE` is from `import RTE from 'fp-ts/ReaderTaskEither'`)
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12221,9 +13046,11 @@ exports.readerTaskEither = {
     throwError: exports.throwError
 };
 /**
- * Use small, specific instances instead.
+ * This instance is deprecated, use small, specific instances instead.
+ * For example if a function needs a `Functor` instance, pass `RTE.Functor` instead of `RTE.readerTaskEitherSeq`
+ * (where `RTE` is from `import RTE from 'fp-ts/ReaderTaskEither'`)
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12246,32 +13073,30 @@ exports.readerTaskEitherSeq = {
  * Semigroup returning the left-most `Left` value. If both operands are `Right`s then the inner values
  * are concatenated using the provided `Semigroup`
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
 exports.getApplySemigroup = 
-/*#__PURE__*/
-Apply_1.getApplySemigroup(exports.ApplySeq);
+/*#__PURE__*/ (0, Apply_1.getApplySemigroup)(exports.ApplySeq);
 /**
  * Use [`getApplicativeMonoid`](./Applicative.ts.html#getapplicativemonoid) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
 exports.getApplyMonoid = 
-/*#__PURE__*/
-Applicative_1.getApplicativeMonoid(exports.ApplicativeSeq);
+/*#__PURE__*/ (0, Applicative_1.getApplicativeMonoid)(exports.ApplicativeSeq);
 /**
  * Use [`getApplySemigroup`](./Apply.ts.html#getapplysemigroup) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
 var getSemigroup = function (S) {
-    return Apply_1.getApplySemigroup(RT.ApplySeq)(E.getSemigroup(S));
+    return (0, Apply_1.getApplySemigroup)(RT.ApplySeq)(E.getSemigroup(S));
 };
 exports.getSemigroup = getSemigroup;
 /**
@@ -12301,6 +13126,7 @@ function getReaderTaskValidation(SE) {
 }
 exports.getReaderTaskValidation = getReaderTaskValidation;
 /**
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12320,7 +13146,11 @@ exports.run = run;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -12441,7 +13271,6 @@ exports.constant = constant;
  *
  * assert.deepStrictEqual(reverse(S.Semigroup).concat('a', 'b'), 'ba')
  *
- * @category combinators
  * @since 2.10.0
  */
 exports.reverse = M.reverse;
@@ -12464,7 +13293,6 @@ exports.reverse = M.reverse;
  *
  * assert.deepStrictEqual(S.concat({ x: 1, y: 2 }, { x: 3, y: 4 }), { x: 4, y: 6 })
  *
- * @category combinators
  * @since 2.10.0
  */
 var struct = function (semigroups) { return ({
@@ -12494,7 +13322,6 @@ exports.struct = struct;
  * const S2 = tuple(S.Semigroup, N.SemigroupSum, B.SemigroupAll)
  * assert.deepStrictEqual(S2.concat(['a', 1, true], ['b', 2, false]), ['ab', 3, false])
  *
- * @category combinators
  * @since 2.10.0
  */
 var tuple = function () {
@@ -12519,12 +13346,13 @@ exports.tuple = tuple;
  *
  * assert.strictEqual(S1.concat('a', 'b'), 'a + b')
  *
- * @category combinators
  * @since 2.10.0
  */
-var intercalate = function (middle) { return function (S) { return ({
-    concat: function (x, y) { return S.concat(x, S.concat(middle, y)); }
-}); }; };
+var intercalate = function (middle) {
+    return function (S) { return ({
+        concat: function (x, y) { return S.concat(x, S.concat(middle, y)); }
+    }); };
+};
 exports.intercalate = intercalate;
 // -------------------------------------------------------------------------------------
 // instances
@@ -12581,15 +13409,15 @@ exports.concatAll = M.concatAll;
 /**
  * Use `void` module instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
-exports.semigroupVoid = exports.constant(undefined);
+exports.semigroupVoid = (0, exports.constant)(undefined);
 /**
  * Use [`getAssignSemigroup`](./struct.ts.html#getAssignSemigroup) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12600,7 +13428,7 @@ exports.getObjectSemigroup = getObjectSemigroup;
 /**
  * Use [`last`](#last) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12608,7 +13436,7 @@ exports.getLastSemigroup = exports.last;
 /**
  * Use [`first`](#first) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12616,7 +13444,7 @@ exports.getFirstSemigroup = exports.first;
 /**
  * Use [`tuple`](#tuple) instead.
  *
- * @category combinators
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12624,7 +13452,7 @@ exports.getTupleSemigroup = exports.tuple;
 /**
  * Use [`struct`](#struct) instead.
  *
- * @category combinators
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12632,7 +13460,7 @@ exports.getStructSemigroup = exports.struct;
 /**
  * Use [`reverse`](#reverse) instead.
  *
- * @category combinators
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12640,7 +13468,7 @@ exports.getDualSemigroup = exports.reverse;
 /**
  * Use [`max`](#max) instead.
  *
- * @category constructors
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12648,7 +13476,7 @@ exports.getJoinSemigroup = exports.max;
 /**
  * Use [`min`](#min) instead.
  *
- * @category constructors
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12656,20 +13484,20 @@ exports.getMeetSemigroup = exports.min;
 /**
  * Use [`intercalate`](#intercalate) instead.
  *
- * @category combinators
+ * @category zone of death
  * @since 2.5.0
  * @deprecated
  */
 exports.getIntercalateSemigroup = exports.intercalate;
 function fold(S) {
-    var concatAllS = exports.concatAll(S);
+    var concatAllS = (0, exports.concatAll)(S);
     return function (startWith, as) { return (as === undefined ? concatAllS(startWith) : concatAllS(startWith)(as)); };
 }
 exports.fold = fold;
 /**
  * Use [`SemigroupAll`](./boolean.ts.html#SemigroupAll) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12679,7 +13507,7 @@ exports.semigroupAll = {
 /**
  * Use [`SemigroupAny`](./boolean.ts.html#SemigroupAny) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12689,7 +13517,7 @@ exports.semigroupAny = {
 /**
  * Use [`getSemigroup`](./function.ts.html#getSemigroup) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12697,7 +13525,7 @@ exports.getFunctionSemigroup = function_1.getSemigroup;
 /**
  * Use [`Semigroup`](./string.ts.html#Semigroup) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12707,7 +13535,7 @@ exports.semigroupString = {
 /**
  * Use [`SemigroupSum`](./number.ts.html#SemigroupSum) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12717,7 +13545,7 @@ exports.semigroupSum = {
 /**
  * Use [`SemigroupProduct`](./number.ts.html#SemigroupProduct) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -12758,51 +13586,48 @@ var Functor_1 = __nccwpck_require__(5533);
  */
 var separated = function (left, right) { return ({ left: left, right: right }); };
 exports.separated = separated;
-// -------------------------------------------------------------------------------------
-// non-pipeables
-// -------------------------------------------------------------------------------------
-var _map = function (fa, f) { return function_1.pipe(fa, exports.map(f)); };
-var _mapLeft = function (fa, f) { return function_1.pipe(fa, exports.mapLeft(f)); };
-var _bimap = function (fa, g, f) { return function_1.pipe(fa, exports.bimap(g, f)); };
-// -------------------------------------------------------------------------------------
-// type class members
-// -------------------------------------------------------------------------------------
+var _map = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); };
+var _mapLeft = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.mapLeft)(f)); };
+var _bimap = function (fa, g, f) { return (0, function_1.pipe)(fa, (0, exports.bimap)(g, f)); };
 /**
  * `map` can be used to turn functions `(a: A) => B` into functions `(fa: F<A>) => F<B>` whose argument and return types
  * use the type constructor `F` to represent some computational context.
  *
- * @category Functor
+ * @category mapping
  * @since 2.10.0
  */
-var map = function (f) { return function (fa) {
-    return exports.separated(exports.left(fa), f(exports.right(fa)));
-}; };
+var map = function (f) {
+    return function (fa) {
+        return (0, exports.separated)((0, exports.left)(fa), f((0, exports.right)(fa)));
+    };
+};
 exports.map = map;
 /**
  * Map a function over the first type argument of a bifunctor.
  *
- * @category Bifunctor
+ * @category error handling
  * @since 2.10.0
  */
-var mapLeft = function (f) { return function (fa) {
-    return exports.separated(f(exports.left(fa)), exports.right(fa));
-}; };
+var mapLeft = function (f) {
+    return function (fa) {
+        return (0, exports.separated)(f((0, exports.left)(fa)), (0, exports.right)(fa));
+    };
+};
 exports.mapLeft = mapLeft;
 /**
  * Map a pair of functions over the two type arguments of the bifunctor.
  *
- * @category Bifunctor
+ * @category mapping
  * @since 2.10.0
  */
-var bimap = function (f, g) { return function (fa) {
-    return exports.separated(f(exports.left(fa)), g(exports.right(fa)));
-}; };
+var bimap = function (f, g) {
+    return function (fa) {
+        return (0, exports.separated)(f((0, exports.left)(fa)), g((0, exports.right)(fa)));
+    };
+};
 exports.bimap = bimap;
-// -------------------------------------------------------------------------------------
-// instances
-// -------------------------------------------------------------------------------------
 /**
- * @category instances
+ * @category type lambdas
  * @since 2.10.0
  */
 exports.URI = 'Separated';
@@ -12824,14 +13649,10 @@ exports.Functor = {
     map: _map
 };
 /**
- * Derivable from `Functor`.
- *
- * @category combinators
+ * @category mapping
  * @since 2.10.0
  */
-exports.flap = 
-/*#__PURE__*/
-Functor_1.flap(exports.Functor);
+exports.flap = (0, Functor_1.flap)(exports.Functor);
 // -------------------------------------------------------------------------------------
 // utils
 // -------------------------------------------------------------------------------------
@@ -12856,7 +13677,11 @@ exports.right = right;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -12874,7 +13699,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getMonoid = exports.getSemigroup = exports.taskSeq = exports.task = exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apS = exports.bind = exports.bindTo = exports.Do = exports.never = exports.FromTask = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.FromIO = exports.chainFirst = exports.MonadTask = exports.fromTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecond = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.Functor = exports.getRaceMonoid = exports.URI = exports.flatten = exports.chain = exports.of = exports.ap = exports.map = exports.delay = exports.fromIO = void 0;
+exports.getMonoid = exports.getSemigroup = exports.taskSeq = exports.task = exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apS = exports.bind = exports.let = exports.bindTo = exports.Do = exports.never = exports.FromTask = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.FromIO = exports.chainFirst = exports.MonadTask = exports.fromTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecond = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.Functor = exports.getRaceMonoid = exports.URI = exports.flatten = exports.chain = exports.of = exports.ap = exports.map = exports.delay = exports.fromIO = void 0;
 /**
  * ```ts
  * interface Task<A> {
@@ -12895,10 +13720,10 @@ var function_1 = __nccwpck_require__(6985);
 var Functor_1 = __nccwpck_require__(5533);
 var _ = __importStar(__nccwpck_require__(1840));
 // -------------------------------------------------------------------------------------
-// natural transformations
+// conversions
 // -------------------------------------------------------------------------------------
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.0.0
  */
 var fromIO = function (ma) { return function () { return Promise.resolve().then(ma); }; };
@@ -12930,37 +13755,29 @@ exports.fromIO = fromIO;
  *
  * test()
  *
- * @category combinators
  * @since 2.0.0
  */
 function delay(millis) {
     return function (ma) { return function () {
         return new Promise(function (resolve) {
             setTimeout(function () {
-                // tslint:disable-next-line: no-floating-promises
                 Promise.resolve().then(ma).then(resolve);
             }, millis);
         });
     }; };
 }
 exports.delay = delay;
-// -------------------------------------------------------------------------------------
-// non-pipeables
-// -------------------------------------------------------------------------------------
-var _map = function (fa, f) { return function_1.pipe(fa, exports.map(f)); };
-var _apPar = function (fab, fa) { return function_1.pipe(fab, exports.ap(fa)); };
+var _map = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); };
+var _apPar = function (fab, fa) { return (0, function_1.pipe)(fab, (0, exports.ap)(fa)); };
 var _apSeq = function (fab, fa) {
-    return function_1.pipe(fab, exports.chain(function (f) { return function_1.pipe(fa, exports.map(f)); }));
+    return (0, function_1.pipe)(fab, (0, exports.chain)(function (f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); }));
 };
-var _chain = function (ma, f) { return function_1.pipe(ma, exports.chain(f)); };
-// -------------------------------------------------------------------------------------
-// type class members
-// -------------------------------------------------------------------------------------
+var _chain = function (ma, f) { return (0, function_1.pipe)(ma, (0, exports.chain)(f)); };
 /**
  * `map` can be used to turn functions `(a: A) => B` into functions `(fa: F<A>) => F<B>` whose argument and return types
  * use the type constructor `F` to represent some computational context.
  *
- * @category Functor
+ * @category mapping
  * @since 2.0.0
  */
 var map = function (f) { return function (fa) { return function () {
@@ -12968,9 +13785,6 @@ var map = function (f) { return function (fa) { return function () {
 }; }; };
 exports.map = map;
 /**
- * Apply a function to an argument under a type constructor.
- *
- * @category Apply
  * @since 2.0.0
  */
 var ap = function (fa) { return function (fab) { return function () {
@@ -12981,7 +13795,7 @@ var ap = function (fa) { return function (fab) { return function () {
 }; }; };
 exports.ap = ap;
 /**
- * @category Pointed
+ * @category constructors
  * @since 2.0.0
  */
 var of = function (a) { return function () { return Promise.resolve(a); }; };
@@ -12989,7 +13803,7 @@ exports.of = of;
 /**
  * Composes computations in sequence, using the return value of one computation to determine the next computation.
  *
- * @category Monad
+ * @category sequencing
  * @since 2.0.0
  */
 var chain = function (f) { return function (ma) { return function () {
@@ -12999,19 +13813,12 @@ var chain = function (f) { return function (ma) { return function () {
 }; }; };
 exports.chain = chain;
 /**
- * Derivable from `Chain`.
- *
- * @category combinators
+ * @category sequencing
  * @since 2.0.0
  */
-exports.flatten = 
-/*#__PURE__*/
-exports.chain(function_1.identity);
-// -------------------------------------------------------------------------------------
-// instances
-// -------------------------------------------------------------------------------------
+exports.flatten = (0, exports.chain)(function_1.identity);
 /**
- * @category instances
+ * @category type lambdas
  * @since 2.0.0
  */
 exports.URI = 'Task';
@@ -13051,14 +13858,10 @@ exports.Functor = {
     map: _map
 };
 /**
- * Derivable from `Functor`.
- *
- * @category combinators
+ * @category mapping
  * @since 2.10.0
  */
-exports.flap = 
-/*#__PURE__*/
-Functor_1.flap(exports.Functor);
+exports.flap = (0, Functor_1.flap)(exports.Functor);
 /**
  * @category instances
  * @since 2.10.0
@@ -13068,6 +13871,8 @@ exports.Pointed = {
     of: exports.of
 };
 /**
+ * Runs computations in parallel.
+ *
  * @category instances
  * @since 2.10.0
  */
@@ -13079,26 +13884,18 @@ exports.ApplyPar = {
 /**
  * Combine two effectful actions, keeping only the result of the first.
  *
- * Derivable from `Apply`.
- *
- * @category combinators
  * @since 2.0.0
  */
-exports.apFirst = 
-/*#__PURE__*/
-Apply_1.apFirst(exports.ApplyPar);
+exports.apFirst = (0, Apply_1.apFirst)(exports.ApplyPar);
 /**
  * Combine two effectful actions, keeping only the result of the second.
  *
- * Derivable from `Apply`.
- *
- * @category combinators
  * @since 2.0.0
  */
-exports.apSecond = 
-/*#__PURE__*/
-Apply_1.apSecond(exports.ApplyPar);
+exports.apSecond = (0, Apply_1.apSecond)(exports.ApplyPar);
 /**
+ * Runs computations in parallel.
+ *
  * @category instances
  * @since 2.7.0
  */
@@ -13109,6 +13906,8 @@ exports.ApplicativePar = {
     of: exports.of
 };
 /**
+ * Runs computations sequentially.
+ *
  * @category instances
  * @since 2.10.0
  */
@@ -13118,6 +13917,8 @@ exports.ApplySeq = {
     ap: _apSeq
 };
 /**
+ * Runs computations sequentially.
+ *
  * @category instances
  * @since 2.7.0
  */
@@ -13161,7 +13962,7 @@ exports.MonadIO = {
     fromIO: exports.fromIO
 };
 /**
- * @category FromTask
+ * @category zone of death
  * @since 2.7.0
  * @deprecated
  */
@@ -13183,14 +13984,10 @@ exports.MonadTask = {
  * Composes computations in sequence, using the return value of one computation to determine the next computation and
  * keeping only the result of the first.
  *
- * Derivable from `Chain`.
- *
- * @category combinators
+ * @category sequencing
  * @since 2.0.0
  */
-exports.chainFirst = 
-/*#__PURE__*/
-Chain_1.chainFirst(exports.Chain);
+exports.chainFirst = (0, Chain_1.chainFirst)(exports.Chain);
 /**
  * @category instances
  * @since 2.10.0
@@ -13200,26 +13997,21 @@ exports.FromIO = {
     fromIO: exports.fromIO
 };
 /**
- * @category combinators
+ * @category lifting
  * @since 2.4.0
  */
 exports.fromIOK = 
-/*#__PURE__*/
-FromIO_1.fromIOK(exports.FromIO);
+/*#__PURE__*/ (0, FromIO_1.fromIOK)(exports.FromIO);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.4.0
  */
-exports.chainIOK = 
-/*#__PURE__*/
-FromIO_1.chainIOK(exports.FromIO, exports.Chain);
+exports.chainIOK = (0, FromIO_1.chainIOK)(exports.FromIO, exports.Chain);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.10.0
  */
-exports.chainFirstIOK = 
-/*#__PURE__*/
-FromIO_1.chainFirstIOK(exports.FromIO, exports.Chain);
+exports.chainFirstIOK = (0, FromIO_1.chainFirstIOK)(exports.FromIO, exports.Chain);
 /**
  * @category instances
  * @since 2.10.0
@@ -13243,133 +14035,154 @@ exports.never = never;
 // do notation
 // -------------------------------------------------------------------------------------
 /**
+ * @category do notation
  * @since 2.9.0
  */
-exports.Do = 
-/*#__PURE__*/
-exports.of(_.emptyRecord);
+exports.Do = (0, exports.of)(_.emptyRecord);
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.bindTo = 
-/*#__PURE__*/
-Functor_1.bindTo(exports.Functor);
+exports.bindTo = (0, Functor_1.bindTo)(exports.Functor);
+var let_ = /*#__PURE__*/ (0, Functor_1.let)(exports.Functor);
+exports.let = let_;
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.bind = 
-/*#__PURE__*/
-Chain_1.bind(exports.Chain);
-// -------------------------------------------------------------------------------------
-// pipeable sequence S
-// -------------------------------------------------------------------------------------
+exports.bind = (0, Chain_1.bind)(exports.Chain);
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.apS = 
-/*#__PURE__*/
-Apply_1.apS(exports.ApplyPar);
-// -------------------------------------------------------------------------------------
-// sequence T
-// -------------------------------------------------------------------------------------
+exports.apS = (0, Apply_1.apS)(exports.ApplyPar);
 /**
  * @since 2.11.0
  */
-exports.ApT = 
-/*#__PURE__*/
-exports.of(_.emptyReadonlyArray);
+exports.ApT = (0, exports.of)(_.emptyReadonlyArray);
 // -------------------------------------------------------------------------------------
 // array utils
 // -------------------------------------------------------------------------------------
 /**
  * Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(ApplicativePar)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
-var traverseReadonlyNonEmptyArrayWithIndex = function (f) { return function (as) { return function () { return Promise.all(as.map(function (a, i) { return Promise.resolve().then(function () { return f(i, a)(); }); })); }; }; };
+var traverseReadonlyNonEmptyArrayWithIndex = function (f) {
+    return function (as) {
+        return function () {
+            return Promise.all(as.map(function (a, i) { return Promise.resolve().then(function () { return f(i, a)(); }); }));
+        };
+    };
+};
 exports.traverseReadonlyNonEmptyArrayWithIndex = traverseReadonlyNonEmptyArrayWithIndex;
 /**
  * Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativePar)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
 var traverseReadonlyArrayWithIndex = function (f) {
-    var g = exports.traverseReadonlyNonEmptyArrayWithIndex(f);
+    var g = (0, exports.traverseReadonlyNonEmptyArrayWithIndex)(f);
     return function (as) { return (_.isNonEmpty(as) ? g(as) : exports.ApT); };
 };
 exports.traverseReadonlyArrayWithIndex = traverseReadonlyArrayWithIndex;
 /**
  * Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(ApplicativeSeq)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
-var traverseReadonlyNonEmptyArrayWithIndexSeq = function (f) { return function (as) { return function () {
-    return _.tail(as).reduce(function (acc, a, i) {
-        return acc.then(function (bs) {
-            return Promise.resolve()
-                .then(f(i + 1, a))
-                .then(function (b) {
-                bs.push(b);
-                return bs;
-            });
-        });
-    }, Promise.resolve()
-        .then(f(0, _.head(as)))
-        .then(_.singleton));
-}; }; };
+var traverseReadonlyNonEmptyArrayWithIndexSeq = function (f) {
+    return function (as) {
+        return function () {
+            return _.tail(as).reduce(function (acc, a, i) {
+                return acc.then(function (bs) {
+                    return Promise.resolve()
+                        .then(f(i + 1, a))
+                        .then(function (b) {
+                        bs.push(b);
+                        return bs;
+                    });
+                });
+            }, Promise.resolve()
+                .then(f(0, _.head(as)))
+                .then(_.singleton));
+        };
+    };
+};
 exports.traverseReadonlyNonEmptyArrayWithIndexSeq = traverseReadonlyNonEmptyArrayWithIndexSeq;
 /**
  * Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativeSeq)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
 var traverseReadonlyArrayWithIndexSeq = function (f) {
-    var g = exports.traverseReadonlyNonEmptyArrayWithIndexSeq(f);
+    var g = (0, exports.traverseReadonlyNonEmptyArrayWithIndexSeq)(f);
     return function (as) { return (_.isNonEmpty(as) ? g(as) : exports.ApT); };
 };
 exports.traverseReadonlyArrayWithIndexSeq = traverseReadonlyArrayWithIndexSeq;
 /**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex;
 /**
+ * Equivalent to `ReadonlyArray#traverse(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 var traverseArray = function (f) {
-    return exports.traverseReadonlyArrayWithIndex(function (_, a) { return f(a); });
+    return (0, exports.traverseReadonlyArrayWithIndex)(function (_, a) { return f(a); });
 };
 exports.traverseArray = traverseArray;
 /**
+ * Equivalent to `ReadonlyArray#sequence(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.sequenceArray = 
-/*#__PURE__*/
-exports.traverseArray(function_1.identity);
+/*#__PURE__*/ (0, exports.traverseArray)(function_1.identity);
 /**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativeSeq)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.traverseSeqArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq;
 /**
+ * Equivalent to `ReadonlyArray#traverse(ApplicativeSeq)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 var traverseSeqArray = function (f) {
-    return exports.traverseReadonlyArrayWithIndexSeq(function (_, a) { return f(a); });
+    return (0, exports.traverseReadonlyArrayWithIndexSeq)(function (_, a) { return f(a); });
 };
 exports.traverseSeqArray = traverseSeqArray;
 /**
+ * Equivalent to `ReadonlyArray#sequence(ApplicativeSeq)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.sequenceSeqArray = 
-/*#__PURE__*/
-exports.traverseSeqArray(function_1.identity);
+/*#__PURE__*/ (0, exports.traverseSeqArray)(function_1.identity);
 // -------------------------------------------------------------------------------------
 // deprecated
 // -------------------------------------------------------------------------------------
-// tslint:disable: deprecation
 /**
- * Use small, specific instances instead.
+ * This instance is deprecated, use small, specific instances instead.
+ * For example if a function needs a `Functor` instance, pass `T.Functor` instead of `T.task`
+ * (where `T` is from `import T from 'fp-ts/Task'`)
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -13383,9 +14196,11 @@ exports.task = {
     fromTask: exports.fromTask
 };
 /**
- * Use small, specific instances instead.
+ * This instance is deprecated, use small, specific instances instead.
+ * For example if a function needs a `Functor` instance, pass `T.Functor` instead of `T.taskSeq`
+ * (where `T` is from `import T from 'fp-ts/Task'`)
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -13401,25 +14216,21 @@ exports.taskSeq = {
 /**
  * Use [`getApplySemigroup`](./Apply.ts.html#getapplysemigroup) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
-exports.getSemigroup = 
-/*#__PURE__*/
-Apply_1.getApplySemigroup(exports.ApplySeq);
+exports.getSemigroup = (0, Apply_1.getApplySemigroup)(exports.ApplySeq);
 /**
  * Use [`getApplicativeMonoid`](./Applicative.ts.html#getapplicativemonoid) instead.
  *
  * Lift a monoid into 'Task', the inner values are concatenated using the provided `Monoid`.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
-exports.getMonoid = 
-/*#__PURE__*/
-Applicative_1.getApplicativeMonoid(exports.ApplicativeSeq);
+exports.getMonoid = (0, Applicative_1.getApplicativeMonoid)(exports.ApplicativeSeq);
 
 
 /***/ }),
@@ -13431,7 +14242,11 @@ Applicative_1.getApplicativeMonoid(exports.ApplicativeSeq);
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -13448,10 +14263,46 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getCompactable = exports.getAltTaskValidation = exports.getApplicativeTaskValidation = exports.URI = exports.throwError = exports.of = exports.altW = exports.alt = exports.flatten = exports.flattenW = exports.chainW = exports.chain = exports.apW = exports.ap = exports.mapLeft = exports.bimap = exports.map = exports.chainIOEitherK = exports.chainIOEitherKW = exports.fromIOEitherK = exports.chainTaskOptionK = exports.fromTaskOptionK = exports.swap = exports.orLeft = exports.orElseFirstW = exports.orElseFirst = exports.orElseW = exports.orElse = exports.toUnion = exports.tryCatchK = exports.tryCatch = exports.getOrElseW = exports.getOrElse = exports.foldW = exports.matchEW = exports.fold = exports.matchE = exports.matchW = exports.match = exports.fromTaskOption = exports.fromIOEither = exports.fromEither = exports.fromTask = exports.fromIO = exports.leftIO = exports.rightIO = exports.leftTask = exports.rightTask = exports.right = exports.left = void 0;
-exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.bindTo = exports.Do = exports.bracket = exports.taskify = exports.chainFirstTaskK = exports.chainTaskK = exports.fromTaskK = exports.FromTask = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.FromIO = exports.fromEitherK = exports.filterOrElseW = exports.filterOrElse = exports.fromPredicate = exports.chainEitherKW = exports.chainEitherK = exports.chainOptionK = exports.fromOptionK = exports.fromOption = exports.FromEither = exports.Alt = exports.Bifunctor = exports.chainFirstW = exports.chainFirst = exports.MonadThrow = exports.MonadTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecond = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.Functor = exports.getFilterable = void 0;
-exports.getTaskValidation = exports.getSemigroup = exports.getApplyMonoid = exports.getApplySemigroup = exports.taskEitherSeq = exports.taskEither = exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = void 0;
+exports.altW = exports.alt = exports.flatten = exports.flattenW = exports.chainW = exports.chain = exports.apW = exports.ap = exports.mapLeft = exports.bimap = exports.map = exports.chainIOEitherK = exports.chainIOEitherKW = exports.fromIOEitherK = exports.chainTaskOptionK = exports.chainTaskOptionKW = exports.fromTaskOptionK = exports.swap = exports.orLeft = exports.orElseFirstTaskK = exports.orElseFirstIOK = exports.orElseFirstW = exports.orElseFirst = exports.orElseW = exports.orElse = exports.chainNullableK = exports.fromNullableK = exports.fromNullable = exports.toUnion = exports.tryCatchK = exports.tryCatch = exports.getOrElseW = exports.getOrElse = exports.foldW = exports.matchEW = exports.fold = exports.matchE = exports.matchW = exports.match = exports.fromTaskOption = exports.fromIOEither = exports.fromEither = exports.fromTask = exports.fromIO = exports.leftIO = exports.rightIO = exports.leftTask = exports.rightTask = exports.right = exports.left = void 0;
+exports.bracketW = exports.bracket = exports.taskify = exports.chainFirstTaskK = exports.chainTaskK = exports.fromTaskK = exports.FromTask = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.FromIO = exports.fromEitherK = exports.filterOrElseW = exports.filterOrElse = exports.fromPredicate = exports.chainFirstEitherKW = exports.chainFirstEitherK = exports.chainEitherKW = exports.chainEitherK = exports.chainOptionK = exports.fromOptionK = exports.fromOption = exports.FromEither = exports.Alt = exports.Bifunctor = exports.chainFirstW = exports.chainFirst = exports.MonadThrow = exports.MonadTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecondW = exports.apSecond = exports.apFirstW = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.Functor = exports.getFilterable = exports.getCompactable = exports.getAltTaskValidation = exports.getApplicativeTaskValidation = exports.URI = exports.throwError = exports.of = void 0;
+exports.getTaskValidation = exports.getSemigroup = exports.getApplyMonoid = exports.getApplySemigroup = exports.taskEitherSeq = exports.taskEither = exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.let = exports.bindTo = exports.Do = void 0;
 var Applicative_1 = __nccwpck_require__(4766);
 var Apply_1 = __nccwpck_require__(205);
 var Chain_1 = __nccwpck_require__(2372);
@@ -13473,141 +14324,125 @@ var T = __importStar(__nccwpck_require__(2664));
  * @category constructors
  * @since 2.0.0
  */
-exports.left = 
-/*#__PURE__*/
-ET.left(T.Pointed);
+exports.left = ET.left(T.Pointed);
 /**
  * @category constructors
  * @since 2.0.0
  */
-exports.right = 
-/*#__PURE__*/
-ET.right(T.Pointed);
+exports.right = ET.right(T.Pointed);
 /**
  * @category constructors
  * @since 2.0.0
  */
-exports.rightTask = 
-/*#__PURE__*/
-ET.rightF(T.Functor);
+exports.rightTask = ET.rightF(T.Functor);
 /**
  * @category constructors
  * @since 2.0.0
  */
-exports.leftTask = 
-/*#__PURE__*/
-ET.leftF(T.Functor);
+exports.leftTask = ET.leftF(T.Functor);
 /**
  * @category constructors
  * @since 2.0.0
  */
-exports.rightIO = 
-/*#__PURE__*/
-function_1.flow(T.fromIO, exports.rightTask);
+exports.rightIO = (0, function_1.flow)(T.fromIO, exports.rightTask);
 /**
  * @category constructors
  * @since 2.0.0
  */
-exports.leftIO = 
-/*#__PURE__*/
-function_1.flow(T.fromIO, exports.leftTask);
+exports.leftIO = (0, function_1.flow)(T.fromIO, exports.leftTask);
 // -------------------------------------------------------------------------------------
-// natural transformations
+// conversions
 // -------------------------------------------------------------------------------------
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.7.0
  */
 exports.fromIO = exports.rightIO;
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.7.0
  */
 exports.fromTask = exports.rightTask;
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.0.0
  */
 exports.fromEither = T.of;
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.0.0
  */
 exports.fromIOEither = T.fromIO;
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.11.0
  */
 var fromTaskOption = function (onNone) {
     return T.map(E.fromOption(onNone));
 };
 exports.fromTaskOption = fromTaskOption;
-// -------------------------------------------------------------------------------------
-// destructors
-// -------------------------------------------------------------------------------------
 /**
- * @category destructors
+ * @category pattern matching
  * @since 2.10.0
  */
 exports.match = 
-/*#__PURE__*/
-ET.match(T.Functor);
+/*#__PURE__*/ ET.match(T.Functor);
 /**
  * Less strict version of [`match`](#match).
  *
- * @category destructors
+ * The `W` suffix (short for **W**idening) means that the handler return types will be merged.
+ *
+ * @category pattern matching
  * @since 2.10.0
  */
 exports.matchW = exports.match;
 /**
- * @category destructors
+ * The `E` suffix (short for **E**ffect) means that the handlers return an effect (`Task`).
+ *
+ * @category pattern matching
  * @since 2.10.0
  */
-exports.matchE = 
-/*#__PURE__*/
-ET.matchE(T.Monad);
+exports.matchE = ET.matchE(T.Monad);
 /**
  * Alias of [`matchE`](#matche).
  *
- * @category destructors
+ * @category pattern matching
  * @since 2.0.0
  */
 exports.fold = exports.matchE;
 /**
  * Less strict version of [`matchE`](#matche).
  *
- * @category destructors
+ * The `W` suffix (short for **W**idening) means that the handler return types will be merged.
+ *
+ * @category pattern matching
  * @since 2.10.0
  */
 exports.matchEW = exports.matchE;
 /**
  * Alias of [`matchEW`](#matchew).
  *
- * @category destructors
+ * @category pattern matching
  * @since 2.10.0
  */
 exports.foldW = exports.matchEW;
 /**
- * @category destructors
+ * @category error handling
  * @since 2.0.0
  */
 exports.getOrElse = 
-/*#__PURE__*/
-ET.getOrElse(T.Monad);
+/*#__PURE__*/ ET.getOrElse(T.Monad);
 /**
  * Less strict version of [`getOrElse`](#getorelse).
  *
- * @category destructors
+ * The `W` suffix (short for **W**idening) means that the handler return type will be merged.
+ *
+ * @category error handling
  * @since 2.6.0
  */
 exports.getOrElseW = exports.getOrElse;
-// -------------------------------------------------------------------------------------
-// interop
-// -------------------------------------------------------------------------------------
 /**
  * Transforms a `Promise` that may reject to a `Promise` that never rejects and returns an `Either` instead.
- *
- * Note: `f` should never `throw` errors, they are not caught.
  *
  * See also [`tryCatchK`](#trycatchk).
  *
@@ -13625,9 +14460,23 @@ exports.getOrElseW = exports.getOrElse;
  * @category interop
  * @since 2.0.0
  */
-var tryCatch = function (f, onRejected) { return function () {
-    return f().then(_.right, function (reason) { return _.left(onRejected(reason)); });
-}; };
+var tryCatch = function (f, onRejected) {
+    return function () { return __awaiter(void 0, void 0, void 0, function () {
+        var reason_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, f().then(_.right)];
+                case 1: return [2 /*return*/, _a.sent()];
+                case 2:
+                    reason_1 = _a.sent();
+                    return [2 /*return*/, _.left(onRejected(reason_1))];
+                case 3: return [2 /*return*/];
+            }
+        });
+    }); };
+};
 exports.tryCatch = tryCatch;
 /**
  * Converts a function returning a `Promise` to one returning a `TaskEither`.
@@ -13635,21 +14484,37 @@ exports.tryCatch = tryCatch;
  * @category interop
  * @since 2.5.0
  */
-var tryCatchK = function (f, onRejected) { return function () {
-    var a = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        a[_i] = arguments[_i];
-    }
-    return exports.tryCatch(function () { return f.apply(void 0, a); }, onRejected);
-}; };
+var tryCatchK = function (f, onRejected) {
+    return function () {
+        var a = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            a[_i] = arguments[_i];
+        }
+        return (0, exports.tryCatch)(function () { return f.apply(void 0, a); }, onRejected);
+    };
+};
 exports.tryCatchK = tryCatchK;
 /**
- * @category interop
+ * @category conversions
  * @since 2.10.0
  */
-exports.toUnion = 
-/*#__PURE__*/
-ET.toUnion(T.Functor);
+exports.toUnion = ET.toUnion(T.Functor);
+/**
+ * @category conversions
+ * @since 2.12.0
+ */
+exports.fromNullable = ET.fromNullable(T.Pointed);
+/**
+ * @category lifting
+ * @since 2.12.0
+ */
+exports.fromNullableK = ET.fromNullableK(T.Pointed);
+/**
+ * @category sequencing
+ * @since 2.12.0
+ */
+exports.chainNullableK = 
+/*#__PURE__*/ ET.chainNullableK(T.Monad);
 // -------------------------------------------------------------------------------------
 // combinators
 // -------------------------------------------------------------------------------------
@@ -13671,173 +14536,183 @@ ET.toUnion(T.Functor);
  *
  * test()
  *
- * @category combinators
+ * @category error handling
  * @since 2.0.0
  */
 exports.orElse = 
-/*#__PURE__*/
-ET.orElse(T.Monad);
+/*#__PURE__*/ ET.orElse(T.Monad);
 /**
  * Less strict version of [`orElse`](#orelse).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the return types will be merged.
+ *
+ * @category error handling
  * @since 2.10.0
  */
 exports.orElseW = exports.orElse;
 /**
- * @category combinators
+ * @category error handling
  * @since 2.11.0
  */
 exports.orElseFirst = 
-/*#__PURE__*/
-ET.orElseFirst(T.Monad);
+/*#__PURE__*/ ET.orElseFirst(T.Monad);
 /**
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @category error handling
  * @since 2.11.0
  */
 exports.orElseFirstW = exports.orElseFirst;
 /**
- * @category combinators
+ * @category error handling
+ * @since 2.12.0
+ */
+var orElseFirstIOK = function (onLeft) { return (0, exports.orElseFirst)((0, exports.fromIOK)(onLeft)); };
+exports.orElseFirstIOK = orElseFirstIOK;
+/**
+ * @category error handling
+ * @since 2.12.0
+ */
+var orElseFirstTaskK = function (onLeft) { return (0, exports.orElseFirst)((0, exports.fromTaskK)(onLeft)); };
+exports.orElseFirstTaskK = orElseFirstTaskK;
+/**
+ * @category error handling
  * @since 2.11.0
  */
 exports.orLeft = 
-/*#__PURE__*/
-ET.orLeft(T.Monad);
+/*#__PURE__*/ ET.orLeft(T.Monad);
 /**
- * @category combinators
  * @since 2.0.0
  */
-exports.swap = 
-/*#__PURE__*/
-ET.swap(T.Functor);
+exports.swap = ET.swap(T.Functor);
 /**
- * @category combinators
+ * @category lifting
  * @since 2.11.0
  */
 var fromTaskOptionK = function (onNone) {
-    var from = exports.fromTaskOption(onNone);
-    return function (f) { return function_1.flow(f, from); };
+    var from = (0, exports.fromTaskOption)(onNone);
+    return function (f) { return (0, function_1.flow)(f, from); };
 };
 exports.fromTaskOptionK = fromTaskOptionK;
 /**
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @category sequencing
+ * @since 2.12.3
+ */
+var chainTaskOptionKW = function (onNone) {
+    return function (f) {
+        return function (ma) {
+            return (0, function_1.pipe)(ma, (0, exports.chain)((0, exports.fromTaskOptionK)(onNone)(f)));
+        };
+    };
+};
+exports.chainTaskOptionKW = chainTaskOptionKW;
+/**
+ * @category sequencing
  * @since 2.11.0
  */
-var chainTaskOptionK = function (onNone) {
-    return function_1.flow(exports.fromTaskOptionK(onNone), exports.chain);
-};
-exports.chainTaskOptionK = chainTaskOptionK;
+exports.chainTaskOptionK = exports.chainTaskOptionKW;
 /**
- * @category combinators
+ * @category lifting
  * @since 2.4.0
  */
-var fromIOEitherK = function (f) { return function_1.flow(f, exports.fromIOEither); };
+var fromIOEitherK = function (f) { return (0, function_1.flow)(f, exports.fromIOEither); };
 exports.fromIOEitherK = fromIOEitherK;
 /**
  * Less strict version of [`chainIOEitherK`](#chainioeitherk).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.6.1
  */
-var chainIOEitherKW = function (f) { return exports.chainW(exports.fromIOEitherK(f)); };
+var chainIOEitherKW = function (f) { return (0, exports.chainW)((0, exports.fromIOEitherK)(f)); };
 exports.chainIOEitherKW = chainIOEitherKW;
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.4.0
  */
 exports.chainIOEitherK = exports.chainIOEitherKW;
-// -------------------------------------------------------------------------------------
-// non-pipeables
-// -------------------------------------------------------------------------------------
-var _map = function (fa, f) { return function_1.pipe(fa, exports.map(f)); };
-var _apPar = function (fab, fa) { return function_1.pipe(fab, exports.ap(fa)); };
+var _map = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); };
+var _apPar = function (fab, fa) { return (0, function_1.pipe)(fab, (0, exports.ap)(fa)); };
 var _apSeq = function (fab, fa) {
-    return function_1.pipe(fab, exports.chain(function (f) { return function_1.pipe(fa, exports.map(f)); }));
+    return (0, function_1.pipe)(fab, (0, exports.chain)(function (f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); }));
 };
 /* istanbul ignore next */
-var _chain = function (ma, f) { return function_1.pipe(ma, exports.chain(f)); };
+var _chain = function (ma, f) { return (0, function_1.pipe)(ma, (0, exports.chain)(f)); };
 /* istanbul ignore next */
-var _bimap = function (fa, f, g) { return function_1.pipe(fa, exports.bimap(f, g)); };
+var _bimap = function (fa, f, g) { return (0, function_1.pipe)(fa, (0, exports.bimap)(f, g)); };
 /* istanbul ignore next */
-var _mapLeft = function (fa, f) { return function_1.pipe(fa, exports.mapLeft(f)); };
+var _mapLeft = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.mapLeft)(f)); };
 /* istanbul ignore next */
-var _alt = function (fa, that) { return function_1.pipe(fa, exports.alt(that)); };
-// -------------------------------------------------------------------------------------
-// type class members
-// -------------------------------------------------------------------------------------
+var _alt = function (fa, that) { return (0, function_1.pipe)(fa, (0, exports.alt)(that)); };
 /**
  * `map` can be used to turn functions `(a: A) => B` into functions `(fa: F<A>) => F<B>` whose argument and return types
  * use the type constructor `F` to represent some computational context.
  *
- * @category Functor
+ * @category mapping
  * @since 2.0.0
  */
-exports.map = 
-/*#__PURE__*/
-ET.map(T.Functor);
+exports.map = ET.map(T.Functor);
 /**
  * Map a pair of functions over the two type arguments of the bifunctor.
  *
- * @category Bifunctor
+ * @category mapping
  * @since 2.0.0
  */
 exports.bimap = 
-/*#__PURE__*/
-ET.bimap(T.Functor);
+/*#__PURE__*/ ET.bimap(T.Functor);
 /**
  * Map a function over the first type argument of a bifunctor.
  *
- * @category Bifunctor
+ * @category error handling
  * @since 2.0.0
  */
 exports.mapLeft = 
-/*#__PURE__*/
-ET.mapLeft(T.Functor);
+/*#__PURE__*/ ET.mapLeft(T.Functor);
 /**
- * Apply a function to an argument under a type constructor.
- *
- * @category Apply
  * @since 2.0.0
  */
 exports.ap = 
-/*#__PURE__*/
-ET.ap(T.ApplyPar);
+/*#__PURE__*/ ET.ap(T.ApplyPar);
 /**
  * Less strict version of [`ap`](#ap).
  *
- * @category Apply
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
  * @since 2.8.0
  */
 exports.apW = exports.ap;
 /**
  * Composes computations in sequence, using the return value of one computation to determine the next computation.
  *
- * @category Monad
+ * @category sequencing
  * @since 2.0.0
  */
 exports.chain = 
-/*#__PURE__*/
-ET.chain(T.Monad);
+/*#__PURE__*/ ET.chain(T.Monad);
 /**
  * Less strict version of [`chain`](#chain).
  *
- * @category Monad
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.6.0
  */
 exports.chainW = exports.chain;
 /**
  * Less strict version of [`flatten`](#flatten).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.11.0
  */
 exports.flattenW = 
-/*#__PURE__*/
-exports.chainW(function_1.identity);
+/*#__PURE__*/ (0, exports.chainW)(function_1.identity);
 /**
- * Derivable from `Chain`.
- *
- * @category combinators
+ * @category sequencing
  * @since 2.0.0
  */
 exports.flatten = exports.flattenW;
@@ -13880,54 +14755,105 @@ exports.flatten = exports.flattenW;
  *
  * test()
  *
- * @category Alt
+ * @category error handling
  * @since 2.0.0
  */
 exports.alt = 
-/*#__PURE__*/
-ET.alt(T.Monad);
+/*#__PURE__*/ ET.alt(T.Monad);
 /**
  * Less strict version of [`alt`](#alt).
  *
- * @category Alt
+ * The `W` suffix (short for **W**idening) means that the error and the return types will be merged.
+ *
+ * @category error handling
  * @since 2.9.0
  */
 exports.altW = exports.alt;
 /**
- * @category Pointed
+ * @category constructors
  * @since 2.0.0
  */
 exports.of = exports.right;
 /**
- * @category MonadTask
  * @since 2.7.0
  */
 exports.throwError = exports.left;
-// -------------------------------------------------------------------------------------
-// instances
-// -------------------------------------------------------------------------------------
 /**
- * @category instances
+ * @category type lambdas
  * @since 2.0.0
  */
 exports.URI = 'TaskEither';
 /**
- * @category instances
+ * The default [`ApplicativePar`](#applicativepar) instance returns the first error, if you want to
+ * get all errors you need to provide a way to concatenate them via a `Semigroup`.
+ *
+ * @example
+ * import * as E from 'fp-ts/Either'
+ * import { pipe } from 'fp-ts/function'
+ * import * as RA from 'fp-ts/ReadonlyArray'
+ * import * as S from 'fp-ts/Semigroup'
+ * import * as string from 'fp-ts/string'
+ * import * as T from 'fp-ts/Task'
+ * import * as TE from 'fp-ts/TaskEither'
+ *
+ * interface User {
+ *   readonly id: string
+ *   readonly name: string
+ * }
+ *
+ * const remoteDatabase: ReadonlyArray<User> = [
+ *   { id: 'id1', name: 'John' },
+ *   { id: 'id2', name: 'Mary' },
+ *   { id: 'id3', name: 'Joey' }
+ * ]
+ *
+ * const fetchUser = (id: string): TE.TaskEither<string, User> =>
+ *   pipe(
+ *     remoteDatabase,
+ *     RA.findFirst((user) => user.id === id),
+ *     TE.fromOption(() => `${id} not found`)
+ *   )
+ *
+ * async function test() {
+ *   assert.deepStrictEqual(
+ *     await pipe(['id4', 'id5'], RA.traverse(TE.ApplicativePar)(fetchUser))(),
+ *     E.left('id4 not found') // <= first error
+ *   )
+ *
+ *   const Applicative = TE.getApplicativeTaskValidation(
+ *     T.ApplyPar,
+ *     pipe(string.Semigroup, S.intercalate(', '))
+ *   )
+ *
+ *   assert.deepStrictEqual(
+ *     await pipe(['id4', 'id5'], RA.traverse(Applicative)(fetchUser))(),
+ *     E.left('id4 not found, id5 not found') // <= all errors
+ *   )
+ * }
+ *
+ * test()
+ *
+ * @category error handling
  * @since 2.7.0
  */
 function getApplicativeTaskValidation(A, S) {
-    var ap = Apply_1.ap(A, E.getApplicativeValidation(S));
+    var ap = (0, Apply_1.ap)(A, E.getApplicativeValidation(S));
     return {
         URI: exports.URI,
         _E: undefined,
         map: _map,
-        ap: function (fab, fa) { return function_1.pipe(fab, ap(fa)); },
+        ap: function (fab, fa) { return (0, function_1.pipe)(fab, ap(fa)); },
         of: exports.of
     };
 }
 exports.getApplicativeTaskValidation = getApplicativeTaskValidation;
 /**
- * @category instances
+ * The default [`Alt`](#alt) instance returns the last error, if you want to
+ * get all errors you need to provide a way to concatenate them via a `Semigroup`.
+ *
+ * See [`getAltValidation`](./Either.ts.html#getaltvalidation).
+ *
+ * @category error handling
  * @since 2.7.0
  */
 function getAltTaskValidation(S) {
@@ -13936,12 +14862,12 @@ function getAltTaskValidation(S) {
         URI: exports.URI,
         _E: undefined,
         map: _map,
-        alt: function (fa, that) { return function_1.pipe(fa, alt(that)); }
+        alt: function (fa, that) { return (0, function_1.pipe)(fa, alt(that)); }
     };
 }
 exports.getAltTaskValidation = getAltTaskValidation;
 /**
- * @category instances
+ * @category filtering
  * @since 2.10.0
  */
 var getCompactable = function (M) {
@@ -13949,32 +14875,32 @@ var getCompactable = function (M) {
     return {
         URI: exports.URI,
         _E: undefined,
-        compact: Compactable_1.compact(T.Functor, C),
-        separate: Compactable_1.separate(T.Functor, C, E.Functor)
+        compact: (0, Compactable_1.compact)(T.Functor, C),
+        separate: (0, Compactable_1.separate)(T.Functor, C, E.Functor)
     };
 };
 exports.getCompactable = getCompactable;
 /**
- * @category instances
+ * @category filtering
  * @since 2.1.0
  */
 function getFilterable(M) {
     var F = E.getFilterable(M);
-    var C = exports.getCompactable(M);
-    var filter = Filterable_1.filter(T.Functor, F);
-    var filterMap = Filterable_1.filterMap(T.Functor, F);
-    var partition = Filterable_1.partition(T.Functor, F);
-    var partitionMap = Filterable_1.partitionMap(T.Functor, F);
+    var C = (0, exports.getCompactable)(M);
+    var filter = (0, Filterable_1.filter)(T.Functor, F);
+    var filterMap = (0, Filterable_1.filterMap)(T.Functor, F);
+    var partition = (0, Filterable_1.partition)(T.Functor, F);
+    var partitionMap = (0, Filterable_1.partitionMap)(T.Functor, F);
     return {
         URI: exports.URI,
         _E: undefined,
         map: _map,
         compact: C.compact,
         separate: C.separate,
-        filter: function (fa, predicate) { return function_1.pipe(fa, filter(predicate)); },
-        filterMap: function (fa, f) { return function_1.pipe(fa, filterMap(f)); },
-        partition: function (fa, predicate) { return function_1.pipe(fa, partition(predicate)); },
-        partitionMap: function (fa, f) { return function_1.pipe(fa, partitionMap(f)); }
+        filter: function (fa, predicate) { return (0, function_1.pipe)(fa, filter(predicate)); },
+        filterMap: function (fa, f) { return (0, function_1.pipe)(fa, filterMap(f)); },
+        partition: function (fa, predicate) { return (0, function_1.pipe)(fa, partition(predicate)); },
+        partitionMap: function (fa, f) { return (0, function_1.pipe)(fa, partitionMap(f)); }
     };
 }
 exports.getFilterable = getFilterable;
@@ -13987,14 +14913,10 @@ exports.Functor = {
     map: _map
 };
 /**
- * Derivable from `Functor`.
- *
- * @category combinators
+ * @category mapping
  * @since 2.10.0
  */
-exports.flap = 
-/*#__PURE__*/
-Functor_1.flap(exports.Functor);
+exports.flap = (0, Functor_1.flap)(exports.Functor);
 /**
  * @category instances
  * @since 2.10.0
@@ -14004,6 +14926,8 @@ exports.Pointed = {
     of: exports.of
 };
 /**
+ * Runs computations in parallel.
+ *
  * @category instances
  * @since 2.10.0
  */
@@ -14015,26 +14939,34 @@ exports.ApplyPar = {
 /**
  * Combine two effectful actions, keeping only the result of the first.
  *
- * Derivable from `Apply`.
- *
- * @category combinators
  * @since 2.0.0
  */
-exports.apFirst = 
-/*#__PURE__*/
-Apply_1.apFirst(exports.ApplyPar);
+exports.apFirst = (0, Apply_1.apFirst)(exports.ApplyPar);
+/**
+ * Less strict version of [`apFirst`](#apfirst).
+ *
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @since 2.12.0
+ */
+exports.apFirstW = exports.apFirst;
 /**
  * Combine two effectful actions, keeping only the result of the second.
  *
- * Derivable from `Apply`.
- *
- * @category combinators
  * @since 2.0.0
  */
-exports.apSecond = 
-/*#__PURE__*/
-Apply_1.apSecond(exports.ApplyPar);
+exports.apSecond = (0, Apply_1.apSecond)(exports.ApplyPar);
 /**
+ * Less strict version of [`apSecond`](#apsecond).
+ *
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @since 2.12.0
+ */
+exports.apSecondW = exports.apSecond;
+/**
+ * Runs computations in parallel.
+ *
  * @category instances
  * @since 2.7.0
  */
@@ -14045,6 +14977,8 @@ exports.ApplicativePar = {
     of: exports.of
 };
 /**
+ * Runs computations sequentially.
+ *
  * @category instances
  * @since 2.10.0
  */
@@ -14054,6 +14988,8 @@ exports.ApplySeq = {
     ap: _apSeq
 };
 /**
+ * Runs computations sequentially.
+ *
  * @category instances
  * @since 2.7.0
  */
@@ -14125,20 +15061,17 @@ exports.MonadThrow = {
  * Composes computations in sequence, using the return value of one computation to determine the next computation and
  * keeping only the result of the first.
  *
- * Derivable from `Chain`.
- *
- * @category combinators
+ * @category sequencing
  * @since 2.0.0
  */
 exports.chainFirst = 
-/*#__PURE__*/
-Chain_1.chainFirst(exports.Chain);
+/*#__PURE__*/ (0, Chain_1.chainFirst)(exports.Chain);
 /**
  * Less strict version of [`chainFirst`](#chainfirst).
  *
- * Derivable from `Chain`.
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
  *
- * @category combinators
+ * @category sequencing
  * @since 2.8.0
  */
 exports.chainFirstW = exports.chainFirst;
@@ -14169,68 +15102,76 @@ exports.FromEither = {
     fromEither: exports.fromEither
 };
 /**
- * @category natural transformations
+ * @category conversions
  * @since 2.0.0
  */
 exports.fromOption = 
-/*#__PURE__*/
-FromEither_1.fromOption(exports.FromEither);
+/*#__PURE__*/ (0, FromEither_1.fromOption)(exports.FromEither);
 /**
- * @category combinators
+ * @category lifting
  * @since 2.10.0
  */
 exports.fromOptionK = 
-/*#__PURE__*/
-FromEither_1.fromOptionK(exports.FromEither);
+/*#__PURE__*/ (0, FromEither_1.fromOptionK)(exports.FromEither);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.10.0
  */
-exports.chainOptionK = 
-/*#__PURE__*/
-FromEither_1.chainOptionK(exports.FromEither, exports.Chain);
+exports.chainOptionK = (0, FromEither_1.chainOptionK)(exports.FromEither, exports.Chain);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.4.0
  */
 exports.chainEitherK = 
-/*#__PURE__*/
-FromEither_1.chainEitherK(exports.FromEither, exports.Chain);
+/*#__PURE__*/ (0, FromEither_1.chainEitherK)(exports.FromEither, exports.Chain);
 /**
  * Less strict version of [`chainEitherK`](#chaineitherk).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @category sequencing
  * @since 2.6.1
  */
 exports.chainEitherKW = exports.chainEitherK;
 /**
- * @category constructors
- * @since 2.0.0
+ * @category sequencing
+ * @since 2.12.0
  */
-exports.fromPredicate = 
-/*#__PURE__*/
-FromEither_1.fromPredicate(exports.FromEither);
+exports.chainFirstEitherK = 
+/*#__PURE__*/ (0, FromEither_1.chainFirstEitherK)(exports.FromEither, exports.Chain);
 /**
- * @category combinators
+ * Less strict version of [`chainFirstEitherK`](#chainfirsteitherk).
+ *
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @category sequencing
+ * @since 2.12.0
+ */
+exports.chainFirstEitherKW = exports.chainFirstEitherK;
+/**
+ * @category lifting
  * @since 2.0.0
  */
-exports.filterOrElse = 
-/*#__PURE__*/
-FromEither_1.filterOrElse(exports.FromEither, exports.Chain);
+exports.fromPredicate = (0, FromEither_1.fromPredicate)(exports.FromEither);
+/**
+ * @category filtering
+ * @since 2.0.0
+ */
+exports.filterOrElse = (0, FromEither_1.filterOrElse)(exports.FromEither, exports.Chain);
 /**
  * Less strict version of [`filterOrElse`](#filterorelse).
  *
- * @category combinators
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @category filtering
  * @since 2.9.0
  */
 exports.filterOrElseW = exports.filterOrElse;
 /**
- * @category combinators
+ * @category lifting
  * @since 2.4.0
  */
-exports.fromEitherK = 
-/*#__PURE__*/
-FromEither_1.fromEitherK(exports.FromEither);
+exports.fromEitherK = (0, FromEither_1.fromEitherK)(exports.FromEither);
 /**
  * @category instances
  * @since 2.10.0
@@ -14240,26 +15181,22 @@ exports.FromIO = {
     fromIO: exports.fromIO
 };
 /**
- * @category combinators
+ * @category lifting
  * @since 2.10.0
  */
-exports.fromIOK = 
-/*#__PURE__*/
-FromIO_1.fromIOK(exports.FromIO);
+exports.fromIOK = (0, FromIO_1.fromIOK)(exports.FromIO);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.10.0
  */
 exports.chainIOK = 
-/*#__PURE__*/
-FromIO_1.chainIOK(exports.FromIO, exports.Chain);
+/*#__PURE__*/ (0, FromIO_1.chainIOK)(exports.FromIO, exports.Chain);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.10.0
  */
 exports.chainFirstIOK = 
-/*#__PURE__*/
-FromIO_1.chainFirstIOK(exports.FromIO, exports.Chain);
+/*#__PURE__*/ (0, FromIO_1.chainFirstIOK)(exports.FromIO, exports.Chain);
 /**
  * @category instances
  * @since 2.10.0
@@ -14270,26 +15207,22 @@ exports.FromTask = {
     fromTask: exports.fromTask
 };
 /**
- * @category combinators
+ * @category lifting
  * @since 2.10.0
  */
-exports.fromTaskK = 
-/*#__PURE__*/
-FromTask_1.fromTaskK(exports.FromTask);
+exports.fromTaskK = (0, FromTask_1.fromTaskK)(exports.FromTask);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.10.0
  */
 exports.chainTaskK = 
-/*#__PURE__*/
-FromTask_1.chainTaskK(exports.FromTask, exports.Chain);
+/*#__PURE__*/ (0, FromTask_1.chainTaskK)(exports.FromTask, exports.Chain);
 /**
- * @category combinators
+ * @category sequencing
  * @since 2.10.0
  */
 exports.chainFirstTaskK = 
-/*#__PURE__*/
-FromTask_1.chainFirstTaskK(exports.FromTask, exports.Chain);
+/*#__PURE__*/ (0, FromTask_1.chainFirstTaskK)(exports.FromTask, exports.Chain);
 function taskify(f) {
     return function () {
         var args = Array.prototype.slice.call(arguments);
@@ -14310,152 +15243,184 @@ exports.taskify = taskify;
  *
  * @since 2.0.0
  */
-var bracket = function (acquire, use, release) {
-    return function_1.pipe(acquire, exports.chain(function (a) {
-        return function_1.pipe(use(a), T.chain(function (e) {
-            return function_1.pipe(release(a, e), exports.chain(function () { return T.of(e); }));
+var bracket = function (acquire, use, release) { return (0, exports.bracketW)(acquire, use, release); };
+exports.bracket = bracket;
+/**
+ * Less strict version of [`bracket`](#bracket).
+ *
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @since 2.12.0
+ */
+var bracketW = function (acquire, use, release) {
+    return (0, function_1.pipe)(acquire, (0, exports.chainW)(function (a) {
+        return (0, function_1.pipe)(use(a), T.chain(function (e) {
+            return (0, function_1.pipe)(release(a, e), (0, exports.chainW)(function () { return T.of(e); }));
         }));
     }));
 };
-exports.bracket = bracket;
+exports.bracketW = bracketW;
 // -------------------------------------------------------------------------------------
 // do notation
 // -------------------------------------------------------------------------------------
 /**
+ * @category do notation
  * @since 2.9.0
  */
-exports.Do = 
-/*#__PURE__*/
-exports.of(_.emptyRecord);
+exports.Do = (0, exports.of)(_.emptyRecord);
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.bindTo = 
-/*#__PURE__*/
-Functor_1.bindTo(exports.Functor);
+exports.bindTo = (0, Functor_1.bindTo)(exports.Functor);
+var let_ = /*#__PURE__*/ (0, Functor_1.let)(exports.Functor);
+exports.let = let_;
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.bind = 
-/*#__PURE__*/
-Chain_1.bind(exports.Chain);
+exports.bind = (0, Chain_1.bind)(exports.Chain);
 /**
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @category do notation
  * @since 2.8.0
  */
 exports.bindW = exports.bind;
-// -------------------------------------------------------------------------------------
-// pipeable sequence S
-// -------------------------------------------------------------------------------------
 /**
+ * @category do notation
  * @since 2.8.0
  */
-exports.apS = 
-/*#__PURE__*/
-Apply_1.apS(exports.ApplyPar);
+exports.apS = (0, Apply_1.apS)(exports.ApplyPar);
 /**
+ * Less strict version of [`apS`](#aps).
+ *
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @category do notation
  * @since 2.8.0
  */
 exports.apSW = exports.apS;
-// -------------------------------------------------------------------------------------
-// sequence T
-// -------------------------------------------------------------------------------------
 /**
  * @since 2.11.0
  */
-exports.ApT = 
-/*#__PURE__*/
-exports.of(_.emptyReadonlyArray);
+exports.ApT = (0, exports.of)(_.emptyReadonlyArray);
 // -------------------------------------------------------------------------------------
 // array utils
 // -------------------------------------------------------------------------------------
 /**
  * Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(ApplicativePar)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
 var traverseReadonlyNonEmptyArrayWithIndex = function (f) {
-    return function_1.flow(T.traverseReadonlyNonEmptyArrayWithIndex(f), T.map(E.traverseReadonlyNonEmptyArrayWithIndex(function_1.SK)));
+    return (0, function_1.flow)(T.traverseReadonlyNonEmptyArrayWithIndex(f), T.map(E.traverseReadonlyNonEmptyArrayWithIndex(function_1.SK)));
 };
 exports.traverseReadonlyNonEmptyArrayWithIndex = traverseReadonlyNonEmptyArrayWithIndex;
 /**
  * Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativePar)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
 var traverseReadonlyArrayWithIndex = function (f) {
-    var g = exports.traverseReadonlyNonEmptyArrayWithIndex(f);
+    var g = (0, exports.traverseReadonlyNonEmptyArrayWithIndex)(f);
     return function (as) { return (_.isNonEmpty(as) ? g(as) : exports.ApT); };
 };
 exports.traverseReadonlyArrayWithIndex = traverseReadonlyArrayWithIndex;
 /**
  * Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativeSeq)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
-var traverseReadonlyNonEmptyArrayWithIndexSeq = function (f) { return function (as) { return function () {
-    return _.tail(as).reduce(function (acc, a, i) {
-        return acc.then(function (ebs) {
-            return _.isLeft(ebs)
-                ? acc
-                : f(i + 1, a)().then(function (eb) {
-                    if (_.isLeft(eb)) {
-                        return eb;
-                    }
-                    ebs.right.push(eb.right);
-                    return ebs;
+var traverseReadonlyNonEmptyArrayWithIndexSeq = function (f) {
+    return function (as) {
+        return function () {
+            return _.tail(as).reduce(function (acc, a, i) {
+                return acc.then(function (ebs) {
+                    return _.isLeft(ebs)
+                        ? acc
+                        : f(i + 1, a)().then(function (eb) {
+                            if (_.isLeft(eb)) {
+                                return eb;
+                            }
+                            ebs.right.push(eb.right);
+                            return ebs;
+                        });
                 });
-        });
-    }, f(0, _.head(as))().then(E.map(_.singleton)));
-}; }; };
+            }, f(0, _.head(as))().then(E.map(_.singleton)));
+        };
+    };
+};
 exports.traverseReadonlyNonEmptyArrayWithIndexSeq = traverseReadonlyNonEmptyArrayWithIndexSeq;
 /**
  * Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativeSeq)`.
  *
+ * @category traversing
  * @since 2.11.0
  */
 var traverseReadonlyArrayWithIndexSeq = function (f) {
-    var g = exports.traverseReadonlyNonEmptyArrayWithIndexSeq(f);
+    var g = (0, exports.traverseReadonlyNonEmptyArrayWithIndexSeq)(f);
     return function (as) { return (_.isNonEmpty(as) ? g(as) : exports.ApT); };
 };
 exports.traverseReadonlyArrayWithIndexSeq = traverseReadonlyArrayWithIndexSeq;
 /**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex;
 /**
+ * Equivalent to `ReadonlyArray#traverse(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
-var traverseArray = function (f) { return exports.traverseReadonlyArrayWithIndex(function (_, a) { return f(a); }); };
+var traverseArray = function (f) { return (0, exports.traverseReadonlyArrayWithIndex)(function (_, a) { return f(a); }); };
 exports.traverseArray = traverseArray;
 /**
+ * Equivalent to `ReadonlyArray#sequence(Applicative)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.sequenceArray = 
-/*#__PURE__*/
-exports.traverseArray(function_1.identity);
+/*#__PURE__*/ (0, exports.traverseArray)(function_1.identity);
 /**
+ * Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativeSeq)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.traverseSeqArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq;
 /**
+ * Equivalent to `ReadonlyArray#traverse(ApplicativeSeq)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
-var traverseSeqArray = function (f) { return exports.traverseReadonlyArrayWithIndexSeq(function (_, a) { return f(a); }); };
+var traverseSeqArray = function (f) { return (0, exports.traverseReadonlyArrayWithIndexSeq)(function (_, a) { return f(a); }); };
 exports.traverseSeqArray = traverseSeqArray;
 /**
+ * Equivalent to `ReadonlyArray#sequence(ApplicativeSeq)`.
+ *
+ * @category traversing
  * @since 2.9.0
  */
 exports.sequenceSeqArray = 
-/*#__PURE__*/
-exports.traverseSeqArray(function_1.identity);
+/*#__PURE__*/ (0, exports.traverseSeqArray)(function_1.identity);
 // -------------------------------------------------------------------------------------
 // deprecated
 // -------------------------------------------------------------------------------------
-// tslint:disable: deprecation
 /**
- * Use small, specific instances instead.
+ * This instance is deprecated, use small, specific instances instead.
+ * For example if a function needs a `Functor` instance, pass `TE.Functor` instead of `TE.taskEither`
+ * (where `TE` is from `import TE from 'fp-ts/TaskEither'`)
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -14473,9 +15438,11 @@ exports.taskEither = {
     throwError: exports.throwError
 };
 /**
- * Use small, specific instances instead.
+ * This instance is deprecated, use small, specific instances instead.
+ * For example if a function needs a `Functor` instance, pass `TE.Functor` instead of `TE.taskEitherSeq`
+ * (where `TE` is from `import TE from 'fp-ts/TaskEither'`)
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -14495,38 +15462,36 @@ exports.taskEitherSeq = {
 /**
  * Use [`getApplySemigroup`](./Apply.ts.html#getapplysemigroup) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
 exports.getApplySemigroup = 
-/*#__PURE__*/
-Apply_1.getApplySemigroup(exports.ApplySeq);
+/*#__PURE__*/ (0, Apply_1.getApplySemigroup)(exports.ApplySeq);
 /**
  * Use [`getApplicativeMonoid`](./Applicative.ts.html#getapplicativemonoid) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
 exports.getApplyMonoid = 
-/*#__PURE__*/
-Applicative_1.getApplicativeMonoid(exports.ApplicativeSeq);
+/*#__PURE__*/ (0, Applicative_1.getApplicativeMonoid)(exports.ApplicativeSeq);
 /**
  * Use [`getApplySemigroup`](./Apply.ts.html#getapplysemigroup) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
 var getSemigroup = function (S) {
-    return Apply_1.getApplySemigroup(T.ApplySeq)(E.getSemigroup(S));
+    return (0, Apply_1.getApplySemigroup)(T.ApplySeq)(E.getSemigroup(S));
 };
 exports.getSemigroup = getSemigroup;
 /**
  * Use [`getApplicativeTaskValidation`](#getapplicativetaskvalidation) and [`getAltTaskValidation`](#getalttaskvalidation) instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -14560,7 +15525,11 @@ exports.getTaskValidation = getTaskValidation;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -14634,14 +15603,16 @@ exports.getEndomorphismMonoid = exports.not = exports.SK = exports.hole = export
  * @category instances
  * @since 2.10.0
  */
-var getBooleanAlgebra = function (B) { return function () { return ({
-    meet: function (x, y) { return function (a) { return B.meet(x(a), y(a)); }; },
-    join: function (x, y) { return function (a) { return B.join(x(a), y(a)); }; },
-    zero: function () { return B.zero; },
-    one: function () { return B.one; },
-    implies: function (x, y) { return function (a) { return B.implies(x(a), y(a)); }; },
-    not: function (x) { return function (a) { return B.not(x(a)); }; }
-}); }; };
+var getBooleanAlgebra = function (B) {
+    return function () { return ({
+        meet: function (x, y) { return function (a) { return B.meet(x(a), y(a)); }; },
+        join: function (x, y) { return function (a) { return B.join(x(a), y(a)); }; },
+        zero: function () { return B.zero; },
+        one: function () { return B.one; },
+        implies: function (x, y) { return function (a) { return B.implies(x(a), y(a)); }; },
+        not: function (x) { return function (a) { return B.not(x(a)); }; }
+    }); };
+};
 exports.getBooleanAlgebra = getBooleanAlgebra;
 /**
  * Unary functions form a semigroup as long as you can provide a semigroup for the codomain.
@@ -14666,9 +15637,11 @@ exports.getBooleanAlgebra = getBooleanAlgebra;
  * @category instances
  * @since 2.10.0
  */
-var getSemigroup = function (S) { return function () { return ({
-    concat: function (f, g) { return function (a) { return S.concat(f(a), g(a)); }; }
-}); }; };
+var getSemigroup = function (S) {
+    return function () { return ({
+        concat: function (f, g) { return function (a) { return S.concat(f(a), g(a)); }; }
+    }); };
+};
 exports.getSemigroup = getSemigroup;
 /**
  * Unary functions form a monoid as long as you can provide a monoid for the codomain.
@@ -14695,7 +15668,7 @@ exports.getSemigroup = getSemigroup;
  * @since 2.10.0
  */
 var getMonoid = function (M) {
-    var getSemigroupM = exports.getSemigroup(M);
+    var getSemigroupM = (0, exports.getSemigroup)(M);
     return function () { return ({
         concat: getSemigroupM().concat,
         empty: function () { return M.empty; }
@@ -14718,7 +15691,7 @@ exports.getSemiring = getSemiring;
  * @since 2.10.0
  */
 var getRing = function (R) {
-    var S = exports.getSemiring(R);
+    var S = (0, exports.getSemiring)(R);
     return {
         add: S.add,
         mul: S.mul,
@@ -14734,7 +15707,11 @@ exports.getRing = getRing;
 /**
  * @since 2.11.0
  */
-var apply = function (a) { return function (f) { return f(a); }; };
+var apply = function (a) {
+    return function (f) {
+        return f(a);
+    };
+};
 exports.apply = apply;
 /**
  * @since 2.0.0
@@ -14759,46 +15736,42 @@ exports.constant = constant;
  *
  * @since 2.0.0
  */
-exports.constTrue = 
-/*#__PURE__*/
-constant(true);
+exports.constTrue = constant(true);
 /**
  * A thunk that returns always `false`.
  *
  * @since 2.0.0
  */
-exports.constFalse = 
-/*#__PURE__*/
-constant(false);
+exports.constFalse = constant(false);
 /**
  * A thunk that returns always `null`.
  *
  * @since 2.0.0
  */
-exports.constNull = 
-/*#__PURE__*/
-constant(null);
+exports.constNull = constant(null);
 /**
  * A thunk that returns always `undefined`.
  *
  * @since 2.0.0
  */
-exports.constUndefined = 
-/*#__PURE__*/
-constant(undefined);
+exports.constUndefined = constant(undefined);
 /**
  * A thunk that returns always `void`.
  *
  * @since 2.0.0
  */
 exports.constVoid = exports.constUndefined;
-/**
- * Flips the order of the arguments of a function of two arguments.
- *
- * @since 2.0.0
- */
 function flip(f) {
-    return function (b, a) { return f(a, b); };
+    return function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        if (args.length > 1) {
+            return f(args[1], args[0]);
+        }
+        return function (a) { return f(a)(args[0]); };
+    };
 }
 exports.flip = flip;
 function flow(ab, bc, cd, de, ef, fg, gh, hi, ij) {
@@ -14924,12 +15897,13 @@ function pipe(a, ab, bc, cd, de, ef, fg, gh, hi) {
             return gh(fg(ef(de(cd(bc(ab(a)))))));
         case 9:
             return hi(gh(fg(ef(de(cd(bc(ab(a))))))));
-        default:
+        default: {
             var ret = arguments[0];
             for (var i = 1; i < arguments.length; i++) {
                 ret = arguments[i](ret);
             }
             return ret;
+        }
     }
 }
 exports.pipe = pipe;
@@ -14947,6 +15921,7 @@ exports.SK = SK;
 /**
  * Use `Predicate` module instead.
  *
+ * @category zone of death
  * @since 2.0.0
  * @deprecated
  */
@@ -14957,7 +15932,7 @@ exports.not = not;
 /**
  * Use `Endomorphism` module instead.
  *
- * @category instances
+ * @category zone of death
  * @since 2.10.0
  * @deprecated
  */
@@ -14975,10 +15950,14 @@ exports.getEndomorphismMonoid = getEndomorphismMonoid;
 
 "use strict";
 
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.fromReadonlyNonEmptyArray = exports.has = exports.emptyRecord = exports.emptyReadonlyArray = exports.tail = exports.head = exports.isNonEmpty = exports.singleton = exports.right = exports.left = exports.isRight = exports.isLeft = exports.some = exports.none = exports.isSome = exports.isNone = void 0;
@@ -15042,7 +16021,7 @@ exports.has = Object.prototype.hasOwnProperty;
 // NonEmptyArray
 // -------------------------------------------------------------------------------------
 /** @internal */
-var fromReadonlyNonEmptyArray = function (as) { return __spreadArray([as[0]], as.slice(1)); };
+var fromReadonlyNonEmptyArray = function (as) { return __spreadArray([as[0]], as.slice(1), true); };
 exports.fromReadonlyNonEmptyArray = fromReadonlyNonEmptyArray;
 
 
@@ -15656,6 +16635,652 @@ exports.debug = debug; // for test
 
 /***/ }),
 
+/***/ 5840:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+Object.defineProperty(exports, "v1", ({
+  enumerable: true,
+  get: function () {
+    return _v.default;
+  }
+}));
+Object.defineProperty(exports, "v3", ({
+  enumerable: true,
+  get: function () {
+    return _v2.default;
+  }
+}));
+Object.defineProperty(exports, "v4", ({
+  enumerable: true,
+  get: function () {
+    return _v3.default;
+  }
+}));
+Object.defineProperty(exports, "v5", ({
+  enumerable: true,
+  get: function () {
+    return _v4.default;
+  }
+}));
+Object.defineProperty(exports, "NIL", ({
+  enumerable: true,
+  get: function () {
+    return _nil.default;
+  }
+}));
+Object.defineProperty(exports, "version", ({
+  enumerable: true,
+  get: function () {
+    return _version.default;
+  }
+}));
+Object.defineProperty(exports, "validate", ({
+  enumerable: true,
+  get: function () {
+    return _validate.default;
+  }
+}));
+Object.defineProperty(exports, "stringify", ({
+  enumerable: true,
+  get: function () {
+    return _stringify.default;
+  }
+}));
+Object.defineProperty(exports, "parse", ({
+  enumerable: true,
+  get: function () {
+    return _parse.default;
+  }
+}));
+
+var _v = _interopRequireDefault(__nccwpck_require__(8628));
+
+var _v2 = _interopRequireDefault(__nccwpck_require__(6409));
+
+var _v3 = _interopRequireDefault(__nccwpck_require__(5122));
+
+var _v4 = _interopRequireDefault(__nccwpck_require__(9120));
+
+var _nil = _interopRequireDefault(__nccwpck_require__(5332));
+
+var _version = _interopRequireDefault(__nccwpck_require__(1595));
+
+var _validate = _interopRequireDefault(__nccwpck_require__(6900));
+
+var _stringify = _interopRequireDefault(__nccwpck_require__(8950));
+
+var _parse = _interopRequireDefault(__nccwpck_require__(2746));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+
+/***/ 4569:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _crypto = _interopRequireDefault(__nccwpck_require__(6417));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function md5(bytes) {
+  if (Array.isArray(bytes)) {
+    bytes = Buffer.from(bytes);
+  } else if (typeof bytes === 'string') {
+    bytes = Buffer.from(bytes, 'utf8');
+  }
+
+  return _crypto.default.createHash('md5').update(bytes).digest();
+}
+
+var _default = md5;
+exports.default = _default;
+
+/***/ }),
+
+/***/ 5332:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+var _default = '00000000-0000-0000-0000-000000000000';
+exports.default = _default;
+
+/***/ }),
+
+/***/ 2746:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _validate = _interopRequireDefault(__nccwpck_require__(6900));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function parse(uuid) {
+  if (!(0, _validate.default)(uuid)) {
+    throw TypeError('Invalid UUID');
+  }
+
+  let v;
+  const arr = new Uint8Array(16); // Parse ########-....-....-....-............
+
+  arr[0] = (v = parseInt(uuid.slice(0, 8), 16)) >>> 24;
+  arr[1] = v >>> 16 & 0xff;
+  arr[2] = v >>> 8 & 0xff;
+  arr[3] = v & 0xff; // Parse ........-####-....-....-............
+
+  arr[4] = (v = parseInt(uuid.slice(9, 13), 16)) >>> 8;
+  arr[5] = v & 0xff; // Parse ........-....-####-....-............
+
+  arr[6] = (v = parseInt(uuid.slice(14, 18), 16)) >>> 8;
+  arr[7] = v & 0xff; // Parse ........-....-....-####-............
+
+  arr[8] = (v = parseInt(uuid.slice(19, 23), 16)) >>> 8;
+  arr[9] = v & 0xff; // Parse ........-....-....-....-############
+  // (Use "/" to avoid 32-bit truncation when bit-shifting high-order bytes)
+
+  arr[10] = (v = parseInt(uuid.slice(24, 36), 16)) / 0x10000000000 & 0xff;
+  arr[11] = v / 0x100000000 & 0xff;
+  arr[12] = v >>> 24 & 0xff;
+  arr[13] = v >>> 16 & 0xff;
+  arr[14] = v >>> 8 & 0xff;
+  arr[15] = v & 0xff;
+  return arr;
+}
+
+var _default = parse;
+exports.default = _default;
+
+/***/ }),
+
+/***/ 814:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+var _default = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
+exports.default = _default;
+
+/***/ }),
+
+/***/ 807:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = rng;
+
+var _crypto = _interopRequireDefault(__nccwpck_require__(6417));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const rnds8Pool = new Uint8Array(256); // # of random values to pre-allocate
+
+let poolPtr = rnds8Pool.length;
+
+function rng() {
+  if (poolPtr > rnds8Pool.length - 16) {
+    _crypto.default.randomFillSync(rnds8Pool);
+
+    poolPtr = 0;
+  }
+
+  return rnds8Pool.slice(poolPtr, poolPtr += 16);
+}
+
+/***/ }),
+
+/***/ 5274:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _crypto = _interopRequireDefault(__nccwpck_require__(6417));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function sha1(bytes) {
+  if (Array.isArray(bytes)) {
+    bytes = Buffer.from(bytes);
+  } else if (typeof bytes === 'string') {
+    bytes = Buffer.from(bytes, 'utf8');
+  }
+
+  return _crypto.default.createHash('sha1').update(bytes).digest();
+}
+
+var _default = sha1;
+exports.default = _default;
+
+/***/ }),
+
+/***/ 8950:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _validate = _interopRequireDefault(__nccwpck_require__(6900));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
+const byteToHex = [];
+
+for (let i = 0; i < 256; ++i) {
+  byteToHex.push((i + 0x100).toString(16).substr(1));
+}
+
+function stringify(arr, offset = 0) {
+  // Note: Be careful editing this code!  It's been tuned for performance
+  // and works in ways you may not expect. See https://github.com/uuidjs/uuid/pull/434
+  const uuid = (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + '-' + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + '-' + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + '-' + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + '-' + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase(); // Consistency check for valid UUID.  If this throws, it's likely due to one
+  // of the following:
+  // - One or more input array values don't map to a hex octet (leading to
+  // "undefined" in the uuid)
+  // - Invalid input values for the RFC `version` or `variant` fields
+
+  if (!(0, _validate.default)(uuid)) {
+    throw TypeError('Stringified UUID is invalid');
+  }
+
+  return uuid;
+}
+
+var _default = stringify;
+exports.default = _default;
+
+/***/ }),
+
+/***/ 8628:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _rng = _interopRequireDefault(__nccwpck_require__(807));
+
+var _stringify = _interopRequireDefault(__nccwpck_require__(8950));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// **`v1()` - Generate time-based UUID**
+//
+// Inspired by https://github.com/LiosK/UUID.js
+// and http://docs.python.org/library/uuid.html
+let _nodeId;
+
+let _clockseq; // Previous uuid creation time
+
+
+let _lastMSecs = 0;
+let _lastNSecs = 0; // See https://github.com/uuidjs/uuid for API details
+
+function v1(options, buf, offset) {
+  let i = buf && offset || 0;
+  const b = buf || new Array(16);
+  options = options || {};
+  let node = options.node || _nodeId;
+  let clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq; // node and clockseq need to be initialized to random values if they're not
+  // specified.  We do this lazily to minimize issues related to insufficient
+  // system entropy.  See #189
+
+  if (node == null || clockseq == null) {
+    const seedBytes = options.random || (options.rng || _rng.default)();
+
+    if (node == null) {
+      // Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
+      node = _nodeId = [seedBytes[0] | 0x01, seedBytes[1], seedBytes[2], seedBytes[3], seedBytes[4], seedBytes[5]];
+    }
+
+    if (clockseq == null) {
+      // Per 4.2.2, randomize (14 bit) clockseq
+      clockseq = _clockseq = (seedBytes[6] << 8 | seedBytes[7]) & 0x3fff;
+    }
+  } // UUID timestamps are 100 nano-second units since the Gregorian epoch,
+  // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
+  // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
+  // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
+
+
+  let msecs = options.msecs !== undefined ? options.msecs : Date.now(); // Per 4.2.1.2, use count of uuid's generated during the current clock
+  // cycle to simulate higher resolution clock
+
+  let nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1; // Time since last uuid creation (in msecs)
+
+  const dt = msecs - _lastMSecs + (nsecs - _lastNSecs) / 10000; // Per 4.2.1.2, Bump clockseq on clock regression
+
+  if (dt < 0 && options.clockseq === undefined) {
+    clockseq = clockseq + 1 & 0x3fff;
+  } // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
+  // time interval
+
+
+  if ((dt < 0 || msecs > _lastMSecs) && options.nsecs === undefined) {
+    nsecs = 0;
+  } // Per 4.2.1.2 Throw error if too many uuids are requested
+
+
+  if (nsecs >= 10000) {
+    throw new Error("uuid.v1(): Can't create more than 10M uuids/sec");
+  }
+
+  _lastMSecs = msecs;
+  _lastNSecs = nsecs;
+  _clockseq = clockseq; // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
+
+  msecs += 12219292800000; // `time_low`
+
+  const tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
+  b[i++] = tl >>> 24 & 0xff;
+  b[i++] = tl >>> 16 & 0xff;
+  b[i++] = tl >>> 8 & 0xff;
+  b[i++] = tl & 0xff; // `time_mid`
+
+  const tmh = msecs / 0x100000000 * 10000 & 0xfffffff;
+  b[i++] = tmh >>> 8 & 0xff;
+  b[i++] = tmh & 0xff; // `time_high_and_version`
+
+  b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
+
+  b[i++] = tmh >>> 16 & 0xff; // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
+
+  b[i++] = clockseq >>> 8 | 0x80; // `clock_seq_low`
+
+  b[i++] = clockseq & 0xff; // `node`
+
+  for (let n = 0; n < 6; ++n) {
+    b[i + n] = node[n];
+  }
+
+  return buf || (0, _stringify.default)(b);
+}
+
+var _default = v1;
+exports.default = _default;
+
+/***/ }),
+
+/***/ 6409:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _v = _interopRequireDefault(__nccwpck_require__(5998));
+
+var _md = _interopRequireDefault(__nccwpck_require__(4569));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const v3 = (0, _v.default)('v3', 0x30, _md.default);
+var _default = v3;
+exports.default = _default;
+
+/***/ }),
+
+/***/ 5998:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = _default;
+exports.URL = exports.DNS = void 0;
+
+var _stringify = _interopRequireDefault(__nccwpck_require__(8950));
+
+var _parse = _interopRequireDefault(__nccwpck_require__(2746));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function stringToBytes(str) {
+  str = unescape(encodeURIComponent(str)); // UTF8 escape
+
+  const bytes = [];
+
+  for (let i = 0; i < str.length; ++i) {
+    bytes.push(str.charCodeAt(i));
+  }
+
+  return bytes;
+}
+
+const DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
+exports.DNS = DNS;
+const URL = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
+exports.URL = URL;
+
+function _default(name, version, hashfunc) {
+  function generateUUID(value, namespace, buf, offset) {
+    if (typeof value === 'string') {
+      value = stringToBytes(value);
+    }
+
+    if (typeof namespace === 'string') {
+      namespace = (0, _parse.default)(namespace);
+    }
+
+    if (namespace.length !== 16) {
+      throw TypeError('Namespace must be array-like (16 iterable integer values, 0-255)');
+    } // Compute hash of namespace and value, Per 4.3
+    // Future: Use spread syntax when supported on all platforms, e.g. `bytes =
+    // hashfunc([...namespace, ... value])`
+
+
+    let bytes = new Uint8Array(16 + value.length);
+    bytes.set(namespace);
+    bytes.set(value, namespace.length);
+    bytes = hashfunc(bytes);
+    bytes[6] = bytes[6] & 0x0f | version;
+    bytes[8] = bytes[8] & 0x3f | 0x80;
+
+    if (buf) {
+      offset = offset || 0;
+
+      for (let i = 0; i < 16; ++i) {
+        buf[offset + i] = bytes[i];
+      }
+
+      return buf;
+    }
+
+    return (0, _stringify.default)(bytes);
+  } // Function#name is not settable on some platforms (#270)
+
+
+  try {
+    generateUUID.name = name; // eslint-disable-next-line no-empty
+  } catch (err) {} // For CommonJS default export support
+
+
+  generateUUID.DNS = DNS;
+  generateUUID.URL = URL;
+  return generateUUID;
+}
+
+/***/ }),
+
+/***/ 5122:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _rng = _interopRequireDefault(__nccwpck_require__(807));
+
+var _stringify = _interopRequireDefault(__nccwpck_require__(8950));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function v4(options, buf, offset) {
+  options = options || {};
+
+  const rnds = options.random || (options.rng || _rng.default)(); // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+
+
+  rnds[6] = rnds[6] & 0x0f | 0x40;
+  rnds[8] = rnds[8] & 0x3f | 0x80; // Copy bytes to buffer, if provided
+
+  if (buf) {
+    offset = offset || 0;
+
+    for (let i = 0; i < 16; ++i) {
+      buf[offset + i] = rnds[i];
+    }
+
+    return buf;
+  }
+
+  return (0, _stringify.default)(rnds);
+}
+
+var _default = v4;
+exports.default = _default;
+
+/***/ }),
+
+/***/ 9120:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _v = _interopRequireDefault(__nccwpck_require__(5998));
+
+var _sha = _interopRequireDefault(__nccwpck_require__(5274));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const v5 = (0, _v.default)('v5', 0x50, _sha.default);
+var _default = v5;
+exports.default = _default;
+
+/***/ }),
+
+/***/ 6900:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _regex = _interopRequireDefault(__nccwpck_require__(814));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function validate(uuid) {
+  return typeof uuid === 'string' && _regex.default.test(uuid);
+}
+
+var _default = validate;
+exports.default = _default;
+
+/***/ }),
+
+/***/ 1595:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _validate = _interopRequireDefault(__nccwpck_require__(6900));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function version(uuid) {
+  if (!(0, _validate.default)(uuid)) {
+    throw TypeError('Invalid UUID');
+  }
+
+  return parseInt(uuid.substr(14, 1), 16);
+}
+
+var _default = version;
+exports.default = _default;
+
+/***/ }),
+
 /***/ 696:
 /***/ ((module) => {
 
@@ -15669,6 +17294,14 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 
 "use strict";
 module.exports = require("assert");
+
+/***/ }),
+
+/***/ 6417:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("crypto");
 
 /***/ }),
 

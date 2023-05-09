@@ -1,6 +1,6 @@
 {
   "name": "axe-slack-reporter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "GH Action for reporting findings from axe-core to Slack using incoming web hook",
   "main": "lib/index.js",
   "scripts": {
