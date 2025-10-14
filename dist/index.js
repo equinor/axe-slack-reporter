@@ -1,6 +1,14 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ 7286:
+/***/ ((module) => {
+
+"use strict";
+module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
+
+/***/ }),
+
 /***/ 7716:
 /***/ ((module) => {
 
@@ -2017,7 +2025,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.IncomingWebhook = void 0;
-const axios_1 = __importDefault(__nccwpck_require__(6545));
+const axios_1 = __importDefault(__nccwpck_require__(6817));
 const errors_1 = __nccwpck_require__(8564);
 const instrument_1 = __nccwpck_require__(8645);
 /**
@@ -2214,32 +2222,32 @@ exports.getUserAgent = getUserAgent;
 
 /***/ }),
 
-/***/ 6545:
+/***/ 6817:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__(2618);
+module.exports = __nccwpck_require__(7183);
 
 /***/ }),
 
-/***/ 8104:
+/***/ 4218:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(328);
-var settle = __nccwpck_require__(3211);
-var buildFullPath = __nccwpck_require__(1934);
-var buildURL = __nccwpck_require__(646);
+var utils = __nccwpck_require__(4542);
+var settle = __nccwpck_require__(1699);
+var buildFullPath = __nccwpck_require__(9994);
+var buildURL = __nccwpck_require__(5072);
 var http = __nccwpck_require__(8605);
 var https = __nccwpck_require__(7211);
 var httpFollow = __nccwpck_require__(7707).http;
 var httpsFollow = __nccwpck_require__(7707).https;
 var url = __nccwpck_require__(8835);
 var zlib = __nccwpck_require__(8761);
-var pkg = __nccwpck_require__(696);
-var createError = __nccwpck_require__(5226);
-var enhanceError = __nccwpck_require__(1516);
+var pkg = __nccwpck_require__(7286);
+var createError = __nccwpck_require__(9608);
+var enhanceError = __nccwpck_require__(637);
 
 var isHttps = /https:?/;
 
@@ -2560,20 +2568,20 @@ module.exports = function httpAdapter(config) {
 
 /***/ }),
 
-/***/ 3454:
+/***/ 760:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(328);
-var settle = __nccwpck_require__(3211);
-var cookies = __nccwpck_require__(1545);
-var buildURL = __nccwpck_require__(646);
-var buildFullPath = __nccwpck_require__(1934);
-var parseHeaders = __nccwpck_require__(6455);
-var isURLSameOrigin = __nccwpck_require__(3608);
-var createError = __nccwpck_require__(5226);
+var utils = __nccwpck_require__(4542);
+var settle = __nccwpck_require__(1699);
+var cookies = __nccwpck_require__(2093);
+var buildURL = __nccwpck_require__(5072);
+var buildFullPath = __nccwpck_require__(9994);
+var parseHeaders = __nccwpck_require__(1208);
+var isURLSameOrigin = __nccwpck_require__(579);
+var createError = __nccwpck_require__(9608);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -2757,17 +2765,17 @@ module.exports = function xhrAdapter(config) {
 
 /***/ }),
 
-/***/ 2618:
+/***/ 7183:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(328);
-var bind = __nccwpck_require__(7065);
-var Axios = __nccwpck_require__(8178);
-var mergeConfig = __nccwpck_require__(4831);
-var defaults = __nccwpck_require__(8190);
+var utils = __nccwpck_require__(4542);
+var bind = __nccwpck_require__(2470);
+var Axios = __nccwpck_require__(6458);
+var mergeConfig = __nccwpck_require__(9918);
+var defaults = __nccwpck_require__(9941);
 
 /**
  * Create an instance of Axios
@@ -2800,18 +2808,18 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __nccwpck_require__(8875);
-axios.CancelToken = __nccwpck_require__(1587);
-axios.isCancel = __nccwpck_require__(4057);
+axios.Cancel = __nccwpck_require__(3026);
+axios.CancelToken = __nccwpck_require__(6556);
+axios.isCancel = __nccwpck_require__(7599);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __nccwpck_require__(4850);
+axios.spread = __nccwpck_require__(745);
 
 // Expose isAxiosError
-axios.isAxiosError = __nccwpck_require__(650);
+axios.isAxiosError = __nccwpck_require__(5733);
 
 module.exports = axios;
 
@@ -2821,7 +2829,7 @@ module.exports.default = axios;
 
 /***/ }),
 
-/***/ 8875:
+/***/ 3026:
 /***/ ((module) => {
 
 "use strict";
@@ -2848,13 +2856,13 @@ module.exports = Cancel;
 
 /***/ }),
 
-/***/ 1587:
+/***/ 6556:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var Cancel = __nccwpck_require__(8875);
+var Cancel = __nccwpck_require__(3026);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -2913,7 +2921,7 @@ module.exports = CancelToken;
 
 /***/ }),
 
-/***/ 4057:
+/***/ 7599:
 /***/ ((module) => {
 
 "use strict";
@@ -2926,18 +2934,18 @@ module.exports = function isCancel(value) {
 
 /***/ }),
 
-/***/ 8178:
+/***/ 6458:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(328);
-var buildURL = __nccwpck_require__(646);
-var InterceptorManager = __nccwpck_require__(3214);
-var dispatchRequest = __nccwpck_require__(5062);
-var mergeConfig = __nccwpck_require__(4831);
-var validator = __nccwpck_require__(1632);
+var utils = __nccwpck_require__(4542);
+var buildURL = __nccwpck_require__(5072);
+var InterceptorManager = __nccwpck_require__(4421);
+var dispatchRequest = __nccwpck_require__(4458);
+var mergeConfig = __nccwpck_require__(9918);
+var validator = __nccwpck_require__(186);
 
 var validators = validator.validators;
 /**
@@ -3082,13 +3090,13 @@ module.exports = Axios;
 
 /***/ }),
 
-/***/ 3214:
+/***/ 4421:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(328);
+var utils = __nccwpck_require__(4542);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -3144,14 +3152,14 @@ module.exports = InterceptorManager;
 
 /***/ }),
 
-/***/ 1934:
+/***/ 9994:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var isAbsoluteURL = __nccwpck_require__(1301);
-var combineURLs = __nccwpck_require__(7189);
+var isAbsoluteURL = __nccwpck_require__(2511);
+var combineURLs = __nccwpck_require__(692);
 
 /**
  * Creates a new URL by combining the baseURL with the requestedURL,
@@ -3172,13 +3180,13 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
 
 /***/ }),
 
-/***/ 5226:
+/***/ 9608:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var enhanceError = __nccwpck_require__(1516);
+var enhanceError = __nccwpck_require__(637);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -3198,16 +3206,16 @@ module.exports = function createError(message, config, code, request, response) 
 
 /***/ }),
 
-/***/ 5062:
+/***/ 4458:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(328);
-var transformData = __nccwpck_require__(9812);
-var isCancel = __nccwpck_require__(4057);
-var defaults = __nccwpck_require__(8190);
+var utils = __nccwpck_require__(4542);
+var transformData = __nccwpck_require__(6550);
+var isCancel = __nccwpck_require__(7599);
+var defaults = __nccwpck_require__(9941);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -3288,7 +3296,7 @@ module.exports = function dispatchRequest(config) {
 
 /***/ }),
 
-/***/ 1516:
+/***/ 637:
 /***/ ((module) => {
 
 "use strict";
@@ -3338,13 +3346,13 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 /***/ }),
 
-/***/ 4831:
+/***/ 9918:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(328);
+var utils = __nccwpck_require__(4542);
 
 /**
  * Config-specific merge-function which creates a new config-object
@@ -3433,13 +3441,13 @@ module.exports = function mergeConfig(config1, config2) {
 
 /***/ }),
 
-/***/ 3211:
+/***/ 1699:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var createError = __nccwpck_require__(5226);
+var createError = __nccwpck_require__(9608);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -3466,14 +3474,14 @@ module.exports = function settle(resolve, reject, response) {
 
 /***/ }),
 
-/***/ 9812:
+/***/ 6550:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(328);
-var defaults = __nccwpck_require__(8190);
+var utils = __nccwpck_require__(4542);
+var defaults = __nccwpck_require__(9941);
 
 /**
  * Transform the data for a request or a response
@@ -3496,15 +3504,15 @@ module.exports = function transformData(data, headers, fns) {
 
 /***/ }),
 
-/***/ 8190:
+/***/ 9941:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(328);
-var normalizeHeaderName = __nccwpck_require__(6240);
-var enhanceError = __nccwpck_require__(1516);
+var utils = __nccwpck_require__(4542);
+var normalizeHeaderName = __nccwpck_require__(1414);
+var enhanceError = __nccwpck_require__(637);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -3520,10 +3528,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __nccwpck_require__(3454);
+    adapter = __nccwpck_require__(760);
   } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
     // For node use HTTP adapter
-    adapter = __nccwpck_require__(8104);
+    adapter = __nccwpck_require__(4218);
   }
   return adapter;
 }
@@ -3638,7 +3646,7 @@ module.exports = defaults;
 
 /***/ }),
 
-/***/ 7065:
+/***/ 2470:
 /***/ ((module) => {
 
 "use strict";
@@ -3657,13 +3665,13 @@ module.exports = function bind(fn, thisArg) {
 
 /***/ }),
 
-/***/ 646:
+/***/ 5072:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(328);
+var utils = __nccwpck_require__(4542);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -3735,7 +3743,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 /***/ }),
 
-/***/ 7189:
+/***/ 692:
 /***/ ((module) => {
 
 "use strict";
@@ -3757,13 +3765,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 /***/ }),
 
-/***/ 1545:
+/***/ 2093:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(328);
+var utils = __nccwpck_require__(4542);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -3818,7 +3826,7 @@ module.exports = (
 
 /***/ }),
 
-/***/ 1301:
+/***/ 2511:
 /***/ ((module) => {
 
 "use strict";
@@ -3840,7 +3848,7 @@ module.exports = function isAbsoluteURL(url) {
 
 /***/ }),
 
-/***/ 650:
+/***/ 5733:
 /***/ ((module) => {
 
 "use strict";
@@ -3859,13 +3867,13 @@ module.exports = function isAxiosError(payload) {
 
 /***/ }),
 
-/***/ 3608:
+/***/ 579:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(328);
+var utils = __nccwpck_require__(4542);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -3935,13 +3943,13 @@ module.exports = (
 
 /***/ }),
 
-/***/ 6240:
+/***/ 1414:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(328);
+var utils = __nccwpck_require__(4542);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -3955,13 +3963,13 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 /***/ }),
 
-/***/ 6455:
+/***/ 1208:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(328);
+var utils = __nccwpck_require__(4542);
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -4016,7 +4024,7 @@ module.exports = function parseHeaders(headers) {
 
 /***/ }),
 
-/***/ 4850:
+/***/ 745:
 /***/ ((module) => {
 
 "use strict";
@@ -4051,13 +4059,13 @@ module.exports = function spread(callback) {
 
 /***/ }),
 
-/***/ 1632:
+/***/ 186:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var pkg = __nccwpck_require__(696);
+var pkg = __nccwpck_require__(7286);
 
 var validators = {};
 
@@ -4164,13 +4172,13 @@ module.exports = {
 
 /***/ }),
 
-/***/ 328:
+/***/ 4542:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var bind = __nccwpck_require__(7065);
+var bind = __nccwpck_require__(2470);
 
 // utils is a library of generic helper functions non-specific to axios
 
@@ -5398,6 +5406,30 @@ var Writable = __nccwpck_require__(2413).Writable;
 var assert = __nccwpck_require__(2357);
 var debug = __nccwpck_require__(1133);
 
+// Whether to use the native URL object or the legacy url module
+var useNativeURL = false;
+try {
+  assert(new URL());
+}
+catch (error) {
+  useNativeURL = error.code === "ERR_INVALID_URL";
+}
+
+// URL fields to preserve in copy operations
+var preservedUrlFields = [
+  "auth",
+  "host",
+  "hostname",
+  "href",
+  "path",
+  "pathname",
+  "port",
+  "protocol",
+  "query",
+  "search",
+  "hash",
+];
+
 // Create handlers that pass events from native requests
 var events = ["abort", "aborted", "connect", "error", "socket", "timeout"];
 var eventHandlers = Object.create(null);
@@ -5407,19 +5439,20 @@ events.forEach(function (event) {
   };
 });
 
+// Error types with codes
 var InvalidUrlError = createErrorType(
   "ERR_INVALID_URL",
   "Invalid URL",
   TypeError
 );
-// Error types with codes
 var RedirectionError = createErrorType(
   "ERR_FR_REDIRECTION_FAILURE",
   "Redirected request failed"
 );
 var TooManyRedirectsError = createErrorType(
   "ERR_FR_TOO_MANY_REDIRECTS",
-  "Maximum number of redirects exceeded"
+  "Maximum number of redirects exceeded",
+  RedirectionError
 );
 var MaxBodyLengthExceededError = createErrorType(
   "ERR_FR_MAX_BODY_LENGTH_EXCEEDED",
@@ -5429,6 +5462,9 @@ var WriteAfterEndError = createErrorType(
   "ERR_STREAM_WRITE_AFTER_END",
   "write after end"
 );
+
+// istanbul ignore next
+var destroy = Writable.prototype.destroy || noop;
 
 // An HTTP(S) request that can be redirected
 function RedirectableRequest(options, responseCallback) {
@@ -5451,7 +5487,13 @@ function RedirectableRequest(options, responseCallback) {
   // React to responses of native requests
   var self = this;
   this._onNativeResponse = function (response) {
-    self._processResponse(response);
+    try {
+      self._processResponse(response);
+    }
+    catch (cause) {
+      self.emit("error", cause instanceof RedirectionError ?
+        cause : new RedirectionError({ cause: cause }));
+    }
   };
 
   // Perform the first request
@@ -5460,8 +5502,15 @@ function RedirectableRequest(options, responseCallback) {
 RedirectableRequest.prototype = Object.create(Writable.prototype);
 
 RedirectableRequest.prototype.abort = function () {
-  abortRequest(this._currentRequest);
+  destroyRequest(this._currentRequest);
+  this._currentRequest.abort();
   this.emit("abort");
+};
+
+RedirectableRequest.prototype.destroy = function (error) {
+  destroyRequest(this._currentRequest, error);
+  destroy.call(this, error);
+  return this;
 };
 
 // Writes buffered data to the current native request
@@ -5576,6 +5625,7 @@ RedirectableRequest.prototype.setTimeout = function (msecs, callback) {
     self.removeListener("abort", clearTimer);
     self.removeListener("error", clearTimer);
     self.removeListener("response", clearTimer);
+    self.removeListener("close", clearTimer);
     if (callback) {
       self.removeListener("timeout", callback);
     }
@@ -5602,6 +5652,7 @@ RedirectableRequest.prototype.setTimeout = function (msecs, callback) {
   this.on("abort", clearTimer);
   this.on("error", clearTimer);
   this.on("response", clearTimer);
+  this.on("close", clearTimer);
 
   return this;
 };
@@ -5660,8 +5711,7 @@ RedirectableRequest.prototype._performRequest = function () {
   var protocol = this._options.protocol;
   var nativeProtocol = this._options.nativeProtocols[protocol];
   if (!nativeProtocol) {
-    this.emit("error", new TypeError("Unsupported protocol " + protocol));
-    return;
+    throw new TypeError("Unsupported protocol " + protocol);
   }
 
   // If specified, use the agent corresponding to the protocol
@@ -5753,15 +5803,14 @@ RedirectableRequest.prototype._processResponse = function (response) {
   }
 
   // The response is a redirect, so abort the current request
-  abortRequest(this._currentRequest);
+  destroyRequest(this._currentRequest);
   // Discard the remainder of the response to avoid waiting for data
   response.destroy();
 
   // RFC7231§6.4: A client SHOULD detect and intervene
   // in cyclical redirections (i.e., "infinite" redirection loops).
   if (++this._redirectCount > this._options.maxRedirects) {
-    this.emit("error", new TooManyRedirectsError());
-    return;
+    throw new TooManyRedirectsError();
   }
 
   // Store the request headers if applicable
@@ -5795,34 +5844,24 @@ RedirectableRequest.prototype._processResponse = function (response) {
   var currentHostHeader = removeMatchingHeaders(/^host$/i, this._options.headers);
 
   // If the redirect is relative, carry over the host of the last request
-  var currentUrlParts = url.parse(this._currentUrl);
+  var currentUrlParts = parseUrl(this._currentUrl);
   var currentHost = currentHostHeader || currentUrlParts.host;
   var currentUrl = /^\w+:/.test(location) ? this._currentUrl :
     url.format(Object.assign(currentUrlParts, { host: currentHost }));
 
-  // Determine the URL of the redirection
-  var redirectUrl;
-  try {
-    redirectUrl = url.resolve(currentUrl, location);
-  }
-  catch (cause) {
-    this.emit("error", new RedirectionError({ cause: cause }));
-    return;
-  }
-
   // Create the redirected request
-  debug("redirecting to", redirectUrl);
+  var redirectUrl = resolveUrl(location, currentUrl);
+  debug("redirecting to", redirectUrl.href);
   this._isRedirect = true;
-  var redirectUrlParts = url.parse(redirectUrl);
-  Object.assign(this._options, redirectUrlParts);
+  spreadUrlObject(redirectUrl, this._options);
 
   // Drop confidential headers when redirecting to a less secure protocol
   // or to a different domain that is not a superdomain
-  if (redirectUrlParts.protocol !== currentUrlParts.protocol &&
-     redirectUrlParts.protocol !== "https:" ||
-     redirectUrlParts.host !== currentHost &&
-     !isSubdomain(redirectUrlParts.host, currentHost)) {
-    removeMatchingHeaders(/^(?:authorization|cookie)$/i, this._options.headers);
+  if (redirectUrl.protocol !== currentUrlParts.protocol &&
+     redirectUrl.protocol !== "https:" ||
+     redirectUrl.host !== currentHost &&
+     !isSubdomain(redirectUrl.host, currentHost)) {
+    removeMatchingHeaders(/^(?:(?:proxy-)?authorization|cookie)$/i, this._options.headers);
   }
 
   // Evaluate the beforeRedirect callback
@@ -5836,23 +5875,12 @@ RedirectableRequest.prototype._processResponse = function (response) {
       method: method,
       headers: requestHeaders,
     };
-    try {
-      beforeRedirect(this._options, responseDetails, requestDetails);
-    }
-    catch (err) {
-      this.emit("error", err);
-      return;
-    }
+    beforeRedirect(this._options, responseDetails, requestDetails);
     this._sanitizeOptions(this._options);
   }
 
   // Perform the redirected request
-  try {
-    this._performRequest();
-  }
-  catch (cause) {
-    this.emit("error", new RedirectionError({ cause: cause }));
-  }
+  this._performRequest();
 };
 
 // Wraps the key/value object of protocols with redirect functionality
@@ -5872,27 +5900,16 @@ function wrap(protocols) {
 
     // Executes a request, following redirects
     function request(input, options, callback) {
-      // Parse parameters
-      if (isString(input)) {
-        var parsed;
-        try {
-          parsed = urlToOptions(new URL(input));
-        }
-        catch (err) {
-          /* istanbul ignore next */
-          parsed = url.parse(input);
-        }
-        if (!isString(parsed.protocol)) {
-          throw new InvalidUrlError({ input });
-        }
-        input = parsed;
+      // Parse parameters, ensuring that input is an object
+      if (isURL(input)) {
+        input = spreadUrlObject(input);
       }
-      else if (URL && (input instanceof URL)) {
-        input = urlToOptions(input);
+      else if (isString(input)) {
+        input = spreadUrlObject(parseUrl(input));
       }
       else {
         callback = options;
-        options = input;
+        options = validateUrl(input);
         input = { protocol: protocol };
       }
       if (isFunction(options)) {
@@ -5931,27 +5948,57 @@ function wrap(protocols) {
   return exports;
 }
 
-/* istanbul ignore next */
 function noop() { /* empty */ }
 
-// from https://github.com/nodejs/node/blob/master/lib/internal/url.js
-function urlToOptions(urlObject) {
-  var options = {
-    protocol: urlObject.protocol,
-    hostname: urlObject.hostname.startsWith("[") ?
-      /* istanbul ignore next */
-      urlObject.hostname.slice(1, -1) :
-      urlObject.hostname,
-    hash: urlObject.hash,
-    search: urlObject.search,
-    pathname: urlObject.pathname,
-    path: urlObject.pathname + urlObject.search,
-    href: urlObject.href,
-  };
-  if (urlObject.port !== "") {
-    options.port = Number(urlObject.port);
+function parseUrl(input) {
+  var parsed;
+  /* istanbul ignore else */
+  if (useNativeURL) {
+    parsed = new URL(input);
   }
-  return options;
+  else {
+    // Ensure the URL is valid and absolute
+    parsed = validateUrl(url.parse(input));
+    if (!isString(parsed.protocol)) {
+      throw new InvalidUrlError({ input });
+    }
+  }
+  return parsed;
+}
+
+function resolveUrl(relative, base) {
+  /* istanbul ignore next */
+  return useNativeURL ? new URL(relative, base) : parseUrl(url.resolve(base, relative));
+}
+
+function validateUrl(input) {
+  if (/^\[/.test(input.hostname) && !/^\[[:0-9a-f]+\]$/i.test(input.hostname)) {
+    throw new InvalidUrlError({ input: input.href || input });
+  }
+  if (/^\[/.test(input.host) && !/^\[[:0-9a-f]+\](:\d+)?$/i.test(input.host)) {
+    throw new InvalidUrlError({ input: input.href || input });
+  }
+  return input;
+}
+
+function spreadUrlObject(urlObject, target) {
+  var spread = target || {};
+  for (var key of preservedUrlFields) {
+    spread[key] = urlObject[key];
+  }
+
+  // Fix IPv6 hostname
+  if (spread.hostname.startsWith("[")) {
+    spread.hostname = spread.hostname.slice(1, -1);
+  }
+  // Ensure port is a number
+  if (spread.port !== "") {
+    spread.port = Number(spread.port);
+  }
+  // Concatenate path
+  spread.path = spread.search ? spread.pathname + spread.search : spread.pathname;
+
+  return spread;
 }
 
 function removeMatchingHeaders(regex, headers) {
@@ -5977,17 +6024,25 @@ function createErrorType(code, message, baseClass) {
 
   // Attach constructor and set default properties
   CustomError.prototype = new (baseClass || Error)();
-  CustomError.prototype.constructor = CustomError;
-  CustomError.prototype.name = "Error [" + code + "]";
+  Object.defineProperties(CustomError.prototype, {
+    constructor: {
+      value: CustomError,
+      enumerable: false,
+    },
+    name: {
+      value: "Error [" + code + "]",
+      enumerable: false,
+    },
+  });
   return CustomError;
 }
 
-function abortRequest(request) {
+function destroyRequest(request, error) {
   for (var event of events) {
     request.removeListener(event, eventHandlers[event]);
   }
   request.on("error", noop);
-  request.abort();
+  request.destroy(error);
 }
 
 function isSubdomain(subdomain, domain) {
@@ -6006,6 +6061,10 @@ function isFunction(value) {
 
 function isBuffer(value) {
   return typeof value === "object" && ("length" in value);
+}
+
+function isURL(value) {
+  return URL && value instanceof URL;
 }
 
 // Exports
@@ -6097,6 +6156,43 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.sequenceS = exports.sequenceT = exports.getApplySemigroup = exports.apS = exports.apSecond = exports.apFirst = exports.ap = void 0;
+/**
+ * The `Apply` class provides the `ap` which is used to apply a function to an argument under a type constructor.
+ *
+ * `Apply` can be used to lift functions of two or more arguments to work on values wrapped with the type constructor
+ * `f`.
+ *
+ * Instances must satisfy the following law in addition to the `Functor` laws:
+ *
+ * 1. Associative composition: `F.ap(F.ap(F.map(fbc, bc => ab => a => bc(ab(a))), fab), fa) <-> F.ap(fbc, F.ap(fab, fa))`
+ *
+ * Formally, `Apply` represents a strong lax semi-monoidal endofunctor.
+ *
+ * @example
+ * import * as O from 'fp-ts/Option'
+ * import { pipe } from 'fp-ts/function'
+ *
+ * const f = (a: string) => (b: number) => (c: boolean) => a + String(b) + String(c)
+ * const fa: O.Option<string> = O.some('s')
+ * const fb: O.Option<number> = O.some(1)
+ * const fc: O.Option<boolean> = O.some(true)
+ *
+ * assert.deepStrictEqual(
+ *   pipe(
+ *     // lift a function
+ *     O.some(f),
+ *     // apply the first argument
+ *     O.ap(fa),
+ *     // apply the second argument
+ *     O.ap(fb),
+ *     // apply the third argument
+ *     O.ap(fc)
+ *   ),
+ *   O.some('s1true')
+ * )
+ *
+ * @since 2.0.0
+ */
 var function_1 = __nccwpck_require__(6985);
 var _ = __importStar(__nccwpck_require__(1840));
 function ap(F, G) {
@@ -6255,11 +6351,17 @@ exports.sequenceS = sequenceS;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.bind = exports.chainFirst = void 0;
+exports.bind = exports.tap = exports.chainFirst = void 0;
 function chainFirst(M) {
-    return function (f) { return function (first) { return M.chain(first, function (a) { return M.map(f(a), function () { return a; }); }); }; };
+    var tapM = tap(M);
+    return function (f) { return function (first) { return tapM(first, f); }; };
 }
 exports.chainFirst = chainFirst;
+/** @internal */
+function tap(M) {
+    return function (first, f) { return M.chain(first, function (a) { return M.map(f(a), function () { return a; }); }); };
+}
+exports.tap = tap;
 function bind(M) {
     return function (name, f) { return function (ma) { return M.chain(ma, function (a) { return M.map(f(a), function (b) {
         var _a;
@@ -6380,11 +6482,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.fold = exports.match = exports.foldW = exports.matchW = exports.isRight = exports.isLeft = exports.fromOption = exports.fromPredicate = exports.FromEither = exports.MonadThrow = exports.throwError = exports.ChainRec = exports.Extend = exports.extend = exports.Alt = exports.alt = exports.altW = exports.Bifunctor = exports.mapLeft = exports.bimap = exports.Traversable = exports.sequence = exports.traverse = exports.Foldable = exports.reduceRight = exports.foldMap = exports.reduce = exports.Monad = exports.Chain = exports.chain = exports.chainW = exports.Applicative = exports.Apply = exports.ap = exports.apW = exports.Pointed = exports.of = exports.Functor = exports.map = exports.getAltValidation = exports.getApplicativeValidation = exports.getWitherable = exports.getFilterable = exports.getCompactable = exports.getSemigroup = exports.getEq = exports.getShow = exports.URI = exports.right = exports.left = void 0;
-exports.getValidation = exports.getValidationMonoid = exports.getValidationSemigroup = exports.getApplyMonoid = exports.getApplySemigroup = exports.either = exports.stringifyJSON = exports.parseJSON = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.let = exports.bindTo = exports.Do = exports.exists = exports.elem = exports.toError = exports.toUnion = exports.chainNullableK = exports.fromNullableK = exports.tryCatchK = exports.tryCatch = exports.fromNullable = exports.orElse = exports.orElseW = exports.swap = exports.filterOrElseW = exports.filterOrElse = exports.chainOptionK = exports.fromOptionK = exports.duplicate = exports.flatten = exports.flattenW = exports.chainFirstW = exports.chainFirst = exports.apSecondW = exports.apSecond = exports.apFirstW = exports.apFirst = exports.flap = exports.getOrElse = exports.getOrElseW = void 0;
+exports.match = exports.foldW = exports.matchW = exports.isRight = exports.isLeft = exports.fromOption = exports.fromPredicate = exports.FromEither = exports.MonadThrow = exports.throwError = exports.ChainRec = exports.Extend = exports.extend = exports.Alt = exports.alt = exports.altW = exports.Bifunctor = exports.mapLeft = exports.bimap = exports.Traversable = exports.sequence = exports.traverse = exports.Foldable = exports.reduceRight = exports.foldMap = exports.reduce = exports.Monad = exports.Chain = exports.Applicative = exports.Apply = exports.ap = exports.apW = exports.Pointed = exports.of = exports.asUnit = exports.as = exports.Functor = exports.map = exports.getAltValidation = exports.getApplicativeValidation = exports.getWitherable = exports.getFilterable = exports.getCompactable = exports.getSemigroup = exports.getEq = exports.getShow = exports.URI = exports.flatMap = exports.right = exports.left = void 0;
+exports.chainFirstW = exports.chainFirst = exports.chain = exports.chainW = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.let = exports.bindTo = exports.Do = exports.exists = exports.elem = exports.toError = exports.toUnion = exports.chainNullableK = exports.fromNullableK = exports.tryCatchK = exports.tryCatch = exports.fromNullable = exports.orElse = exports.orElseW = exports.swap = exports.filterOrElseW = exports.filterOrElse = exports.flatMapOption = exports.flatMapNullable = exports.liftOption = exports.liftNullable = exports.chainOptionKW = exports.chainOptionK = exports.fromOptionK = exports.duplicate = exports.flatten = exports.flattenW = exports.tap = exports.apSecondW = exports.apSecond = exports.apFirstW = exports.apFirst = exports.flap = exports.getOrElse = exports.getOrElseW = exports.fold = void 0;
+exports.getValidation = exports.getValidationMonoid = exports.getValidationSemigroup = exports.getApplyMonoid = exports.getApplySemigroup = exports.either = exports.stringifyJSON = exports.parseJSON = void 0;
 var Applicative_1 = __nccwpck_require__(4766);
 var Apply_1 = __nccwpck_require__(205);
-var Chain_1 = __nccwpck_require__(2372);
+var chainable = __importStar(__nccwpck_require__(2372));
 var ChainRec_1 = __nccwpck_require__(5322);
 var FromEither_1 = __nccwpck_require__(1964);
 var function_1 = __nccwpck_require__(6985);
@@ -6411,10 +6514,13 @@ exports.left = _.left;
  * @since 2.0.0
  */
 exports.right = _.right;
+/**
+ * @category sequencing
+ * @since 2.14.0
+ */
+exports.flatMap = (0, function_1.dual)(2, function (ma, f) { return ((0, exports.isLeft)(ma) ? ma : f(ma.right)); });
 var _map = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); };
 var _ap = function (fab, fa) { return (0, function_1.pipe)(fab, (0, exports.ap)(fa)); };
-/* istanbul ignore next */
-var _chain = function (ma, f) { return (0, function_1.pipe)(ma, (0, exports.chain)(f)); };
 /* istanbul ignore next */
 var _reduce = function (fa, b, f) { return (0, function_1.pipe)(fa, (0, exports.reduce)(b, f)); };
 /* istanbul ignore next */
@@ -6711,6 +6817,20 @@ exports.Functor = {
     map: _map
 };
 /**
+ * Maps the `Right` value of this `Either` to the specified constant value.
+ *
+ * @category mapping
+ * @since 2.16.0
+ */
+exports.as = (0, function_1.dual)(2, (0, Functor_1.as)(exports.Functor));
+/**
+ * Maps the `Right` value of this `Either` to the void constant value.
+ *
+ * @category mapping
+ * @since 2.16.0
+ */
+exports.asUnit = (0, Functor_1.asUnit)(exports.Functor);
+/**
  * @category constructors
  * @since 2.7.0
  */
@@ -6758,47 +6878,6 @@ exports.Applicative = {
     of: exports.of
 };
 /**
- * Less strict version of [`chain`](#chain).
- *
- * The `W` suffix (short for **W**idening) means that the error types will be merged.
- *
- * @example
- * import * as E from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
- *
- * const e1: E.Either<string, number> = E.right(1)
- * const e2: E.Either<number, number> = E.right(2)
- *
- * export const result1 = pipe(
- *   // @ts-expect-error
- *   e1,
- *   E.chain(() => e2)
- * )
- *
- * // merged error types -----v-------------v
- * // const result2: E.Either<string | number, number>
- * export const result2 = pipe(
- *   e1, // no error
- *   E.chainW(() => e2)
- * )
- *
- * @category sequencing
- * @since 2.6.0
- */
-var chainW = function (f) {
-    return function (ma) {
-        return (0, exports.isLeft)(ma) ? ma : f(ma.right);
-    };
-};
-exports.chainW = chainW;
-/**
- * Composes computations in sequence, using the return value of one computation to determine the next computation.
- *
- * @category sequencing
- * @since 2.0.0
- */
-exports.chain = exports.chainW;
-/**
  * @category instances
  * @since 2.10.0
  */
@@ -6806,7 +6885,7 @@ exports.Chain = {
     URI: exports.URI,
     map: _map,
     ap: _ap,
-    chain: _chain
+    chain: exports.flatMap
 };
 /**
  * @category instances
@@ -6817,7 +6896,7 @@ exports.Monad = {
     map: _map,
     ap: _ap,
     of: exports.of,
-    chain: _chain
+    chain: exports.flatMap
 };
 /**
  * Left-associative fold of a structure.
@@ -7104,7 +7183,7 @@ exports.ChainRec = {
     URI: exports.URI,
     map: _map,
     ap: _ap,
-    chain: _chain,
+    chain: exports.flatMap,
     chainRec: _chainRec
 };
 /**
@@ -7120,7 +7199,7 @@ exports.MonadThrow = {
     map: _map,
     ap: _ap,
     of: exports.of,
-    chain: _chain,
+    chain: exports.flatMap,
     throwError: exports.throwError
 };
 /**
@@ -7350,20 +7429,10 @@ exports.apSecondW = exports.apSecond;
  * Composes computations in sequence, using the return value of one computation to determine the next computation and
  * keeping only the result of the first.
  *
- * @category sequencing
- * @since 2.0.0
+ * @category combinators
+ * @since 2.15.0
  */
-exports.chainFirst = 
-/*#__PURE__*/ (0, Chain_1.chainFirst)(exports.Chain);
-/**
- * Less strict version of [`chainFirst`](#chainfirst)
- *
- * The `W` suffix (short for **W**idening) means that the error types will be merged.
- *
- * @category sequencing
- * @since 2.8.0
- */
-exports.chainFirstW = exports.chainFirst;
+exports.tap = (0, function_1.dual)(2, chainable.tap(exports.Chain));
 /**
  * Less strict version of [`flatten`](#flatten).
  *
@@ -7373,7 +7442,7 @@ exports.chainFirstW = exports.chainFirst;
  * @since 2.11.0
  */
 exports.flattenW = 
-/*#__PURE__*/ (0, exports.chainW)(function_1.identity);
+/*#__PURE__*/ (0, exports.flatMap)(function_1.identity);
 /**
  * The `flatten` function is the conventional monad join operator. It is used to remove one level of monadic structure, projecting its bound argument into the outer level.
  *
@@ -7393,16 +7462,55 @@ exports.flatten = exports.flattenW;
  */
 exports.duplicate = (0, exports.extend)(function_1.identity);
 /**
- * @category lifting
+ * Use `liftOption`.
+ *
+ * @category legacy
  * @since 2.10.0
  */
 exports.fromOptionK = 
 /*#__PURE__*/ (0, FromEither_1.fromOptionK)(exports.FromEither);
 /**
- * @category sequencing
+ * Use `flatMapOption`.
+ *
+ * @category legacy
  * @since 2.11.0
  */
 exports.chainOptionK = (0, FromEither_1.chainOptionK)(exports.FromEither, exports.Chain);
+/**
+ * Use `flatMapOption`.
+ *
+ * @category legacy
+ * @since 2.13.2
+ */
+exports.chainOptionKW = exports.chainOptionK;
+/** @internal */
+var _FromEither = {
+    fromEither: exports.FromEither.fromEither
+};
+/**
+ * @category lifting
+ * @since 2.15.0
+ */
+exports.liftNullable = _.liftNullable(_FromEither);
+/**
+ * @category lifting
+ * @since 2.15.0
+ */
+exports.liftOption = _.liftOption(_FromEither);
+/** @internal */
+var _FlatMap = {
+    flatMap: exports.flatMap
+};
+/**
+ * @category sequencing
+ * @since 2.15.0
+ */
+exports.flatMapNullable = _.flatMapNullable(_FromEither, _FlatMap);
+/**
+ * @category sequencing
+ * @since 2.15.0
+ */
+exports.flatMapOption = _.flatMapOption(_FromEither, _FlatMap);
 /**
  * @example
  * import * as E from 'fp-ts/Either'
@@ -7552,7 +7660,9 @@ var tryCatchK = function (f, onThrow) {
 };
 exports.tryCatchK = tryCatchK;
 /**
- * @category lifting
+ * Use `liftNullable`.
+ *
+ * @category legacy
  * @since 2.9.0
  */
 var fromNullableK = function (e) {
@@ -7561,12 +7671,14 @@ var fromNullableK = function (e) {
 };
 exports.fromNullableK = fromNullableK;
 /**
- * @category sequencing
+ * Use `flatMapNullable`.
+ *
+ * @category legacy
  * @since 2.9.0
  */
 var chainNullableK = function (e) {
     var from = (0, exports.fromNullableK)(e);
-    return function (f) { return (0, exports.chain)(from(f)); };
+    return function (f) { return (0, exports.flatMap)(from(f)); };
 };
 exports.chainNullableK = chainNullableK;
 /**
@@ -7635,7 +7747,7 @@ exports.let = let_;
  * @category do notation
  * @since 2.8.0
  */
-exports.bind = (0, Chain_1.bind)(exports.Chain);
+exports.bind = chainable.bind(exports.Chain);
 /**
  * The `W` suffix (short for **W**idening) means that the error types will be merged.
  *
@@ -7722,6 +7834,37 @@ exports.traverseArray = traverseArray;
  */
 exports.sequenceArray = 
 /*#__PURE__*/ (0, exports.traverseArray)(function_1.identity);
+// -------------------------------------------------------------------------------------
+// legacy
+// -------------------------------------------------------------------------------------
+/**
+ * Alias of `flatMap`.
+ *
+ * @category legacy
+ * @since 2.6.0
+ */
+exports.chainW = exports.flatMap;
+/**
+ * Alias of `flatMap`.
+ *
+ * @category legacy
+ * @since 2.0.0
+ */
+exports.chain = exports.flatMap;
+/**
+ * Alias of `tap`.
+ *
+ * @category legacy
+ * @since 2.0.0
+ */
+exports.chainFirst = exports.tap;
+/**
+ * Alias of `tap`.
+ *
+ * @category legacy
+ * @since 2.8.0
+ */
+exports.chainFirstW = exports.tap;
 /**
  * Use [`parse`](./Json.ts.html#parse) instead.
  *
@@ -7764,7 +7907,7 @@ exports.either = {
     map: _map,
     of: exports.of,
     ap: _ap,
-    chain: _chain,
+    chain: exports.flatMap,
     reduce: _reduce,
     foldMap: _foldMap,
     reduceRight: _reduceRight,
@@ -7835,7 +7978,7 @@ function getValidation(SE) {
         _E: undefined,
         map: _map,
         of: exports.of,
-        chain: _chain,
+        chain: exports.flatMap,
         bimap: _bimap,
         mapLeft: _mapLeft,
         reduce: _reduce,
@@ -7884,7 +8027,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getEitherM = exports.toUnion = exports.swap = exports.orLeft = exports.orElseFirst = exports.orElse = exports.getOrElse = exports.matchE = exports.match = exports.altValidation = exports.mapLeft = exports.bimap = exports.alt = exports.chain = exports.ap = exports.map = exports.chainNullableK = exports.fromNullableK = exports.fromNullable = exports.leftF = exports.rightF = exports.left = exports.right = void 0;
+exports.getEitherM = exports.toUnion = exports.swap = exports.orLeft = exports.tapError = exports.orElseFirst = exports.orElse = exports.getOrElse = exports.matchE = exports.match = exports.altValidation = exports.mapError = exports.mapLeft = exports.mapBoth = exports.bimap = exports.alt = exports.flatMap = exports.chain = exports.ap = exports.map = exports.chainNullableK = exports.fromNullableK = exports.fromNullable = exports.leftF = exports.rightF = exports.left = exports.right = void 0;
 var Apply_1 = __nccwpck_require__(205);
 var E = __importStar(__nccwpck_require__(7534));
 var function_1 = __nccwpck_require__(6985);
@@ -7935,21 +8078,39 @@ function ap(F) {
 }
 exports.ap = ap;
 function chain(M) {
-    return function (f) { return function (ma) { return M.chain(ma, function (e) { return (E.isLeft(e) ? M.of(e) : f(e.right)); }); }; };
+    var flatMapM = flatMap(M);
+    return function (f) { return function (ma) { return flatMapM(ma, f); }; };
 }
 exports.chain = chain;
+/** @internal */
+function flatMap(M) {
+    return function (ma, f) { return M.chain(ma, function (e) { return (E.isLeft(e) ? M.of(e) : f(e.right)); }); };
+}
+exports.flatMap = flatMap;
 function alt(M) {
     return function (second) { return function (first) { return M.chain(first, function (e) { return (E.isLeft(e) ? second() : M.of(e)); }); }; };
 }
 exports.alt = alt;
 function bimap(F) {
-    return function (f, g) { return function (fea) { return F.map(fea, E.bimap(f, g)); }; };
+    var mapBothF = mapBoth(F);
+    return function (f, g) { return function (self) { return mapBothF(self, f, g); }; };
 }
 exports.bimap = bimap;
+/** @internal */
+function mapBoth(F) {
+    return function (self, f, g) { return F.map(self, E.bimap(f, g)); };
+}
+exports.mapBoth = mapBoth;
 function mapLeft(F) {
-    return function (f) { return function (fea) { return F.map(fea, E.mapLeft(f)); }; };
+    var mapErrorF = mapError(F);
+    return function (f) { return function (self) { return mapErrorF(self, f); }; };
 }
 exports.mapLeft = mapLeft;
+/** @internal */
+function mapError(F) {
+    return function (self, f) { return F.map(self, E.mapLeft(f)); };
+}
+exports.mapError = mapError;
 function altValidation(M, S) {
     return function (second) { return function (first) {
         return M.chain(first, E.match(function (e1) {
@@ -7975,10 +8136,18 @@ function orElse(M) {
 }
 exports.orElse = orElse;
 function orElseFirst(M) {
-    var orElseM = orElse(M);
-    return function (onLeft) { return orElseM(function (e) { return M.map(onLeft(e), function (eb) { return (E.isLeft(eb) ? eb : E.left(e)); }); }); };
+    var tapErrorM = tapError(M);
+    return function (onLeft) { return function (ma) { return tapErrorM(ma, onLeft); }; };
 }
 exports.orElseFirst = orElseFirst;
+/** @internal */
+function tapError(M) {
+    var orElseM = orElse(M);
+    return function (ma, onLeft) {
+        return (0, function_1.pipe)(ma, orElseM(function (e) { return M.map(onLeft(e), function (eb) { return (E.isLeft(eb) ? eb : E.left(e)); }); }));
+    };
+}
+exports.tapError = tapError;
 function orLeft(M) {
     return function (onLeft) { return function (ma) {
         return M.chain(ma, E.match(function (e) { return M.map(onLeft(e), E.left); }, function (a) { return M.of(E.right(a)); }));
@@ -8360,7 +8529,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.filterOrElse = exports.chainFirstEitherK = exports.chainEitherK = exports.fromEitherK = exports.chainOptionK = exports.fromOptionK = exports.fromPredicate = exports.fromOption = void 0;
+exports.tapEither = exports.filterOrElse = exports.chainFirstEitherK = exports.chainEitherK = exports.fromEitherK = exports.chainOptionK = exports.fromOptionK = exports.fromPredicate = exports.fromOption = void 0;
 var Chain_1 = __nccwpck_require__(2372);
 var function_1 = __nccwpck_require__(6985);
 var _ = __importStar(__nccwpck_require__(1840));
@@ -8402,7 +8571,8 @@ function chainEitherK(F, M) {
 }
 exports.chainEitherK = chainEitherK;
 function chainFirstEitherK(F, M) {
-    return (0, function_1.flow)(fromEitherK(F), (0, Chain_1.chainFirst)(M));
+    var tapEitherM = tapEither(F, M);
+    return function (f) { return function (ma) { return tapEitherM(ma, f); }; };
 }
 exports.chainFirstEitherK = chainFirstEitherK;
 function filterOrElse(F, M) {
@@ -8413,6 +8583,13 @@ function filterOrElse(F, M) {
     };
 }
 exports.filterOrElse = filterOrElse;
+/** @internal */
+function tapEither(F, M) {
+    var fromEither = fromEitherK(F);
+    var tapM = (0, Chain_1.tap)(M);
+    return function (self, f) { return tapM(self, fromEither(f)); };
+}
+exports.tapEither = tapEither;
 
 
 /***/ }),
@@ -8423,7 +8600,7 @@ exports.filterOrElse = filterOrElse;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = void 0;
+exports.tapIO = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = void 0;
 /**
  * Lift a computation from the `IO` monad
  *
@@ -8443,10 +8620,16 @@ function chainIOK(F, M) {
 }
 exports.chainIOK = chainIOK;
 function chainFirstIOK(F, M) {
-    var chainFirstM = (0, Chain_1.chainFirst)(M);
-    return function (f) { return chainFirstM((0, function_1.flow)(f, F.fromIO)); };
+    var tapIOM = tapIO(F, M);
+    return function (f) { return function (first) { return tapIOM(first, f); }; };
 }
 exports.chainFirstIOK = chainFirstIOK;
+/** @internal */
+function tapIO(F, M) {
+    var chainFirstM = (0, Chain_1.tap)(M);
+    return function (self, f) { return chainFirstM(self, (0, function_1.flow)(f, F.fromIO)); };
+}
+exports.tapIO = tapIO;
 
 
 /***/ }),
@@ -8480,7 +8663,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.chainFirstReaderK = exports.chainReaderK = exports.fromReaderK = exports.asks = exports.ask = void 0;
+exports.tapReader = exports.chainFirstReaderK = exports.chainReaderK = exports.fromReaderK = exports.asks = exports.ask = void 0;
 /**
  * Lift a computation from the `Reader` monad.
  *
@@ -8507,9 +8690,16 @@ function chainReaderK(F, M) {
 }
 exports.chainReaderK = chainReaderK;
 function chainFirstReaderK(F, M) {
-    return (0, function_1.flow)(fromReaderK(F), (0, Chain_1.chainFirst)(M));
+    var tapM = tapReader(F, M);
+    return function (f) { return function (self) { return tapM(self, f); }; };
 }
 exports.chainFirstReaderK = chainFirstReaderK;
+/** @internal */
+function tapReader(F, M) {
+    var tapM = (0, Chain_1.tap)(M);
+    return function (self, f) { return tapM(self, (0, function_1.flow)(f, F.fromReader)); };
+}
+exports.tapReader = tapReader;
 
 
 /***/ }),
@@ -8520,7 +8710,7 @@ exports.chainFirstReaderK = chainFirstReaderK;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.chainFirstTaskK = exports.chainTaskK = exports.fromTaskK = void 0;
+exports.tapTask = exports.chainFirstTaskK = exports.chainTaskK = exports.fromTaskK = void 0;
 /**
  * Lift a computation from the `Task` monad
  *
@@ -8540,10 +8730,16 @@ function chainTaskK(F, M) {
 }
 exports.chainTaskK = chainTaskK;
 function chainFirstTaskK(F, M) {
-    var chainFirstM = (0, Chain_1.chainFirst)(M);
-    return function (f) { return chainFirstM((0, function_1.flow)(f, F.fromTask)); };
+    var tapTaskM = tapTask(F, M);
+    return function (f) { return function (first) { return tapTaskM(first, f); }; };
 }
 exports.chainFirstTaskK = chainFirstTaskK;
+/** @internal */
+function tapTask(F, M) {
+    var tapM = (0, Chain_1.tap)(M);
+    return function (self, f) { return tapM(self, (0, function_1.flow)(f, F.fromTask)); };
+}
+exports.tapTask = tapTask;
 
 
 /***/ }),
@@ -8554,7 +8750,7 @@ exports.chainFirstTaskK = chainFirstTaskK;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getFunctorComposition = exports.let = exports.bindTo = exports.flap = exports.map = void 0;
+exports.asUnit = exports.as = exports.getFunctorComposition = exports.let = exports.bindTo = exports.flap = exports.map = void 0;
 /**
  * A `Functor` is a type constructor which supports a mapping operation `map`.
  *
@@ -8599,6 +8795,17 @@ function getFunctorComposition(F, G) {
     };
 }
 exports.getFunctorComposition = getFunctorComposition;
+/** @internal */
+function as(F) {
+    return function (self, b) { return F.map(self, function () { return b; }); };
+}
+exports.as = as;
+/** @internal */
+function asUnit(F) {
+    var asM = as(F);
+    return function (self) { return asM(self, undefined); };
+}
+exports.asUnit = asUnit;
 
 
 /***/ }),
@@ -8723,11 +8930,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.fromEither = exports.MonadThrow = exports.throwError = exports.Witherable = exports.wilt = exports.wither = exports.Traversable = exports.sequence = exports.traverse = exports.Filterable = exports.partitionMap = exports.partition = exports.filterMap = exports.filter = exports.Compactable = exports.separate = exports.compact = exports.Extend = exports.extend = exports.Alternative = exports.guard = exports.Zero = exports.zero = exports.Alt = exports.alt = exports.altW = exports.Foldable = exports.reduceRight = exports.foldMap = exports.reduce = exports.Monad = exports.Chain = exports.chain = exports.Applicative = exports.Apply = exports.ap = exports.Pointed = exports.of = exports.Functor = exports.map = exports.getMonoid = exports.getOrd = exports.getEq = exports.getShow = exports.URI = exports.getRight = exports.getLeft = exports.fromPredicate = exports.some = exports.none = void 0;
-exports.getLastMonoid = exports.getFirstMonoid = exports.getApplyMonoid = exports.getApplySemigroup = exports.option = exports.mapNullable = exports.getRefinement = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apS = exports.bind = exports.let = exports.bindTo = exports.Do = exports.exists = exports.elem = exports.toUndefined = exports.toNullable = exports.chainNullableK = exports.fromNullableK = exports.tryCatchK = exports.tryCatch = exports.fromNullable = exports.chainFirstEitherK = exports.chainEitherK = exports.fromEitherK = exports.duplicate = exports.chainFirst = exports.flatten = exports.apSecond = exports.apFirst = exports.flap = exports.getOrElse = exports.getOrElseW = exports.fold = exports.match = exports.foldW = exports.matchW = exports.isNone = exports.isSome = exports.FromEither = void 0;
+exports.Witherable = exports.wilt = exports.wither = exports.Traversable = exports.sequence = exports.traverse = exports.Filterable = exports.partitionMap = exports.partition = exports.filterMap = exports.filter = exports.Compactable = exports.separate = exports.compact = exports.Extend = exports.extend = exports.Alternative = exports.guard = exports.Zero = exports.zero = exports.Alt = exports.alt = exports.altW = exports.orElse = exports.Foldable = exports.reduceRight = exports.foldMap = exports.reduce = exports.Monad = exports.Chain = exports.flatMap = exports.Applicative = exports.Apply = exports.ap = exports.Pointed = exports.of = exports.asUnit = exports.as = exports.Functor = exports.map = exports.getMonoid = exports.getOrd = exports.getEq = exports.getShow = exports.URI = exports.getRight = exports.getLeft = exports.fromPredicate = exports.some = exports.none = void 0;
+exports.getFirstMonoid = exports.getApplyMonoid = exports.getApplySemigroup = exports.option = exports.mapNullable = exports.getRefinement = exports.chainFirst = exports.chain = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apS = exports.bind = exports.let = exports.bindTo = exports.Do = exports.exists = exports.elem = exports.toUndefined = exports.toNullable = exports.chainNullableK = exports.fromNullableK = exports.tryCatchK = exports.tryCatch = exports.fromNullable = exports.chainFirstEitherK = exports.chainEitherK = exports.fromEitherK = exports.duplicate = exports.tapEither = exports.tap = exports.flatten = exports.apSecond = exports.apFirst = exports.flap = exports.getOrElse = exports.getOrElseW = exports.fold = exports.match = exports.foldW = exports.matchW = exports.isNone = exports.isSome = exports.FromEither = exports.fromEither = exports.MonadThrow = exports.throwError = void 0;
+exports.getLastMonoid = void 0;
 var Applicative_1 = __nccwpck_require__(4766);
 var Apply_1 = __nccwpck_require__(205);
-var Chain_1 = __nccwpck_require__(2372);
+var chainable = __importStar(__nccwpck_require__(2372));
 var FromEither_1 = __nccwpck_require__(1964);
 var function_1 = __nccwpck_require__(6985);
 var Functor_1 = __nccwpck_require__(5533);
@@ -8790,7 +8998,6 @@ var getRight = function (ma) { return (ma._tag === 'Left' ? exports.none : (0, e
 exports.getRight = getRight;
 var _map = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); };
 var _ap = function (fab, fa) { return (0, function_1.pipe)(fab, (0, exports.ap)(fa)); };
-var _chain = function (ma, f) { return (0, function_1.pipe)(ma, (0, exports.chain)(f)); };
 var _reduce = function (fa, b, f) { return (0, function_1.pipe)(fa, (0, exports.reduce)(b, f)); };
 var _foldMap = function (M) {
     var foldMapM = (0, exports.foldMap)(M);
@@ -8919,6 +9126,20 @@ exports.Functor = {
     map: _map
 };
 /**
+ * Maps the `Some` value of this `Option` to the specified constant value.
+ *
+ * @category mapping
+ * @since 2.16.0
+ */
+exports.as = (0, function_1.dual)(2, (0, Functor_1.as)(exports.Functor));
+/**
+ * Maps the `Some` value of this `Option` to the void constant value.
+ *
+ * @category mapping
+ * @since 2.16.0
+ */
+exports.asUnit = (0, Functor_1.asUnit)(exports.Functor);
+/**
  * @category constructors
  * @since 2.7.0
  */
@@ -8958,15 +9179,10 @@ exports.Applicative = {
     of: exports.of
 };
 /**
- * Composes computations in sequence, using the return value of one computation to determine the next computation.
- *
  * @category sequencing
- * @since 2.0.0
+ * @since 2.14.0
  */
-var chain = function (f) { return function (ma) {
-    return (0, exports.isNone)(ma) ? exports.none : f(ma.value);
-}; };
-exports.chain = chain;
+exports.flatMap = (0, function_1.dual)(2, function (ma, f) { return ((0, exports.isNone)(ma) ? exports.none : f(ma.value)); });
 /**
  * @category instances
  * @since 2.10.0
@@ -8975,7 +9191,7 @@ exports.Chain = {
     URI: exports.URI,
     map: _map,
     ap: _ap,
-    chain: _chain
+    chain: exports.flatMap
 };
 /**
  * @category instances
@@ -8986,7 +9202,7 @@ exports.Monad = {
     map: _map,
     ap: _ap,
     of: exports.of,
-    chain: _chain
+    chain: exports.flatMap
 };
 /**
  * @category folding
@@ -9023,67 +9239,41 @@ exports.Foldable = {
     reduceRight: _reduceRight
 };
 /**
+ * Returns the provided `Option` `that` if `self` is `None`, otherwise returns `self`.
+ *
+ * @param self - The first `Option` to be checked.
+ * @param that - The `Option` to return if `self` is `None`.
+ *
+ * @example
+ * import * as O from "fp-ts/Option"
+ *
+ * assert.deepStrictEqual(O.orElse(O.none, () => O.none), O.none)
+ * assert.deepStrictEqual(O.orElse(O.some(1), () => O.none), O.some(1))
+ * assert.deepStrictEqual(O.orElse(O.none, () => O.some('b')), O.some('b'))
+ * assert.deepStrictEqual(O.orElse(O.some(1), () => O.some('b')), O.some(1))
+ *
+ * @category error handling
+ * @since 2.16.0
+ */
+exports.orElse = (0, function_1.dual)(2, function (self, that) { return ((0, exports.isNone)(self) ? that() : self); });
+/**
+ * Alias of `orElse`.
+ *
  * Less strict version of [`alt`](#alt).
  *
  * The `W` suffix (short for **W**idening) means that the return types will be merged.
  *
- * @category error handling
+ * @category legacy
  * @since 2.9.0
  */
-var altW = function (that) { return function (fa) {
-    return (0, exports.isNone)(fa) ? that() : fa;
-}; };
-exports.altW = altW;
+exports.altW = exports.orElse;
 /**
- * Identifies an associative operation on a type constructor. It is similar to `Semigroup`, except that it applies to
- * types of kind `* -> *`.
+ * Alias of `orElse`.
  *
- * In case of `Option` returns the left-most non-`None` value.
- *
- * | x       | y       | pipe(x, alt(() => y) |
- * | ------- | ------- | -------------------- |
- * | none    | none    | none                 |
- * | some(a) | none    | some(a)              |
- * | none    | some(b) | some(b)              |
- * | some(a) | some(b) | some(a)              |
- *
- * @example
- * import * as O from 'fp-ts/Option'
- * import { pipe } from 'fp-ts/function'
- *
- * assert.deepStrictEqual(
- *   pipe(
- *     O.none,
- *     O.alt(() => O.none)
- *   ),
- *   O.none
- * )
- * assert.deepStrictEqual(
- *   pipe(
- *     O.some('a'),
- *     O.alt<string>(() => O.none)
- *   ),
- *   O.some('a')
- * )
- * assert.deepStrictEqual(
- *   pipe(
- *     O.none,
- *     O.alt(() => O.some('b'))
- *   ),
- *   O.some('b')
- * )
- * assert.deepStrictEqual(
- *   pipe(
- *     O.some('a'),
- *     O.alt(() => O.some('b'))
- *   ),
- *   O.some('a')
- * )
- *
- * @category error handling
+ * @category legacy
  * @since 2.0.0
  */
-exports.alt = exports.altW;
+exports.alt = exports.orElse;
 /**
  * @category instances
  * @since 2.7.0
@@ -9143,7 +9333,7 @@ exports.Extend = {
  * @category filtering
  * @since 2.0.0
  */
-exports.compact = (0, exports.chain)(function_1.identity);
+exports.compact = (0, exports.flatMap)(function_1.identity);
 var defaultSeparated = /*#__PURE__*/ (0, Separated_1.separated)(exports.none, exports.none);
 /**
  * @category filtering
@@ -9300,7 +9490,7 @@ exports.MonadThrow = {
     map: _map,
     ap: _ap,
     of: exports.of,
-    chain: _chain,
+    chain: exports.flatMap,
     throwError: exports.throwError
 };
 /**
@@ -9472,11 +9662,31 @@ exports.flatten = exports.compact;
  * Composes computations in sequence, using the return value of one computation to determine the next computation and
  * keeping only the result of the first.
  *
- * @category sequencing
- * @since 2.0.0
+ * @category combinators
+ * @since 2.15.0
  */
-exports.chainFirst = 
-/*#__PURE__*/ (0, Chain_1.chainFirst)(exports.Chain);
+exports.tap = (0, function_1.dual)(2, chainable.tap(exports.Chain));
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function'
+ * import * as O from 'fp-ts/Option'
+ * import * as E from 'fp-ts/Either'
+ *
+ * const compute = (value: number) => pipe(
+ *   O.of(value),
+ *   O.tapEither((value) => value > 0 ? E.right('ok') : E.left('error')),
+ * )
+ *
+ * assert.deepStrictEqual(compute(1), O.of(1))
+ * assert.deepStrictEqual(compute(-42), O.none)
+ *
+ * @category combinators
+ * @since 2.16.0
+ */
+exports.tapEither = (0, function_1.dual)(2, (0, FromEither_1.tapEither)(exports.FromEither, exports.Chain));
 /**
  * @since 2.0.0
  */
@@ -9493,11 +9703,12 @@ exports.fromEitherK = (0, FromEither_1.fromEitherK)(exports.FromEither);
 exports.chainEitherK = 
 /*#__PURE__*/ (0, FromEither_1.chainEitherK)(exports.FromEither, exports.Chain);
 /**
- * @category sequencing
+ * Alias of `tapEither`.
+ *
+ * @category legacy
  * @since 2.12.0
  */
-exports.chainFirstEitherK = 
-/*#__PURE__*/ (0, FromEither_1.chainFirstEitherK)(exports.FromEither, exports.Chain);
+exports.chainFirstEitherK = exports.tapEither;
 /**
  * Constructs a new `Option` from a nullable type. If the value is `null` or `undefined`, returns `None`, otherwise
  * returns the value wrapped in a `Some`.
@@ -9748,7 +9959,7 @@ exports.let = let_;
  * @category do notation
  * @since 2.8.0
  */
-exports.bind = (0, Chain_1.bind)(exports.Chain);
+exports.bind = chainable.bind(exports.Chain);
 /**
  * @category do notation
  * @since 2.8.0
@@ -9822,6 +10033,23 @@ exports.traverseArray = traverseArray;
 exports.sequenceArray = 
 /*#__PURE__*/ (0, exports.traverseArray)(function_1.identity);
 // -------------------------------------------------------------------------------------
+// legacy
+// -------------------------------------------------------------------------------------
+/**
+ * Alias of `flatMap`.
+ *
+ * @category legacy
+ * @since 2.0.0
+ */
+exports.chain = exports.flatMap;
+/**
+ * Alias of `tap`.
+ *
+ * @category legacy
+ * @since 2.0.0
+ */
+exports.chainFirst = exports.tap;
+// -------------------------------------------------------------------------------------
 // deprecated
 // -------------------------------------------------------------------------------------
 /**
@@ -9857,7 +10085,7 @@ exports.option = {
     map: _map,
     of: exports.of,
     ap: _ap,
-    chain: _chain,
+    chain: exports.flatMap,
     reduce: _reduce,
     foldMap: _foldMap,
     reduceRight: _reduceRight,
@@ -10556,8 +10784,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.Do = exports.bindW = exports.bind = exports.let = exports.bindTo = exports.Choice = exports.Strong = exports.Category = exports.Profunctor = exports.chainFirstW = exports.chainFirst = exports.Monad = exports.Chain = exports.Applicative = exports.apSecondW = exports.apSecond = exports.apFirstW = exports.apFirst = exports.Apply = exports.Pointed = exports.flap = exports.Functor = exports.URI = exports.right = exports.left = exports.second = exports.first = exports.id = exports.promap = exports.compose = exports.flatten = exports.flattenW = exports.chain = exports.chainW = exports.of = exports.ap = exports.apW = exports.map = exports.asksReader = exports.asksReaderW = exports.local = exports.asks = exports.ask = void 0;
-exports.getMonoid = exports.getSemigroup = exports.reader = exports.sequenceArray = void 0;
+exports.chainW = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.Do = exports.bindW = exports.bind = exports.let = exports.bindTo = exports.Choice = exports.Strong = exports.Category = exports.Profunctor = exports.tap = exports.Monad = exports.Chain = exports.Applicative = exports.apSecondW = exports.apSecond = exports.apFirstW = exports.apFirst = exports.Apply = exports.Pointed = exports.flap = exports.Functor = exports.URI = exports.right = exports.left = exports.second = exports.first = exports.id = exports.promap = exports.compose = exports.flatten = exports.flattenW = exports.flatMap = exports.of = exports.ap = exports.apW = exports.map = exports.asksReader = exports.asksReaderW = exports.local = exports.asks = exports.ask = void 0;
+exports.getMonoid = exports.getSemigroup = exports.reader = exports.chainFirstW = exports.chainFirst = exports.chain = void 0;
 /**
  * The `Reader` monad (also called the Environment monad). Represents a computation, which can read values from a shared environment,
  * pass values from function to function, and execute sub-computations in a modified environment.
@@ -10600,7 +10828,7 @@ exports.getMonoid = exports.getSemigroup = exports.reader = exports.sequenceArra
  */
 var Applicative_1 = __nccwpck_require__(4766);
 var Apply_1 = __nccwpck_require__(205);
-var Chain_1 = __nccwpck_require__(2372);
+var chainable = __importStar(__nccwpck_require__(2372));
 var E = __importStar(__nccwpck_require__(7534));
 var function_1 = __nccwpck_require__(6985);
 var Functor_1 = __nccwpck_require__(5533);
@@ -10685,8 +10913,6 @@ exports.asksReader = exports.asksReaderW;
 var _map = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); };
 /* istanbul ignore next */
 var _ap = function (fab, fa) { return (0, function_1.pipe)(fab, (0, exports.ap)(fa)); };
-/* istanbul ignore next */
-var _chain = function (ma, f) { return (0, function_1.pipe)(ma, (0, exports.chain)(f)); };
 var _compose = function (bc, ab) { return (0, function_1.pipe)(bc, (0, exports.compose)(ab)); };
 var _promap = function (fea, f, g) { return (0, function_1.pipe)(fea, (0, exports.promap)(f, g)); };
 /**
@@ -10719,24 +10945,14 @@ exports.ap = exports.apW;
  */
 exports.of = function_1.constant;
 /**
- * Less strict version of [`chain`](#chain).
- *
- * The `W` suffix (short for **W**idening) means that the environment types will be merged.
- *
  * @category sequencing
- * @since 2.6.0
+ * @since 2.14.0
  */
-var chainW = function (f) { return function (fa) { return function (r) {
-    return f(fa(r))(r);
-}; }; };
-exports.chainW = chainW;
-/**
- * Composes computations in sequence, using the return value of one computation to determine the next computation.
- *
- * @category sequencing
- * @since 2.0.0
- */
-exports.chain = exports.chainW;
+exports.flatMap = (0, function_1.dual)(2, function (ma, f) {
+    return function (r) {
+        return f(ma(r))(r);
+    };
+});
 /**
  * Less strict version of [`flatten`](#flatten).
  *
@@ -10746,7 +10962,7 @@ exports.chain = exports.chainW;
  * @since 2.11.0
  */
 exports.flattenW = 
-/*#__PURE__*/ (0, exports.chainW)(function_1.identity);
+/*#__PURE__*/ (0, exports.flatMap)(function_1.identity);
 /**
  * @category sequencing
  * @since 2.0.0
@@ -10881,7 +11097,7 @@ exports.Chain = {
     URI: exports.URI,
     map: _map,
     ap: _ap,
-    chain: _chain
+    chain: exports.flatMap
 };
 /**
  * @category instances
@@ -10892,26 +11108,16 @@ exports.Monad = {
     map: _map,
     of: exports.of,
     ap: _ap,
-    chain: _chain
+    chain: exports.flatMap
 };
 /**
  * Composes computations in sequence, using the return value of one computation to determine the next computation and
  * keeping only the result of the first.
  *
- * @category sequencing
- * @since 2.0.0
+ * @category combinators
+ * @since 2.15.0
  */
-exports.chainFirst = 
-/*#__PURE__*/ (0, Chain_1.chainFirst)(exports.Chain);
-/**
- * Less strict version of [`chainFirst`](#chainfirst).
- *
- * The `W` suffix (short for **W**idening) means that the environment types will be merged.
- *
- * @category sequencing
- * @since 2.11.0
- */
-exports.chainFirstW = exports.chainFirst;
+exports.tap = (0, function_1.dual)(2, chainable.tap(exports.Chain));
 /**
  * @category instances
  * @since 2.7.0
@@ -10966,7 +11172,7 @@ exports.let = let_;
  * @category do notation
  * @since 2.8.0
  */
-exports.bind = (0, Chain_1.bind)(exports.Chain);
+exports.bind = chainable.bind(exports.Chain);
 /**
  * The `W` suffix (short for **W**idening) means that the environment types will be merged.
  *
@@ -11053,6 +11259,37 @@ exports.traverseArray = traverseArray;
 exports.sequenceArray = 
 /*#__PURE__*/ (0, exports.traverseArray)(function_1.identity);
 // -------------------------------------------------------------------------------------
+// legacy
+// -------------------------------------------------------------------------------------
+/**
+ * Alias of `flatMap`.
+ *
+ * @category legacy
+ * @since 2.6.0
+ */
+exports.chainW = exports.flatMap;
+/**
+ * Alias of `flatMap`.
+ *
+ * @category legacy
+ * @since 2.0.0
+ */
+exports.chain = exports.flatMap;
+/**
+ * Alias of `tap`.
+ *
+ * @category legacy
+ * @since 2.0.0
+ */
+exports.chainFirst = exports.tap;
+/**
+ * Alias of `tap`.
+ *
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.chainFirstW = exports.tap;
+// -------------------------------------------------------------------------------------
 // deprecated
 // -------------------------------------------------------------------------------------
 /**
@@ -11069,7 +11306,7 @@ exports.reader = {
     map: _map,
     of: exports.of,
     ap: _ap,
-    chain: _chain,
+    chain: exports.flatMap,
     promap: _promap,
     compose: _compose,
     id: exports.id,
@@ -11104,7 +11341,7 @@ exports.getMonoid = (0, Applicative_1.getApplicativeMonoid)(exports.Applicative)
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getReaderM = exports.fromNaturalTransformation = exports.fromReader = exports.chain = exports.ap = exports.map = exports.of = void 0;
+exports.getReaderM = exports.fromNaturalTransformation = exports.fromReader = exports.flatMap = exports.chain = exports.ap = exports.map = exports.of = void 0;
 var function_1 = __nccwpck_require__(6985);
 function of(F) {
     return function (a) { return function () { return F.of(a); }; };
@@ -11119,9 +11356,15 @@ function ap(F) {
 }
 exports.ap = ap;
 function chain(M) {
-    return function (f) { return function (ma) { return function (r) { return M.chain(ma(r), function (a) { return f(a)(r); }); }; }; };
+    var flatMapM = flatMap(M);
+    return function (f) { return function (ma) { return flatMapM(ma, f); }; };
 }
 exports.chain = chain;
+/** @internal */
+function flatMap(M) {
+    return function (ma, f) { return function (r) { return M.chain(ma(r), function (a) { return f(a)(r); }); }; };
+}
+exports.flatMap = flatMap;
 function fromReader(F) {
     return function (ma) { return (0, function_1.flow)(ma, F.of); };
 }
@@ -11182,14 +11425,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.fromTaskK = exports.FromTask = exports.chainFirstReaderIOK = exports.chainFirstReaderIOKW = exports.chainReaderIOK = exports.chainReaderIOKW = exports.fromReaderIOK = exports.chainFirstReaderKW = exports.chainFirstReaderK = exports.chainReaderKW = exports.chainReaderK = exports.fromReaderK = exports.asks = exports.ask = exports.FromReader = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.FromIO = exports.chainFirstW = exports.chainFirst = exports.MonadTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecond = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.Functor = exports.URI = exports.flatten = exports.flattenW = exports.chainW = exports.chain = exports.of = exports.apW = exports.ap = exports.map = exports.asksReaderTask = exports.asksReaderTaskW = exports.local = exports.fromReaderIO = exports.fromIO = exports.fromTask = exports.fromReader = void 0;
-exports.run = exports.getMonoid = exports.getSemigroup = exports.readerTaskSeq = exports.readerTask = exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.let = exports.bindTo = exports.Do = exports.chainFirstTaskK = exports.chainTaskK = void 0;
+exports.chainReaderKW = exports.chainReaderK = exports.fromReaderK = exports.asks = exports.ask = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.tapReaderIO = exports.tapTask = exports.tapReader = exports.tapIO = exports.tap = exports.flatMapReaderIO = exports.flatMapReader = exports.flatMapTask = exports.flatMapIO = exports.FromReader = exports.FromTask = exports.FromIO = exports.MonadTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecond = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.asUnit = exports.as = exports.Functor = exports.URI = exports.flatten = exports.flattenW = exports.flatMap = exports.of = exports.apW = exports.ap = exports.map = exports.asksReaderTask = exports.asksReaderTaskW = exports.local = exports.fromReaderIO = exports.fromIO = exports.fromTask = exports.fromReader = void 0;
+exports.run = exports.getMonoid = exports.getSemigroup = exports.readerTaskSeq = exports.readerTask = exports.sequenceSeqArray = exports.chainFirstW = exports.chainFirst = exports.chainW = exports.chain = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.let = exports.bindTo = exports.Do = exports.chainFirstTaskK = exports.chainTaskK = exports.fromTaskK = exports.chainFirstReaderIOK = exports.chainFirstReaderIOKW = exports.chainReaderIOK = exports.chainReaderIOKW = exports.fromReaderIOK = exports.chainFirstReaderKW = exports.chainFirstReaderK = void 0;
 /**
  * @since 2.3.0
  */
 var Applicative_1 = __nccwpck_require__(4766);
 var Apply_1 = __nccwpck_require__(205);
-var Chain_1 = __nccwpck_require__(2372);
+var chainable = __importStar(__nccwpck_require__(2372));
 var FromIO_1 = __nccwpck_require__(7948);
 var FromReader_1 = __nccwpck_require__(678);
 var FromTask_1 = __nccwpck_require__(2038);
@@ -11250,10 +11493,7 @@ exports.asksReaderTaskW = R.asksReaderW;
 exports.asksReaderTask = exports.asksReaderTaskW;
 var _map = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); };
 var _apPar = function (fab, fa) { return (0, function_1.pipe)(fab, (0, exports.ap)(fa)); };
-var _apSeq = function (fab, fa) {
-    return (0, function_1.pipe)(fab, (0, exports.chain)(function (f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); }));
-};
-var _chain = function (ma, f) { return (0, function_1.pipe)(ma, (0, exports.chain)(f)); };
+var _apSeq = function (fab, fa) { return (0, exports.flatMap)(fab, function (f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); }); };
 /**
  * `map` can be used to turn functions `(a: A) => B` into functions `(fa: F<A>) => F<B>` whose argument and return types
  * use the type constructor `F` to represent some computational context.
@@ -11281,22 +11521,10 @@ exports.apW = exports.ap;
  */
 exports.of = RT.of(T.Pointed);
 /**
- * Composes computations in sequence, using the return value of one computation to determine the next computation.
- *
  * @category sequencing
- * @since 2.3.0
+ * @since 2.14.0
  */
-exports.chain = 
-/*#__PURE__*/ RT.chain(T.Monad);
-/**
- * Less strict version of  [`chain`](#chain).
- *
- * The `W` suffix (short for **W**idening) means that the environment types will be merged.
- *
- * @category sequencing
- * @since 2.6.7
- */
-exports.chainW = exports.chain;
+exports.flatMap = (0, function_1.dual)(2, RT.flatMap(T.Monad));
 /**
  * Less strict version of [`flatten`](#flatten).
  *
@@ -11306,7 +11534,7 @@ exports.chainW = exports.chain;
  * @since 2.11.0
  */
 exports.flattenW = 
-/*#__PURE__*/ (0, exports.chainW)(function_1.identity);
+/*#__PURE__*/ (0, exports.flatMap)(function_1.identity);
 /**
  * @category sequencing
  * @since 2.3.0
@@ -11325,6 +11553,20 @@ exports.Functor = {
     URI: exports.URI,
     map: _map
 };
+/**
+ * Maps the value to the specified constant value.
+ *
+ * @category mapping
+ * @since 2.16.0
+ */
+exports.as = (0, function_1.dual)(2, (0, Functor_1.as)(exports.Functor));
+/**
+ * Maps the value to the void constant value.
+ *
+ * @category mapping
+ * @since 2.16.0
+ */
+exports.asUnit = (0, Functor_1.asUnit)(exports.Functor);
 /**
  * @category mapping
  * @since 2.10.0
@@ -11404,7 +11646,7 @@ exports.Chain = {
     URI: exports.URI,
     map: _map,
     ap: _apPar,
-    chain: _chain
+    chain: exports.flatMap
 };
 /**
  * @category instances
@@ -11415,7 +11657,7 @@ exports.Monad = {
     map: _map,
     of: exports.of,
     ap: _apPar,
-    chain: _chain
+    chain: exports.flatMap
 };
 /**
  * @category instances
@@ -11426,7 +11668,7 @@ exports.MonadIO = {
     map: _map,
     of: exports.of,
     ap: _apPar,
-    chain: _chain,
+    chain: exports.flatMap,
     fromIO: exports.fromIO
 };
 /**
@@ -11438,28 +11680,10 @@ exports.MonadTask = {
     map: _map,
     of: exports.of,
     ap: _apPar,
-    chain: _chain,
+    chain: exports.flatMap,
     fromIO: exports.fromIO,
     fromTask: exports.fromTask
 };
-/**
- * Composes computations in sequence, using the return value of one computation to determine the next computation and
- * keeping only the result of the first.
- *
- * @category sequencing
- * @since 2.3.0
- */
-exports.chainFirst = 
-/*#__PURE__*/ (0, Chain_1.chainFirst)(exports.Chain);
-/**
- * Less strict version of [`chainFirst`](#chainfirst).
- *
- * The `W` suffix (short for **W**idening) means that the environment types will be merged.
- *
- * @category sequencing
- * @since 2.11.0
- */
-exports.chainFirstW = exports.chainFirst;
 /**
  * @category instances
  * @since 2.10.0
@@ -11469,22 +11693,14 @@ exports.FromIO = {
     fromIO: exports.fromIO
 };
 /**
- * @category lifting
- * @since 2.4.0
- */
-exports.fromIOK = (0, FromIO_1.fromIOK)(exports.FromIO);
-/**
- * @category sequencing
- * @since 2.4.0
- */
-exports.chainIOK = 
-/*#__PURE__*/ (0, FromIO_1.chainIOK)(exports.FromIO, exports.Chain);
-/**
- * @category sequencing
+ * @category instances
  * @since 2.10.0
  */
-exports.chainFirstIOK = 
-/*#__PURE__*/ (0, FromIO_1.chainFirstIOK)(exports.FromIO, exports.Chain);
+exports.FromTask = {
+    URI: exports.URI,
+    fromIO: exports.fromIO,
+    fromTask: exports.fromTask
+};
 /**
  * @category instances
  * @since 2.11.0
@@ -11493,6 +11709,138 @@ exports.FromReader = {
     URI: exports.URI,
     fromReader: exports.fromReader
 };
+/** @internal */
+var _FlatMap = {
+    flatMap: exports.flatMap
+};
+/** @internal */
+var _FromIO = {
+    fromIO: exports.FromIO.fromIO
+};
+/** @internal */
+var _FromTask = {
+    fromTask: exports.fromTask
+};
+/** @internal */
+var _FromReader = {
+    fromReader: exports.fromReader
+};
+/**
+ * @category sequencing
+ * @since 2.16.0
+ */
+exports.flatMapIO = _.flatMapIO(_FromIO, _FlatMap);
+/**
+ * @category sequencing
+ * @since 2.16.0
+ */
+exports.flatMapTask = _.flatMapTask(_FromTask, _FlatMap);
+/**
+ * @category sequencing
+ * @since 2.16.0
+ */
+exports.flatMapReader = _.flatMapReader(_FromReader, _FlatMap);
+/**
+ * @category sequencing
+ * @since 2.16.0
+ */
+exports.flatMapReaderIO = (0, function_1.dual)(2, function (self, f) {
+    return (0, exports.flatMap)(self, (0, exports.fromReaderIOK)(f));
+});
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @category combinators
+ * @since 2.15.0
+ */
+exports.tap = (0, function_1.dual)(2, chainable.tap(exports.Chain));
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function'
+ * import * as RT from 'fp-ts/ReaderTask'
+ * import * as Console from 'fp-ts/Console'
+ *
+ * // Will produce `Hello, fp-ts` to the stdout
+ * const effect = pipe(
+ *   RT.ask<string>(),
+ *   RT.tapIO((value) => Console.log(`Hello, ${value}`)),
+ * )
+ *
+ * async function test() {
+ *   assert.deepStrictEqual(await effect('fp-ts')(), 'fp-ts')
+ * }
+ *
+ * test()
+ *
+ * @category combinators
+ * @since 2.16.0
+ */
+exports.tapIO = (0, function_1.dual)(2, (0, FromIO_1.tapIO)(exports.FromIO, exports.Chain));
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @category combinators
+ * @since 2.16.0
+ */
+exports.tapReader = (0, function_1.dual)(2, (0, FromReader_1.tapReader)(exports.FromReader, exports.Chain));
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function'
+ * import * as RT from 'fp-ts/ReaderTask'
+ * import * as T from 'fp-ts/Task'
+ *
+ * const effect = pipe(
+ *   RT.ask<number>(),
+ *   RT.tapTask((value) => T.of(value + 1)),
+ * )
+ *
+ * async function test() {
+ *   assert.deepStrictEqual(await effect(1)(), 1)
+ * }
+ *
+ * test()
+ *
+ * @category combinators
+ * @since 2.16.0
+ */
+exports.tapTask = (0, function_1.dual)(2, (0, FromTask_1.tapTask)(exports.FromTask, exports.Chain));
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @category combinators
+ * @since 2.16.0
+ */
+exports.tapReaderIO = (0, function_1.dual)(2, function (self, f) {
+    return (0, exports.tap)(self, (0, exports.fromReaderIOK)(f));
+});
+/**
+ * @category lifting
+ * @since 2.4.0
+ */
+exports.fromIOK = (0, FromIO_1.fromIOK)(exports.FromIO);
+/**
+ * Alias of `flatMapIO`.
+ *
+ * @category legacy
+ * @since 2.4.0
+ */
+exports.chainIOK = exports.flatMapIO;
+/**
+ * Alias of `tapIO`.
+ *
+ * @category legacy
+ * @since 2.10.0
+ */
+exports.chainFirstIOK = exports.tapIO;
 /**
  * Reads the current context.
  *
@@ -11513,35 +11861,41 @@ exports.asks = (0, FromReader_1.asks)(exports.FromReader);
  */
 exports.fromReaderK = (0, FromReader_1.fromReaderK)(exports.FromReader);
 /**
- * @category sequencing
+ * Alias of `flatMapReader`.
+ *
+ * @category legacy
  * @since 2.11.0
  */
-exports.chainReaderK = 
-/*#__PURE__*/ (0, FromReader_1.chainReaderK)(exports.FromReader, exports.Chain);
+exports.chainReaderK = exports.flatMapReader;
 /**
+ * Alias of `flatMapReader`.
+ *
  * Less strict version of [`chainReaderK`](#chainreaderk).
  *
  * The `W` suffix (short for **W**idening) means that the environment types will be merged.
  *
- * @category sequencing
+ * @category legacy
  * @since 2.11.0
  */
-exports.chainReaderKW = exports.chainReaderK;
+exports.chainReaderKW = exports.flatMapReader;
 /**
- * @category sequencing
+ * Alias of `tapReader`.
+ *
+ * @category legacy
  * @since 2.11.0
  */
-exports.chainFirstReaderK = 
-/*#__PURE__*/ (0, FromReader_1.chainFirstReaderK)(exports.FromReader, exports.Chain);
+exports.chainFirstReaderK = exports.tapReader;
 /**
+ * Alias of `tapReader`.
+ *
  * Less strict version of [`chainFirstReaderK`](#chainfirstreaderk).
  *
  * The `W` suffix (short for **W**idening) means that the environment types will be merged.
  *
- * @category sequencing
+ * @category legacy
  * @since 2.11.0
  */
-exports.chainFirstReaderKW = exports.chainFirstReaderK;
+exports.chainFirstReaderKW = exports.tapReader;
 /**
  * @category lifting
  * @since 2.13.0
@@ -11557,57 +11911,55 @@ var fromReaderIOK = function (f) {
 };
 exports.fromReaderIOK = fromReaderIOK;
 /**
+ * Alias of `flatMapReaderIO`.
+ *
  * Less strict version of [`chainReaderIOK`](#chainreaderiok).
  *
- * @category sequencing
+ * @category legacy
  * @since 2.13.0
  */
-var chainReaderIOKW = function (f) { return (0, exports.chainW)((0, exports.fromReaderIOK)(f)); };
-exports.chainReaderIOKW = chainReaderIOKW;
+exports.chainReaderIOKW = exports.flatMapReaderIO;
 /**
- * @category sequencing
+ * Alias of `flatMapReaderIO`.
+ *
+ * @category legacy
  * @since 2.13.0
  */
-exports.chainReaderIOK = exports.chainReaderIOKW;
+exports.chainReaderIOK = exports.flatMapReaderIO;
 /**
+ * Alias of `tapReaderIO`.
+ *
  * Less strict version of [`chainFirstReaderIOK`](#chainfirstreaderiok).
  *
- * @category sequencing
+ * @category legacy
  * @since 2.13.0
  */
-var chainFirstReaderIOKW = function (f) { return (0, exports.chainFirstW)((0, exports.fromReaderIOK)(f)); };
-exports.chainFirstReaderIOKW = chainFirstReaderIOKW;
+exports.chainFirstReaderIOKW = exports.tapReaderIO;
 /**
- * @category sequencing
+ * Alias of `tapReaderIO`.
+ *
+ * @category legacy
  * @since 2.13.0
  */
-exports.chainFirstReaderIOK = exports.chainFirstReaderIOKW;
-/**
- * @category instances
- * @since 2.10.0
- */
-exports.FromTask = {
-    URI: exports.URI,
-    fromIO: exports.fromIO,
-    fromTask: exports.fromTask
-};
+exports.chainFirstReaderIOK = exports.tapReaderIO;
 /**
  * @category lifting
  * @since 2.4.0
  */
 exports.fromTaskK = (0, FromTask_1.fromTaskK)(exports.FromTask);
 /**
- * @category sequencing
+ * Alias of `flatMapTask`.
+ *
+ * @category legacy
  * @since 2.4.0
  */
-exports.chainTaskK = 
-/*#__PURE__*/ (0, FromTask_1.chainTaskK)(exports.FromTask, exports.Chain);
+exports.chainTaskK = exports.flatMapTask;
 /**
- * @category sequencing
+ * Alias of `tapTask`.
+ * @category legacy
  * @since 2.10.0
  */
-exports.chainFirstTaskK = 
-/*#__PURE__*/ (0, FromTask_1.chainFirstTaskK)(exports.FromTask, exports.Chain);
+exports.chainFirstTaskK = exports.tapTask;
 // -------------------------------------------------------------------------------------
 // do notation
 // -------------------------------------------------------------------------------------
@@ -11627,7 +11979,7 @@ exports.let = let_;
  * @category do notation
  * @since 2.8.0
  */
-exports.bind = (0, Chain_1.bind)(exports.Chain);
+exports.bind = chainable.bind(exports.Chain);
 /**
  * The `W` suffix (short for **W**idening) means that the environment types will be merged.
  *
@@ -11737,6 +12089,37 @@ exports.traverseSeqArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq;
 var traverseSeqArray = function (f) { return (0, exports.traverseReadonlyArrayWithIndexSeq)(function (_, a) { return f(a); }); };
 exports.traverseSeqArray = traverseSeqArray;
 // -------------------------------------------------------------------------------------
+// legacy
+// -------------------------------------------------------------------------------------
+/**
+ * Alias of `flatMap`.
+ *
+ * @category legacy
+ * @since 2.3.0
+ */
+exports.chain = exports.flatMap;
+/**
+ * Alias of `flatMap`.
+ *
+ * @category legacy
+ * @since 2.6.7
+ */
+exports.chainW = exports.flatMap;
+/**
+ * Alias of `tap`.
+ *
+ * @category legacy
+ * @since 2.3.0
+ */
+exports.chainFirst = exports.tap;
+/**
+ * Alias of `tap`.
+ *
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.chainFirstW = exports.tap;
+// -------------------------------------------------------------------------------------
 // deprecated
 // -------------------------------------------------------------------------------------
 /**
@@ -11762,7 +12145,7 @@ exports.readerTask = {
     map: _map,
     of: exports.of,
     ap: _apPar,
-    chain: _chain,
+    chain: exports.flatMap,
     fromIO: exports.fromIO,
     fromTask: exports.fromTask
 };
@@ -11780,7 +12163,7 @@ exports.readerTaskSeq = {
     map: _map,
     of: exports.of,
     ap: _apSeq,
-    chain: _chain,
+    chain: exports.flatMap,
     fromIO: exports.fromIO,
     fromTask: exports.fromTask
 };
@@ -11845,13 +12228,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.chainReaderEitherKW = exports.fromReaderEitherK = exports.chainFirstTaskEitherK = exports.chainFirstTaskEitherKW = exports.chainTaskEitherK = exports.chainTaskEitherKW = exports.fromTaskEitherK = exports.chainIOEitherK = exports.chainIOEitherKW = exports.fromIOEitherK = exports.swap = exports.orLeft = exports.orElseFirstW = exports.orElseFirst = exports.orElseW = exports.orElse = exports.asksReaderTaskEither = exports.asksReaderTaskEitherW = exports.local = exports.chainNullableK = exports.fromNullableK = exports.fromNullable = exports.toUnion = exports.getOrElseW = exports.getOrElse = exports.foldW = exports.matchEW = exports.fold = exports.matchE = exports.matchW = exports.match = exports.fromReaderEither = exports.fromIOEither = exports.fromTask = exports.fromIO = exports.fromReader = exports.fromEither = exports.leftReaderIO = exports.rightReaderIO = exports.leftIO = exports.rightIO = exports.leftReaderTask = exports.rightReaderTask = exports.leftReader = exports.rightReader = exports.leftTask = exports.rightTask = exports.right = exports.left = exports.fromTaskEither = void 0;
-exports.fromReaderTaskK = exports.chainFirstReaderKW = exports.chainFirstReaderK = exports.chainReaderKW = exports.chainReaderK = exports.fromReaderK = exports.asks = exports.ask = exports.FromReader = exports.Alt = exports.Bifunctor = exports.chainFirstW = exports.chainFirst = exports.MonadThrow = exports.MonadTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecondW = exports.apSecond = exports.apFirstW = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.Functor = exports.getAltReaderTaskValidation = exports.getApplicativeReaderTaskValidation = exports.getFilterable = exports.getCompactable = exports.URI = exports.throwError = exports.altW = exports.alt = exports.flatten = exports.flattenW = exports.chainW = exports.chain = exports.of = exports.apW = exports.ap = exports.mapLeft = exports.bimap = exports.map = exports.chainFirstReaderEitherK = exports.chainFirstReaderEitherKW = exports.chainReaderEitherK = void 0;
-exports.readerTaskEither = exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.let = exports.bindTo = exports.Do = exports.bracketW = exports.bracket = exports.chainFirstTaskK = exports.chainTaskK = exports.fromTaskK = exports.FromTask = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.FromIO = exports.fromEitherK = exports.filterOrElseW = exports.filterOrElse = exports.fromPredicate = exports.chainFirstEitherKW = exports.chainFirstEitherK = exports.chainEitherKW = exports.chainEitherK = exports.chainOptionK = exports.fromOptionK = exports.fromOption = exports.FromEither = exports.chainFirstReaderIOK = exports.chainFirstReaderIOKW = exports.chainReaderIOK = exports.chainReaderIOKW = exports.fromReaderIOK = exports.chainFirstReaderTaskK = exports.chainFirstReaderTaskKW = exports.chainReaderTaskK = exports.chainReaderTaskKW = void 0;
-exports.run = exports.getReaderTaskValidation = exports.getSemigroup = exports.getApplyMonoid = exports.getApplySemigroup = exports.readerTaskEitherSeq = void 0;
+exports.of = exports.apW = exports.ap = exports.mapLeft = exports.mapError = exports.bimap = exports.mapBoth = exports.map = exports.fromReaderEitherK = exports.fromTaskEitherK = exports.fromIOEitherK = exports.swap = exports.orLeft = exports.tapError = exports.orElseW = exports.orElse = exports.asksReaderTaskEither = exports.asksReaderTaskEitherW = exports.local = exports.chainNullableK = exports.fromNullableK = exports.fromNullable = exports.toUnion = exports.getOrElseW = exports.getOrElse = exports.foldW = exports.matchEW = exports.fold = exports.matchE = exports.matchW = exports.match = exports.fromReaderEither = exports.fromIOEither = exports.fromTask = exports.fromIO = exports.fromReader = exports.fromEither = exports.leftReaderIO = exports.rightReaderIO = exports.leftIO = exports.rightIO = exports.leftReaderTask = exports.rightReaderTask = exports.leftReader = exports.rightReader = exports.leftTask = exports.rightTask = exports.right = exports.left = exports.fromTaskEither = void 0;
+exports.chainFirstReaderEitherKW = exports.chainFirstReaderKW = exports.chainFirstReaderK = exports.fromReaderK = exports.asks = exports.ask = exports.Alt = exports.Bifunctor = exports.tapReaderIO = exports.tapReaderTask = exports.tapTaskEither = exports.tapReaderEither = exports.tapReader = exports.tapTask = exports.tapIO = exports.tapEither = exports.tap = exports.FromReader = exports.FromTask = exports.FromIO = exports.FromEither = exports.MonadThrow = exports.MonadTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecondW = exports.apSecond = exports.apFirstW = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.asUnit = exports.as = exports.Functor = exports.getAltReaderTaskValidation = exports.getApplicativeReaderTaskValidation = exports.getFilterable = exports.getCompactable = exports.URI = exports.throwError = exports.altW = exports.alt = exports.flatten = exports.flattenW = exports.flatMap = void 0;
+exports.chainIOEitherK = exports.chainIOEitherKW = exports.chainReaderIOK = exports.chainReaderIOKW = exports.chainReaderKW = exports.chainReaderK = exports.chainFirstTaskK = exports.chainTaskK = exports.fromTaskK = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.fromEitherK = exports.filterOrElseW = exports.filterOrElse = exports.fromPredicate = exports.chainReaderTaskK = exports.chainReaderTaskKW = exports.chainTaskEitherK = exports.chainTaskEitherKW = exports.chainFirstEitherKW = exports.chainFirstEitherK = exports.chainEitherKW = exports.chainEitherK = exports.flatMapReaderEither = exports.flatMapIOEither = exports.flatMapReaderIO = exports.flatMapReader = exports.flatMapTask = exports.flatMapIO = exports.flatMapReaderTask = exports.flatMapTaskEither = exports.flatMapEither = exports.flatMapOption = exports.flatMapNullable = exports.liftOption = exports.liftNullable = exports.chainOptionKW = exports.chainOptionK = exports.fromOptionK = exports.fromOption = exports.chainFirstReaderIOK = exports.chainFirstReaderIOKW = exports.fromReaderIOK = exports.chainFirstReaderTaskK = exports.chainFirstReaderTaskKW = exports.fromReaderTaskK = exports.chainFirstTaskEitherK = exports.chainFirstTaskEitherKW = exports.chainFirstReaderEitherK = void 0;
+exports.run = exports.getReaderTaskValidation = exports.getSemigroup = exports.getApplyMonoid = exports.getApplySemigroup = exports.readerTaskEitherSeq = exports.readerTaskEither = exports.orElseFirstW = exports.orElseFirst = exports.chainFirstW = exports.chainFirst = exports.chainW = exports.chain = exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.let = exports.bindTo = exports.Do = exports.bracketW = exports.bracket = exports.chainReaderEitherK = exports.chainReaderEitherKW = void 0;
 var Applicative_1 = __nccwpck_require__(4766);
 var Apply_1 = __nccwpck_require__(205);
-var Chain_1 = __nccwpck_require__(2372);
+var chainable = __importStar(__nccwpck_require__(2372));
 var Compactable_1 = __nccwpck_require__(729);
 var E = __importStar(__nccwpck_require__(7534));
 var ET = __importStar(__nccwpck_require__(9803));
@@ -12051,12 +12434,16 @@ exports.toUnion = ET.toUnion(RT.Functor);
 exports.fromNullable = 
 /*#__PURE__*/ ET.fromNullable(RT.Pointed);
 /**
- * @category lifting
+ * Use `liftNullable`.
+ *
+ * @category legacy
  * @since 2.12.0
  */
 exports.fromNullableK = ET.fromNullableK(RT.Pointed);
 /**
- * @category sequencing
+ * Use `flatMapNullable`.
+ *
+ * @category legacy
  * @since 2.12.0
  */
 exports.chainNullableK = ET.chainNullableK(RT.Monad);
@@ -12101,17 +12488,12 @@ exports.orElse = ET.orElse(RT.Monad);
  */
 exports.orElseW = exports.orElse;
 /**
- * @category error handling
- * @since 2.11.0
- */
-exports.orElseFirst = ET.orElseFirst(RT.Monad);
-/**
- * The `W` suffix (short for **W**idening) means that the environment types and the return types will be merged.
+ * Returns an effect that effectfully "peeks" at the failure of this effect.
  *
  * @category error handling
- * @since 2.11.0
+ * @since 2.15.0
  */
-exports.orElseFirstW = exports.orElseFirst;
+exports.tapError = (0, function_1.dual)(2, ET.tapError(RT.Monad));
 /**
  * @category error handling
  * @since 2.11.0
@@ -12128,109 +12510,22 @@ exports.swap = ET.swap(RT.Functor);
 var fromIOEitherK = function (f) { return (0, function_1.flow)(f, exports.fromIOEither); };
 exports.fromIOEitherK = fromIOEitherK;
 /**
- * Less strict version of [`chainIOEitherK`](#chainioeitherk).
- *
- * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
- *
- * @category sequencing
- * @since 2.6.1
- */
-var chainIOEitherKW = function (f) { return (0, exports.chainW)((0, exports.fromIOEitherK)(f)); };
-exports.chainIOEitherKW = chainIOEitherKW;
-/**
- * @category sequencing
- * @since 2.4.0
- */
-exports.chainIOEitherK = exports.chainIOEitherKW;
-/**
  * @category lifting
  * @since 2.4.0
  */
 var fromTaskEitherK = function (f) { return (0, function_1.flow)(f, exports.fromTaskEither); };
 exports.fromTaskEitherK = fromTaskEitherK;
 /**
- * Less strict version of [`chainTaskEitherK`](#chaintaskeitherk).
- *
- * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
- *
- * @category sequencing
- * @since 2.6.1
- */
-var chainTaskEitherKW = function (f) { return (0, exports.chainW)((0, exports.fromTaskEitherK)(f)); };
-exports.chainTaskEitherKW = chainTaskEitherKW;
-/**
- * @category sequencing
- * @since 2.4.0
- */
-exports.chainTaskEitherK = exports.chainTaskEitherKW;
-/**
- * Less strict version of [`chainFirstTaskEitherK`](#chainfirsttaskeitherk).
- *
- * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
- *
- * @category sequencing
- * @since 2.11.0
- */
-var chainFirstTaskEitherKW = function (f) { return (0, exports.chainFirstW)((0, exports.fromTaskEitherK)(f)); };
-exports.chainFirstTaskEitherKW = chainFirstTaskEitherKW;
-/**
- * @category sequencing
- * @since 2.11.0
- */
-exports.chainFirstTaskEitherK = exports.chainFirstTaskEitherKW;
-/**
  * @category lifting
  * @since 2.11.0
  */
 var fromReaderEitherK = function (f) { return (0, function_1.flow)(f, exports.fromReaderEither); };
 exports.fromReaderEitherK = fromReaderEitherK;
-/**
- * Less strict version of [`chainReaderEitherK`](#chainreadereitherk).
- *
- * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
- *
- * @category sequencing
- * @since 2.11.0
- */
-var chainReaderEitherKW = function (f) {
-    return (0, exports.chainW)((0, exports.fromReaderEitherK)(f));
-};
-exports.chainReaderEitherKW = chainReaderEitherKW;
-/**
- * @category sequencing
- * @since 2.11.0
- */
-exports.chainReaderEitherK = exports.chainReaderEitherKW;
-/**
- * Less strict version of [`chainFirstReaderEitherK`](#chainfirstreadereitherk).
- *
- * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
- *
- * @category sequencing
- * @since 2.11.0
- */
-var chainFirstReaderEitherKW = function (f) {
-    return (0, exports.chainFirstW)((0, exports.fromReaderEitherK)(f));
-};
-exports.chainFirstReaderEitherKW = chainFirstReaderEitherKW;
-/**
- * @category sequencing
- * @since 2.11.0
- */
-exports.chainFirstReaderEitherK = exports.chainFirstReaderEitherKW;
 var _map = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); };
 var _apPar = function (fab, fa) { return (0, function_1.pipe)(fab, (0, exports.ap)(fa)); };
-var _apSeq = function (fab, fa) {
-    return (0, function_1.pipe)(fab, (0, exports.chain)(function (f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); }));
-};
-/* istanbul ignore next */
-var _chain = function (ma, f) { return (0, function_1.pipe)(ma, (0, exports.chain)(f)); };
+var _apSeq = function (fab, fa) { return (0, exports.flatMap)(fab, function (f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); }); };
 /* istanbul ignore next */
 var _alt = function (fa, that) { return (0, function_1.pipe)(fa, (0, exports.alt)(that)); };
-/* istanbul ignore next */
-var _bimap = function (fa, f, g) { return (0, function_1.pipe)(fa, (0, exports.bimap)(f, g)); };
-/* istanbul ignore next */
-var _mapLeft = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.mapLeft)(f)); };
 /**
  * `map` can be used to turn functions `(a: A) => B` into functions `(fa: F<A>) => F<B>` whose argument and return types
  * use the type constructor `F` to represent some computational context.
@@ -12241,20 +12536,60 @@ var _mapLeft = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.ma
 exports.map = 
 /*#__PURE__*/ ET.map(RT.Functor);
 /**
- * Map a pair of functions over the two last type arguments of the bifunctor.
+ * Returns a `ReaderTaskEither` whose failure and success channels have been mapped by the specified pair of functions, `f` and `g`.
  *
- * @category mapping
- * @since 2.0.0
- */
-exports.bimap = ET.bimap(RT.Functor);
-/**
- * Map a function over the second type argument of a bifunctor.
+ * @example
+ * import * as ReaderTaskEither from 'fp-ts/ReaderTaskEither'
+ * import * as Either from 'fp-ts/Either'
+ *
+ * const f = (s: string) => new Error(s)
+ * const g = (n: number) => n * 2
+ *
+ * async function test() {
+ *   assert.deepStrictEqual(await ReaderTaskEither.mapBoth(ReaderTaskEither.right(1), f, g)({})(), Either.right(2))
+ *   assert.deepStrictEqual(await ReaderTaskEither.mapBoth(ReaderTaskEither.left('err'), f, g)({})(), Either.left(new Error('err')))
+ * }
+ *
+ * test()
  *
  * @category error handling
+ * @since 2.16.0
+ */
+exports.mapBoth = (0, function_1.dual)(3, ET.mapBoth(RT.Functor));
+/**
+ * Alias of `mapBoth`.
+ *
+ * @category legacy
  * @since 2.0.0
  */
-exports.mapLeft = 
-/*#__PURE__*/ ET.mapLeft(RT.Functor);
+exports.bimap = exports.mapBoth;
+/**
+ * Returns a `ReaderTaskEither` with its error channel mapped using the specified function.
+ *
+ * @example
+ * import * as ReaderTaskEither from 'fp-ts/ReaderTaskEither'
+ * import * as Either from 'fp-ts/Either'
+ *
+ * const f = (s: string) => new Error(s)
+ *
+ * async function test() {
+ *   assert.deepStrictEqual(await ReaderTaskEither.mapError(ReaderTaskEither.right(1), f)({})(), Either.right(1))
+ *   assert.deepStrictEqual(await ReaderTaskEither.mapError(ReaderTaskEither.left('err'), f)({})(), Either.left(new Error('err')))
+ * }
+ *
+ * test()
+ *
+ * @category error handling
+ * @since 2.16.0
+ */
+exports.mapError = (0, function_1.dual)(2, ET.mapError(RT.Functor));
+/**
+ * Alias of `mapError`.
+ *
+ * @category legacy
+ * @since 2.0.0
+ */
+exports.mapLeft = exports.mapError;
 /**
  * @since 2.0.0
  */
@@ -12273,21 +12608,10 @@ exports.apW = exports.ap;
  */
 exports.of = exports.right;
 /**
- * Composes computations in sequence, using the return value of one computation to determine the next computation.
- *
  * @category sequencing
- * @since 2.0.0
+ * @since 2.14.0
  */
-exports.chain = ET.chain(RT.Monad);
-/**
- * Less strict version of [`chain`](#chain).
- *
- * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
- *
- * @category sequencing
- * @since 2.6.0
- */
-exports.chainW = exports.chain;
+exports.flatMap = (0, function_1.dual)(2, ET.flatMap(RT.Monad));
 /**
  * Less strict version of [`flatten`](#flatten).
  *
@@ -12296,7 +12620,7 @@ exports.chainW = exports.chain;
  * @category sequencing
  * @since 2.11.0
  */
-exports.flattenW = (0, exports.chainW)(function_1.identity);
+exports.flattenW = (0, exports.flatMap)(function_1.identity);
 /**
  * @category sequencing
  * @since 2.0.0
@@ -12414,6 +12738,20 @@ exports.Functor = {
     map: _map
 };
 /**
+ * Maps the `Right` value of this `ReaderTaskEither` to the specified constant value.
+ *
+ * @category mapping
+ * @since 2.16.0
+ */
+exports.as = (0, function_1.dual)(2, (0, Functor_1.as)(exports.Functor));
+/**
+ * Maps the `Right` value of this `ReaderTaskEither` to the void constant value.
+ *
+ * @category mapping
+ * @since 2.16.0
+ */
+exports.asUnit = (0, Functor_1.asUnit)(exports.Functor);
+/**
  * @category mapping
  * @since 2.10.0
  */
@@ -12508,7 +12846,7 @@ exports.Chain = {
     URI: exports.URI,
     map: _map,
     ap: _apPar,
-    chain: _chain
+    chain: exports.flatMap
 };
 /**
  * @category instances
@@ -12518,7 +12856,7 @@ exports.Monad = {
     URI: exports.URI,
     map: _map,
     ap: _apPar,
-    chain: _chain,
+    chain: exports.flatMap,
     of: exports.of
 };
 /**
@@ -12529,7 +12867,7 @@ exports.MonadIO = {
     URI: exports.URI,
     map: _map,
     ap: _apPar,
-    chain: _chain,
+    chain: exports.flatMap,
     of: exports.of,
     fromIO: exports.fromIO
 };
@@ -12541,7 +12879,7 @@ exports.MonadTask = {
     URI: exports.URI,
     map: _map,
     ap: _apPar,
-    chain: _chain,
+    chain: exports.flatMap,
     of: exports.of,
     fromIO: exports.fromIO,
     fromTask: exports.fromTask
@@ -12554,35 +12892,177 @@ exports.MonadThrow = {
     URI: exports.URI,
     map: _map,
     ap: _apPar,
-    chain: _chain,
+    chain: exports.flatMap,
     of: exports.of,
     throwError: exports.throwError
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.FromEither = {
+    URI: exports.URI,
+    fromEither: exports.fromEither
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.FromIO = {
+    URI: exports.URI,
+    fromIO: exports.fromIO
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.FromTask = {
+    URI: exports.URI,
+    fromIO: exports.fromIO,
+    fromTask: exports.fromTask
+};
+/**
+ * @category instances
+ * @since 2.11.0
+ */
+exports.FromReader = {
+    URI: exports.URI,
+    fromReader: exports.fromReader
 };
 /**
  * Composes computations in sequence, using the return value of one computation to determine the next computation and
  * keeping only the result of the first.
  *
- * @category sequencing
- * @since 2.0.0
+ * @category combinators
+ * @since 2.15.0
  */
-exports.chainFirst = (0, Chain_1.chainFirst)(exports.Chain);
+exports.tap = (0, function_1.dual)(2, chainable.tap(exports.Chain));
 /**
- * Less strict version of [`chainFirst`](#chainfirst).
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
  *
- * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ * @example
+ * import * as E from 'fp-ts/Either'
+ * import { pipe } from 'fp-ts/function'
+ * import * as RTE from 'fp-ts/ReaderTaskEither'
  *
- * @category sequencing
- * @since 2.8.0
+ * const checkString = (value: string) => pipe(
+ *   RTE.ask<number>(),
+ *   RTE.tapEither((minLength) => value.length > minLength ? E.right('ok') : E.left('error'))
+ * )
+ *
+ * async function test() {
+ *   assert.deepStrictEqual(await checkString('')(2)(), E.left('error'))
+ *   assert.deepStrictEqual(await checkString('fp-ts')(2)(), E.right(2))
+ * }
+ *
+ * test()
+ *
+ * @category combinators
+ * @since 2.16.0
  */
-exports.chainFirstW = exports.chainFirst;
+exports.tapEither = (0, function_1.dual)(2, (0, FromEither_1.tapEither)(exports.FromEither, exports.Chain));
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @example
+ * import * as RTE from 'fp-ts/ReaderTaskEither'
+ * import * as E from 'fp-ts/Either'
+ * import * as Console from 'fp-ts/Console'
+ *
+ *
+ * // Will produce `Hello, fp-ts` to the stdout
+ * const effect = RTE.tapIO(
+ *   RTE.ask<string>(),
+ *   (value) => Console.log(`Hello, ${value}`)
+ * )
+ *
+ * async function test() {
+ *   assert.deepStrictEqual(await effect('fp-ts')(), E.of('fp-ts'))
+ * }
+ *
+ * test()
+ *
+ * @category combinators
+ * @since 2.16.0
+ */
+exports.tapIO = (0, function_1.dual)(2, (0, FromIO_1.tapIO)(exports.FromIO, exports.Chain));
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @example
+ * import * as RTE from 'fp-ts/ReaderTaskEither'
+ * import * as E from 'fp-ts/Either'
+ * import * as T from 'fp-ts/Task'
+ *
+ *
+ * const effect = RTE.tapTask(
+ *   RTE.ask<number>(),
+ *   (value) => T.of(value + 1)
+ * )
+ *
+ * async function test() {
+ *   assert.deepStrictEqual(await effect(1)(), E.of(1))
+ * }
+ *
+ * test()
+ *
+ * @category combinators
+ * @since 2.16.0
+ */
+exports.tapTask = (0, function_1.dual)(2, (0, FromTask_1.tapTask)(exports.FromTask, exports.Chain));
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @category combinators
+ * @since 2.16.0
+ */
+exports.tapReader = (0, function_1.dual)(2, (0, FromReader_1.tapReader)(exports.FromReader, exports.Chain));
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @category combinators
+ * @since 2.16.0
+ */
+exports.tapReaderEither = (0, function_1.dual)(2, function (self, f) { return (0, exports.tap)(self, (0, exports.fromReaderEitherK)(f)); });
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @category combinators
+ * @since 2.16.0
+ */
+exports.tapTaskEither = (0, function_1.dual)(2, function (self, f) { return (0, exports.tap)(self, (0, exports.fromTaskEitherK)(f)); });
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @category combinators
+ * @since 2.16.0
+ */
+exports.tapReaderTask = (0, function_1.dual)(2, function (self, f) { return (0, exports.tap)(self, (0, exports.fromReaderTaskK)(f)); });
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @category combinators
+ * @since 2.16.0
+ */
+exports.tapReaderIO = (0, function_1.dual)(2, function (self, f) {
+    return (0, exports.tap)(self, (0, exports.fromReaderIOK)(f));
+});
 /**
  * @category instances
  * @since 2.7.0
  */
 exports.Bifunctor = {
     URI: exports.URI,
-    bimap: _bimap,
-    mapLeft: _mapLeft
+    bimap: exports.mapBoth,
+    mapLeft: exports.mapError
 };
 /**
  * @category instances
@@ -12592,14 +13072,6 @@ exports.Alt = {
     URI: exports.URI,
     map: _map,
     alt: _alt
-};
-/**
- * @category instances
- * @since 2.11.0
- */
-exports.FromReader = {
-    URI: exports.URI,
-    fromReader: exports.fromReader
 };
 /**
  * Reads the current context.
@@ -12621,33 +13093,59 @@ exports.asks = (0, FromReader_1.asks)(exports.FromReader);
  */
 exports.fromReaderK = (0, FromReader_1.fromReaderK)(exports.FromReader);
 /**
- * @category sequencing
- * @since 2.11.0
- */
-exports.chainReaderK = (0, FromReader_1.chainReaderK)(exports.FromReader, exports.Chain);
-/**
- * Less strict version of [`chainReaderK`](#chainreaderk).
+ * Alias of `tapReader`.
  *
- * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.chainFirstReaderK = exports.tapReader;
+/**
+ * Alias of `tapReader`.
  *
- * @category sequencing
- * @since 2.11.0
- */
-exports.chainReaderKW = exports.chainReaderK;
-/**
- * @category sequencing
- * @since 2.11.0
- */
-exports.chainFirstReaderK = (0, FromReader_1.chainFirstReaderK)(exports.FromReader, exports.Chain);
-/**
  * Less strict version of [`chainFirstReaderK`](#chainfirstreaderk).
  *
  * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
  *
- * @category sequencing
+ * @category legacy
  * @since 2.11.0
  */
-exports.chainFirstReaderKW = exports.chainFirstReaderK;
+exports.chainFirstReaderKW = exports.tapReader;
+/**
+ * Alias of `tapReaderEither`.
+ *
+ * Less strict version of [`chainFirstReaderEitherK`](#chainfirstreadereitherk).
+ *
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.chainFirstReaderEitherKW = exports.tapReaderEither;
+/**
+ * Alias of `tapReaderEither`.
+ *
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.chainFirstReaderEitherK = exports.tapReaderEither;
+/**
+ * Alias of `tapTaskEither`.
+ *
+ * Less strict version of [`chainFirstTaskEitherK`](#chainfirsttaskeitherk).
+ *
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.chainFirstTaskEitherKW = exports.tapTaskEither;
+/**
+ * Alias of `tapTaskEither`.
+ *
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.chainFirstTaskEitherK = exports.tapTaskEither;
 /**
  * @category lifting
  * @since 2.11.0
@@ -12663,35 +13161,23 @@ var fromReaderTaskK = function (f) {
 };
 exports.fromReaderTaskK = fromReaderTaskK;
 /**
- * Less strict version of [`chainReaderTaskK`](#chainreadertaskk).
+ * Alias of `tapReaderTask`.
  *
- * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
- *
- * @category sequencing
- * @since 2.11.0
- */
-var chainReaderTaskKW = function (f) { return (0, exports.chainW)((0, exports.fromReaderTaskK)(f)); };
-exports.chainReaderTaskKW = chainReaderTaskKW;
-/**
- * @category sequencing
- * @since 2.11.0
- */
-exports.chainReaderTaskK = exports.chainReaderTaskKW;
-/**
  * Less strict version of [`chainFirstReaderTaskK`](#chainfirstreadertaskk).
  *
  * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
  *
- * @category sequencing
+ * @category legacy
  * @since 2.11.0
  */
-var chainFirstReaderTaskKW = function (f) { return (0, exports.chainFirstW)((0, exports.fromReaderTaskK)(f)); };
-exports.chainFirstReaderTaskKW = chainFirstReaderTaskKW;
+exports.chainFirstReaderTaskKW = exports.tapReaderTask;
 /**
- * @category sequencing
+ * Alias of `tapReaderTask`.
+ *
+ * @category legacy
  * @since 2.11.0
  */
-exports.chainFirstReaderTaskK = exports.chainFirstReaderTaskKW;
+exports.chainFirstReaderTaskK = exports.tapReaderTask;
 /**
  * @category lifting
  * @since 2.13.0
@@ -12707,39 +13193,21 @@ var fromReaderIOK = function (f) {
 };
 exports.fromReaderIOK = fromReaderIOK;
 /**
- * Less strict version of [`chainReaderIOK`](#chainreaderiok).
+ * Alias of `tapReaderIO`.
  *
- * @category sequencing
- * @since 2.13.0
- */
-var chainReaderIOKW = function (f) { return (0, exports.chainW)((0, exports.fromReaderIOK)(f)); };
-exports.chainReaderIOKW = chainReaderIOKW;
-/**
- * @category sequencing
- * @since 2.13.0
- */
-exports.chainReaderIOK = exports.chainReaderIOKW;
-/**
  * Less strict version of [`chainFirstReaderIOK`](#chainfirstreaderiok).
  *
- * @category sequencing
+ * @category legacy
  * @since 2.13.0
  */
-var chainFirstReaderIOKW = function (f) { return (0, exports.chainFirstW)((0, exports.fromReaderIOK)(f)); };
-exports.chainFirstReaderIOKW = chainFirstReaderIOKW;
+exports.chainFirstReaderIOKW = exports.tapReaderIO;
 /**
- * @category sequencing
+ * Alias of `tapReaderIO`.
+ *
+ * @category legacy
  * @since 2.13.0
  */
-exports.chainFirstReaderIOK = exports.chainFirstReaderIOKW;
-/**
- * @category instances
- * @since 2.10.0
- */
-exports.FromEither = {
-    URI: exports.URI,
-    fromEither: exports.fromEither
-};
+exports.chainFirstReaderIOK = exports.tapReaderIO;
 /**
  * @category conversions
  * @since 2.0.0
@@ -12747,44 +13215,185 @@ exports.FromEither = {
 exports.fromOption = 
 /*#__PURE__*/ (0, FromEither_1.fromOption)(exports.FromEither);
 /**
- * @category lifting
+ * Use `liftOption`.
+ *
+ * @category legacy
  * @since 2.10.0
  */
 exports.fromOptionK = (0, FromEither_1.fromOptionK)(exports.FromEither);
 /**
- * @category sequencing
+ * Use `flatMapOption`.
+ *
+ * @category legacy
  * @since 2.10.0
  */
 exports.chainOptionK = 
 /*#__PURE__*/ (0, FromEither_1.chainOptionK)(exports.FromEither, exports.Chain);
 /**
+ * Use `flatMapOption`.
+ *
+ * @category legacy
+ * @since 2.13.2
+ */
+exports.chainOptionKW = 
+/*#__PURE__*/ exports.chainOptionK;
+/** @internal */
+var _FromEither = {
+    fromEither: exports.FromEither.fromEither
+};
+/**
+ * @category lifting
+ * @since 2.15.0
+ */
+exports.liftNullable = _.liftNullable(_FromEither);
+/**
+ * @category lifting
+ * @since 2.15.0
+ */
+exports.liftOption = _.liftOption(_FromEither);
+/** @internal */
+var _FlatMap = {
+    flatMap: exports.flatMap
+};
+/** @internal */
+var _FromIO = {
+    fromIO: exports.fromIO
+};
+/** @internal */
+var _FromTask = {
+    fromTask: exports.fromTask
+};
+/** @internal */
+var _FromReader = {
+    fromReader: exports.fromReader
+};
+/**
  * @category sequencing
+ * @since 2.15.0
+ */
+exports.flatMapNullable = _.flatMapNullable(_FromEither, _FlatMap);
+/**
+ * @category sequencing
+ * @since 2.15.0
+ */
+exports.flatMapOption = _.flatMapOption(_FromEither, _FlatMap);
+/**
+ * @category sequencing
+ * @since 2.15.0
+ */
+exports.flatMapEither = _.flatMapEither(_FromEither, _FlatMap);
+/**
+ * @category sequencing
+ * @since 2.16.0
+ */
+exports.flatMapTaskEither = (0, function_1.dual)(2, function (self, f) { return (0, exports.flatMap)(self, (0, exports.fromTaskEitherK)(f)); });
+/**
+ * @category sequencing
+ * @since 2.16.0
+ */
+exports.flatMapReaderTask = (0, function_1.dual)(2, function (self, f) { return (0, exports.flatMap)(self, (0, exports.fromReaderTaskK)(f)); });
+/**
+ * @category sequencing
+ * @since 2.16.0
+ */
+exports.flatMapIO = _.flatMapIO(_FromIO, _FlatMap);
+/**
+ * @category sequencing
+ * @since 2.16.0
+ */
+exports.flatMapTask = _.flatMapTask(_FromTask, _FlatMap);
+/**
+ * @category sequencing
+ * @since 2.16.0
+ */
+exports.flatMapReader = _.flatMapReader(_FromReader, _FlatMap);
+/**
+ * @category sequencing
+ * @since 2.16.0
+ */
+exports.flatMapReaderIO = (0, function_1.dual)(2, function (self, f) {
+    return (0, exports.flatMap)(self, (0, exports.fromReaderIOK)(f));
+});
+/**
+ * @category sequencing
+ * @since 2.16.0
+ */
+exports.flatMapIOEither = (0, function_1.dual)(2, function (self, f) {
+    return (0, exports.flatMap)(self, (0, exports.fromIOEitherK)(f));
+});
+/**
+ * @category sequencing
+ * @since 2.16.0
+ */
+exports.flatMapReaderEither = (0, function_1.dual)(2, function (self, f) { return (0, exports.flatMap)(self, (0, exports.fromReaderEitherK)(f)); });
+/**
+ * Alias of `flatMapEither`.
+ *
+ * @category legacy
  * @since 2.4.0
  */
-exports.chainEitherK = (0, FromEither_1.chainEitherK)(exports.FromEither, exports.Chain);
+exports.chainEitherK = exports.flatMapEither;
 /**
- * Less strict version of [`chainEitherK`](#chaineitherk).
+ * Alias of `flatMapEither`.
  *
- * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
- *
- * @category sequencing
+ * @category legacy
  * @since 2.6.1
  */
-exports.chainEitherKW = exports.chainEitherK;
+exports.chainEitherKW = exports.flatMapEither;
 /**
- * @category sequencing
+ * Alias of `tapEither`.
+ *
+ * @category legacy
  * @since 2.12.0
  */
-exports.chainFirstEitherK = (0, FromEither_1.chainFirstEitherK)(exports.FromEither, exports.Chain);
+exports.chainFirstEitherK = exports.tapEither;
 /**
+ * Alias of `tapEither`.
+ *
  * Less strict version of [`chainFirstEitherK`](#chainfirsteitherk).
  *
  * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
  *
- * @category sequencing
+ * @category legacy
  * @since 2.12.0
  */
-exports.chainFirstEitherKW = exports.chainFirstEitherK;
+exports.chainFirstEitherKW = exports.tapEither;
+/**
+ * Alias of `flatMapTaskEither`.
+ *
+ * Less strict version of [`chainTaskEitherK`](#chaintaskeitherk).
+ *
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category legacy
+ * @since 2.6.1
+ */
+exports.chainTaskEitherKW = exports.flatMapTaskEither;
+/**
+ * Alias of `flatMapTaskEither`.
+ *
+ * @category legacy
+ * @since 2.4.0
+ */
+exports.chainTaskEitherK = exports.flatMapTaskEither;
+/**
+ * Alias of `flatMapReaderTask`.
+ *
+ * Less strict version of [`chainReaderTaskK`](#chainreadertaskk).
+ *
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.chainReaderTaskKW = exports.flatMapReaderTask;
+/**
+ * Alias of `flatMapReaderTask`.
+ *
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.chainReaderTaskK = exports.flatMapReaderTask;
 /**
  * @category lifting
  * @since 2.0.0
@@ -12810,52 +13419,112 @@ exports.filterOrElseW = exports.filterOrElse;
  */
 exports.fromEitherK = (0, FromEither_1.fromEitherK)(exports.FromEither);
 /**
- * @category instances
- * @since 2.10.0
- */
-exports.FromIO = {
-    URI: exports.URI,
-    fromIO: exports.fromIO
-};
-/**
  * @category lifting
  * @since 2.10.0
  */
 exports.fromIOK = (0, FromIO_1.fromIOK)(exports.FromIO);
 /**
- * @category sequencing
+ * Alias of `flatMapIO`.
+ *
+ * @category legacy
  * @since 2.10.0
  */
-exports.chainIOK = (0, FromIO_1.chainIOK)(exports.FromIO, exports.Chain);
+exports.chainIOK = exports.flatMapIO;
 /**
- * @category sequencing
+ * Alias of `tapIO`.
+ *
+ * @category legacy
  * @since 2.10.0
  */
-exports.chainFirstIOK = (0, FromIO_1.chainFirstIOK)(exports.FromIO, exports.Chain);
-/**
- * @category instances
- * @since 2.10.0
- */
-exports.FromTask = {
-    URI: exports.URI,
-    fromIO: exports.fromIO,
-    fromTask: exports.fromTask
-};
+exports.chainFirstIOK = exports.tapIO;
 /**
  * @category lifting
  * @since 2.10.0
  */
 exports.fromTaskK = (0, FromTask_1.fromTaskK)(exports.FromTask);
 /**
- * @category sequencing
+ * Alias of `flatMapTask`.
+ *
+ * @category legacy
  * @since 2.10.0
  */
-exports.chainTaskK = (0, FromTask_1.chainTaskK)(exports.FromTask, exports.Chain);
+exports.chainTaskK = exports.flatMapTask;
 /**
- * @category sequencing
+ * Alias of `tapTask`.
+ * @category legacy
  * @since 2.10.0
  */
-exports.chainFirstTaskK = (0, FromTask_1.chainFirstTaskK)(exports.FromTask, exports.Chain);
+exports.chainFirstTaskK = exports.tapTask;
+/**
+ * Alias of `flatMapReader`.
+ *
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.chainReaderK = exports.flatMapReader;
+/**
+ * Alias of `flatMapReader`.
+ *
+ * Less strict version of [`chainReaderK`](#chainreaderk).
+ *
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.chainReaderKW = exports.flatMapReader;
+/**
+ * Alias of `flatMapReaderIO`.
+ *
+ * Less strict version of [`chainReaderIOK`](#chainreaderiok).
+ *
+ * @category legacy
+ * @since 2.13.0
+ */
+exports.chainReaderIOKW = exports.flatMapReaderIO;
+/**
+ * Alias of `flatMapReaderIO`.
+ *
+ * @category legacy
+ * @since 2.13.0
+ */
+exports.chainReaderIOK = exports.flatMapReaderIO;
+/**
+ * Alias of `flatMapIOEither`.
+ *
+ * Less strict version of [`chainIOEitherK`](#chainioeitherk).
+ *
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category legacy
+ * @since 2.6.1
+ */
+exports.chainIOEitherKW = exports.flatMapIOEither;
+/**
+ * Alias of `flatMapIOEither`.
+ *
+ * @category legacy
+ * @since 2.4.0
+ */
+exports.chainIOEitherK = exports.flatMapIOEither;
+/**
+ * Alias of `flatMapReaderEither`.
+ *
+ * Less strict version of [`chainReaderEitherK`](#chainreadereitherk).
+ *
+ * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
+ *
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.chainReaderEitherKW = exports.flatMapReaderEither;
+/**
+ * Alias of `flatMapReaderEither`.
+ *
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.chainReaderEitherK = exports.flatMapReaderEither;
 // -------------------------------------------------------------------------------------
 // utils
 // -------------------------------------------------------------------------------------
@@ -12901,7 +13570,7 @@ exports.let = let_;
  * @category do notation
  * @since 2.8.0
  */
-exports.bind = (0, Chain_1.bind)(exports.Chain);
+exports.bind = chainable.bind(exports.Chain);
 /**
  * The `W` suffix (short for **W**idening) means that the environment types and the error types will be merged.
  *
@@ -13021,6 +13690,51 @@ exports.traverseSeqArray = traverseSeqArray;
  */
 exports.sequenceSeqArray = (0, exports.traverseSeqArray)(function_1.identity);
 // -------------------------------------------------------------------------------------
+// legacy
+// -------------------------------------------------------------------------------------
+/**
+ * Alias of `flatMap`.
+ *
+ * @category legacy
+ * @since 2.0.0
+ */
+exports.chain = exports.flatMap;
+/**
+ * Alias of `flatMap`.
+ *
+ * @category legacy
+ * @since 2.6.0
+ */
+exports.chainW = exports.flatMap;
+/**
+ * Alias of `tap`.
+ *
+ * @category legacy
+ * @since 2.0.0
+ */
+exports.chainFirst = exports.tap;
+/**
+ * Alias of `tap`.
+ *
+ * @category legacy
+ * @since 2.8.0
+ */
+exports.chainFirstW = exports.tap;
+/**
+ * Alias of `tapError`.
+ *
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.orElseFirst = exports.tapError;
+/**
+ * Alias of `tapError`.
+ *
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.orElseFirstW = exports.tapError;
+// -------------------------------------------------------------------------------------
 // deprecated
 // -------------------------------------------------------------------------------------
 /**
@@ -13037,10 +13751,10 @@ exports.readerTaskEither = {
     map: _map,
     of: exports.of,
     ap: _apPar,
-    chain: _chain,
+    chain: exports.flatMap,
     alt: _alt,
-    bimap: _bimap,
-    mapLeft: _mapLeft,
+    bimap: exports.mapBoth,
+    mapLeft: exports.mapError,
     fromIO: exports.fromIO,
     fromTask: exports.fromTask,
     throwError: exports.throwError
@@ -13059,10 +13773,10 @@ exports.readerTaskEitherSeq = {
     map: _map,
     of: exports.of,
     ap: _apSeq,
-    chain: _chain,
+    chain: exports.flatMap,
     alt: _alt,
-    bimap: _bimap,
-    mapLeft: _mapLeft,
+    bimap: exports.mapBoth,
+    mapLeft: exports.mapError,
     fromIO: exports.fromIO,
     fromTask: exports.fromTask,
     throwError: exports.throwError
@@ -13114,9 +13828,9 @@ function getReaderTaskValidation(SE) {
         _E: undefined,
         map: _map,
         of: exports.of,
-        chain: _chain,
-        bimap: _bimap,
-        mapLeft: _mapLeft,
+        chain: exports.flatMap,
+        bimap: exports.mapBoth,
+        mapLeft: exports.mapError,
         ap: applicativeReaderTaskValidation.ap,
         alt: altReaderTaskValidation.alt,
         fromIO: exports.fromIO,
@@ -13699,7 +14413,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getMonoid = exports.getSemigroup = exports.taskSeq = exports.task = exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apS = exports.bind = exports.let = exports.bindTo = exports.Do = exports.never = exports.FromTask = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.FromIO = exports.chainFirst = exports.MonadTask = exports.fromTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecond = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.Functor = exports.getRaceMonoid = exports.URI = exports.flatten = exports.chain = exports.of = exports.ap = exports.map = exports.delay = exports.fromIO = void 0;
+exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apS = exports.bind = exports.let = exports.bindTo = exports.Do = exports.never = exports.FromTask = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.tapIO = exports.tap = exports.flatMapIO = exports.FromIO = exports.MonadTask = exports.fromTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecond = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.asUnit = exports.as = exports.Functor = exports.getRaceMonoid = exports.URI = exports.flatten = exports.flatMap = exports.of = exports.ap = exports.map = exports.delay = exports.fromIO = void 0;
+exports.getMonoid = exports.getSemigroup = exports.taskSeq = exports.task = exports.chainFirst = exports.chain = void 0;
 /**
  * ```ts
  * interface Task<A> {
@@ -13714,7 +14429,7 @@ exports.getMonoid = exports.getSemigroup = exports.taskSeq = exports.task = expo
  */
 var Applicative_1 = __nccwpck_require__(4766);
 var Apply_1 = __nccwpck_require__(205);
-var Chain_1 = __nccwpck_require__(2372);
+var chainable = __importStar(__nccwpck_require__(2372));
 var FromIO_1 = __nccwpck_require__(7948);
 var function_1 = __nccwpck_require__(6985);
 var Functor_1 = __nccwpck_require__(5533);
@@ -13769,10 +14484,7 @@ function delay(millis) {
 exports.delay = delay;
 var _map = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); };
 var _apPar = function (fab, fa) { return (0, function_1.pipe)(fab, (0, exports.ap)(fa)); };
-var _apSeq = function (fab, fa) {
-    return (0, function_1.pipe)(fab, (0, exports.chain)(function (f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); }));
-};
-var _chain = function (ma, f) { return (0, function_1.pipe)(ma, (0, exports.chain)(f)); };
+var _apSeq = function (fab, fa) { return (0, exports.flatMap)(fab, function (f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); }); };
 /**
  * `map` can be used to turn functions `(a: A) => B` into functions `(fa: F<A>) => F<B>` whose argument and return types
  * use the type constructor `F` to represent some computational context.
@@ -13801,22 +14513,21 @@ exports.ap = ap;
 var of = function (a) { return function () { return Promise.resolve(a); }; };
 exports.of = of;
 /**
- * Composes computations in sequence, using the return value of one computation to determine the next computation.
- *
  * @category sequencing
- * @since 2.0.0
+ * @since 2.14.0
  */
-var chain = function (f) { return function (ma) { return function () {
-    return Promise.resolve()
-        .then(ma)
-        .then(function (a) { return f(a)(); });
-}; }; };
-exports.chain = chain;
+exports.flatMap = (0, function_1.dual)(2, function (ma, f) {
+    return function () {
+        return Promise.resolve()
+            .then(ma)
+            .then(function (a) { return f(a)(); });
+    };
+});
 /**
  * @category sequencing
  * @since 2.0.0
  */
-exports.flatten = (0, exports.chain)(function_1.identity);
+exports.flatten = (0, exports.flatMap)(function_1.identity);
 /**
  * @category type lambdas
  * @since 2.0.0
@@ -13857,6 +14568,20 @@ exports.Functor = {
     URI: exports.URI,
     map: _map
 };
+/**
+ * Maps the value to the specified constant value.
+ *
+ * @category mapping
+ * @since 2.16.0
+ */
+exports.as = (0, function_1.dual)(2, (0, Functor_1.as)(exports.Functor));
+/**
+ * Maps the value to the void constant value.
+ *
+ * @category mapping
+ * @since 2.16.0
+ */
+exports.asUnit = (0, Functor_1.asUnit)(exports.Functor);
 /**
  * @category mapping
  * @since 2.10.0
@@ -13936,7 +14661,7 @@ exports.Chain = {
     URI: exports.URI,
     map: _map,
     ap: _apPar,
-    chain: _chain
+    chain: exports.flatMap
 };
 /**
  * @category instances
@@ -13947,7 +14672,7 @@ exports.Monad = {
     map: _map,
     of: exports.of,
     ap: _apPar,
-    chain: _chain
+    chain: exports.flatMap
 };
 /**
  * @category instances
@@ -13958,7 +14683,7 @@ exports.MonadIO = {
     map: _map,
     of: exports.of,
     ap: _apPar,
-    chain: _chain,
+    chain: exports.flatMap,
     fromIO: exports.fromIO
 };
 /**
@@ -13976,18 +14701,10 @@ exports.MonadTask = {
     map: _map,
     of: exports.of,
     ap: _apPar,
-    chain: _chain,
+    chain: exports.flatMap,
     fromIO: exports.fromIO,
     fromTask: exports.fromTask
 };
-/**
- * Composes computations in sequence, using the return value of one computation to determine the next computation and
- * keeping only the result of the first.
- *
- * @category sequencing
- * @since 2.0.0
- */
-exports.chainFirst = (0, Chain_1.chainFirst)(exports.Chain);
 /**
  * @category instances
  * @since 2.10.0
@@ -13996,6 +14713,52 @@ exports.FromIO = {
     URI: exports.URI,
     fromIO: exports.fromIO
 };
+/** @internal */
+var _FlatMap = {
+    flatMap: exports.flatMap
+};
+/** @internal */
+var _FromIO = {
+    fromIO: exports.FromIO.fromIO
+};
+/**
+ * @category sequencing
+ * @since 2.16.0
+ */
+exports.flatMapIO = _.flatMapIO(_FromIO, _FlatMap);
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @category combinators
+ * @since 2.15.0
+ */
+exports.tap = (0, function_1.dual)(2, chainable.tap(exports.Chain));
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function'
+ * import * as T from 'fp-ts/Task'
+ * import * as Console from 'fp-ts/Console'
+ *
+ * // Will produce `Hello, fp-ts` to the stdout
+ * const effect = pipe(
+ *   T.of('fp-ts'),
+ *   T.tapIO((value) => Console.log(`Hello, ${value}`)),
+ * )
+ *
+ * async function test() {
+ *   assert.deepStrictEqual(await effect(), 'fp-ts')
+ * }
+ *
+ * test()
+ *
+ * @category combinators
+ * @since 2.16.0
+ */
+exports.tapIO = (0, function_1.dual)(2, (0, FromIO_1.tapIO)(exports.FromIO, exports.Chain));
 /**
  * @category lifting
  * @since 2.4.0
@@ -14003,15 +14766,19 @@ exports.FromIO = {
 exports.fromIOK = 
 /*#__PURE__*/ (0, FromIO_1.fromIOK)(exports.FromIO);
 /**
- * @category sequencing
+ * Alias of `flatMapIO`.
+ *
+ * @category legacy
  * @since 2.4.0
  */
-exports.chainIOK = (0, FromIO_1.chainIOK)(exports.FromIO, exports.Chain);
+exports.chainIOK = exports.flatMapIO;
 /**
- * @category sequencing
+ * Alias of `tapIO`.
+ *
+ * @category legacy
  * @since 2.10.0
  */
-exports.chainFirstIOK = (0, FromIO_1.chainFirstIOK)(exports.FromIO, exports.Chain);
+exports.chainFirstIOK = exports.tapIO;
 /**
  * @category instances
  * @since 2.10.0
@@ -14050,7 +14817,7 @@ exports.let = let_;
  * @category do notation
  * @since 2.8.0
  */
-exports.bind = (0, Chain_1.bind)(exports.Chain);
+exports.bind = chainable.bind(exports.Chain);
 /**
  * @category do notation
  * @since 2.8.0
@@ -14175,6 +14942,23 @@ exports.traverseSeqArray = traverseSeqArray;
 exports.sequenceSeqArray = 
 /*#__PURE__*/ (0, exports.traverseSeqArray)(function_1.identity);
 // -------------------------------------------------------------------------------------
+// legacy
+// -------------------------------------------------------------------------------------
+/**
+ * Alias of `flatMap`.
+ *
+ * @category legacy
+ * @since 2.0.0
+ */
+exports.chain = exports.flatMap;
+/**
+ * Alias of `tap`.
+ *
+ * @category legacy
+ * @since 2.0.0
+ */
+exports.chainFirst = exports.tap;
+// -------------------------------------------------------------------------------------
 // deprecated
 // -------------------------------------------------------------------------------------
 /**
@@ -14191,7 +14975,7 @@ exports.task = {
     map: _map,
     of: exports.of,
     ap: _apPar,
-    chain: _chain,
+    chain: exports.flatMap,
     fromIO: exports.fromIO,
     fromTask: exports.fromTask
 };
@@ -14209,7 +14993,7 @@ exports.taskSeq = {
     map: _map,
     of: exports.of,
     ap: _apSeq,
-    chain: _chain,
+    chain: exports.flatMap,
     fromIO: exports.fromIO,
     fromTask: exports.fromTask
 };
@@ -14278,7 +15062,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -14300,12 +15084,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.altW = exports.alt = exports.flatten = exports.flattenW = exports.chainW = exports.chain = exports.apW = exports.ap = exports.mapLeft = exports.bimap = exports.map = exports.chainIOEitherK = exports.chainIOEitherKW = exports.fromIOEitherK = exports.chainTaskOptionK = exports.chainTaskOptionKW = exports.fromTaskOptionK = exports.swap = exports.orLeft = exports.orElseFirstTaskK = exports.orElseFirstIOK = exports.orElseFirstW = exports.orElseFirst = exports.orElseW = exports.orElse = exports.chainNullableK = exports.fromNullableK = exports.fromNullable = exports.toUnion = exports.tryCatchK = exports.tryCatch = exports.getOrElseW = exports.getOrElse = exports.foldW = exports.matchEW = exports.fold = exports.matchE = exports.matchW = exports.match = exports.fromTaskOption = exports.fromIOEither = exports.fromEither = exports.fromTask = exports.fromIO = exports.leftIO = exports.rightIO = exports.leftTask = exports.rightTask = exports.right = exports.left = void 0;
-exports.bracketW = exports.bracket = exports.taskify = exports.chainFirstTaskK = exports.chainTaskK = exports.fromTaskK = exports.FromTask = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.FromIO = exports.fromEitherK = exports.filterOrElseW = exports.filterOrElse = exports.fromPredicate = exports.chainFirstEitherKW = exports.chainFirstEitherK = exports.chainEitherKW = exports.chainEitherK = exports.chainOptionK = exports.fromOptionK = exports.fromOption = exports.FromEither = exports.Alt = exports.Bifunctor = exports.chainFirstW = exports.chainFirst = exports.MonadThrow = exports.MonadTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecondW = exports.apSecond = exports.apFirstW = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.Functor = exports.getFilterable = exports.getCompactable = exports.getAltTaskValidation = exports.getApplicativeTaskValidation = exports.URI = exports.throwError = exports.of = void 0;
-exports.getTaskValidation = exports.getSemigroup = exports.getApplyMonoid = exports.getApplySemigroup = exports.taskEitherSeq = exports.taskEither = exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.let = exports.bindTo = exports.Do = void 0;
+exports.throwError = exports.of = exports.altW = exports.alt = exports.flatten = exports.flattenW = exports.flatMap = exports.apW = exports.ap = exports.mapLeft = exports.mapError = exports.bimap = exports.mapBoth = exports.map = exports.fromIOEitherK = exports.chainTaskOptionK = exports.chainTaskOptionKW = exports.fromTaskOptionK = exports.swap = exports.orLeft = exports.orElseFirstTaskK = exports.orElseFirstIOK = exports.tapError = exports.orElseW = exports.orElse = exports.chainNullableK = exports.fromNullableK = exports.fromNullable = exports.toUnion = exports.tryCatchK = exports.tryCatch = exports.getOrElseW = exports.getOrElse = exports.foldW = exports.matchEW = exports.fold = exports.matchE = exports.matchW = exports.match = exports.fromTaskOption = exports.fromIOEither = exports.fromEither = exports.fromTask = exports.fromIO = exports.leftIO = exports.rightIO = exports.leftTask = exports.rightTask = exports.right = exports.left = void 0;
+exports.fromPredicate = exports.chainFirstEitherKW = exports.chainFirstEitherK = exports.chainEitherKW = exports.chainEitherK = exports.flatMapTaskOption = exports.flatMapIOEither = exports.flatMapTask = exports.flatMapIO = exports.flatMapEither = exports.flatMapOption = exports.flatMapNullable = exports.liftOption = exports.liftNullable = exports.chainOptionKW = exports.chainOptionK = exports.fromOptionK = exports.fromOption = exports.Alt = exports.Bifunctor = exports.tapTask = exports.tapIO = exports.tapEither = exports.tap = exports.FromTask = exports.FromIO = exports.FromEither = exports.MonadThrow = exports.MonadTask = exports.MonadIO = exports.Monad = exports.Chain = exports.ApplicativeSeq = exports.ApplySeq = exports.ApplicativePar = exports.apSecondW = exports.apSecond = exports.apFirstW = exports.apFirst = exports.ApplyPar = exports.Pointed = exports.flap = exports.asUnit = exports.as = exports.Functor = exports.getFilterable = exports.getCompactable = exports.getAltTaskValidation = exports.getApplicativeTaskValidation = exports.URI = void 0;
+exports.getTaskValidation = exports.getSemigroup = exports.getApplyMonoid = exports.getApplySemigroup = exports.taskEitherSeq = exports.taskEither = exports.orElseFirstW = exports.orElseFirst = exports.chainFirstW = exports.chainFirst = exports.chainW = exports.chain = exports.sequenceSeqArray = exports.traverseSeqArray = exports.traverseSeqArrayWithIndex = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.traverseReadonlyArrayWithIndexSeq = exports.traverseReadonlyNonEmptyArrayWithIndexSeq = exports.traverseReadonlyArrayWithIndex = exports.traverseReadonlyNonEmptyArrayWithIndex = exports.ApT = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.let = exports.bindTo = exports.Do = exports.bracketW = exports.bracket = exports.taskify = exports.chainIOEitherK = exports.chainIOEitherKW = exports.chainFirstTaskK = exports.chainTaskK = exports.fromTaskK = exports.chainFirstIOK = exports.chainIOK = exports.fromIOK = exports.fromEitherK = exports.filterOrElseW = exports.filterOrElse = void 0;
 var Applicative_1 = __nccwpck_require__(4766);
 var Apply_1 = __nccwpck_require__(205);
-var Chain_1 = __nccwpck_require__(2372);
+var chainable = __importStar(__nccwpck_require__(2372));
 var Compactable_1 = __nccwpck_require__(729);
 var E = __importStar(__nccwpck_require__(7534));
 var ET = __importStar(__nccwpck_require__(9803));
@@ -14505,12 +15289,16 @@ exports.toUnion = ET.toUnion(T.Functor);
  */
 exports.fromNullable = ET.fromNullable(T.Pointed);
 /**
- * @category lifting
+ * Use `liftNullable`.
+ *
+ * @category legacy
  * @since 2.12.0
  */
 exports.fromNullableK = ET.fromNullableK(T.Pointed);
 /**
- * @category sequencing
+ * Use `flatMapNullable`.
+ *
+ * @category legacy
  * @since 2.12.0
  */
 exports.chainNullableK = 
@@ -14551,29 +15339,23 @@ exports.orElse =
  */
 exports.orElseW = exports.orElse;
 /**
- * @category error handling
- * @since 2.11.0
- */
-exports.orElseFirst = 
-/*#__PURE__*/ ET.orElseFirst(T.Monad);
-/**
- * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ * Returns an effect that effectfully "peeks" at the failure of this effect.
  *
  * @category error handling
- * @since 2.11.0
+ * @since 2.15.0
  */
-exports.orElseFirstW = exports.orElseFirst;
+exports.tapError = (0, function_1.dual)(2, ET.tapError(T.Monad));
 /**
  * @category error handling
  * @since 2.12.0
  */
-var orElseFirstIOK = function (onLeft) { return (0, exports.orElseFirst)((0, exports.fromIOK)(onLeft)); };
+var orElseFirstIOK = function (onLeft) { return (0, exports.tapError)((0, exports.fromIOK)(onLeft)); };
 exports.orElseFirstIOK = orElseFirstIOK;
 /**
  * @category error handling
  * @since 2.12.0
  */
-var orElseFirstTaskK = function (onLeft) { return (0, exports.orElseFirst)((0, exports.fromTaskK)(onLeft)); };
+var orElseFirstTaskK = function (onLeft) { return (0, exports.tapError)((0, exports.fromTaskK)(onLeft)); };
 exports.orElseFirstTaskK = orElseFirstTaskK;
 /**
  * @category error handling
@@ -14595,21 +15377,25 @@ var fromTaskOptionK = function (onNone) {
 };
 exports.fromTaskOptionK = fromTaskOptionK;
 /**
+ * Use `flatMapTaskOption`.
+ *
  * The `W` suffix (short for **W**idening) means that the error types will be merged.
  *
- * @category sequencing
+ * @category legacy
  * @since 2.12.3
  */
 var chainTaskOptionKW = function (onNone) {
     return function (f) {
         return function (ma) {
-            return (0, function_1.pipe)(ma, (0, exports.chain)((0, exports.fromTaskOptionK)(onNone)(f)));
+            return (0, exports.flatMap)(ma, (0, exports.fromTaskOptionK)(onNone)(f));
         };
     };
 };
 exports.chainTaskOptionKW = chainTaskOptionKW;
 /**
- * @category sequencing
+ * Use `flatMapTaskOption`.
+ *
+ * @category legacy
  * @since 2.11.0
  */
 exports.chainTaskOptionK = exports.chainTaskOptionKW;
@@ -14619,32 +15405,9 @@ exports.chainTaskOptionK = exports.chainTaskOptionKW;
  */
 var fromIOEitherK = function (f) { return (0, function_1.flow)(f, exports.fromIOEither); };
 exports.fromIOEitherK = fromIOEitherK;
-/**
- * Less strict version of [`chainIOEitherK`](#chainioeitherk).
- *
- * The `W` suffix (short for **W**idening) means that the error types will be merged.
- *
- * @category sequencing
- * @since 2.6.1
- */
-var chainIOEitherKW = function (f) { return (0, exports.chainW)((0, exports.fromIOEitherK)(f)); };
-exports.chainIOEitherKW = chainIOEitherKW;
-/**
- * @category sequencing
- * @since 2.4.0
- */
-exports.chainIOEitherK = exports.chainIOEitherKW;
 var _map = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); };
 var _apPar = function (fab, fa) { return (0, function_1.pipe)(fab, (0, exports.ap)(fa)); };
-var _apSeq = function (fab, fa) {
-    return (0, function_1.pipe)(fab, (0, exports.chain)(function (f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); }));
-};
-/* istanbul ignore next */
-var _chain = function (ma, f) { return (0, function_1.pipe)(ma, (0, exports.chain)(f)); };
-/* istanbul ignore next */
-var _bimap = function (fa, f, g) { return (0, function_1.pipe)(fa, (0, exports.bimap)(f, g)); };
-/* istanbul ignore next */
-var _mapLeft = function (fa, f) { return (0, function_1.pipe)(fa, (0, exports.mapLeft)(f)); };
+var _apSeq = function (fab, fa) { return (0, exports.flatMap)(fab, function (f) { return (0, function_1.pipe)(fa, (0, exports.map)(f)); }); };
 /* istanbul ignore next */
 var _alt = function (fa, that) { return (0, function_1.pipe)(fa, (0, exports.alt)(that)); };
 /**
@@ -14656,21 +15419,60 @@ var _alt = function (fa, that) { return (0, function_1.pipe)(fa, (0, exports.alt
  */
 exports.map = ET.map(T.Functor);
 /**
- * Map a pair of functions over the two type arguments of the bifunctor.
+ * Returns a `TaskEither` whose failure and success channels have been mapped by the specified pair of functions, `f` and `g`.
  *
- * @category mapping
- * @since 2.0.0
- */
-exports.bimap = 
-/*#__PURE__*/ ET.bimap(T.Functor);
-/**
- * Map a function over the first type argument of a bifunctor.
+ * @example
+ * import * as TaskEither from 'fp-ts/TaskEither'
+ * import * as Either from 'fp-ts/Either'
+ *
+ * const f = (s: string) => new Error(s)
+ * const g = (n: number) => n * 2
+ *
+ * async function test() {
+ *   assert.deepStrictEqual(await TaskEither.mapBoth(TaskEither.right(1), f, g)(), Either.right(2))
+ *   assert.deepStrictEqual(await TaskEither.mapBoth(TaskEither.left('err'), f, g)(), Either.left(new Error('err')))
+ * }
+ *
+ * test()
  *
  * @category error handling
+ * @since 2.16.0
+ */
+exports.mapBoth = (0, function_1.dual)(3, ET.mapBoth(T.Functor));
+/**
+ * Alias of `mapBoth`.
+ *
+ * @category legacy
  * @since 2.0.0
  */
-exports.mapLeft = 
-/*#__PURE__*/ ET.mapLeft(T.Functor);
+exports.bimap = exports.mapBoth;
+/**
+ * Returns a `TaskEither` with its error channel mapped using the specified function.
+ *
+ * @example
+ * import * as TaskEither from 'fp-ts/TaskEither'
+ * import * as Either from 'fp-ts/Either'
+ *
+ * const f = (s: string) => new Error(s)
+ *
+ * async function test() {
+ *   assert.deepStrictEqual(await TaskEither.mapError(TaskEither.right(1), f)(), Either.right(1))
+ *   assert.deepStrictEqual(await TaskEither.mapError(TaskEither.left('err'), f)(), Either.left(new Error('err')))
+ * }
+ *
+ * test()
+ *
+ * @category error handling
+ * @since 2.16.0
+ */
+exports.mapError = (0, function_1.dual)(2, ET.mapError(T.Functor));
+/**
+ * Alias of `mapError`.
+ *
+ * @category legacy
+ * @since 2.0.0
+ */
+exports.mapLeft = exports.mapError;
 /**
  * @since 2.0.0
  */
@@ -14685,22 +15487,10 @@ exports.ap =
  */
 exports.apW = exports.ap;
 /**
- * Composes computations in sequence, using the return value of one computation to determine the next computation.
- *
  * @category sequencing
- * @since 2.0.0
+ * @since 2.14.0
  */
-exports.chain = 
-/*#__PURE__*/ ET.chain(T.Monad);
-/**
- * Less strict version of [`chain`](#chain).
- *
- * The `W` suffix (short for **W**idening) means that the error types will be merged.
- *
- * @category sequencing
- * @since 2.6.0
- */
-exports.chainW = exports.chain;
+exports.flatMap = (0, function_1.dual)(2, ET.flatMap(T.Monad));
 /**
  * Less strict version of [`flatten`](#flatten).
  *
@@ -14710,7 +15500,7 @@ exports.chainW = exports.chain;
  * @since 2.11.0
  */
 exports.flattenW = 
-/*#__PURE__*/ (0, exports.chainW)(function_1.identity);
+/*#__PURE__*/ (0, exports.flatMap)(function_1.identity);
 /**
  * @category sequencing
  * @since 2.0.0
@@ -14913,6 +15703,20 @@ exports.Functor = {
     map: _map
 };
 /**
+ * Maps the `Right` value of this `TaskEither` to the specified constant value.
+ *
+ * @category mapping
+ * @since 2.16.0
+ */
+exports.as = (0, function_1.dual)(2, (0, Functor_1.as)(exports.Functor));
+/**
+ * Maps the `Right` value of this `TaskEither` to the void constant value.
+ *
+ * @category mapping
+ * @since 2.16.0
+ */
+exports.asUnit = (0, Functor_1.asUnit)(exports.Functor);
+/**
  * @category mapping
  * @since 2.10.0
  */
@@ -15007,7 +15811,7 @@ exports.Chain = {
     URI: exports.URI,
     map: _map,
     ap: _apPar,
-    chain: _chain
+    chain: exports.flatMap
 };
 /**
  * @category instances
@@ -15017,7 +15821,7 @@ exports.Monad = {
     URI: exports.URI,
     map: _map,
     ap: _apPar,
-    chain: _chain,
+    chain: exports.flatMap,
     of: exports.of
 };
 /**
@@ -15028,7 +15832,7 @@ exports.MonadIO = {
     URI: exports.URI,
     map: _map,
     ap: _apPar,
-    chain: _chain,
+    chain: exports.flatMap,
     of: exports.of,
     fromIO: exports.fromIO
 };
@@ -15040,7 +15844,7 @@ exports.MonadTask = {
     URI: exports.URI,
     map: _map,
     ap: _apPar,
-    chain: _chain,
+    chain: exports.flatMap,
     of: exports.of,
     fromIO: exports.fromIO,
     fromTask: exports.fromTask
@@ -15053,36 +15857,135 @@ exports.MonadThrow = {
     URI: exports.URI,
     map: _map,
     ap: _apPar,
-    chain: _chain,
+    chain: exports.flatMap,
     of: exports.of,
     throwError: exports.throwError
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.FromEither = {
+    URI: exports.URI,
+    fromEither: exports.fromEither
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.FromIO = {
+    URI: exports.URI,
+    fromIO: exports.fromIO
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.FromTask = {
+    URI: exports.URI,
+    fromIO: exports.fromIO,
+    fromTask: exports.fromTask
 };
 /**
  * Composes computations in sequence, using the return value of one computation to determine the next computation and
  * keeping only the result of the first.
  *
- * @category sequencing
- * @since 2.0.0
+ * @category combinators
+ * @since 2.15.0
  */
-exports.chainFirst = 
-/*#__PURE__*/ (0, Chain_1.chainFirst)(exports.Chain);
+exports.tap = (0, function_1.dual)(2, chainable.tap(exports.Chain));
 /**
- * Less strict version of [`chainFirst`](#chainfirst).
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
  *
- * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ * @example
+ * import * as E from 'fp-ts/Either'
+ * import { pipe } from 'fp-ts/function'
+ * import * as TE from 'fp-ts/TaskEither'
  *
- * @category sequencing
- * @since 2.8.0
+ * const checkString = (value: string) => pipe(
+ *   TE.of(value),
+ *   TE.tapEither(() => value.length > 0 ? E.right('ok') : E.left('error'))
+ * )
+ *
+ * async function test() {
+ *   assert.deepStrictEqual(await checkString('')(), E.left('error'))
+ *   assert.deepStrictEqual(await checkString('fp-ts')(), E.right('fp-ts'))
+ * }
+ *
+ * test()
+ *
+ * @category combinators
+ * @since 2.16.0
  */
-exports.chainFirstW = exports.chainFirst;
+exports.tapEither = (0, function_1.dual)(2, (0, FromEither_1.tapEither)(exports.FromEither, exports.Chain));
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function'
+ * import * as TE from 'fp-ts/TaskEither'
+ * import * as E from 'fp-ts/Either'
+ * import * as Console from 'fp-ts/Console'
+ *
+ *
+ * // Will produce `Hello, fp-ts` to the stdout
+ * const effectA = TE.tapIO(
+ *   TE.of(1),
+ *   (value) => Console.log(`Hello, ${value}`)
+ * )
+ *
+ * // No output to the stdout
+ * const effectB = pipe(
+ *   TE.left('error'),
+ *   TE.tapIO((value) => Console.log(`Hello, ${value}`))
+ * )
+ *
+ * async function test() {
+ *   assert.deepStrictEqual(await effectA(), E.of(1))
+ *   assert.deepStrictEqual(await effectB(), E.left('error'))
+ * }
+ *
+ * test()
+ *
+ * @category combinators
+ * @since 2.16.0
+ */
+exports.tapIO = (0, function_1.dual)(2, (0, FromIO_1.tapIO)(exports.FromIO, exports.Chain));
+/**
+ * Composes computations in sequence, using the return value of one computation to determine the next computation and
+ * keeping only the result of the first.
+ *
+ * @example
+ * import * as TE from 'fp-ts/TaskEither'
+ * import * as T from 'fp-ts/Task'
+ * import * as E from 'fp-ts/Either'
+ *
+ *
+ * const effect = TE.tapIO(
+ *   TE.of(1),
+ *   (value) => T.of(value + 1)
+ * )
+ *
+ * async function test() {
+ *   assert.deepStrictEqual(await effect(), E.of(1))
+ * }
+ *
+ * test()
+ *
+ * @category combinators
+ * @since 2.16.0
+ */
+exports.tapTask = (0, function_1.dual)(2, (0, FromTask_1.tapTask)(exports.FromTask, exports.Chain));
 /**
  * @category instances
  * @since 2.7.0
  */
 exports.Bifunctor = {
     URI: exports.URI,
-    bimap: _bimap,
-    mapLeft: _mapLeft
+    bimap: exports.mapBoth,
+    mapLeft: exports.mapError
 };
 /**
  * @category instances
@@ -15094,60 +15997,131 @@ exports.Alt = {
     alt: _alt
 };
 /**
- * @category instances
- * @since 2.10.0
- */
-exports.FromEither = {
-    URI: exports.URI,
-    fromEither: exports.fromEither
-};
-/**
  * @category conversions
  * @since 2.0.0
  */
 exports.fromOption = 
 /*#__PURE__*/ (0, FromEither_1.fromOption)(exports.FromEither);
 /**
- * @category lifting
+ * Use `liftOption`.
+ *
+ * @category legacy
  * @since 2.10.0
  */
 exports.fromOptionK = 
 /*#__PURE__*/ (0, FromEither_1.fromOptionK)(exports.FromEither);
 /**
- * @category sequencing
+ * Use `flatMapOption`.
+ *
+ * @category legacy
  * @since 2.10.0
  */
 exports.chainOptionK = (0, FromEither_1.chainOptionK)(exports.FromEither, exports.Chain);
 /**
+ * Use `flatMapOption`.
+ *
+ * @category legacy
+ * @since 2.13.2
+ */
+exports.chainOptionKW = 
+/*#__PURE__*/ exports.chainOptionK;
+/** @internal */
+var _FromEither = {
+    fromEither: exports.FromEither.fromEither
+};
+/**
+ * @category lifting
+ * @since 2.15.0
+ */
+exports.liftNullable = _.liftNullable(_FromEither);
+/**
+ * @category lifting
+ * @since 2.15.0
+ */
+exports.liftOption = _.liftOption(_FromEither);
+/** @internal */
+var _FlatMap = {
+    flatMap: exports.flatMap
+};
+/** @internal */
+var _FromIO = {
+    fromIO: exports.FromIO.fromIO
+};
+/** @internal */
+var _FromTask = {
+    fromTask: exports.fromTask
+};
+/**
  * @category sequencing
+ * @since 2.15.0
+ */
+exports.flatMapNullable = _.flatMapNullable(_FromEither, _FlatMap);
+/**
+ * @category sequencing
+ * @since 2.15.0
+ */
+exports.flatMapOption = _.flatMapOption(_FromEither, _FlatMap);
+/**
+ * @category sequencing
+ * @since 2.15.0
+ */
+exports.flatMapEither = _.flatMapEither(_FromEither, _FlatMap);
+/**
+ * @category sequencing
+ * @since 2.15.0
+ */
+exports.flatMapIO = _.flatMapIO(_FromIO, _FlatMap);
+/**
+ * @category sequencing
+ * @since 2.16.0
+ */
+exports.flatMapTask = _.flatMapTask(_FromTask, _FlatMap);
+/**
+ * @category sequencing
+ * @since 2.16.0
+ */
+exports.flatMapIOEither = (0, function_1.dual)(2, function (self, f) {
+    return (0, exports.flatMap)(self, (0, exports.fromIOEitherK)(f));
+});
+/**
+ * @category sequencing
+ * @since 2.16.0
+ */
+exports.flatMapTaskOption = (0, function_1.dual)(3, function (self, f, onNone) {
+    return (0, exports.flatMap)(self, function (a) { return (0, exports.fromTaskOption)(function () { return onNone(a); })(f(a)); });
+});
+/**
+ * Alias of `flatMapEither`.
+ *
+ * @category legacy
  * @since 2.4.0
  */
-exports.chainEitherK = 
-/*#__PURE__*/ (0, FromEither_1.chainEitherK)(exports.FromEither, exports.Chain);
+exports.chainEitherK = exports.flatMapEither;
 /**
- * Less strict version of [`chainEitherK`](#chaineitherk).
+ * Alias of `flatMapEither`.
  *
- * The `W` suffix (short for **W**idening) means that the error types will be merged.
- *
- * @category sequencing
+ * @category legacy
  * @since 2.6.1
  */
-exports.chainEitherKW = exports.chainEitherK;
+exports.chainEitherKW = exports.flatMapEither;
 /**
- * @category sequencing
+ * Alias of `tapEither`.
+ *
+ * @category legacy
  * @since 2.12.0
  */
-exports.chainFirstEitherK = 
-/*#__PURE__*/ (0, FromEither_1.chainFirstEitherK)(exports.FromEither, exports.Chain);
+exports.chainFirstEitherK = exports.tapEither;
 /**
+ * Alias of `tapEither`.
+ *
  * Less strict version of [`chainFirstEitherK`](#chainfirsteitherk).
  *
  * The `W` suffix (short for **W**idening) means that the error types will be merged.
  *
- * @category sequencing
+ * @category legacy
  * @since 2.12.0
  */
-exports.chainFirstEitherKW = exports.chainFirstEitherK;
+exports.chainFirstEitherKW = exports.tapEither;
 /**
  * @category lifting
  * @since 2.0.0
@@ -15173,56 +16147,61 @@ exports.filterOrElseW = exports.filterOrElse;
  */
 exports.fromEitherK = (0, FromEither_1.fromEitherK)(exports.FromEither);
 /**
- * @category instances
- * @since 2.10.0
- */
-exports.FromIO = {
-    URI: exports.URI,
-    fromIO: exports.fromIO
-};
-/**
  * @category lifting
  * @since 2.10.0
  */
 exports.fromIOK = (0, FromIO_1.fromIOK)(exports.FromIO);
 /**
- * @category sequencing
+ * Alias of `flatMapIO`.
+ *
+ * @category legacy
  * @since 2.10.0
  */
-exports.chainIOK = 
-/*#__PURE__*/ (0, FromIO_1.chainIOK)(exports.FromIO, exports.Chain);
+exports.chainIOK = exports.flatMapIO;
 /**
- * @category sequencing
+ * Alias of `tapIO`.
+ *
+ * @category legacy
  * @since 2.10.0
  */
-exports.chainFirstIOK = 
-/*#__PURE__*/ (0, FromIO_1.chainFirstIOK)(exports.FromIO, exports.Chain);
-/**
- * @category instances
- * @since 2.10.0
- */
-exports.FromTask = {
-    URI: exports.URI,
-    fromIO: exports.fromIO,
-    fromTask: exports.fromTask
-};
+exports.chainFirstIOK = exports.tapIO;
 /**
  * @category lifting
  * @since 2.10.0
  */
 exports.fromTaskK = (0, FromTask_1.fromTaskK)(exports.FromTask);
 /**
- * @category sequencing
+ * Alias of `flatMapTask`.
+ *
+ * @category legacy
  * @since 2.10.0
  */
-exports.chainTaskK = 
-/*#__PURE__*/ (0, FromTask_1.chainTaskK)(exports.FromTask, exports.Chain);
+exports.chainTaskK = exports.flatMapTask;
 /**
- * @category sequencing
+ * Alias of `tapTask`.
+ *
+ * @category legacy
  * @since 2.10.0
  */
-exports.chainFirstTaskK = 
-/*#__PURE__*/ (0, FromTask_1.chainFirstTaskK)(exports.FromTask, exports.Chain);
+exports.chainFirstTaskK = exports.tapTask;
+/**
+ * Alias of `flatMapIOEither`.
+ *
+ * Less strict version of [`chainIOEitherK`](#chainioeitherk).
+ *
+ * The `W` suffix (short for **W**idening) means that the error types will be merged.
+ *
+ * @category legacy
+ * @since 2.6.1
+ */
+exports.chainIOEitherKW = exports.flatMapIOEither;
+/**
+ * Alias of `flatMapIOEither`.
+ *
+ * @category legacy
+ * @since 2.4.0
+ */
+exports.chainIOEitherK = exports.flatMapIOEither;
 function taskify(f) {
     return function () {
         var args = Array.prototype.slice.call(arguments);
@@ -15253,11 +16232,7 @@ exports.bracket = bracket;
  * @since 2.12.0
  */
 var bracketW = function (acquire, use, release) {
-    return (0, function_1.pipe)(acquire, (0, exports.chainW)(function (a) {
-        return (0, function_1.pipe)(use(a), T.chain(function (e) {
-            return (0, function_1.pipe)(release(a, e), (0, exports.chainW)(function () { return T.of(e); }));
-        }));
-    }));
+    return (0, exports.flatMap)(acquire, function (a) { return T.flatMap(use(a), function (e) { return (0, exports.flatMap)(release(a, e), function () { return T.of(e); }); }); });
 };
 exports.bracketW = bracketW;
 // -------------------------------------------------------------------------------------
@@ -15279,7 +16254,7 @@ exports.let = let_;
  * @category do notation
  * @since 2.8.0
  */
-exports.bind = (0, Chain_1.bind)(exports.Chain);
+exports.bind = chainable.bind(exports.Chain);
 /**
  * The `W` suffix (short for **W**idening) means that the error types will be merged.
  *
@@ -15413,6 +16388,51 @@ exports.traverseSeqArray = traverseSeqArray;
 exports.sequenceSeqArray = 
 /*#__PURE__*/ (0, exports.traverseSeqArray)(function_1.identity);
 // -------------------------------------------------------------------------------------
+// legacy
+// -------------------------------------------------------------------------------------
+/**
+ * Alias of `flatMap`.
+ *
+ * @category legacy
+ * @since 2.0.0
+ */
+exports.chain = exports.flatMap;
+/**
+ * Alias of `flatMap`.
+ *
+ * @category legacy
+ * @since 2.6.0
+ */
+exports.chainW = exports.flatMap;
+/**
+ * Alias of `tap`.
+ *
+ * @category legacy
+ * @since 2.0.0
+ */
+exports.chainFirst = exports.tap;
+/**
+ * Alias of `tap`.
+ *
+ * @category legacy
+ * @since 2.8.0
+ */
+exports.chainFirstW = exports.tap;
+/**
+ * Alias of `tapError`.
+ *
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.orElseFirst = exports.tapError;
+/**
+ * Alias of `tapError`.
+ *
+ * @category legacy
+ * @since 2.11.0
+ */
+exports.orElseFirstW = exports.tapError;
+// -------------------------------------------------------------------------------------
 // deprecated
 // -------------------------------------------------------------------------------------
 /**
@@ -15426,12 +16446,12 @@ exports.sequenceSeqArray =
  */
 exports.taskEither = {
     URI: exports.URI,
-    bimap: _bimap,
-    mapLeft: _mapLeft,
+    bimap: exports.mapBoth,
+    mapLeft: exports.mapError,
     map: _map,
     of: exports.of,
     ap: _apPar,
-    chain: _chain,
+    chain: exports.flatMap,
     alt: _alt,
     fromIO: exports.fromIO,
     fromTask: exports.fromTask,
@@ -15448,12 +16468,12 @@ exports.taskEither = {
  */
 exports.taskEitherSeq = {
     URI: exports.URI,
-    bimap: _bimap,
-    mapLeft: _mapLeft,
+    bimap: exports.mapBoth,
+    mapLeft: exports.mapError,
     map: _map,
     of: exports.of,
     ap: _apSeq,
-    chain: _chain,
+    chain: exports.flatMap,
     alt: _alt,
     fromIO: exports.fromIO,
     fromTask: exports.fromTask,
@@ -15504,9 +16524,9 @@ function getTaskValidation(SE) {
         map: _map,
         ap: applicativeTaskValidation.ap,
         of: exports.of,
-        chain: _chain,
-        bimap: _bimap,
-        mapLeft: _mapLeft,
+        chain: exports.flatMap,
+        bimap: exports.mapBoth,
+        mapLeft: exports.mapError,
         alt: altTaskValidation.alt,
         fromIO: exports.fromIO,
         fromTask: exports.fromTask,
@@ -15590,12 +16610,21 @@ exports.guard = guard;
 /***/ }),
 
 /***/ 6985:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ (function(__unused_webpack_module, exports) {
 
 "use strict";
 
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getEndomorphismMonoid = exports.not = exports.SK = exports.hole = exports.pipe = exports.untupled = exports.tupled = exports.absurd = exports.decrement = exports.increment = exports.tuple = exports.flow = exports.flip = exports.constVoid = exports.constUndefined = exports.constNull = exports.constFalse = exports.constTrue = exports.constant = exports.unsafeCoerce = exports.identity = exports.apply = exports.getRing = exports.getSemiring = exports.getMonoid = exports.getSemigroup = exports.getBooleanAlgebra = void 0;
+exports.dual = exports.getEndomorphismMonoid = exports.not = exports.SK = exports.hole = exports.pipe = exports.untupled = exports.tupled = exports.absurd = exports.decrement = exports.increment = exports.tuple = exports.flow = exports.flip = exports.constVoid = exports.constUndefined = exports.constNull = exports.constFalse = exports.constTrue = exports.constant = exports.unsafeCoerce = exports.identity = exports.apply = exports.getRing = exports.getSemiring = exports.getMonoid = exports.getSemigroup = exports.getBooleanAlgebra = void 0;
 // -------------------------------------------------------------------------------------
 // instances
 // -------------------------------------------------------------------------------------
@@ -15941,12 +16970,24 @@ var getEndomorphismMonoid = function () { return ({
     empty: identity
 }); };
 exports.getEndomorphismMonoid = getEndomorphismMonoid;
+/** @internal */
+var dual = function (arity, body) {
+    var isDataFirst = typeof arity === 'number' ? function (args) { return args.length >= arity; } : arity;
+    return function () {
+        var args = Array.from(arguments);
+        if (isDataFirst(arguments)) {
+            return body.apply(this, args);
+        }
+        return function (self) { return body.apply(void 0, __spreadArray([self], args, false)); };
+    };
+};
+exports.dual = dual;
 
 
 /***/ }),
 
 /***/ 1840:
-/***/ (function(__unused_webpack_module, exports) {
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
 
@@ -15960,7 +17001,8 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.fromReadonlyNonEmptyArray = exports.has = exports.emptyRecord = exports.emptyReadonlyArray = exports.tail = exports.head = exports.isNonEmpty = exports.singleton = exports.right = exports.left = exports.isRight = exports.isLeft = exports.some = exports.none = exports.isSome = exports.isNone = void 0;
+exports.flatMapReader = exports.flatMapTask = exports.flatMapIO = exports.flatMapEither = exports.flatMapOption = exports.flatMapNullable = exports.liftOption = exports.liftNullable = exports.fromReadonlyNonEmptyArray = exports.has = exports.emptyRecord = exports.emptyReadonlyArray = exports.tail = exports.head = exports.isNonEmpty = exports.singleton = exports.right = exports.left = exports.isRight = exports.isLeft = exports.some = exports.none = exports.isSome = exports.isNone = void 0;
+var function_1 = __nccwpck_require__(6985);
 // -------------------------------------------------------------------------------------
 // Option
 // -------------------------------------------------------------------------------------
@@ -16023,6 +17065,74 @@ exports.has = Object.prototype.hasOwnProperty;
 /** @internal */
 var fromReadonlyNonEmptyArray = function (as) { return __spreadArray([as[0]], as.slice(1), true); };
 exports.fromReadonlyNonEmptyArray = fromReadonlyNonEmptyArray;
+/** @internal */
+var liftNullable = function (F) {
+    return function (f, onNullable) {
+        return function () {
+            var a = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                a[_i] = arguments[_i];
+            }
+            var o = f.apply(void 0, a);
+            return F.fromEither(o == null ? (0, exports.left)(onNullable.apply(void 0, a)) : (0, exports.right)(o));
+        };
+    };
+};
+exports.liftNullable = liftNullable;
+/** @internal */
+var liftOption = function (F) {
+    return function (f, onNone) {
+        return function () {
+            var a = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                a[_i] = arguments[_i];
+            }
+            var o = f.apply(void 0, a);
+            return F.fromEither((0, exports.isNone)(o) ? (0, exports.left)(onNone.apply(void 0, a)) : (0, exports.right)(o.value));
+        };
+    };
+};
+exports.liftOption = liftOption;
+/** @internal */
+var flatMapNullable = function (F, M) {
+    /*#__PURE__*/ return (0, function_1.dual)(3, function (self, f, onNullable) {
+        return M.flatMap(self, (0, exports.liftNullable)(F)(f, onNullable));
+    });
+};
+exports.flatMapNullable = flatMapNullable;
+/** @internal */
+var flatMapOption = function (F, M) {
+    /*#__PURE__*/ return (0, function_1.dual)(3, function (self, f, onNone) { return M.flatMap(self, (0, exports.liftOption)(F)(f, onNone)); });
+};
+exports.flatMapOption = flatMapOption;
+/** @internal */
+var flatMapEither = function (F, M) {
+    /*#__PURE__*/ return (0, function_1.dual)(2, function (self, f) {
+        return M.flatMap(self, function (a) { return F.fromEither(f(a)); });
+    });
+};
+exports.flatMapEither = flatMapEither;
+/** @internal */
+var flatMapIO = function (F, M) {
+    /*#__PURE__*/ return (0, function_1.dual)(2, function (self, f) {
+        return M.flatMap(self, function (a) { return F.fromIO(f(a)); });
+    });
+};
+exports.flatMapIO = flatMapIO;
+/** @internal */
+var flatMapTask = function (F, M) {
+    /*#__PURE__*/ return (0, function_1.dual)(2, function (self, f) {
+        return M.flatMap(self, function (a) { return F.fromTask(f(a)); });
+    });
+};
+exports.flatMapTask = flatMapTask;
+/** @internal */
+var flatMapReader = function (F, M) {
+    /*#__PURE__*/ return (0, function_1.dual)(2, function (self, f) {
+        return M.flatMap(self, function (a) { return F.fromReader(f(a)); });
+    });
+};
+exports.flatMapReader = flatMapReader;
 
 
 /***/ }),
@@ -17278,14 +18388,6 @@ function version(uuid) {
 
 var _default = version;
 exports.default = _default;
-
-/***/ }),
-
-/***/ 696:
-/***/ ((module) => {
-
-"use strict";
-module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
 
 /***/ }),
 
